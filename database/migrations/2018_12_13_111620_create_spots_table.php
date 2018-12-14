@@ -14,11 +14,11 @@ class CreateSpotsTable extends Migration
     public function up()
     {
         Schema::create('spots', function (Blueprint $table) {
-            $table->increments('spotid');
-            $table->string('name');
-            $table->text('profile');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('spotid');                  //観光地
+            $table->string('name');                        //観光地名
+            $table->text('profile');                       //紹介文
+            $table->text('etc')->nullable();               //メモ
+            $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
         });
     }

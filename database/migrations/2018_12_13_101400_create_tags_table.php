@@ -10,10 +10,10 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->increments('tagid');
-            $table->string('name');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('tagid');                //タグID
+            $table->string('name');                     //タグ名
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }

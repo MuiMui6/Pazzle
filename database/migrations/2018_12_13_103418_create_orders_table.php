@@ -10,17 +10,17 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('orderid');
-            $table->integer('userid');
-            $table->integer('itemid');
-            $table->integer('cnt');
-            $table->integer('addressid');
-            $table->date('paydate')->nullable();
-            $table->integer('pconfirmorid')->nullable();
-            $table->date('shipdate')->nullable();
-            $table->integer('sconfirmorid')->nullable();
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('orderid');                 //受注ID
+            $table->integer('userid');                     //ユーザID
+            $table->integer('itemid');                     //商品ID
+            $table->integer('cnt');                        //商品数
+            $table->integer('addressid');                  //宛先ID
+            $table->date('paydate')->nullable();           //支払日
+            $table->integer('pconfirmorid')->nullable();   //支払い確認者
+            $table->date('shipdate')->nullable();          //発送日
+            $table->integer('sconfirmorid')->nullable();   //発送確認者
+            $table->text('etc')->nullable();               //メモ
+            $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
         });
     }
