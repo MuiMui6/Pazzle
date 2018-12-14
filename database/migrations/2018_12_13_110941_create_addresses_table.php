@@ -10,14 +10,14 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('addressid');
-            $table->integer('userid');
-            $table->string('toname')->nullable();
-            $table->integer('post');
-            $table->string('add1');
-            $table->string('add2');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('addressid');            //住所ID
+            $table->integer('userid');                  //ユーザID
+            $table->string('toname')->nullable();       //宛先名
+            $table->integer('post');                    //郵便番号
+            $table->string('add1');                     //都道府県市区町村
+            $table->string('add2');                     //番地マンション名
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }

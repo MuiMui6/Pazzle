@@ -10,11 +10,11 @@ class CreateWarehousesTable extends Migration
     public function up()
     {
         Schema::create('warehouses', function (Blueprint $table) {
-            $table->increments('warehouseid');
-            $table->integer('itemid');
-            $table->integer('cnt');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('warehouseid');          //入庫ID
+            $table->integer('itemid');                  //商品ID
+            $table->integer('cnt');                     //仕入数
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }

@@ -10,11 +10,11 @@ class CreateSizesTable extends Migration
     public function up()
     {
         Schema::create('sizes', function (Blueprint $table) {
-            $table->increments('sizeid');
-            $table->integer('height');
-            $table->integer('width');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('sizeid');               //サイズID
+            $table->integer('height');                  //縦
+            $table->integer('width');                   //横
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }

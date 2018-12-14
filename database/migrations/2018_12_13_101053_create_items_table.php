@@ -14,18 +14,18 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('itemid');
-            $table->string('name');
-            $table->text('profile');
-            $table->integer('tag1');
-            $table->integer('tag2')->nullable();
-            $table->integer('tag3')->nullable();
-            $table->integer('sizeid');
-            $table->integer('peaceid');
-            $table->integer('spotid');
-            $table->boolean('view')->default(0);
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('itemid');               //商品ID
+            $table->string('name');                     //商品名
+            $table->text('profile');                    //紹介文
+            $table->integer('tag1');                    //タグ１
+            $table->integer('tag2')->nullable();        //タグ２
+            $table->integer('tag3')->nullable();        //タグ３
+            $table->integer('sizeid');                  //サイズ
+            $table->integer('peaceid');                 //peas数
+            $table->integer('spotid');                  //観光情報
+            $table->boolean('view')->default(0);  //可視か不可視か（基本不可視）
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }

@@ -10,10 +10,10 @@ class CreatePeasesTable extends Migration
     public function up()
     {
         Schema::create('peases', function (Blueprint $table) {
-            $table->increments('peasid');
-            $table->integer('cnt');
-            $table->text('etc')->nullable();
-            $table->integer('updaterid')->nullable();
+            $table->increments('peasid');               //peasID
+            $table->integer('cnt');                     //ピース数
+            $table->text('etc')->nullable();            //メモ
+            $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });
     }
