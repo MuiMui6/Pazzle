@@ -2,6 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b21692ba-9ae2-4e86-bc03-57a66d89bc7f" name="Default Changelist" comment="" />
+    <list default="true" id="b21692ba-9ae2-4e86-bc03-57a66d89bc7f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/action_provision" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/action_provision" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/action_set_name" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/action_set_name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/id" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/id" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/index_uuid" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/index_uuid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/private_key" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/pazzle/virtualbox/private_key" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_101053_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_101053_create_items_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_101400_create_tags_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_101400_create_tags_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_103418_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_103418_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_103709_create_sizes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_103709_create_sizes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_104441_create_warehouses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_104441_create_warehouses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_110941_create_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_110941_create_addresses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_111229_create_peases_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_111229_create_peases_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_111620_create_spots_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_111620_create_spots_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_111915_create_spot_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_111915_create_spot_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_13_112220_create_item_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_13_112220_create_item_comments_table.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +68,7 @@
         </entry>
       </file>
     </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -185,6 +205,11 @@
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="追加" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -268,7 +293,12 @@
       <updated>1544696454509</updated>
       <workItem from="1544696458447" duration="4659000" />
       <workItem from="1544761429866" duration="491000" />
+<<<<<<< HEAD
       <workItem from="1544790652679" duration="6345000" />
+=======
+      <workItem from="1544790652679" duration="5750000" />
+      <workItem from="1544790652679" duration="4666000" />
+>>>>>>> 4862fa922d82f45e30a7806d8cf5c6a5001dc690
     </task>
     <servers />
   </component>
@@ -280,6 +310,12 @@
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3238512" />
+    <option name="totallyTimeSpent" value="9816000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15778251" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -294,6 +330,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
