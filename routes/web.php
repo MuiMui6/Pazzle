@@ -42,6 +42,11 @@ Route::get('/home', 'HomeController@index')->name('home');
         return view('All_Address');
     });
 
+    //住所詳細
+    Route::get('/Edit_Address', function () {
+        return view('Edit_Address');
+    });
+
     //カート
     Route::get('/Register_Cart', function () {
         return view('Register_Cart');
@@ -55,6 +60,11 @@ Route::get('/home', 'HomeController@index')->name('home');
     //カート履歴
     Route::get('/History_Cart', function () {
         return view('History_Cart');
+    });
+
+    //ユーザ詳細
+    Route::get('/Edit_User', function () {
+        return view('Edit_User');
     });
 
 //管理者のみ
