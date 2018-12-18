@@ -22,22 +22,15 @@
                     </td>
                 </tr>
 
-                {{--Tel--}}
-                <tr>
-                    <th scope="row">Tel</th>
-                    <td>000-0000-0000</td>
-                </tr>
-
-
                 {{--Website--}}
                 <tr>
-                    <th scope="row">Website</th>
+                    <th scope="row">WebSite</th>
                     <td><a href="#">WebsiteURL</a></td>
                 </tr>
 
                 {{--観光地--}}
                 <tr>
-                    <th scope="row">Spot</th>
+                    <th scope="row">Address</th>
                     <td>大阪府大阪市鶴見区</td>
                 </tr>
                 </tbody>
