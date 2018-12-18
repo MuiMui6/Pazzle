@@ -17,55 +17,56 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //全ユーザ共通
-    //トップ
-    Route::get('/', function () {
-        return view('home');
-    });
+//トップ
+Route::get('/', function () {
+    return view('home');
+});
 
-    //商品詳細
-    Route::get('/Detail_Item', function () {
-        return view('Detail_Item');
-    });
+//商品詳細
+Route::get('/Detail_Item', function () {
+    return view('Detail_Item');
+});
 
-    //観光地一覧
-    Route::get('/All_Spot', function () {
-        return view('All_Spot');
-    });
+//観光地一覧
+Route::get('/All_Spot', function () {
+    return view('All_Spot');
+});
 
-    //観光地詳細
-    Route::get('/Detail_Spot', function () {
-        return view('Detail_Spot');
-    });
+//観光地詳細
+Route::get('/Detail_Spot', function () {
+    return view('Detail_Spot');
+});
 
-    //住所一覧
-    Route::get('/All_Address', function () {
-        return view('All_Address');
-    });
+//住所詳細V
+Route::get('/Edit_Address', function () {
+    return view('Edit_Address');
+});
 
-    //住所詳細
-    Route::get('/Edit_Address', function () {
-        return view('Edit_Address');
-    });
+//カート確認V
+Route::get('/Confirmor_Cart', function () {
+    return view('Confirmor_Cart');
+});
 
-    //カート
-    Route::get('/Register_Cart', function () {
-        return view('Register_Cart');
-    });
+//カート完了V
+Route::get('/Registerd_Cart', function () {
+    return view('Registerd_Cart');
+});
 
-    //カート確認
-    Route::get('/Confirmor_Cart', function () {
-        return view('Confirmor_Cart');
-    });
+//カート履歴V
+Route::get('/History_Cart', function () {
+    return view('History_Cart');
+});
 
-    //カート履歴
-    Route::get('/History_Cart', function () {
-        return view('History_Cart');
-    });
 
-    //ユーザ詳細
-    Route::get('/Edit_User', function () {
-        return view('Edit_User');
-    });
+//宛先確認V
+Route::get('/Register_Topost', function () {
+    return view('Register_Topost');
+});
+
+//ユーザ詳細
+Route::get('/Edit_User', function () {
+    return view('Edit_User');
+});
 
 //管理者のみ
 ////一覧系
@@ -154,5 +155,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //    Route::get('/', function () {
 //        return view('admin.Edit_');
 //    });
-//
 

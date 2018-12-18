@@ -4,19 +4,15 @@
     <div class="container">
         <div class="row justify-content-center">
 
-            <div class="card mb-3">
                 <img class="card-img-top" src="img/spring.JPG" height="400px">
-                <div class="card-body">
-                    <h5 class="card-title">Title</h5>
-                    <p class="card-text">
+            <div class="col-12 m-3">
+                <h3 class="text-center">ItemName</h3>
+            </div>
+            <div class="m-3">
+                <h5>「ItemName」の商品情報です。</h5>
+            </div>
                     <table class="table table-borderless">
                         <tbody>
-                        {{--商品名--}}
-                        <tr>
-                            <th scope="row">Name</th>
-                            <td>春の桜</td>
-                        </tr>
-
                         {{--紹介文--}}
                         <tr>
                             <th scope="row">Profile</th>
@@ -50,12 +46,9 @@
 
                         </tbody>
                     </table>
-                    </p>
                     <p class="card-text">
                         <small class="text-muted">Tag1,Tag2,Tag3</small>
                     </p>
-                </div>
-            </div>
 
         </div>
     </div>
