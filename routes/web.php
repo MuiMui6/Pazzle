@@ -70,89 +70,89 @@ Route::get('/Edit_User', function () {
 
 //管理者のみ
 //一覧系
-    //住所一覧
-    Route::get('/Admin/All_Address', function () {
-        return view('admin.All_Address');
-    });
+//住所一覧
+Route::get('/Admin/All_Address', function () {
+    return view('admin.All_Address');
+});
 
-    //商品一覧
+//商品一覧
 Route::get('/Admin/All_Item', function () {
     return view('admin.All_Item');
 });
 
-    //商品コメント一覧
+//商品コメント一覧
 Route::get('/Admin/All_ItemComment', function () {
     return view('admin.All_ItemComment');
 });
 
-    //受注一覧
+//受注一覧
 Route::get('/Admin/All_Order', function () {
     return view('admin.All_Order');
 });
 
-    //ピース一覧
+//ピース一覧
 Route::get('/Admin/All_Peas', function () {
     return view('admin.All_Peas');
 });
 
-    //サイズ一覧
+//サイズ一覧
 Route::get('/Admin/All_Size', function () {
     return view('admin.All_Size');
 });
 
-    //観光地一覧
+//観光地一覧
 Route::get('/Admin/All_Spot', function () {
     return view('admin.All_Spot');
 });
 
-    //観光地コメント一覧
+//観光地コメント一覧
 Route::get('/Admin/All_SpotComment', function () {
     return view('admin.All_SpotComment');
 });
 
-    //タグ一覧
+//タグ一覧
 Route::get('/Admin/All_Tag', function () {
     return view('admin.All_Tag');
 });
 
-    //ユーザ一覧
+//ユーザ一覧
 Route::get('/Admin/All_User', function () {
     return view('admin.All_User');
 });
 
 //編集
-    //住所編集
-    Route::get('/Admin/Edit_Address', function () {
-        return view('admin.Edit_Address');
-    });
+//住所編集
+Route::get('/Admin/Edit_Address', function () {
+    return view('admin.Edit_Address');
+});
 
-    //商品編集
-    Route::get('/Admin/Edit_Item', function () {
-        return view('admin.Edit_Item');
-    });
+//商品編集
+Route::get('/Admin/Edit_Item', function () {
+    return view('admin.Edit_Item');
+});
 
-    //商品コメント編集
-    Route::get('/Admin/Edit_ItemComment', function () {
-        return view('admin.Edit_ItemComment');
-    });
+//商品コメント編集
+Route::get('/Admin/Edit_ItemComment', function () {
+    return view('admin.Edit_ItemComment');
+});
 
 //    //受注編集
-    Route::get('/Admin/Edit_Order', function () {
-        return view('admin.Edit_Order');
-    });
+Route::get('/Admin/Edit_Order', function () {
+    return view('admin.Edit_Order');
+});
 
-    //観光地編集
-    Route::get('/Admin/Edit_Spot', function () {
-        return view('admin.Edit_Spot');
-    });
+//観光地編集
+Route::get('/Admin/Edit_Spot', function () {
+    return view('admin.Edit_Spot');
+});
 
 //観光地コメント編集
-    Route::get('/Admin/Edit_SpotComment', function () {
-        return view('admin.Edit_SpotComment');
-    });
+Route::get('/Admin/Edit_SpotComment', function () {
+    return view('admin.Edit_SpotComment');
+});
 
-    //ユーザ編集
-    Route::get('/Admin/Edit_User', function () {
-        return view('admin.Edit_User');
-    });
+//ユーザ編集
+Route::get('/Admin/Edit_User', function () {
+    return view('admin.Edit_User');
+});
 
