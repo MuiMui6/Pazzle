@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-
-        @for($i = 0;$i<=15;$i++)
-            <div class="card m-3" style="width: 18rem;">
-                <img class="card-img-top" src="img/spring.JPG" width="180px">
+    <div class="row">
+        @for($i = 0;$i<15;$i++)
+            <div class="card m-2" style="width: 17rem;">
+                <img class="card-img-top" src="img/spring.JPG" width="150px">
                 <div class="card-body">
                     <p class="card-text">
                     <table class="table table-borderless">
@@ -47,5 +45,4 @@
             </div>
         @endfor
     </div>
-</div>
 @endsection
