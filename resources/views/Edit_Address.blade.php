@@ -13,14 +13,14 @@
             {{--宛先名--}}
             <tr>
                 <th scope="row">ToName</th>
-                <td><input type="text" class="form-text"></td>
+                <td><input type="text" class="form-control"></td>
             </tr>
 
             {{--郵便番号--}}
             <tr>
                 <th scope="row">Post</th>
-                <td>
-                    〒<input type="text" class="form-text">
+                <td class="form-inline">
+                    〒　<input type="text" class="form-control">
                 </td>
             </tr>
 
@@ -28,7 +28,7 @@
             <tr>
                 <th scope="row">Address1</th>
                 <td>
-                    <input type="text" class="form-text">
+                    <input type="text" class="form-control">
                 </td>
             </tr>
 
@@ -36,7 +36,7 @@
             <tr>
                 <th scope="row">Address2</th>
                 <td>
-                    <input type="text" class="form-text">
+                    <input type="text" class="form-control">
                 </td>
             </tr>
 
@@ -44,8 +44,7 @@
             <tr>
                 <th scope="row">Memo</th>
                 <td>
-                                <textarea cols="50" rows="5" class="form-text">
-                                </textarea>
+                    <textarea cols="50" rows="5" class="form-control"></textarea>
                 </td>
             </tr>
 

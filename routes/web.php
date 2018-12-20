@@ -57,10 +57,14 @@ Route::get('/History_Cart', function () {
     return view('History_Cart');
 });
 
-
 //宛先確認V
 Route::get('/Register_Topost', function () {
     return view('Register_Topost');
+});
+
+//宛先確認V
+Route::get('/Register_Cart', function () {
+    return view('Register_Cart');
 });
 
 //ユーザ詳細
@@ -120,6 +124,11 @@ Route::get('/Admin/All_User', function () {
     return view('admin.All_User');
 });
 
+//入庫一覧
+Route::get('/Admin/All_Warehouse', function () {
+    return view('admin.All_Warehouse');
+});
+
 //編集
 //住所編集
 Route::get('/Admin/Edit_Address', function () {
@@ -156,3 +165,7 @@ Route::get('/Admin/Edit_User', function () {
     return view('admin.Edit_User');
 });
 
+//入庫一覧
+Route::get('/Admin/Edit_Warehouse', function () {
+    return view('admin.Edit_Warehouse');
+});

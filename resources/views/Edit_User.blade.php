@@ -15,7 +15,7 @@
             <tr>
                 <th scope="row">Name</th>
                 <td>
-                    <input type="text" class="form-text">
+                    <input type="text" class="form-control">
                 </td>
             </tr>
 
@@ -23,7 +23,7 @@
             <tr>
                 <th scope="row">Email</th>
                 <td>
-                    <input type="email" class="form-text">
+                    <input type="email" class="form-control">
                 </td>
             </tr>
 
@@ -31,8 +31,8 @@
             <tr>
                 <th scope="row">Password</th>
                 <td>
-                    <input type="text" class="form-text">
-                    <input type="text" class="form-text">
+                    <input type="text" class="m-3 form-control">
+                    <input type="text" class="m-3 form-control">
                 </td>
             </tr>
 

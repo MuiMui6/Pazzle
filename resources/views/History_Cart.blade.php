@@ -20,10 +20,10 @@
             </thead>
             <tbody>
             <tr>
-                <th><img src="img/spring.jpg" height="150px"></th>
-                <th>商品名</th>
-                <th class="text-right">3000円</th>
-                <th>0000/00/00</th>
+                <th class="text-center"><img src="img/spring.jpg" height="150px"></th>
+                <th class="text-center"><a href="#">商品名</a></th>
+                <th class="text-center">3000円</th>
+                <th class="text-center">0000/00/00</th>
             </tr>
             </tbody>
         </table>

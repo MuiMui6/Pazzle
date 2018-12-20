@@ -27,10 +27,43 @@
                 <td><a href="#">WebsiteURL</a></td>
             </tr>
 
-            {{--観光地--}}
+            {{--Address--}}
             <tr>
                 <th scope="row">Address</th>
                 <td>大阪府大阪市鶴見区</td>
+            </tr>
+
+            {{--TEL--}}
+            <tr>
+                <th scope="row">Tel</th>
+                <td>000-0000-0000</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="col-12 m-3">
+            <h3 class="text-center">Comment</h3>
+        </div>
+        <div class="m-3">
+            <h5>「ItemName」のコメント一覧です。</h5>
+        </div>
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <td><h3>Average Evakuation</h3></td>
+                <td><h3>3.0</h3></td>
+            </tr>
+            <tr>
+                <td>Evakuation</td>
+                <td>Name</td>
+                <td>Comment</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-left">3.0</td>
+                <td class="text-left">投稿者</td>
+                <td class="text-left">コメント文コメント文コメント文</td>
             </tr>
             </tbody>
         </table>

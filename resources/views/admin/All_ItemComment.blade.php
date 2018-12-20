@@ -17,7 +17,7 @@
                 <th class="text-center">UserId</th>
                 <th class="text-center">ItemId</th>
                 <th class="text-center">Comment</th>
-                <th class="text-center">Rank</th>
+                <th class="text-center">Evakuation</th>
                 <th class="text-center">Create_date</th>
                 <th class="text-center">View</th>
                 <th class="text-center">Etc</th>

@@ -14,14 +14,8 @@
             <thead>
             <tr>
                 <th class="text-center">Id</th>
-                <th class="text-center">UserId</th>
                 <th class="text-center">ItemId</th>
                 <th class="text-center">Cnt</th>
-                <th class="text-center">AddressId</th>
-                <th class="text-center">PayDate</th>
-                <th class="text-center">PayConriemorId</th>
-                <th class="text-center">ShipDate</th>
-                <th class="text-center">ShioConfirmorId</th>
                 <th class="text-center">Creater</th>
                 <th class="text-center">Create_date</th>
                 <th class="text-center">Updater</th>
@@ -33,14 +27,8 @@
             <tbody>
             <tr>
                 <th class="text-center">#</th>
-                <th class="text-center">#</th>
-                <th class="text-center">#</th>
+                <th class="text-center">Itemid</th>
                 <th class="text-center">1(点)</th>
-                <th class="text-center">#</th>
-                <th class="text-center">0000-00-00</th>
-                <th class="text-center">確認者名</th>
-                <th class="text-center">0000-00-00</th>
-                <th class="text-center">確認者名</th>
                 <th class="text-center">作成者</th>
                 <th class="text-center">0000-00-00</th>
                 <th class="text-center">更新者</th>
