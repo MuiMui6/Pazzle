@@ -17,6 +17,9 @@ class CreateSpotsTable extends Migration
             $table->increments('spotid');                  //観光地
             $table->string('name');                        //観光地名
             $table->text('profile');                       //紹介文
+            $table->string('url');                         //URL
+            $table->text('address');                       //住所
+            $table->text('tel');                           //TEL
             $table->text('etc')->nullable();               //メモ
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
