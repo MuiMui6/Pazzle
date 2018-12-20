@@ -1,26 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 //全ユーザ共通
 //トップ
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'ItemController@user_view');
 
 //商品詳細
 Route::get('/Detail_Item', function () {
@@ -80,9 +64,7 @@ Route::get('/Admin/All_Address', function () {
 });
 
 //商品一覧
-Route::get('/Admin/All_Item', function () {
-    return view('admin.All_Item');
-});
+Route::get('/Admin/All_Item','ItemController@admin_view');
 
 //商品コメント一覧
 Route::get('/Admin/All_ItemComment', function () {
