@@ -6,69 +6,27 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    //
 //表示
-//一般ユーザ
-    public function user_view()
+    public function view()
     {
 
     }
 
-//管理者側
-    public function admin_view()
-    {
-
-    }
-
-
-//検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
-//管理者側
-    public function admin_search()
-    {
-
-    }
-
-//詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
-//管理者側
-    public function admin_detail()
+//確認
+    public function confirmor()
     {
 
     }
 
 //追加
-    public function user_add()
-    {
-
-    }
-
-//管理者側
-    public function admin_add()
+    public function add()
     {
 
     }
 
 //編集
-    public function user_edit()
+    public function edit()
     {
 
     }
-
-//管理者側
-    public function admin_edit()
-    {
-
-    }
-
 }

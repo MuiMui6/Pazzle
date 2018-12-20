@@ -7,26 +7,13 @@ use Illuminate\Http\Request;
 class PeasController extends Controller
 {
 //表示
-//一般ユーザ
-    public function user_view()
-    {
-
-    }
-
 //管理者側
     public function admin_view()
     {
 
     }
 
-
 //検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
 //管理者側
     public function admin_search()
     {
@@ -34,12 +21,6 @@ class PeasController extends Controller
     }
 
 //詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
 //管理者側
     public function admin_detail()
     {
@@ -47,11 +28,6 @@ class PeasController extends Controller
     }
 
 //追加
-    public function user_add()
-    {
-
-    }
-
 //管理者側
     public function admin_add()
     {
@@ -59,11 +35,6 @@ class PeasController extends Controller
     }
 
 //編集
-    public function user_edit()
-    {
-
-    }
-
 //管理者側
     public function admin_edit()
     {

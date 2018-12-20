@@ -34,12 +34,6 @@ class SpotCommentController extends Controller
     }
 
 //詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
 //管理者側
     public function admin_detail()
     {
@@ -59,11 +53,6 @@ class SpotCommentController extends Controller
     }
 
 //編集
-    public function user_edit()
-    {
-
-    }
-
 //管理者側
     public function admin_edit()
     {

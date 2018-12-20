@@ -47,11 +47,6 @@ class SpotController extends Controller
     }
 
 //追加
-    public function user_add()
-    {
-
-    }
-
 //管理者側
     public function admin_add()
     {
@@ -59,11 +54,6 @@ class SpotController extends Controller
     }
 
 //編集
-    public function user_edit()
-    {
-
-    }
-
 //管理者側
     public function admin_edit()
     {

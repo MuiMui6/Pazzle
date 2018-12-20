@@ -7,65 +7,31 @@ use Illuminate\Http\Request;
 class WarehouseController extends Controller
 {
 //表示
-//一般ユーザ
-    public function user_view()
+    public function view()
     {
 
     }
-
-//管理者側
-    public function admin_view()
-    {
-
-    }
-
 
 //検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
-//管理者側
-    public function admin_search()
+    public function search()
     {
 
     }
 
 //詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
-//管理者側
-    public function admin_detail()
+    public function detail()
     {
 
     }
 
 //追加
-    public function user_add()
-    {
-
-    }
-
-//管理者側
-    public function admin_add()
+    public function add()
     {
 
     }
 
 //編集
-    public function user_edit()
-    {
-
-    }
-
-//管理者側
-    public function admin_edit()
+    public function edit()
     {
 
     }

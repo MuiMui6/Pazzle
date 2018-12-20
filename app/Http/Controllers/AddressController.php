@@ -19,7 +19,6 @@ class AddressController extends Controller
 
     }
 
-
 //検索
 //一般ユーザ
     public function user_serch()
@@ -47,6 +46,7 @@ class AddressController extends Controller
     }
 
 //追加
+//一般ユーザ
     public function user_add()
     {
 
@@ -59,6 +59,7 @@ class AddressController extends Controller
     }
 
 //編集
+//一般ユーザ
     public function user_edit()
     {
 

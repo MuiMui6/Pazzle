@@ -19,14 +19,7 @@ class ItemCommentController extends Controller
 
     }
 
-
 //検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
 //管理者側
     public function admin_search()
     {
@@ -52,18 +45,8 @@ class ItemCommentController extends Controller
 
     }
 
-//管理者側
-    public function admin_add()
-    {
-
-    }
 
 //編集
-    public function user_edit()
-    {
-
-    }
-
 //管理者側
     public function admin_edit()
     {

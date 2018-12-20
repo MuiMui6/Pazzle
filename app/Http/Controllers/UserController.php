@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 //表示
-//一般ユーザ
-    public function user_view()
-    {
-
-    }
-
 //管理者側
     public function admin_view()
     {
@@ -21,12 +15,6 @@ class UserController extends Controller
 
 
 //検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
 //管理者側
     public function admin_search()
     {
@@ -34,26 +22,8 @@ class UserController extends Controller
     }
 
 //詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
 //管理者側
     public function admin_detail()
-    {
-
-    }
-
-//追加
-    public function user_add()
-    {
-
-    }
-
-//管理者側
-    public function admin_add()
     {
 
     }
