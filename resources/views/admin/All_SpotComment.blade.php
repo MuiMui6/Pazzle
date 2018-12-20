@@ -16,7 +16,7 @@
                 <th class="text-center">UserId</th>
                 <th class="text-center">SpotId</th>
                 <th class="text-center">Comment</th>
-                <th class="text-center">Rank</th>
+                <th class="text-center">Evakuation</th>
                 <th class="text-center">Create_date</th>
                 <th class="text-center">Updater</th>
                 <th class="text-center">Update_date</th>
