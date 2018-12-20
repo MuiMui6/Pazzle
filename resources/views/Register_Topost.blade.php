@@ -9,13 +9,13 @@
             <h5>商品の発送先を決定します。</h5>
         </div>
 
+
+        <div class="col-12">
+            <input type="submit" class="btn btn-block" value="住所を追加する">
+        </div>
+
         <table class="table table-borderless">
             <tbody>
-            <tr>
-                <th class="text-center">ToPost</th>
-                <th class="text-center"><input type="text">様</th>
-            </tr>
-
             <tr>
                 <th class="text-center"><input type="radio"></th>
                 <th class="text-center">
@@ -25,9 +25,11 @@
                     <p>１－１－１</p>
                 </th>
             </tr>
-
             </tbody>
         </table>
 
+        <div class="col-12">
+            <input type="submit" class="btn btn-block" value="購入確認">
+        </div>
     </div>
 @endsection

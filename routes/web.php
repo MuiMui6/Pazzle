@@ -57,10 +57,14 @@ Route::get('/History_Cart', function () {
     return view('History_Cart');
 });
 
-
 //宛先確認V
 Route::get('/Register_Topost', function () {
     return view('Register_Topost');
+});
+
+//宛先確認V
+Route::get('/Register_Cart', function () {
+    return view('Register_Cart');
 });
 
 //ユーザ詳細

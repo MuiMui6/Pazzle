@@ -54,18 +54,22 @@
             <h5>「ItemName」のコメント一覧です。</h5>
         </div>
         <table class="table table-borderless">
+            <thead>
+            <tr>
+                <td><h3>Average Evakuation</h3></td>
+                <td><h3>3.0</h3></td>
+            </tr>
+            <tr>
+                <td>Evakuation</td>
+                <td>Name</td>
+                <td>Comment</td>
+            </tr>
+            </thead>
             <tbody>
             <tr>
-                <th class="text-center">平均評価</th>
-                <th class="text-center">3.0</th>
-            </tr>
-            <tr>
-                <th class="text-center">Name：評価名</th>
-                <th class="text-center">評価：3.0</th>
-            </tr>
-            <tr>
-                <th class="text-center">Comment</th>
-                <th class="text-center">コメント文</th>
+                <td class="text-left">3.0</td>
+                <td class="text-left">投稿者</td>
+                <td class="text-left">コメント文コメント文コメント文</td>
             </tr>
             </tbody>
         </table>

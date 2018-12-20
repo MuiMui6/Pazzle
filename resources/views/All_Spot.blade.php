@@ -14,12 +14,14 @@
             <tr>
                 <th class="text-center">SpotName</th>
                 <th class="text-center">Address</th>
+                <th class="text-center">AVG Evakuation</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th class="text-center">観光名所名</th>
-                <th class="text-center">都道府県</th>
+                <th class="text-center"><a href="#">観光名所名</a></th>
+                <th class="text-center">住所</th>
+                <th class="text-center">3.0</th>
             </tr>
             </tbody>
         </table>
