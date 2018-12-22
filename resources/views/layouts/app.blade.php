@@ -57,7 +57,9 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            History Cart
+                            <a class="nav-link">
+                                History Cart
+                            </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -80,21 +82,22 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 AdminMenu <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item">住所管理</a>
-                                <a href="#" class="dropdown-item">商品管理</a>
-                                <a href="#" class="dropdown-item">商品コメント管理</a>
-                                <a href="#" class="dropdown-item">受注管理</a>
-                                <a href="#" class="dropdown-item">ピース管理</a>
-                                <a href="#" class="dropdown-item">サイズ管理</a>
-                                <a href="#" class="dropdown-item">観光地管理</a>
-                                <a href="#" class="dropdown-item">観光地コメント管理</a>
-                                <a href="#" class="dropdown-item">タグ管理</a>
-                                <a href="#" class="dropdown-item">ユーザ管理</a>
+                                <a href="#" class="dropdown-item">Address Management</a>
+                                <a href="#" class="dropdown-item">Item Management</a>
+                                <a href="#" class="dropdown-item">Item Comment Management</a>
+                                <a href="#" class="dropdown-item">Order Management</a>
+                                <a href="#" class="dropdown-item">Peas Management</a>
+                                <a href="#" class="dropdown-item">Size Management</a>
+                                <a href="#" class="dropdown-item">Spot Management</a>
+                                <a href="#" class="dropdown-item">Spot Comment Management</a>
+                                <a href="#" class="dropdown-item">Tag Management</a>
+                                <a href="#" class="dropdown-item">User Management</a>
                             </div>
                         </li>
                     @endguest
@@ -105,33 +108,33 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3">
+                <form method="get" action="/">
+                    @csrf
+                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
+                </form>
             </div>
             <div class="col-2">
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Peas</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach($peas as $peases)
+                        <li class="list-group-item">{{$peases->cnt}}</li>
+                    @endforeach
                 </ul>
 
 
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Size</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach ($size as $sizes)
+                        <li class="list-group-item">{{$sizes->height}}*{{$sizes->width}}</li>
+                    @endforeach
                 </ul>
 
 
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Tag</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach($tag as $tags)
+                        <li class="list-group-item">{{$tags->name}}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-10">

@@ -13,6 +13,7 @@ class CreateTagsTable extends Migration
             $table->increments('tagid');                //タグID
             $table->string('name');                     //タグ名
             $table->text('etc')->nullable();            //メモ
+            $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ class CreatePeasesTable extends Migration
             $table->increments('peasid');               //peasID
             $table->integer('cnt');                     //ピース数
             $table->text('etc')->nullable();            //メモ
+            $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });

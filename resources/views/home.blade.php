@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        @for($i = 0;$i<15;$i++)
+    <div class="row cart-columns">
+        @foreach( $item as $items )
             <div class="card m-2" style="width: 17rem;">
-                <img class="card-img-top" src="img/spring.JPG" width="150px">
+                <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px">
                 <div class="card-body">
                     <p class="card-text">
                     <table class="table table-borderless">
@@ -12,37 +12,43 @@
                         {{--商品名--}}
                         <tr>
                             <th scope="row">Name</th>
-                            <td>春の桜</td>
+                            <td>{{$items -> name}}</td>
                         </tr>
 
                         {{--紹介文--}}
                         <tr>
                             <th scope="row">Profile</th>
-                            <td>鶴見緑地にて撮影した写真をパズルにしました！</td>
+                            <td>{{$items -> profile}}</td>
                         </tr>
 
                         {{--サイズ--}}
                         <tr>
                             <th scope="row">Size</th>
-                            <td>縦×横（mm）</td>
+                            <td>{{$items->height}}×{{$items->width}}（mm）</td>
                         </tr>
 
                         {{--ピース数--}}
                         <tr>
                             <th scope="row">PeasCnt</th>
-                            <td>1000peas</td>
+                            <td>{{$items->cnt}}peas</td>
                         </tr>
 
                         {{--詳細--}}
                         <tr>
                             <th scope="row"></th>
-                            <td><input type="submit" class="btn btn-info" value="Detail"></td>
+                            <td>
+                                <form action="/Detail_Item" method="get">
+                                    @csrf
+                                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
+                                    <input type="submit" class="btn btn-info" value="Detail">
+                                </form>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                     </p>
                 </div>
             </div>
-        @endfor
+        @endforeach
     </div>
 @endsection

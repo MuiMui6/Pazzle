@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');                         //パスワード
             $table->boolean('rank')->default(0);          //rank
             $table->text('etc')->nullable();                    //メモ
-            $table->integer('updaterid');                       //更新者
+            $table->integer('updaterid')->nullable();                       //更新者
             $table->rememberToken();
             $table->timestamps();
         });
