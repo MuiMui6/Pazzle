@@ -14,92 +14,110 @@ class TagsTableSeeder extends Seeder
     {
         //未定
         Tag::create([
-            'name' => '未定'
+            'name' => '未定',
+            'createrid'=>'1'
         ]);
 
         //パズル
         Tag::create([
-            'name' => 'パズル'
+            'name' => 'パズル',
+            'createrid'=>'1'
         ]);
 
         //道具
         Tag::create([
-            'name' => '道具'
+            'name' => '道具',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '水族館'
+            'name' => '水族館',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '生き物'
+            'name' => '生き物',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => 'イルミネーション'
+            'name' => 'イルミネーション',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '置物'
+            'name' => '置物',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => 'イベント'
+            'name' => 'イベント',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '寺・神社'
+            'name' => '寺・神社',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '空'
+            'name' => '空',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '春'
+            'name' => '春',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '夏'
+            'name' => '夏',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '秋'
+            'name' => '秋',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '冬'
+            'name' => '冬',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '大阪府'
+            'name' => '大阪府',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '京都府'
+            'name' => '京都府',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '東京都'
+            'name' => '東京都',
+            'createrid'=>'1'
         ]);
 
         //
         Tag::create([
-            'name' => '島根県'
+            'name' => '島根県',
+            'createrid'=>'1'
         ]);
     }
 }

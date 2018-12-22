@@ -15,133 +15,161 @@ class ItemsTableSeeder extends Seeder
 
         Item::create([
             'name' => '祇園祭',
-            'profile' => '2017年７月に行われた祇園祭です。'
+            'profile' => '2017年７月に行われた祇園祭です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => 'イルミネーション',
-            'profile' => '万博記念公園のイルミネーションです。'
+            'profile' => '万博記念公園のイルミネーションです。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '熊野大社',
-            'profile' => '島根県にある熊野大社です。'
+            'profile' => '島根県にある熊野大社です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '桜の原っぱ',
-            'profile' => '鶴見緑地公園にて撮影しました。'
+            'profile' => '鶴見緑地公園にて撮影しました。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '哲学の道',
-            'profile' => '京都銀閣寺前にある哲学の道です。春には桜が綺麗です。'
+            'profile' => '京都銀閣寺前にある哲学の道です。春には桜が綺麗です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '銀閣寺',
-            'profile' => '京都にある銀閣寺です'
+            'profile' => '京都にある銀閣寺です',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '出雲大社１',
-            'profile' => 'TVなどでよく見るあの場所です。'
+            'profile' => 'TVなどでよく見るあの場所です。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '出雲大社２',
-            'profile' => '本殿の方です。'
+            'profile' => '本殿の方です。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '入道雲',
-            'profile' => '９月に撮影した入道雲です。'
+            'profile' => '９月に撮影した入道雲です。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '嵐山１',
-            'profile' => '京都にある嵐山です。'
+            'profile' => '京都にある嵐山です。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '嵐山２',
-            'profile' => '晴れてくれたらよかった……'
+            'profile' => '晴れてくれたらよかった……',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '渡月橋',
-            'profile' => '橋の方の渡月橋です。倉木さんの渡月橋ではありません。'
+            'profile' => '橋の方の渡月橋です。倉木さんの渡月橋ではありません。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '着物フォレスト１',
-            'profile' => '嵐電・嵐山駅の横にあります。'
+            'profile' => '嵐電・嵐山駅の横にあります。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '着物フォレスト２',
-            'profile' => '夜になるとライトアップするそうです。'
+            'profile' => '夜になるとライトアップするそうです。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => 'エビ',
-            'profile' => 'nifureru水族館にて撮影'
+            'profile' => 'nifureru水族館にて撮影',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '魚１',
-            'profile' => 'nifureru水族館にて撮影しました。'
+            'profile' => 'nifureru水族館にて撮影しました。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '魚２',
-            'profile' => 'nihureru水族館にて撮影'
+            'profile' => 'nihureru水族館にて撮影',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => 'イソギンチャク',
-            'profile' => 'nifureru水族館にて撮影しました。'
+            'profile' => 'nifureru水族館にて撮影しました。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '水槽',
-            'profile' => '水槽を横からとってみるといい感じになりました。'
+            'profile' => '水槽を横からとってみるといい感じになりました。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => 'チンアナゴ',
-            'profile' => 'nihureru水族館にて撮影しました。'
+            'profile' => 'nihureru水族館にて撮影しました。',
+            'createrid'=>'1'
         ]);
         Item::create([
             'name' => '紫陽花',
-            'profile' => '８月に撮影した紫陽花です。'
+            'profile' => '８月に撮影した紫陽花です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '明治神宮',
-            'profile' => '明治神宮にて撮影しました。'
+            'profile' => '明治神宮にて撮影しました。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '日本橋',
-            'profile' => '東京の方の日本橋です。'
+            'profile' => '東京の方の日本橋です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => 'お地蔵さん',
-            'profile' => '島根県にある松江城周辺にあるお地蔵さんの一つです。'
+            'profile' => '島根県にある松江城周辺にあるお地蔵さんの一つです。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '手水屋',
-            'profile' => '出雲大社の手水屋です。'
+            'profile' => '出雲大社の手水屋です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '緑のポスト',
-            'profile' => '緑色のポストです。珍しいので撮影。'
+            'profile' => '緑色のポストです。珍しいので撮影。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '空',
-            'profile' => '夕空です。'
+            'profile' => '夕空です。',
+            'createrid'=>'1'
         ]);
 
         Item::create([
             'name' => '夕陽',
-            'profile' => '日本一夕陽が美しい場所にて撮影しました'
+            'profile' => '日本一夕陽が美しい場所にて撮影しました',
+            'createrid'=>'1'
         ]);
     }
 }

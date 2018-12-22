@@ -14,72 +14,86 @@ class PeasesTableSeeder extends Seeder
     {
         //
         Peas::create([
-            'cnt' => '108'
+            'cnt' => '108',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '200'
+            'cnt' => '200',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '300'
+            'cnt' => '300',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '352'
+            'cnt' => '352',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '420'
+            'cnt' => '420',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '500'
+            'cnt' => '500',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '506'
+            'cnt' => '506',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '900'
+            'cnt' => '900',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '954'
+            'cnt' => '954',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '1000'
+            'cnt' => '1000',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '1000'
+            'cnt' => '1000',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '2000'
+            'cnt' => '2000',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '2014'
+            'cnt' => '2014',
+            'createrid'=>'1'
         ]);
 
         //
         Peas::create([
-            'cnt' => '5000'
+            'cnt' => '5000',
+            'createrid'=>'1'
         ]);
 
 
