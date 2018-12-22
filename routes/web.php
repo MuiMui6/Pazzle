@@ -7,9 +7,7 @@ Auth::routes();
 Route::get('/', 'ItemController@user_view');
 
 //商品詳細
-Route::get('/Detail_Item', function () {
-    return view('Detail_Item');
-});
+Route::get('/Detail_Item','ItemController@user_detail');
 
 //観光地一覧
 Route::get('/All_Spot', function () {

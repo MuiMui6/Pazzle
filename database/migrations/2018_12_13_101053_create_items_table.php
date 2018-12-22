@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->integer('tag2')->nullable();        //タグ２
             $table->integer('tag3')->nullable();        //タグ３
             $table->integer('sizeid')->nullable();                  //サイズ
-            $table->integer('peaceid')->nullable();                 //peas数
+            $table->integer('peasid')->nullable();                 //peas数
             $table->integer('spotid')->nullable();                  //観光情報
             $table->boolean('view')->default(0);  //可視か不可視か（基本不可視）
             $table->text('etc')->nullable();            //メモ

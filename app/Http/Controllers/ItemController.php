@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Item;
+use App\Peas;
+use App\Size;
+use App\Tag;
 
 class ItemController extends Controller
 {
@@ -12,9 +16,22 @@ class ItemController extends Controller
     public function user_view()
     {
         //テーブル全取得
-        $item = Item::all();
+        $item = DB::table('items')
+            ->join('peases','items.sizeid','=','peases.peasid')
+            ->join('sizes','items.sizeid','=','sizes.sizeid')
+            ->select('items.itemid','items.name','items.profile','peases.cnt','sizes.height','sizes.width')
+            ->Get();
 
-        return view('/home', compact('item'));
+        //ピース数
+        $peas = Peas::select('cnt')->Get();
+
+        //サイズ
+        $size = Size::select('height', 'width') ->Get();
+
+        //タグ
+        $tag = Tag::select('name')->Get();
+
+        return view('/home', compact('item','peas','size','tag'));
     }
 
 //管理者側
@@ -59,10 +76,25 @@ class ItemController extends Controller
 //一般ユーザ・管理者共通
     public function user_detail(Request $request)
     {
-        //itemidをもとに取得
-        $item = Item::where('id', $request->itemid)->get();
 
-        return view('/Detail_Item', compact('item'));
+        //テーブル全取得
+        $item = DB::table('items')
+            ->join('peases','items.sizeid','=','peases.peasid')
+            ->join('sizes','items.sizeid','=','sizes.sizeid')
+            ->where('items.itemid',$request->itemid)
+            ->select('items.itemid','items.name','items.profile','peases.cnt','sizes.height','sizes.width')
+            ->Get();
+
+        //ピース数
+        $peas = Peas::select('cnt')->Get();
+
+        //サイズ
+        $size = Size::select('height', 'width') ->Get();
+
+        //タグ
+        $tag = Tag::select('name')->Get();
+
+        return view('/Detail_Item', compact('item','peas','size','tag'));
     }
 
 

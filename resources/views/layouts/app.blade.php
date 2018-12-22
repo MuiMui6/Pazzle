@@ -108,33 +108,33 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3">
+                <form method="get" action="/">
+                    @csrf
+                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
+                </form>
             </div>
             <div class="col-2">
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Peas</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach($peas as $peases)
+                        <li class="list-group-item">{{$peases->cnt}}</li>
+                    @endforeach
                 </ul>
 
 
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Size</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach ($size as $sizes)
+                        <li class="list-group-item">{{$sizes->height}}*{{$sizes->width}}</li>
+                    @endforeach
                 </ul>
 
 
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Tag</h4></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
+                    @foreach($tag as $tags)
+                        <li class="list-group-item">{{$tags->name}}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-10">
