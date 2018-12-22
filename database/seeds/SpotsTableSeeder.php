@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Spot;
 
 class SpotsTableSeeder extends Seeder
 {
