@@ -8,7 +8,7 @@ class OrderController extends Controller
 {
 //表示
 //管理者側
-    public function admin_view()
+    public function view()
     {
 
     }
@@ -16,28 +16,21 @@ class OrderController extends Controller
 
 //検索
 //管理者側
-    public function admin_search()
+    public function search()
     {
 
     }
 
 //詳細
 //管理者側
-    public function admin_detail()
-    {
-
-    }
-
-//追加
-//管理者側
-    public function admin_add()
+    public function detail()
     {
 
     }
 
 //編集
 //管理者側
-    public function admin_edit()
+    public function edit()
     {
 
     }

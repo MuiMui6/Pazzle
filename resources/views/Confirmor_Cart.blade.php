@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.napp')
 
 @section('content')
     <div class="row">
@@ -19,12 +19,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="text-center"><img src="img/spring.jpg" height="150px"></th>
-                <th class="text-center">商品名</th>
-                <th class="text-center">3000円</th>
-                <th class="text-center"><input type="submit" class="btn btn-danger" value="Delete"></th>
-            </tr>
+            @foreach($cartItems as $index =>$item)
+                <form action="/Confirmor_Cart" method="post">
+                    <tr>
+                        <th class="text-center"><img src="img/{{$item->name}}.jpg" height="150px"></th>
+                        <th class="text-center">{{$item->name}}</th>
+                        <th class="text-center">{{$item->price}}円</th>
+                        <th class="text-center">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </th>
+                    </tr>
+                </form>
+            @endforeach
             </tbody>
         </table>
 

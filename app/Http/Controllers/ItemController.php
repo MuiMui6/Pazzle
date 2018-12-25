@@ -74,7 +74,7 @@ class ItemController extends Controller
 
 //詳細
 //一般ユーザ・管理者共通
-    public function user_detail(Request $request)
+    public function detail(Request $request)
     {
 
         //テーブル全取得
@@ -100,7 +100,7 @@ class ItemController extends Controller
 
 //追加
 //管理者のみ
-    public function admin_add(Request $request)
+    public function add(Request $request)
     {
         //バリデーションチェック
 
@@ -114,7 +114,7 @@ class ItemController extends Controller
 
 //編集
 //管理者側
-    public function admin_edit(Request $request)
+    public function edit(Request $request)
     {
         //バリデーションチェック
 

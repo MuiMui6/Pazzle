@@ -34,27 +34,22 @@ class SpotCommentController extends Controller
     }
 
 //詳細
-//管理者側
-    public function admin_detail()
+//一般ユーザ
+    public function detail()
     {
 
     }
 
-//追加
-    public function user_add()
-    {
-
-    }
 
 //管理者側
-    public function admin_add()
+    public function add()
     {
 
     }
 
 //編集
 //管理者側
-    public function admin_edit()
+    public function edit()
     {
 
     }

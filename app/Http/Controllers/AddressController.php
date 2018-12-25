@@ -20,12 +20,6 @@ class AddressController extends Controller
     }
 
 //検索
-//一般ユーザ
-    public function user_serch()
-    {
-
-    }
-
 //管理者側
     public function admin_search()
     {

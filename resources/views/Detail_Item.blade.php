@@ -44,7 +44,7 @@
             </table>
             <p class="card-text">
             <div class="col-12 text-center">
-                <form action="/Cart" method="get">
+                <form action="/Conrirmor_Cart" method="get">
                     @csrf
                     <input type="hidden" value="{{$items->itemid}}" name="itemid">
                     <input type="submit" class="btn btn-block btn-info m-3" value="カートに入れる">
