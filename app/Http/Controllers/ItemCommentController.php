@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Item;
+use App\ItemComment;
+use App\User;
 
 class ItemCommentController extends Controller
 {
@@ -11,6 +15,7 @@ class ItemCommentController extends Controller
     public function view()
     {
 
+        return view('/Admin.All_ItemComment');
     }
 
 //検索
@@ -18,6 +23,7 @@ class ItemCommentController extends Controller
     public function search()
     {
 
+        return view('/Admin.All_ItemComment');
     }
 
 //詳細
@@ -25,12 +31,14 @@ class ItemCommentController extends Controller
     public function detail()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 //追加
     public function add()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 
@@ -39,6 +47,7 @@ class ItemCommentController extends Controller
     public function edit()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 }

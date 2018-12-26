@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Item;
+use App\ItemComment;
 use App\Peas;
 use App\Size;
 use App\Tag;
@@ -37,10 +38,8 @@ class ItemController extends Controller
 //管理者側
     public function admin_view()
     {
-        //テーブル全取得
-        $item = Item::all();
 
-        return view('/admin.All_Item', compact('item'));
+        return view('/Admin.All_Item');
     }
 
 
@@ -48,28 +47,15 @@ class ItemController extends Controller
 //一般ユーザ
     public function user_search(Request $request)
     {
-        //キーワードバリデーションチェック
-        $keyword = $request->validate(['keyword' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
 
-        //キーワードをもとに取得
-        $item = Item::where('name', 'like', '%' . $keyword . '%')
-            ->get();
-
-        return view('/home', compact('item'));
+        return view('/home');
     }
 
 //管理者側
     public function admin_search(Request $request)
     {
-        //キーワードバリデーションチェック
-        $keyword = $request->validate(['keyword' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
 
-        //キーワードをもとに取得
-        $item = Item::where('name', 'like', '%' . $keyword . '%')
-            ->get();
-
-        return view('/admin.All_Item', compact('item'));
-
+        return view('/Admin.All_Item');
     }
 
 //詳細

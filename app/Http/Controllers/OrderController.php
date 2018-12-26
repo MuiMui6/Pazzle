@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Address;
+use App\Item;
+use App\User;
 
 class OrderController extends Controller
 {
@@ -11,6 +15,7 @@ class OrderController extends Controller
     public function view()
     {
 
+        return view('/Admin.All_Order');
     }
 
 
@@ -19,6 +24,7 @@ class OrderController extends Controller
     public function search()
     {
 
+        return view('/Admin.All_Order');
     }
 
 //詳細
@@ -26,6 +32,7 @@ class OrderController extends Controller
     public function detail()
     {
 
+        return view('/Admin.Edit_Order');
     }
 
 //編集
@@ -33,6 +40,7 @@ class OrderController extends Controller
     public function edit()
     {
 
+        return view('/Admin.Edit_Order');
     }
 
 }

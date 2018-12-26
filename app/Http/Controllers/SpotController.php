@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Spot;
+use App\SpotComment;
+use App\Item;
+use App\User;
 
 class SpotController extends Controller
 {
@@ -11,6 +16,7 @@ class SpotController extends Controller
     public function view()
     {
 
+        return view('/Admin.All_SpotComment');
     }
 
 
@@ -19,6 +25,7 @@ class SpotController extends Controller
     public function search()
     {
 
+        return view('/Admin.All_SpotComment');
     }
 
 //詳細
@@ -26,6 +33,7 @@ class SpotController extends Controller
     public function detail()
     {
 
+        return view('/Admin.Edit_Spot');
     }
 
 //追加
@@ -33,6 +41,7 @@ class SpotController extends Controller
     public function add()
     {
 
+        return view('/Admin.Edit_Spot');
     }
 
 //編集
@@ -40,6 +49,7 @@ class SpotController extends Controller
     public function edit()
     {
 
+        return view('/Admin.Edit_Spot');
     }
 
 }
