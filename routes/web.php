@@ -40,9 +40,6 @@ Route::post('/Admin/Edit_Address', 'AddressController@admin_edit');
 //============================================================================
 //CartController
 //============================================================================
-//表示
-Route::get('/Cart', 'CartController@view');
-
 //確認
 Route::get('/Cart', 'CartController@confirmor');
 
@@ -54,6 +51,15 @@ Route::get('/Cart', 'CartController@delete');
 
 //全削除
 Route::get('/Cart', 'CartController@all_delete');
+
+//宛先決定
+Route::get('/Cart', 'CartController@Topost');
+
+//最終確認
+Route::get('/Cart', 'CartController@register');
+
+//確定後
+Route::get('/Cart', 'CartController@degisterd');
 
 
 //============================================================================

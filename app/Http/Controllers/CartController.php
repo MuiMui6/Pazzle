@@ -17,6 +17,13 @@ class CartController extends Controller
         return view('/Confirmor_Cart');
     }
 
+//追加
+    public function add()
+    {
+        
+        return view('/Detail_Item');
+    }
+
 //カート内の物を削除（１件）
     public function delete()
     {
