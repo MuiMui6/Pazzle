@@ -18,21 +18,21 @@ class ItemController extends Controller
     {
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases','items.sizeid','=','peases.peasid')
-            ->join('sizes','items.sizeid','=','sizes.sizeid')
-            ->select('items.itemid','items.name','items.profile','peases.cnt','sizes.height','sizes.width')
+            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
+            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
             ->Get();
 
         //ピース数
         $peas = Peas::select('cnt')->Get();
 
         //サイズ
-        $size = Size::select('height', 'width') ->Get();
+        $size = Size::select('height', 'width')->Get();
 
         //タグ
         $tag = Tag::select('name')->Get();
 
-        return view('/home', compact('item','peas','size','tag'));
+        return view('/home', compact('item', 'peas', 'size', 'tag'));
     }
 
 //管理者側
@@ -48,7 +48,52 @@ class ItemController extends Controller
     public function user_search(Request $request)
     {
 
-        return view('/home');
+        $keyword = $request->keyword;
+        $key_height = $request->key_height;
+        $key_width = $request->key_width;
+
+        //テーブル全取得
+        $item = DB::table('items')
+            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
+            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->Get();
+
+        //もしキーワードがあれば
+        if ($keyword <> null) {
+            $item = DB::table('items')
+                ->join('peases', 'items.sizeid', '=', 'peases.peasid')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
+                ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->orwhere('items.name', 'like', '%' . $keyword . '%')
+                ->orwhere('items.profile', 'like', '%' . $keyword . '%')
+                ->orwhere('items.price', 'like', '%' . $keyword . '%')
+                ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
+                ->Get();
+        }
+
+        //もしサイズ指定があれば
+        if ($key_height <> null && $key_width <> null) {
+            $item = DB::table('items')
+                ->join('peases', 'items.sizeid', '=', 'peases.peasid')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
+                ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->orwhere('sizes.height', $key_height)
+                ->orwhere('sizes.width', $key_width)
+                ->Get();
+        }
+
+        //ピース数
+        $peas = Peas::select('cnt')->Get();
+
+        //サイズ
+        $size = Size::select('height', 'width')->Get();
+
+        //タグ
+        $tag = Tag::select('name')->Get();
+
+
+        return view('/home', compact('item', 'peas', 'size', 'tag'));
     }
 
 //管理者側
@@ -62,25 +107,25 @@ class ItemController extends Controller
 //一般ユーザ・管理者共通
     public function detail(Request $request)
     {
-
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases','items.sizeid','=','peases.peasid')
-            ->join('sizes','items.sizeid','=','sizes.sizeid')
-            ->where('items.itemid',$request->itemid)
-            ->select('items.itemid','items.name','items.profile','peases.cnt','sizes.height','sizes.width')
+            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
+            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.itemid', $request->itemid)
             ->Get();
+
 
         //ピース数
         $peas = Peas::select('cnt')->Get();
 
         //サイズ
-        $size = Size::select('height', 'width') ->Get();
+        $size = Size::select('height', 'width')->Get();
 
         //タグ
         $tag = Tag::select('name')->Get();
 
-        return view('/Detail_Item', compact('item','peas','size','tag'));
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag'));
     }
 
 
@@ -92,7 +137,6 @@ class ItemController extends Controller
 
 
         //追加処理
-
 
 
         return view('/admin.Edit_Item');
