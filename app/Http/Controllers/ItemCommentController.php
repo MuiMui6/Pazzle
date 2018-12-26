@@ -3,54 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Item;
+use App\ItemComment;
+use App\User;
 
 class ItemCommentController extends Controller
 {
 //表示
-//一般ユーザ
-    public function user_view()
-    {
-
-    }
-
 //管理者側
-    public function admin_view()
+    public function view()
     {
 
+        return view('/Admin.All_ItemComment');
     }
 
 //検索
 //管理者側
-    public function admin_search()
+    public function search()
     {
 
+        return view('/Admin.All_ItemComment');
     }
 
 //詳細
-//一般ユーザ
-    public function user_detail()
-    {
-
-    }
-
 //管理者側
-    public function admin_detail()
+    public function detail()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 //追加
-    public function user_add()
+    public function add()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 
 //編集
 //管理者側
-    public function admin_edit()
+    public function edit()
     {
 
+        return view('/Admin.Edit_ItemComment');
     }
 
 }
