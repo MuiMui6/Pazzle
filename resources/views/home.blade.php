@@ -37,7 +37,7 @@
                         <tr>
                             <th scope="row"></th>
                             <td>
-                                <form action="/Detail_Item" method="get">
+                                <form action="/Detail" method="get">
                                     @csrf
                                     <input type="hidden" value="{{$items->itemid}}" name="itemid">
                                     <input type="submit" class="btn btn-info" value="Detail">

@@ -1,4 +1,4 @@
-@extends('layouts.napp')
+@extends('layouts.keyapp')
 
 @section('content')
     <div class="row">

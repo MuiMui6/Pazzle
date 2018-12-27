@@ -13,27 +13,6 @@ use App\Tag;
 class ItemController extends Controller
 {
 //表示
-//一般ユーザ
-    public function user_view()
-    {
-        //テーブル全取得
-        $item = DB::table('items')
-            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->Get();
-
-        //ピース数
-        $peas = Peas::select('cnt')->Get();
-
-        //サイズ
-        $size = Size::select('height', 'width')->Get();
-
-        //タグ
-        $tag = Tag::select('name')->Get();
-
-        return view('/home', compact('item', 'peas', 'size', 'tag'));
-    }
 
 //管理者側
     public function admin_view()
@@ -115,17 +94,17 @@ class ItemController extends Controller
             ->where('items.itemid', $request->itemid)
             ->Get();
 
-
         //ピース数
-        $peas = Peas::select('cnt')->Get();
+        $peas = Peas::select('cnt')->get();
 
         //サイズ
-        $size = Size::select('height', 'width')->Get();
+        $size = Size::select('height', 'width')->get();
 
         //タグ
-        $tag = Tag::select('name')->Get();
+        $tag = Tag::select('name')->get();
 
         return view('/Detail_Item', compact('item', 'peas', 'size', 'tag'));
+
     }
 
 

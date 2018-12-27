@@ -65,9 +65,6 @@ Route::get('/Cart', 'CartController@degisterd');
 //============================================================================
 //ItemController
 //============================================================================
-//ユーザ商品表示
-Route::get('/', 'ItemController@user_view');
-
 //管理者商品表示
 Route::get('/admin/All_Item', 'ItemController@admin_view');
 
@@ -78,7 +75,7 @@ Route::get('/', 'ItemController@user_search');
 Route::get('/Admin/All_Item', 'ItemController@admin_search');
 
 //商品詳細
-Route::get('/Detail_Item', 'ItemController@detail');
+Route::get('/Detail', 'ItemController@detail');
 
 //商品追加
 Route::get('/Admin/ItemEdit', 'ItemController@add');
