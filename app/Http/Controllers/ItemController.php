@@ -26,7 +26,6 @@ class ItemController extends Controller
 //一般ユーザ
     public function user_search(Request $request)
     {
-
         $keyword = $request->keyword;
         $key_height = $request->key_height;
         $key_width = $request->key_width;
@@ -86,6 +85,8 @@ class ItemController extends Controller
 //一般ユーザ・管理者共通
     public function detail(Request $request)
     {
+        $message = null;
+
         //テーブル全取得
         $item = DB::table('items')
             ->join('peases', 'items.sizeid', '=', 'peases.peasid')
@@ -103,7 +104,7 @@ class ItemController extends Controller
         //タグ
         $tag = Tag::select('name')->get();
 
-        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag'));
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag','message'));
 
     }
 
