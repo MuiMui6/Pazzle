@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('itemid');               //商品ID
             $table->string('name');                     //商品名
             $table->text('profile');                    //紹介文
+            $table->integer('price');                   //金額
             $table->integer('tag1')->nullable();                    //タグ１
             $table->integer('tag2')->nullable();        //タグ２
             $table->integer('tag3')->nullable();        //タグ３

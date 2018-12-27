@@ -1,4 +1,4 @@
-@extends('layouts.napp')
+@extends('layouts.notapp')
 
 @section('content')
     <div class="row">

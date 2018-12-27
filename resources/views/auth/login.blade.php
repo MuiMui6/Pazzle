@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.notapp')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card m-3">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">

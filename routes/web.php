@@ -41,33 +41,30 @@ Route::post('/Admin/Edit_Address', 'AddressController@admin_edit');
 //CartController
 //============================================================================
 //確認
-Route::get('/Cart', 'CartController@confirmor');
+Route::get('/Confirmor_Cart', 'CartController@confirmor');
 
 //追加
-Route::get('/Cart', 'CartController@add');
+Route::post('/Add_Cart', 'CartController@add');
 
 //削除
-Route::get('/Cart', 'CartController@delete');
+Route::get('/Delete_Cart', 'CartController@delete');
 
 //全削除
-Route::get('/Cart', 'CartController@all_delete');
+Route::get('/AllDelete_Cart', 'CartController@all_delete');
 
 //宛先決定
-Route::get('/Cart', 'CartController@Topost');
+Route::get('/Topost_Cart', 'CartController@Topost');
 
 //最終確認
-Route::get('/Cart', 'CartController@register');
+Route::get('/Register_Cart', 'CartController@register');
 
 //確定後
-Route::get('/Cart', 'CartController@degisterd');
+Route::get('/Registerd_Cart', 'CartController@degisterd');
 
 
 //============================================================================
 //ItemController
 //============================================================================
-//ユーザ商品表示
-Route::get('/', 'ItemController@user_view');
-
 //管理者商品表示
 Route::get('/admin/All_Item', 'ItemController@admin_view');
 
@@ -78,7 +75,7 @@ Route::get('/', 'ItemController@user_search');
 Route::get('/Admin/All_Item', 'ItemController@admin_search');
 
 //商品詳細
-Route::get('/Detail_Item', 'ItemController@detail');
+Route::get('/Detail', 'ItemController@detail');
 
 //商品追加
 Route::get('/Admin/ItemEdit', 'ItemController@add');

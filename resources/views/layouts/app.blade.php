@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" href="/Confirmor_Cart">
                             Cart
                         </a>
                     </li>
@@ -117,7 +117,12 @@
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Peas</h4></li>
                     @foreach($peas as $peases)
-                        <li class="list-group-item">{{$peases->cnt}}</li>
+                        <li class="list-group-item">
+                            @csrf
+                            <form method="get" action="/">
+                                <input type="submit" class="btn btn-link" value="{{$peases->cnt}}" name="keyword">
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
 
@@ -125,7 +130,14 @@
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Size</h4></li>
                     @foreach ($size as $sizes)
-                        <li class="list-group-item">{{$sizes->height}}*{{$sizes->width}}</li>
+                        <li class="list-group-item">
+                            <form method="get" action="/">
+                                @csrf
+                                <input type="hidden" value="{{$sizes->height}}" name="key_height">
+                                <input type="hidden" value="{{$sizes->width}}" name="key_width">
+                                <input type="submit" class="btn btn-link" value="{{$sizes->height}}×{{$sizes->width}}">
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
 
@@ -133,7 +145,12 @@
                 <ul class="list-group mt-3 mb-3">
                     <li class="list-group-item"><h4>Tag</h4></li>
                     @foreach($tag as $tags)
-                        <li class="list-group-item">{{$tags->name}}</li>
+                        <li class="list-group-item">
+                            <form method="get" action="/">
+                                @csrf
+                                <input type="submit" class="btn btn-link" value="{{$tags->name}}" name="keyword">
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
             </div>

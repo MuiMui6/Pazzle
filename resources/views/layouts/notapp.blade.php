@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" href="/Confirmor_Cart">
                             Cart
                         </a>
                     </li>
@@ -106,17 +106,9 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <form method="get" action="/">
-                    @csrf
-                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
-                </form>
-            </div>
             <main>
                 @yield('content')
             </main>
-        </div>
     </div>
 </div>
 </body>
