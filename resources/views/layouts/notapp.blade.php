@@ -106,17 +106,9 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <form method="get" action="/">
-                    @csrf
-                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
-                </form>
-            </div>
             <main>
                 @yield('content')
             </main>
-        </div>
     </div>
 </div>
 </body>
