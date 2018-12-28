@@ -50,7 +50,7 @@ Route::post('/Add_Cart', 'CartController@add');
 Route::post('/Delete_Cart', 'CartController@delete');
 
 //全削除
-Route::post('/AllDelete_Cart', 'CartController@all_delete');
+Route::post('/AllDelete_Cart', 'CartController@alldelete');
 
 //宛先決定
 Route::post('/Topost_Cart', 'CartController@Topost');
