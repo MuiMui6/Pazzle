@@ -60,7 +60,10 @@
             <div class="m-3 alert alert-danger">
                 下のボタンをクリックすると購入が確定します。
             </div>
-            <input type="submit" class="mb-3 btn btn-block" value="購入">
+            <form action="/Registerd_Cart" method="post">
+                @csrf
+                <input type="submit" class="mb-3 btn btn-block" value="購入">
+            </form>
         </div>
     </div>
 @endsection

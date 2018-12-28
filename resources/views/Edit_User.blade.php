@@ -39,7 +39,12 @@
             {{--保存--}}
             <tr>
                 <th scope="row"></th>
-                <td><input type="submit" class="btn btn-info" value="保存"></td>
+                <td>
+                    <form action="/Edit_User">
+                        @csrf
+                        <input type="submit" class="btn btn-info" value="保存">
+                    </form>
+                </td>
             </tr>
 
             </tbody>

@@ -11,7 +11,10 @@
 
 
         <div class="col-12">
-            <input type="submit" class="btn btn-block" value="住所を追加する">
+            <form action="/New_Address">
+                @csrf
+                <input type="submit" class="btn btn-block" value="住所を追加する">
+            </form>
         </div>
 
         <table class="table table-borderless">
@@ -29,7 +32,10 @@
         </table>
 
         <div class="col-12">
-            <input type="submit" class="btn btn-block" value="購入確認">
+            <form action="/Register_Cart" method="post">
+                @csrf
+                <input type="submit" class="btn btn-block" value="購入確認">
+            </form>
         </div>
     </div>
 @endsection

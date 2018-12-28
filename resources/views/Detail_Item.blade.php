@@ -84,6 +84,14 @@
                 <td>Name</td>
                 <td>Comment</td>
             </tr>
+            <form action="/Detail_ItemComment" method="post">
+            <tr>
+                <td>評価</td>
+                <td>{{Auth::user()->name}}</td>
+                <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
+                <td><input type="submit" value="投稿" class="btn btn-info"></td>
+            </tr>
+            </form>
             </thead>
             <tbody>
             <tr>
