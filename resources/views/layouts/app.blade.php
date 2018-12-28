@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Confirmor_Cart">
+                        <a class="nav-link" href="/Confirmation_Cart">
                             Cart
                         </a>
                     </li>

@@ -14,6 +14,11 @@
             <tr>
                 <th class="text-center">合計：{{$itemscnt}}点</th>
                 <th class="text-center">合計金額：{{$price}}円</th>
+                <th class="text-center">
+                    <form action="/AllDelete_Cart" method="post">
+                        <input type="submit" value="All Delete" class="btn btn-danger">
+                    </form>
+                </th>
             </tr>
             <tr>
                 <th class="text-center">ItemImage</th>
@@ -24,24 +29,23 @@
             </thead>
             <tbody>
             @foreach($CartItems as $index =>$item)
-                <form action="/Delete_Cart" method="post">
-                    <tr>
-                        <th class="text-center"><img src="img/{{$item->name}}.jpg" height="150px"></th>
-                        <th class="text-center">{{$item->name}}</th>
-                        <th class="text-center">{{$item->price}}円</th>
-                        <th class="text-center">
-                            <input type="submit" class="btn btn-danger" value="Delete">
-
-                        </th>
-                    </tr>
-                </form>
+                <tr>
+                    <th class="text-center"><img src="img/{{$item->name}}.jpg" height="150px"></th>
+                    <th class="text-center">{{$item->name}}</th>
+                    <th class="text-center">{{$item->price}}円</th>
+                    <th class="text-center">
+                        <form action="/Delete_Cart" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    </th>
+                </tr>
             @endforeach
             </tbody>
         </table>
 
         <div class="col-lg-12">
             <form action="/Topost_Cart">
-                <input type="submit" class="btn btn-default" value="購入手続きへ">
+                <input type="submit" class="btn btn-block btn-default" value="購入手続きへ">
             </form>
         </div>
 

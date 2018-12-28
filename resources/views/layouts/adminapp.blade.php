@@ -41,66 +41,55 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Confirmor_Cart">
+                        <a class="nav-link" href="/Confirmation_Cart">
                             Cart
                         </a>
                     </li>
                     <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                History Cart
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            History Cart
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                AdminMenu <span class="caret"></span>
+                                {{ __('Logout') }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item">Address Management</a>
-                                <a href="#" class="dropdown-item">Item Management</a>
-                                <a href="#" class="dropdown-item">Item Comment Management</a>
-                                <a href="#" class="dropdown-item">Order Management</a>
-                                <a href="#" class="dropdown-item">Peas Management</a>
-                                <a href="#" class="dropdown-item">Size Management</a>
-                                <a href="#" class="dropdown-item">Spot Management</a>
-                                <a href="#" class="dropdown-item">Spot Comment Management</a>
-                                <a href="#" class="dropdown-item">Tag Management</a>
-                                <a href="#" class="dropdown-item">User Management</a>
-                            </div>
-                        </li>
-                    @endguest
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            AdminMenu <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item">Address Management</a>
+                            <a href="#" class="dropdown-item">Item Management</a>
+                            <a href="#" class="dropdown-item">Item Comment Management</a>
+                            <a href="#" class="dropdown-item">Order Management</a>
+                            <a href="#" class="dropdown-item">Peas Management</a>
+                            <a href="#" class="dropdown-item">Size Management</a>
+                            <a href="#" class="dropdown-item">Spot Management</a>
+                            <a href="#" class="dropdown-item">Spot Comment Management</a>
+                            <a href="#" class="dropdown-item">Tag Management</a>
+                            <a href="#" class="dropdown-item">User Management</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -41,19 +41,19 @@ Route::post('/Admin/Edit_Address', 'AddressController@admin_edit');
 //CartController
 //============================================================================
 //確認
-Route::get('/Confirmor_Cart', 'CartController@confirmor');
+Route::get('/Confirmation_Cart', 'CartController@Confirmation');
 
 //追加
 Route::post('/Add_Cart', 'CartController@add');
 
 //削除
-Route::get('/Delete_Cart', 'CartController@delete');
+Route::post('/Delete_Cart', 'CartController@delete');
 
 //全削除
-Route::get('/AllDelete_Cart', 'CartController@all_delete');
+Route::post('/AllDelete_Cart', 'CartController@all_delete');
 
 //宛先決定
-Route::get('/Topost_Cart', 'CartController@Topost');
+Route::post('/Topost_Cart', 'CartController@Topost');
 
 //最終確認
 Route::get('/Register_Cart', 'CartController@register');
