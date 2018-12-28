@@ -8,13 +8,13 @@ use App\Address;
 use App\Item;
 use App\User;
 use App\Peas;
-use App\Size;
 use App\Tag;
+use App\Size;
 
 class CartController extends Controller
 {
 //確認
-    public function Confirmor()
+    public function Confirmation()
     {
         $CartItems = request()->session()->get("CART", []);
         $price = 0;
@@ -42,14 +42,15 @@ class CartController extends Controller
             ->where('items.itemid', $request->itemid)
             ->Get();
 
+
         //ピース数
-        $peas = Peas::select('cnt')->get();
+        $peas = Peas::select('cnt')->Get();
 
         //サイズ
-        $size = Size::select('height', 'width')->get();
+        $size = Size::select('height', 'width')->Get();
 
         //タグ
-        $tag = Tag::select('name')->get();
+        $tag = Tag::select('name')->Get();
 
         $index = $request->itemid;
         $message = null;
@@ -63,7 +64,7 @@ class CartController extends Controller
                 'message' => $message,
                 'item' => $item,
                 'peas' => $peas,
-                'size' => $item,
+                'size' => $size,
                 'tag' => $tag
             ]);
         } else {
@@ -72,47 +73,42 @@ class CartController extends Controller
     }
 
 //カート内の物を削除（１件）
-    public function delete(Request $request)
+    public function delete($index)
     {
-        $index = $request->itemid;
-        $items = DB::select("SELECT * FROM items Where itemid = ?", [$index]);
-
-        if (count($items) >= 0) {
-            $cartItems = request()->session()->get("CART", []);
-            unset($cartItems[$index]);;
-            request()->session()->put("CART", $cartItems);
-            return redirect('Confirmor_Cart');
-        } else {
-            return abort(404);
-        }
-
+        return redirect('/Confirmor_Cart');
     }
 
 //カート内の物を削除（全件）
     public function all_delete()
     {
-        $cartItems = request()->session()->forget("CART");
         return redirect('/Confirmor_Cart');
     }
 
 //宛先決め
-    public function Topost()
+    public function Topost(Request $request)
     {
+        //
+
+        //
 
         return view('/Register_Topost');
     }
 
 //最終確認
-    public function Register()
+    public function Register(Request $request)
     {
+        //商品・合計点数・合計金額表示
+
+        //宛先表示
+
 
         return view('/Register_Cart');
     }
 
 //購入後
-    public function Registerd()
+    public function Registerd(Request $request)
     {
-
+        //DB処理（Orderに追加）
         return view('/Registerd_Cart');
     }
 
