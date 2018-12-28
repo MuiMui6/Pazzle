@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="row justify-content-center">
+
+        @if($message <> null)
+            <div class="alert alert-success m-3">
+                <p>{{$message}}</p>
+            </div>
+        @endif
+
         @foreach($item as $items)
             @if($items->height >= $items->width)
                 <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 600px; width: 400px;">
@@ -50,11 +57,6 @@
                             <p>ログインしないと購入していただけません。</p>
                         </div>
                     @else
-                        @if($message <> null)
-                        <div class="alert alert-success m-3">
-                            <p>{{$message}}</p>
-                        </div>
-                        @endif
                         <form action="/Add_Cart" method="post">
                             @csrf
                             <input type="hidden" value="{{$items->itemid}}" name="itemid">
