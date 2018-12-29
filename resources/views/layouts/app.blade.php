@@ -107,14 +107,14 @@
     </nav>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <form method="get" action="/">
                     @csrf
                     <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
                 </form>
             </div>
             <div class="col-2">
-                <ul class="list-group mt-3 mb-3">
+                <ul class="list-group mt-lg-3 mb-lg-3">
                     <li class="list-group-item"><h4>Peas</h4></li>
                     @foreach($peas as $peases)
                         <li class="list-group-item">
@@ -127,7 +127,7 @@
                 </ul>
 
 
-                <ul class="list-group mt-3 mb-3">
+                <ul class="list-group mt-lg-3 mb-lg-3">
                     <li class="list-group-item"><h4>Size</h4></li>
                     @foreach ($size as $sizes)
                         <li class="list-group-item">
@@ -142,7 +142,7 @@
                 </ul>
 
 
-                <ul class="list-group mt-3 mb-3">
+                <ul class="list-group mt-lg-3 mb-lg-3">
                     <li class="list-group-item"><h4>Tag</h4></li>
                     @foreach($tag as $tags)
                         <li class="list-group-item">
@@ -154,7 +154,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-10">
+            <div class="col-lg-10">
                 <main>
                     @yield('content')
                 </main>
