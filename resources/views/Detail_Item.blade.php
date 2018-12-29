@@ -41,6 +41,12 @@
                     <td>{{$items->cnt}}peas</td>
                 </tr>
 
+                {{--Tag--}}
+                <tr>
+                    <th scope="row">Tag</th>
+                    <td>Tag1,Tag2,Tag3</td>
+                </tr>
+
                 {{--観光地--}}
                 <tr>
                     <th scope="row">Spot</th>
@@ -49,58 +55,81 @@
 
                 </tbody>
             </table>
-            <p class="card-text">
-                <div class="col-12 text-center">
+            @guest
+                <div class="alert alert-danger text-lg-center col-12">
+                    <p>購入していただくには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>して頂く必要があります。</p>
+                </div>
+            @else
+                <form action="/Add_Cart" method="post">
+                    @csrf
+                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
+                    <input type="submit" class="btn btn-block btn-info m-3" value="カートに入れる">
+                </form>
+            @endguest
+
+            <div class="col-12 m-3">
+                <h3 class="text-center">Comment</h3>
+            </div>
+
+            @guest
+                <div class="alert alert-info text-lg-center col-12">
+                    コメントするには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>していただく必要があります。
+                </div>
+            @endguest
+
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <td><h3>Average Evakuation</h3></td>
+                    <td><h3>3.0</h3></td>
+                </tr>
+                <tr>
+                    <td>Evaluation</td>
+                    <td>Name</td>
+                    <td>Comment</td>
+                </tr>
+                <tr>
 
                     @guest
-                        <div class="alert alert-danger m-3">
-                            <p>ログインしないと購入していただけません。</p>
-                        </div>
                     @else
-                        <form action="/Add_Cart" method="post">
-                            @csrf
-                            <input type="hidden" value="{{$items->itemid}}" name="itemid">
-                            <input type="submit" class="btn btn-block btn-info m-3" value="カートに入れる">
+                        <form action="/Detail_ItemComment" method="post">
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        評価を選んでください
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="dropdown-item" type="button" value="1" name="evaluation">★
+                                        </button>
+                                        <button class="dropdown-item" type="button" value="2" name="evaluation">★★
+                                        </button>
+                                        <button class="dropdown-item" type="button" value="3" name="evaluation">★★★
+                                        </button>
+                                        <button class="dropdown-item" type="button" value="4" name="evaluation">★★★★
+                                        </button>
+                                        <button class="dropdown-item" type="button" value="5" name="evaluation">★★★★★
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                {{Auth::user()->name}}</td>
+                            <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
+                            <td><input type="submit" value="投稿" class="btn btn-info"></td>
                         </form>
                     @endguest
-                </div>
-        <small class="text-muted">Tag1,Tag2,Tag3</small>
-        </p>
-
-        <div class="col-12 m-3">
-            <h3 class="text-center">Comment</h3>
-        </div>
-        <div class="m-3">
-            <h5>「ItemName」のコメント一覧です。</h5>
-        </div>
-        <table class="table table-borderless">
-            <thead>
-            <tr>
-                <td><h3>Average Evakuation</h3></td>
-                <td><h3>3.0</h3></td>
-            </tr>
-            <tr>
-                <td>Evakuation</td>
-                <td>Name</td>
-                <td>Comment</td>
-            </tr>
-            <form action="/Detail_ItemComment" method="post">
-            <tr>
-                <td>評価</td>
-                <td>{{Auth::user()->name}}</td>
-                <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
-                <td><input type="submit" value="投稿" class="btn btn-info"></td>
-            </tr>
-            </form>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="text-left">3.0</td>
-                <td class="text-left">投稿者</td>
-                <td class="text-left">コメント文コメント文コメント文</td>
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-left">3.0</td>
+                    <td class="text-left">投稿者</td>
+                    <td class="text-left">コメント文コメント文コメント文</td>
+                </tr>
+                </tbody>
+            </table>
         @endforeach
-        </div>
+    </div>
 @endsection

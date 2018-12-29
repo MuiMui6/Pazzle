@@ -44,19 +44,59 @@
         <div class="col-12 m-3">
             <h3 class="text-center">Comment</h3>
         </div>
-        <div class="m-3">
-            <h5>「ItemName」のコメント一覧です。</h5>
-        </div>
+
+        @guest
+            <div class="alert alert-info text-lg-center col-12">
+                コメントするには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>していただく必要があります。
+            </div>
+        @endguest
+
         <table class="table table-borderless">
             <thead>
             <tr>
-                <td><h3>Average Evakuation</h3></td>
+                <td><h3>Average Evaluation</h3></td>
                 <td><h3>3.0</h3></td>
             </tr>
             <tr>
-                <td>Evakuation</td>
+                <td>Evaluation</td>
                 <td>Name</td>
                 <td>Comment</td>
+            </tr>
+            <tr>
+
+                @guest
+                @else
+                    <form action="/Detail_SpotComment" method="post">
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    評価を選んでください
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button class="dropdown-item" type="button" value="1" name="evaluation">★
+                                    </button>
+                                    <button class="dropdown-item" type="button" value="2" name="evaluation">★★
+                                    </button>
+                                    <button class="dropdown-item" type="button" value="3" name="evaluation">★★★
+                                    </button>
+                                    <button class="dropdown-item" type="button" value="4" name="evaluation">★★★★
+                                    </button>
+                                    <button class="dropdown-item" type="button" value="5" name="evaluation">★★★★★
+                                    </button>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            {{Auth::user()->name}}</td>
+                        <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
+                        <td>
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                            <input type="submit" value="投稿" class="btn btn-info">
+                        </td>
+                    </form>
+                @endguest
             </tr>
             </thead>
             <tbody>
@@ -67,6 +107,6 @@
             </tr>
             </tbody>
         </table>
-
+        @endforeach
     </div>
 @endsection
