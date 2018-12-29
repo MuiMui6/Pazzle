@@ -88,16 +88,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item">Address Management</a>
-                                <a href="#" class="dropdown-item">Item Management</a>
-                                <a href="#" class="dropdown-item">Item Comment Management</a>
-                                <a href="#" class="dropdown-item">Order Management</a>
-                                <a href="#" class="dropdown-item">Peas Management</a>
-                                <a href="#" class="dropdown-item">Size Management</a>
-                                <a href="#" class="dropdown-item">Spot Management</a>
-                                <a href="#" class="dropdown-item">Spot Comment Management</a>
-                                <a href="#" class="dropdown-item">Tag Management</a>
-                                <a href="#" class="dropdown-item">User Management</a>
+                                <a href="/admin/All_Address" class="dropdown-item">Address Management</a>
+                                <a href="/admin/All_Item" class="dropdown-item">Item Management</a>
+                                <a href="/admin/All_ItemComment" class="dropdown-item">Item Comment Management</a>
+                                <a href="/admin/All_Order" class="dropdown-item">Order Management</a>
+                                <a href="/admin/All_Peas" class="dropdown-item">Peas Management</a>
+                                <a href="/admin/All_Size" class="dropdown-item">Size Management</a>
+                                <a href="/admin/All_Spot" class="dropdown-item">Spot Management</a>
+                                <a href="/admin/All_SpotComment" class="dropdown-item">Spot Comment Management</a>
+                                <a href="/admin/All_Tag" class="dropdown-item">Tag Management</a>
+                                <a href="/admin/All_User" class="dropdown-item">User Management</a>
                             </div>
                         </li>
                     @endguest
