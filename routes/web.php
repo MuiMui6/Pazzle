@@ -21,12 +21,12 @@ Route::get('/Edit_Address', 'AddressController@user_detail');
 Route::get('/Admin/Edit_Address', 'AddressController@admin_detail');
 
 //ユーザ追加
-Route::get('/Edit_Address', 'AddressController@user_add');
-Route::post('/Edit_Address', 'AddressController@user_add');
+Route::get('/New_Address', 'AddressController@user_add');
+Route::post('/New_Address', 'AddressController@user_add');
 
 //管理者追加
-Route::get('/Admin/Edit_Address', 'AddressController@admin_add');
-Route::post('/Admin/Edit_Address', 'AddressController@admin_add');
+Route::get('/Admin/New_Address', 'AddressController@admin_add');
+Route::post('/Admin/New_Address', 'AddressController@admin_add');
 
 //ユーザ編集
 Route::get('/Edit_Address', 'AddressController@user_edit');
