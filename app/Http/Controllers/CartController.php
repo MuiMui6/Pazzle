@@ -98,7 +98,7 @@ class CartController extends Controller
 //宛先決め
     public function Topost(Request $request)
     {
-        //
+        //アドレス指定
 
         //
 
