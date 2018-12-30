@@ -50,7 +50,7 @@
         </table>
 
         <div class="col-lg-12">
-            <form action="/Topost_Cart">
+            <form action="/Topost_Cart" method="post">
                 @csrf
                 <input type="submit" class="btn btn-block btn-default" value="購入手続きへ">
             </form>
