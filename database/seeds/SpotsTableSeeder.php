@@ -13,5 +13,10 @@ class SpotsTableSeeder extends Seeder
     public function run()
     {
         //
+//        Spot::create([
+//            'name'=>'',
+//            'profile'=>'',
+//            'address'=>''
+//        ]);
     }
 }

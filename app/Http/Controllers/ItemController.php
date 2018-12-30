@@ -12,18 +12,8 @@ use App\Tag;
 
 class ItemController extends Controller
 {
-//表示
-
-//管理者側
-    public function admin_view()
-    {
-
-        return view('/Admin.All_Item');
-    }
-
-
-//検索
 //一般ユーザ
+//検索
     public function user_search(Request $request)
     {
         $keyword = $request->keyword;
@@ -74,14 +64,6 @@ class ItemController extends Controller
         return view('/home', compact('item', 'peas', 'size', 'tag'));
     }
 
-//管理者側
-    public function admin_search(Request $request)
-    {
-
-        return view('/Admin.All_Item');
-    }
-
-//詳細
 //一般ユーザ・管理者共通
     public function detail(Request $request)
     {
@@ -109,30 +91,10 @@ class ItemController extends Controller
     }
 
 
-//追加
-//管理者のみ
-    public function add(Request $request)
-    {
-        //バリデーションチェック
 
-
-        //追加処理
-
-
-        return view('/admin.Edit_Item');
-    }
-
-//編集
-//管理者側
-    public function edit(Request $request)
-    {
-        //バリデーションチェック
-
-
-        //更新処理
-
-
-        return view('/admin.Edit_Item');
-    }
-
+    //テンプレート
+    //
+    //public function (){
+    //
+    //}
 }

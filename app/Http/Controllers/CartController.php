@@ -10,6 +10,7 @@ use App\User;
 use App\Peas;
 use App\Tag;
 use App\Size;
+use phpDocumentor\Reflection\Types\Integer;
 
 class CartController extends Controller
 {
@@ -24,7 +25,7 @@ class CartController extends Controller
             $itemcnt = $itemcnt + 1;
         }
 
-        return view('/Confirmor_Cart', [
+        return view('/Confirmation_Cart', [
             "CartItems" => $CartItems,
             'price' => $price,
             'itemscnt' => $itemcnt
@@ -73,21 +74,31 @@ class CartController extends Controller
     }
 
 //カート内の物を削除（１件）
-    public function delete($index)
+    public function delete(Request $request)
     {
-        return redirect('/Confirmor_Cart');
+        $index = $request->index;
+        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
+        if(count($items)>=0){
+            $CartItems = request()->session()->get("CART",[]);
+            unset($CartItems[$index]);
+            request()->session()->put("CART",$CartItems);
+            return redirect('/Confirmation_Cart');
+        }else{
+            return abort(404);
+        }
     }
 
 //カート内の物を削除（全件）
-    public function all_delete()
+    public function alldelete()
     {
-        return redirect('/Confirmor_Cart');
+        $CartItems = request()->session()->forget("CART");
+        return redirect('/Confirmation_Cart');
     }
 
 //宛先決め
     public function Topost(Request $request)
     {
-        //
+        //アドレス指定
 
         //
 

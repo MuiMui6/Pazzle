@@ -88,16 +88,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item">Address Management</a>
-                                <a href="#" class="dropdown-item">Item Management</a>
-                                <a href="#" class="dropdown-item">Item Comment Management</a>
-                                <a href="#" class="dropdown-item">Order Management</a>
-                                <a href="#" class="dropdown-item">Peas Management</a>
-                                <a href="#" class="dropdown-item">Size Management</a>
-                                <a href="#" class="dropdown-item">Spot Management</a>
-                                <a href="#" class="dropdown-item">Spot Comment Management</a>
-                                <a href="#" class="dropdown-item">Tag Management</a>
-                                <a href="#" class="dropdown-item">User Management</a>
+                                <a href="/admin/All_Address" class="dropdown-item">Address Management</a>
+                                <a href="/admin/All_Item" class="dropdown-item">Item Management</a>
+                                <a href="/admin/All_ItemComment" class="dropdown-item">Item Comment Management</a>
+                                <a href="/admin/All_Order" class="dropdown-item">Order Management</a>
+                                <a href="/admin/All_Peas" class="dropdown-item">Peas Management</a>
+                                <a href="/admin/All_Size" class="dropdown-item">Size Management</a>
+                                <a href="/admin/All_Spot" class="dropdown-item">Spot Management</a>
+                                <a href="/admin/All_SpotComment" class="dropdown-item">Spot Comment Management</a>
+                                <a href="/admin/All_Tag" class="dropdown-item">Tag Management</a>
+                                <a href="/admin/All_User" class="dropdown-item">User Management</a>
                             </div>
                         </li>
                     @endguest
@@ -113,51 +113,90 @@
                     <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
                 </form>
             </div>
-            <div class="col-2">
-                <ul class="list-group mt-3 mb-3">
-                    <li class="list-group-item"><h4>Peas</h4></li>
-                    @foreach($peas as $peases)
-                        <li class="list-group-item">
-                            @csrf
-                            <form method="get" action="/">
-                                <input type="submit" class="btn btn-link" value="{{$peases->cnt}}" name="keyword">
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
 
-
-                <ul class="list-group mt-3 mb-3">
-                    <li class="list-group-item"><h4>Size</h4></li>
-                    @foreach ($size as $sizes)
-                        <li class="list-group-item">
-                            <form method="get" action="/">
-                                @csrf
-                                <input type="hidden" value="{{$sizes->height}}" name="key_height">
-                                <input type="hidden" value="{{$sizes->width}}" name="key_width">
-                                <input type="submit" class="btn btn-link" value="{{$sizes->height}}×{{$sizes->width}}">
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
-
-
-                <ul class="list-group mt-3 mb-3">
-                    <li class="list-group-item"><h4>Tag</h4></li>
-                    @foreach($tag as $tags)
-                        <li class="list-group-item">
-                            <form method="get" action="/">
-                                @csrf
-                                <input type="submit" class="btn btn-link" value="{{$tags->name}}" name="keyword">
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="col-10">
+            <div class="col-lg-10">
                 <main>
                     @yield('content')
                 </main>
+            </div>
+
+
+            <div class="col-lg-2">
+                <div class="row">
+                    {{--Peas--}}
+                    <table class="table col m-3">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h4>Peas</h4>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($peas as $peases)
+                            <tr>
+                                <td>
+                                    <form method="get" action="/">
+                                        @csrf
+                                        <input type="submit" class="btn btn-link" value="{{$peases->cnt}}"
+                                               name="keyword">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    {{--size--}}
+                    <table class="table col m-3">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h4>Size</h4>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($size as $sizes)
+                            <tr>
+                                <td>
+                                    <form method="get" action="/">
+                                        @csrf
+                                        <input type="hidden" value="{{$sizes->height}}" name="key_height">
+                                        <input type="hidden" value="{{$sizes->width}}" name="key_width">
+                                        <input type="submit" class="btn btn-link"
+                                               value="{{$sizes->height}}×{{$sizes->width}}">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    {{--tag--}}
+                    <table class="table col m-3">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h4>Tag</h4>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($tag as $tags)
+                            <tr>
+                                <td>
+                                    <form method="get" action="/">
+                                        @csrf
+                                        <input type="submit" class="btn btn-link text-left" value="{{$tags->name}}"
+                                               name="keyword">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
