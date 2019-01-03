@@ -99,21 +99,37 @@ class CartController extends Controller
     public function Topost(Request $request)
     {
         //アドレス指定
-
-        //
-
-        return view('/Register_Topost');
-    }
+        $address = Address::where('userid',$request->userid)->get();
+        //カートアイテム
+        $index = $request->index;
+        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
+        if(count($items)>=0){
+            $CartItems = request()->session()->get("CART",[]);
+            unset($CartItems[$index]);
+            request()->session()->put("CART",$CartItems);
+            return redirect('/Register_Topost');
+        }else{
+            return abort(404);
+        }
+}
 
 //最終確認
     public function Register(Request $request)
     {
+
+        $address = Address::where('addressid',$request->addressid)->get();
         //商品・合計点数・合計金額表示
+        $index = $request->index;
+        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
+        if(count($items)>=0){
+            $CartItems = request()->session()->get("CART",[]);
+            unset($CartItems[$index]);
+            request()->session()->put("CART",$CartItems);
+            return redirect('/Register_Cart');
+        }else{
+            return abort(404);
+        }
 
-        //宛先表示
-
-
-        return view('/Register_Cart');
     }
 
 //購入後

@@ -19,21 +19,23 @@
 
         <table class="table table-borderless">
             <tbody>
-            <tr>
-                <th class="text-center"><input type="radio"></th>
-                <th class="text-center">
-                    <p><h5>ToName</h5></p>
-                    <p>〒000-0000</p>
-                    <p>大阪府大阪市東淀川区</p>
-                    <p>１－１－１</p>
-                </th>
-            </tr>
+            @foreach($address as $addindex => $addresses)
+                <tr>
+                    <th class="text-center"><input type="radio" value="{{$addresses->addressid}}" name="addressid"></th>
+                    <th class="text-center">
+                        <p><h5>{{$addresses->toname}}</h5></p>
+                        <p>〒{{$addresses->post}}</p>
+                        <p>{{$addresses->add1}}　{{$addresses->add2}}</p>
+                    </th>
+                </tr>
+            @endforeach
             </tbody>
         </table>
 
         <div class="col-12">
             <form action="/Register_Cart" method="post">
                 @csrf
+                <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                 <input type="submit" class="btn btn-block" value="購入確認">
             </form>
         </div>

@@ -52,6 +52,7 @@
         <div class="col-lg-12">
             <form action="/Topost_Cart" method="post">
                 @csrf
+                <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                 <input type="submit" class="btn btn-block btn-default" value="購入手続きへ">
             </form>
         </div>

@@ -13,7 +13,7 @@ class CreateAddressesTable extends Migration
             $table->increments('addressid');            //住所ID
             $table->integer('userid');                  //ユーザID
             $table->string('toname')->nullable();       //宛先名
-            $table->integer('post');                    //郵便番号
+            $table->string('post');                    //郵便番号
             $table->string('add1');                     //都道府県市区町村
             $table->string('add2');                     //番地マンション名
             $table->text('etc')->nullable();            //メモ

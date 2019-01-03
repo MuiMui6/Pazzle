@@ -13,28 +13,28 @@
             <tbody>
             <tr>
                 <th class="text-center">TotalCnt</th>
-                <th class="text-center">点</th>
+                <th class="text-center">{{$itemcnt}}点</th>
             </tr>
 
             <tr>
                 <th class="text-center">TotalPrice</th>
-                <th class="text-center">円</th>
+                <th class="text-center">{{$price}}円</th>
             </tr>
-
+@foreach($address as $addresses)
             <tr>
                 <th class="text-center">ToName</th>
-                <th class="text-center"></th>
+                <th class="text-center">{{$address->toname}}</th>
             </tr>
 
             <tr>
                 <th class="text-center">宛先</th>
                 <th class="text-center">
-                    <p><h5>ToName</h5></p>
-                    <p>〒000-0000</p>
-                    <p>大阪府大阪市東淀川区</p>
-                    <p>１－１－１</p>
+                    <p>〒{{$address->post}}</p>
+                    <p>{{$Address->add1}}</p>
+                    <p>{{$address->Add2}}</p>
                 </th>
             </tr>
+    @endforeach
 
             </tbody>
         </table>
@@ -48,11 +48,13 @@
             </tr>
             </thead>
             <tbody>
+            @foreach($Cartitems as $index => $items)
             <tr>
-                <th class="text-center"><img src="img/spring.jpg" height="150px"></th>
-                <th class="text-center">商品名</th>
-                <th class="text-center">3000円</th>
+                <th class="text-center"><img src="img/{{$items->name}}.jpg" height="150px"></th>
+                <th class="text-center">{{$items->name}}</th>
+                <th class="text-center">{{$items->price}}円</th>
             </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -62,6 +64,7 @@
             </div>
             <form action="/Registerd_Cart" method="post">
                 @csrf
+                <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                 <input type="submit" class="mb-3 btn btn-block" value="購入">
             </form>
         </div>

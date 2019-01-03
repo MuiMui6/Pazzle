@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
 
         @if($message <> null)
-            <div class="alert alert-success m-3">
+            <div class="alert alert-success m-3 col-12">
                 <p>{{$message}}</p>
             </div>
         @endif

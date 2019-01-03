@@ -21,7 +21,7 @@ Route::post('/AllDelete_Cart', 'CartController@alldelete');
 Route::post('/Topost_Cart', 'CartController@Topost');
 
 //最終確認
-Route::get('/Register_Cart', 'CartController@register');
+Route::post('/Register_Cart', 'CartController@register');
 
 //確定後
 Route::get('/Registerd_Cart', 'CartController@degisterd');
