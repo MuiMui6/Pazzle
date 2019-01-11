@@ -12,58 +12,114 @@ class SizesTableSeeder extends Seeder
      */
     public function run()
     {
-        //A全
+        //A全縦長
         Size::create([
             'height' => '1188', //縦
             'width' => '841',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A0'       //メモ
+            'etc' => 'A0縦長'   //メモ
         ]);
 
-        //A1
+        //A全横長
+        Size::create([
+            'height' => '841',  //縦
+            'width' => '1188',  //横
+            'createrid' => '1', //作成者
+            'etc' => 'A0横長'   //メモ
+        ]);
+
+        //A1縦長
         Size::create([
             'height' => '841',  //縦
             'width' => '594',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A1'       //メモ
+            'etc' => 'A1縦長'   //メモ
         ]);
 
-        //A2
+        //A1横長
+        Size::create([
+            'height' => '594',  //縦
+            'width' => '841',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'A1横長'   //メモ
+        ]);
+
+        //A2縦長
         Size::create([
             'height' => '594',  //縦
             'width' => '420',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A2'       //メモ
+            'etc' => 'A2縦長'   //メモ
         ]);
 
-        //A3
+        //A2横長
+        Size::create([
+            'height' => '420',  //縦
+            'width' => '594',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'A2横長'   //メモ
+        ]);
+
+        //A3縦長
         Size::create([
             'height' => '420',  //縦
             'width' => '297',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A3'       //メモ
+            'etc' => 'A3縦長'   //メモ
         ]);
 
-        //A4
+        //A3横長
+        Size::create([
+            'height' => '297',  //縦
+            'width' => '420',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'A3横長'       //メモ
+        ]);
+
+        //A4縦長
         Size::create([
             'height' => '297',  //縦
             'width' => '210',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A4'       //メモ
+            'etc' => 'A4縦長'   //メモ
         ]);
 
-        //A5
+        //A4横長
+        Size::create([
+            'height' => '210',  //縦
+            'width' => '297',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'A4横長'   //メモ
+        ]);
+
+        //A5縦長
         Size::create([
             'height' => '210',  //縦
             'width' => '148',   //横
             'createrid' => '1', //作成者
-            'etc' => 'A5'       //メモ
+            'etc' => 'A5縦長'   //メモ
         ]);
 
-        //B0
+        //A5横長
+        Size::create([
+            'height' => '148',  //縦
+            'width' => '210',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'A5横長'   //メモ
+        ]);
+
+        //B0縦長
         Size::create([
             'height' => '1456', //縦
             'width' => '1030',  //横
+            'createrid' => '1', //作成者
+            'etc' => 'B0'       //メモ
+        ]);
+
+        //B0横長
+        Size::create([
+            'height' => '1030', //縦
+            'width' => '1456',  //横
             'createrid' => '1', //作成者
             'etc' => 'B0'       //メモ
         ]);
@@ -73,15 +129,31 @@ class SizesTableSeeder extends Seeder
             'height' => '1030', //縦
             'width' => '728',   //横
             'createrid' => '1', //作成者
-            'etc' => 'B1'       //メモ
+            'etc' => 'B1縦長'   //メモ
         ]);
 
-        //B2
+        //B1
+        Size::create([
+            'height' => '728',  //縦
+            'width' => '1030',  //横
+            'createrid' => '1', //作成者
+            'etc' => 'B1横長'   //メモ
+        ]);
+
+        //B2縦長
         Size::create([
             'height' => '728',  //縦
             'width' => '515',   //横
             'createrid' => '1', //作成者
-            'etc' => 'B2'       //メモ
+            'etc' => 'B2縦長'   //メモ
+        ]);
+
+        //B2横長
+        Size::create([
+            'height' => '515',  //縦
+            'width' => '728',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'B2横長'   //メモ
         ]);
 
         //B3
@@ -89,23 +161,47 @@ class SizesTableSeeder extends Seeder
             'height' => '515',  //縦
             'width' => '364',   //横
             'createrid' => '1', //作成者
-            'etc' => 'B3'       //メモ
+            'etc' => 'B3縦長'   //メモ
         ]);
 
-        //
+        //B3
         Size::create([
             'height' => '364',  //縦
-            'width' => '364',   //横
+            'width' => '515',   //横
             'createrid' => '1', //作成者
-            'etc' => 'B4'       //メモ
+            'etc' => 'B3横長'   //メモ
         ]);
 
-        //
+        //B4縦長
+        Size::create([
+            'height' => '364',  //縦
+            'width' => '257',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'B4縦長'   //メモ
+        ]);
+
+        //B4横長
+        Size::create([
+            'height' => '257',  //縦
+            'width' => '364',   //横
+            'createrid' => '1', //作成者
+            'etc' => 'B4横長'   //メモ
+        ]);
+
+        //B5縦長
         Size::create([
             'height' => '257',  //縦
             'width' => '182',   //横,
             'createrid' => '1', //作成者
-            'etc' => 'B5'       //メモ
+            'etc' => 'B5縦長'   //メモ
+        ]);
+
+        //B5横長
+        Size::create([
+            'height' => '182',  //縦
+            'width' => '257',   //横,
+            'createrid' => '1', //作成者
+            'etc' => 'B5横長'   //メモ
         ]);
     }
 }

@@ -12,6 +12,11 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Order::create([
+        //'userid' => '',
+        //'itemid' => '',
+        //'cnt' => '',
+        //'address' => '',
+        //])
     }
 }

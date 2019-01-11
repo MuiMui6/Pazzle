@@ -12,6 +12,10 @@ class SpotCommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //SpotComment::create([
+        //'spotid' => '',
+        //'userid' => '',
+        //'evaluation' => ''
+        //]);
     }
 }

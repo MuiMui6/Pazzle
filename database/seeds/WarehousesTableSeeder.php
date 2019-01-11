@@ -12,6 +12,10 @@ class WarehousesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Warehouse::create([
+        //'itemid'=>'',
+        //'cnt'=>'',
+        //'createrid'=>'1'
+        //])
     }
 }
