@@ -18,7 +18,7 @@ class CreateSpotsTable extends Migration
             $table->string('name');                        //観光地名
             $table->text('profile');                       //紹介文
             $table->string('url')->nullable();             //URL
-            $table->text('address');                       //住所
+            $table->text('address')->nullable();           //住所
             $table->text('tel')->nullable();               //TEL
             $table->text('etc')->nullable();               //メモ
             $table->integer('createrid');                  //作成者
