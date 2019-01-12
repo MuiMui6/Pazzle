@@ -62,6 +62,7 @@
             @else
                 <form action="/Add_Cart" method="post">
                     @csrf
+                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0" name="itemcnt">
@@ -74,8 +75,6 @@
                             <button class="dropdown-item" value="3" name="itemcnt">3点</button>
                         </div>
                     </div>
-                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
-                    <input type="submit" class="btn btn-block btn-info m-3" value="カートに入れる">
                 </form>
             @endguest
 

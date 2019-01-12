@@ -19,13 +19,13 @@ class CartController extends Controller
     {
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
-        $price = 0;
+
         $itemcnt = 0;
-        foreach ($CartItems as $items) {
-            $itemcnt = $itemcnt + 1;
-            foreach ($CartItemCnt as $itemscnt) {
-                $price = $price + $items->price * $itemscnt;
-            }
+        $price = 0;
+
+        foreach ($CartItems as $index => $items) {
+            $itemcnt = $itemcnt + $CartItemCnt[$index];
+            $price = $price + ($items->price * $CartItemCnt[$index]);
         }
 
         return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
@@ -131,16 +131,17 @@ class CartController extends Controller
 
         $address = Address::where('addressid', $request->addressid)->get();
         $addid = $request->addressid;
+
         //商品・合計点数・合計金額表示
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
+
+        $itemcnt = 0;
         $price = 0;
-        $itemcnt = 1;
-        foreach ($CartItems as $items) {
-            foreach ($CartItemCnt as $itemscnt) {
-                $itemcnt = $itemcnt + 1;
-            }
-            $price = $price + ($items->price * $itemscnt);
+
+        foreach ($CartItems as $index => $items) {
+            $itemcnt = $itemcnt + $CartItemCnt[$index];
+            $price = $price + ($items->price * $CartItemCnt[$index]);
         }
 
         return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid'));
@@ -154,15 +155,11 @@ class CartController extends Controller
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
 
-        $itemcnt = 1;
-        foreach ($CartItems as $items) {
-            foreach ($CartItemCnt as $itemscnt) {
-                $itemcnt = $itemcnt + 1;
-            };
-        }
+        $itemcnt = 0;
 
+        foreach ($CartItems as $index => $item) {
 
-        foreach ($CartItems as $item) {
+            $itemcnt = $CartItemCnt[$index];
 
             //DB処理（Orderに追加）
             DB::table('orders')->insert([
