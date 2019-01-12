@@ -18,18 +18,17 @@ class CartController extends Controller
     public function Confirmation()
     {
         $CartItems = request()->session()->get("CART", []);
+        $CartItemCnt = request()->session()->get("CARTCNT", []);
         $price = 0;
         $itemcnt = 0;
         foreach ($CartItems as $items) {
-            $price = $price + $items->price;
             $itemcnt = $itemcnt + 1;
+            foreach ($CartItemCnt as $itemscnt) {
+                $price = $price + $items->price * $itemscnt;
+            }
         }
 
-        return view('/Confirmation_Cart', [
-            "CartItems" => $CartItems,
-            'price' => $price,
-            'itemscnt' => $itemcnt
-        ]);
+        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
     }
 
 //追加
@@ -54,22 +53,38 @@ class CartController extends Controller
         $tag = Tag::select('name')->Get();
 
         $index = $request->itemid;
+        $itemcnt = $request->itemcnt;
         $message = null;
+
         $items = DB::select("SELECT * FROM items where itemid = ?", [$index]);
-        if (count($items)) {
-            $CartItems = request()->session()->get("CART", []);
-            $CartItems[] = $items[0];
-            request()->session()->put("CART", $CartItems);
-            $message = '商品をカートに追加しました。';
-            return view("/Detail_Item", [
-                'message' => $message,
-                'item' => $item,
-                'peas' => $peas,
-                'size' => $size,
-                'tag' => $tag
-            ]);
+
+        if ($itemcnt > 0) {
+
+            if (count($items)) {
+                $CartItems = request()->session()->get("CART", []);
+                $CartItems[] = $items[0];
+
+                $CartItemCnt = request()->session()->get("CARTCNT", []);
+                $CartItemCnt[] = $itemcnt[0];
+
+                request()->session()->put("CART", $CartItems);
+                request()->session()->put("CARTCNT", $CartItemCnt);
+
+                $message = '商品をカートに追加しました。';
+
+                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'tag'));
+
+            } else {
+
+                return abort(404);
+
+            }
+
         } else {
-            return abort(404);
+
+            $message = '購入個数を指定してください';
+
+            return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'tag'));
         }
     }
 
@@ -77,13 +92,16 @@ class CartController extends Controller
     public function delete(Request $request)
     {
         $index = $request->index;
-        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
-        if(count($items)>=0){
-            $CartItems = request()->session()->get("CART",[]);
+        $items = DB::select("SELECT * FROM items where itemid = ?", [$index]);
+        if (count($items) >= 0) {
+            $CartItems = request()->session()->get("CART", []);
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
             unset($CartItems[$index]);
-            request()->session()->put("CART",$CartItems);
+            unset($CartItemCnt[$index]);
+            request()->session()->put("CART", $CartItems);
+            request()->session()->put("CARTCnt", $CartItemCnt);
             return redirect('/Confirmation_Cart');
-        }else{
+        } else {
             return abort(404);
         }
     }
@@ -92,6 +110,7 @@ class CartController extends Controller
     public function alldelete()
     {
         $CartItems = request()->session()->forget("CART");
+        $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
     }
 
@@ -99,43 +118,66 @@ class CartController extends Controller
     public function Topost(Request $request)
     {
         //アドレス指定
-        $address = Address::where('userid',$request->userid)->get();
-        //カートアイテム
-        $index = $request->index;
-        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
-        if(count($items)>=0){
-            $CartItems = request()->session()->get("CART",[]);
-            unset($CartItems[$index]);
-            request()->session()->put("CART",$CartItems);
-            return redirect('/Register_Topost');
-        }else{
-            return abort(404);
-        }
-}
+        $address = Address::where('userid', $request->userid)->get();
+
+        return view('/Register_Topost', compact('address'));
+
+
+    }
 
 //最終確認
     public function Register(Request $request)
     {
 
-        $address = Address::where('addressid',$request->addressid)->get();
+        $address = Address::where('addressid', $request->addressid)->get();
+        $addid = $request->addressid;
         //商品・合計点数・合計金額表示
-        $index = $request->index;
-        $items = DB::select("SELECT * FROM items where itemid = ?",[$index]);
-        if(count($items)>=0){
-            $CartItems = request()->session()->get("CART",[]);
-            unset($CartItems[$index]);
-            request()->session()->put("CART",$CartItems);
-            return redirect('/Register_Cart');
-        }else{
-            return abort(404);
+        $CartItems = request()->session()->get("CART", []);
+        $CartItemCnt = request()->session()->get("CARTCNT", []);
+        $price = 0;
+        $itemcnt = 1;
+        foreach ($CartItems as $items) {
+            foreach ($CartItemCnt as $itemscnt) {
+                $itemcnt = $itemcnt + 1;
+            }
+            $price = $price + ($items->price * $itemscnt);
         }
+
+        return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid'));
 
     }
 
 //購入後
     public function Registerd(Request $request)
     {
-        //DB処理（Orderに追加）
+
+        $CartItems = request()->session()->get("CART", []);
+        $CartItemCnt = request()->session()->get("CARTCNT", []);
+
+        $itemcnt = 1;
+        foreach ($CartItems as $items) {
+            foreach ($CartItemCnt as $itemscnt) {
+                $itemcnt = $itemcnt + 1;
+            };
+        }
+
+
+        foreach ($CartItems as $item) {
+
+            //DB処理（Orderに追加）
+            DB::table('orders')->insert([
+                'userid' => $request->userid,
+                'itemid' => $item->itemid,
+                'cnt' => $itemcnt,
+                'addressid' => $request->addid,
+                'created_at' => now()
+            ]);
+
+
+        }
+        $CartItems = request()->session()->forget("CART");
+        $CartItems = request()->session()->forget("CARTCNT");
+
         return view('/Registerd_Cart');
     }
 

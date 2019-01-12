@@ -24,7 +24,7 @@ Route::post('/Topost_Cart', 'CartController@Topost');
 Route::post('/Register_Cart', 'CartController@register');
 
 //確定後
-Route::get('/Registerd_Cart', 'CartController@degisterd');
+Route::post('/Registerd_Cart', 'CartController@registerd');
 
 
 //============================================================================
