@@ -10,6 +10,7 @@ use App\User;
 use App\Peas;
 use App\Tag;
 use App\Size;
+use App\Order;
 use phpDocumentor\Reflection\Types\Integer;
 
 class CartController extends Controller
@@ -176,6 +177,16 @@ class CartController extends Controller
         $CartItems = request()->session()->forget("CARTCNT");
 
         return view('/Registerd_Cart');
+    }
+
+    public function History(Request $request)
+    {
+        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+            ->where('userid', $request->userid)
+            ->get();
+
+
+        return view('/History_Cart', compact('items'));
     }
 
 }
