@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Confirmation_Cart">
+                        <a class="btn btn-link" href="/Confirmation_Cart">
                             Cart
                         </a>
                     </li>
@@ -57,10 +57,14 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            <a class="nav-link">
-                                History Cart
-                            </a>
+                            <form action="/History_Cart" method="get">
+                                @csrf
+                                <button class="btn btn-link" value="{{Auth::user()->id}}" name="userid" type="submit">
+                                    History Cart
+                                </button>
+                            </form>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

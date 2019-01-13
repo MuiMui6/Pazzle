@@ -21,10 +21,13 @@ Route::post('/AllDelete_Cart', 'CartController@alldelete');
 Route::post('/Topost_Cart', 'CartController@Topost');
 
 //最終確認
-Route::get('/Register_Cart', 'CartController@register');
+Route::post('/Register_Cart', 'CartController@register');
 
 //確定後
-Route::get('/Registerd_Cart', 'CartController@degisterd');
+Route::post('/Registerd_Cart', 'CartController@registerd');
+
+//購入履歴
+Route::get('/History_Cart', 'CartController@history');
 
 
 //============================================================================
@@ -35,3 +38,19 @@ Route::get('/', 'ItemController@user_search');
 
 //商品詳細
 Route::get('/Detail', 'ItemController@detail');
+
+
+//============================================================================
+//OrderController
+//============================================================================
+//PayDate
+Route::post('/History_Cart/Pay_Date', 'OrderController@paydate');
+
+//Pay_Confirmor
+Route::post('/', 'OrderController@payconfirmation');
+
+//ShipDate
+Route::post('/', 'OrderController@');
+
+//Ship_Confirmor
+Route::post('/History_Cart/Ship_Confirmation', 'OrderController@shipconfirmation');

@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
 
         @if($message <> null)
-            <div class="alert alert-success m-3">
+            <div class="alert alert-success m-3 col-12">
                 <p>{{$message}}</p>
             </div>
         @endif
@@ -63,7 +63,18 @@
                 <form action="/Add_Cart" method="post">
                     @csrf
                     <input type="hidden" value="{{$items->itemid}}" name="itemid">
-                    <input type="submit" class="btn btn-block btn-info m-3" value="カートに入れる">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0" name="itemcnt">
+                            Cart Count
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <button class="dropdown-item" value="1" name="itemcnt">1点</button>
+                            <button class="dropdown-item" value="2" name="itemcnt">2点</button>
+                            <button class="dropdown-item" value="3" name="itemcnt">3点</button>
+                        </div>
+                    </div>
                 </form>
             @endguest
 
