@@ -33,36 +33,61 @@
         </div>
 
         {{--期限まで--}}
-        <div class="input-group m-3">
+        <div class="col-lg-12 m-3">
             <form action="/admin/All_Order/Date" method="get">
-                <div class="col-lg-9">
-                    <input type="date" class="col form-control" name="startday">
-                    <label class="col text-center">～</label>
-                    <input type="date" class="col form-control" name="endday">
-                </div>
+                <table class="table table-borderless">
+                    <tbody>
+                    <tr>
+                        <th class="text-center">
+                            <input type="date" class="form-control col" name="startday">
+                        </th>
+                        <th class="text-center">
+                            <label class="text-center col">～</label>
+                        </th>
+                        <th class="text-center">
+                            <input type="date" class="form-control col" name="endday">
+                        </th>
+                        <th class="text-center">
 
-                <div class="col-lg-3">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Date Conditions
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" value="paydate" name="dateclumn">Unpaid</button>
-                        <button class="dropdown-item" value="paydate" name="dateclumn">Paid</button>
-                        <button class="dropdown-item" value="shipdate" name="dateclumn">Unshipped</button>
-                        <button class="dropdown-item" value="shipdate" name="dateclumn">Shipped</button>
-                        <button class="dropdown-item" value="created_at" name="dateclumn">Created</button>
-                        <button class="dropdown-item" value="updated_at" name="dateclumn">Updated</button>
-                    </div>
-                </div>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown button
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" value="paydate" name="dateclumn"
+                                            type="submit">Unpaid
+                                    </button>
+                                    <button class="dropdown-item" value="paydate" name="dateclumn"
+                                            type="submit">Paid
+                                    </button>
+                                    <button class="dropdown-item" value="shipdate" name="dateclumn"
+                                            type="submit">Unshipped
+                                    </button>
+                                    <button class="dropdown-item" value="shipdate" name="dateclumn"
+                                            type="submit">Shipped
+                                    </button>
+                                    <button class="dropdown-item" value="created_at" name="dateclumn"
+                                            type="submit">Created
+                                    </button>
+                                    <button class="dropdown-item" value="updated_at" name="dateclumn"
+                                            type="submit">Updated
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
     </div>
 
-
+    <div class="justify-content-center m-3">
+        {!! $orders->links() !!}
     </div>
 
-    <table class="table table">
+    <table class="table">
         <thead>
         <tr>
             <th class="text-center">ItemId</th>
@@ -72,7 +97,7 @@
             <th class="text-center">Create_date</th>
             <th class="text-center">Updater</th>
             <th class="text-center">Update_date</th>
-            <th class="text-center">Edit</th>
+            <th class="text-center">Detail</th>
         </tr>
         </thead>
         <tbody>
@@ -117,8 +142,8 @@
                 <th class="text-center">{{ $order -> updated_at -> format('y年m月d日') }}</th>
                 <th class="text-center">
                     <form action="/admin/Edit_Order" method="get">
-                        <button class="btn btn-info" value="{{$order->orderid}}" name="orderid">
-                            Edit
+                        <button class="btn btn-primary" value="{{$order->orderid}}" name="orderid">
+                            Detail
                         </button>
                     </form>
                 </th>

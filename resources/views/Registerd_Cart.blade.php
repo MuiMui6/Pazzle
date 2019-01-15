@@ -1,4 +1,8 @@
-@extends('layouts.notapp')
+@if(Auth::user()->rank == 1)
+    @extends('layouts.adminapp')
+@else
+    @extends('layouts.notapp')
+@endif
 
 @section('content')
     <div class="row">
