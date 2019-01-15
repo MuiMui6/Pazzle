@@ -11,31 +11,76 @@ use App\Order;
 
 class OrderController extends Controller
 {
+    //view
+    public function view()
+    {
+        $orders = Order::OrderBy('created_at')->get();
 
-    //
-    public function paydate(Request $request){
-        Order::where('orderid',$request->orderid)
-            ->update(['paydate'=>now()]);
-
-        return redirect('/History_Cart/PayDate');
+        return view('/admin/All_Order', compact('orders'));
     }
 
     //
-    public function payconfirmation(){
+    public function search(Request $request)
+    {
+        $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9]+$/']);
+        $vkeyword = implode($vkeyword);
+        $orders = Order::where($request->searchclumn, 'like', '' . $vkeyword . '')
+            ->get();
 
-        return redirect('/admin/Edit_Order');
+        return view('/admin/All_Order', compact('orders'));
+
     }
 
     //
-    public function shipdate(){
+    public function editview()
+    {
 
-        return redirect('/admin/Edit_Order');
+    }
+
+    //編集保存
+    public function editsave()
+    {
+
+    }
+
+
+    //
+    public function paydate(Request $request)
+    {
+        Order::where('orderid', $request->orderid)
+            ->update(['paydate' => now()]);
+
+        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+            ->where('userid', $request->userid)
+            ->get();
+
+        return view('/History_Cart', compact('items'));
     }
 
     //
-    public function shipconfirmation(){
+    public function payconfirmation(Request $request)
+    {
 
-        return redirect('/History_Cart/Ship_Confirmation');
+        $orders = Order::OrderBy('created_at')->get();
+
+
+        Order::where('orderid', $request->orderid)
+            ->update(['pconfirmorid' => $request->userid]);
+
+        return view('/admin/All_Order', compact('orders'));
+    }
+
+    //
+    public function shipconfirmation(Request $request)
+    {
+        Order::where('orderid', $request->orderid)
+            ->update(['shipdate' => now()]);
+
+        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+            ->where('userid', $request->userid)
+            ->get();
+
+        return view('/History_Cart', compact('items'));
     }
 
     //テンプレート

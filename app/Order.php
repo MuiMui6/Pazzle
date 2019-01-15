@@ -8,4 +8,10 @@ class Order extends Model
 {
     //
     protected $table = 'orders';
+
+    protected $dates = [
+        'paydate',
+        'shipdate'
+    ];
+
 }

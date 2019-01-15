@@ -43,14 +43,28 @@ Route::get('/Detail', 'ItemController@detail');
 //============================================================================
 //OrderController
 //============================================================================
+//管理者側一覧
+//一覧
+Route::get('/admin/All_Order', 'OrderController@view');
+
+//検索
+Route::get('/admin/All_Order/Search', 'OrderController@search');
+
+//
+Route::get('/admin/All_Order/paysearch', 'OrderController@paysearch');
+
+//
+Route::get('/admin/All_Order/shipsearch', 'OrderController@shipsearch');
+
+//編集
+Route::get('/admin/Edit_Order', 'OrderController@editview');
+Route::post('/admin/Edit_Order', 'OrderController@editsave');
+
 //PayDate
 Route::post('/History_Cart/Pay_Date', 'OrderController@paydate');
 
 //Pay_Confirmor
-Route::post('/', 'OrderController@payconfirmation');
+Route::post('/admin/All_Order/PayConfirmation', 'OrderController@payconfirmation');
 
-//ShipDate
-Route::post('/', 'OrderController@');
-
-//Ship_Confirmor
-Route::post('/History_Cart/Ship_Confirmation', 'OrderController@shipconfirmation');
+//Ship_Date_Confirmor
+Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirmation');
