@@ -32,9 +32,88 @@ class OrderController extends Controller
     }
 
     //
-    public function editview()
+    public function datesearch(Request $request)
     {
 
+        //初期値
+        $startday = $request->startday;
+        $endday = $request->endday;
+        $conditions = $request->dateclumn;
+
+        if ($startday == null || $startday > now()) {
+            $startday = now();
+        }
+
+        if ($endday == null || $endday > now()) {
+            $endday = Order::min($conditions);
+        }
+
+
+        //全取得
+        $orders = Order::get();
+
+        //未払い日
+        if ($conditions == 'unpaid') {
+            $orders = Order::whereNotBetween('paydate', [$startday, $endday])->paginate(15);
+        }
+
+        //支払日
+        if ($conditions == 'paid') {
+            $orders = Order::whereBetween('paydate', [$startday, $endday])->paginate(15);
+        }
+
+        //未受け取り
+        if ($conditions == 'unshipped') {
+            $orders = Order::whereNotBetween('shipdate', [$startday, $endday])->paginate(15);
+        }
+
+        //受取日
+        if ($conditions == 'shipped') {
+            $orders = Order::whereBetween('shipdate', [$startday, $endday])->paginate(15);
+        }
+
+        //アカウント作成日
+        if ($conditions == 'created_at') {
+            $orders = Order::whereBetween('created_at', [$startday, $endday])->paginate(15);
+
+        }
+
+        //アカウント更新日
+        if ($conditions == 'update_at') {
+            $orders = Order::whereBetween('update_at', [$startday, $endday])->paginate(15);
+
+        }
+
+        return view('/admin/All_Order', compact('orders'));
+
+    }
+
+
+    //
+    public function editview(Request $request)
+    {
+        $orderid = $request->orderid;
+
+        $order = Order::join('users','users.id','=','orders.userid')
+            ->join('items','items.itemid','=','orders.itemid')
+            ->join('addresses','addresses.addressid','=','orders.addressid')
+            ->where('orderid', $orderid)
+            ->select('orders.orderid',
+                'users.name as username',
+                'orders.cnt as cnt',
+                'addresses.toname as toname',
+                'addresses.post as post',
+                'addresses.add1 as add1',
+                'addresses.add2 as add2',
+                'orders.paydate as paydate',
+                'orders.shipdate as shipdate',
+                'orders.updaterid as updaterid',
+                'orders.created_at as created_at',
+                'orders.updated_at as updated_at',
+                'orders.etc as etc')
+            ->get();
+
+        return view('/admin/Edit_Order', compact('order'));
     }
 
     //編集保存

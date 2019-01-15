@@ -51,10 +51,7 @@ Route::get('/admin/All_Order', 'OrderController@view');
 Route::get('/admin/All_Order/Search', 'OrderController@search');
 
 //
-Route::get('/admin/All_Order/paysearch', 'OrderController@paysearch');
-
-//
-Route::get('/admin/All_Order/shipsearch', 'OrderController@shipsearch');
+Route::get('/admin/All_Order/Date', 'OrderController@datesearch');
 
 //編集
 Route::get('/admin/Edit_Order', 'OrderController@editview');

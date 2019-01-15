@@ -13,62 +13,65 @@
 
         <table class="table table-borderless">
             <tbody>
-            <tr>
-                <th class="text-center">Id</th>
-                <th class="text-center">#</th>
-            </tr>
-            <tr>
-                <th class="text-center">User</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Itemid</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Cnt</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">AddressId</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Pay</th>
-                <th class="text-center"><input type="submit" class="btn btn-block" value="支払い確認"></th>
-            </tr>
-            <tr>
-                <th class="text-center">PayDate</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">PayConfirmor</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Ship</th>
-                <th class="text-center"><input type="submit" class="btn btn-block" value="出庫確認"></th>
-            </tr>
-            <tr>
-                <th class="text-center">ShipDate</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">ShipConfirmor</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Create_Date</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Updater</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Update_date</th>
-                <th class="text-center"></th>
-            </tr>
+            @foreach($order as $Order)
+                <tr>
+                    <th class="text-center">Order Id</th>
+                    <th class="text-center">{{ $Order -> orderid }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">User</th>
+                    <th class="text-center">{{ $Order -> username }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">Item</th>
+                    <th class="text-center">{{ $Order -> itemname }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">Cnt</th>
+                    <th class="text-center">{{ $Order -> cnt }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">{{ $Order -> post }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">PayDate</th>
+                    <th class="text-center">
+                        @if( $Order->paydate <> null )
+                            {{ $Order -> paydate -> format('Y年m月d日') }}
+                        @endif
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center">PayConfirmor</th>
+                    <th class="text-center">{{ $Order -> pconfirmorid }}</th>
+                </tr>
+                <tr>
+                    <th class="text-center">ShipDate</th>
+                    <th class="text-center">
+                        @if( $Order->shipdate <> null )
+                            {{ $Order -> shipdate -> format('Y年m月d日') }}
+                        @endif
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center">Create_Date</th>
+                    <th class="text-center">
+                            {{ $Order -> created_at -> format('Y年m月d日') }}
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center">Updater</th>
+                    <th class="text-center">{{ $Order -> updaterid }}
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center">Update_date</th>
+                    <th class="text-center">
+                            {{ $Order -> updated_at -> format('Y年m月d日') }}
+                    </th>
+                </tr>
+            @endforeach
             </tbody>
         </table>
 
