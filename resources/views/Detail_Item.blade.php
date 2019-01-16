@@ -1,8 +1,4 @@
-@if(Auth::user()->rank == 1)
-    @extends('layouts.adminapp')
-@else
-    @extends('layouts.app')
-@endif
+@extends('layouts.app')
 
 @section('content')
     <div class="row justify-content-center">
@@ -138,11 +134,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-left">3.0</td>
-                    <td class="text-left">投稿者</td>
-                    <td class="text-left">コメント文コメント文コメント文</td>
-                </tr>
+                @foreach($itemcomments as $itemcomment)
+                    <tr>
+                        <td class="text-left">{{$evaluation}}</td>
+                        <td class="text-left">{{$itemcomment->name}}</td>
+                        <td class="text-left">{{$itemcomment->comment}}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         @endforeach

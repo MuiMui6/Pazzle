@@ -15,7 +15,8 @@
         <div class="col-lg-12 m-3">
             <form action="/admin/All_Order/Search" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="itemid / userid / updateid" name="keyword">
+                    <input type="text" class="form-control"
+                           placeholder="Item Id / Item Name / User Id / User Name / Updater Id" name="keyword">
                     <div class="input-group-append">
                         <button type="button"
                                 class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
@@ -23,9 +24,12 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                            <button class="dropdown-item" value="itemid" name="searchclumn">Item Id</button>
-                            <button class="dropdown-item" value="userid" name="searchclumn">User Id</button>
-                            <button class="dropdown-item" value="updaterid" name="searchclumn">Updater Id</button>
+                            <button class="dropdown-item" value="orders.itemid" name="searchclumn">Item Id</button>
+                            <button class="dropdown-item" value="items.name" name="searchclumn">Item Name</button>
+                            <button class="dropdown-item" value="orders.userid" name="searchclumn">User Id</button>
+                            <button class="dropdown-item" value="users.name" name="searchclumn">User Name</button>
+                            <button class="dropdown-item" value="orders.updaterid" name="searchclumn">Updater Id
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -91,7 +95,7 @@
         <thead>
         <tr>
             <th class="text-center">ItemId</th>
-            <th class="text-center">UserId</th>
+            <th class="text-center">UserName</th>
             <th class="text-center">Cnt</th>
             <th class="text-center">Status</th>
             <th class="text-center">Create_date</th>
@@ -103,8 +107,8 @@
         <tbody>
         @foreach($orders as $order)
             <tr>
-                <th class="text-center">{{ $order -> itemid }}</th>
-                <th class="text-center">{{ $order -> userid }}</th>
+                <th class="text-center">{{ $order -> itemname }}</th>
+                <th class="text-center">{{ $order -> username }}</th>
                 <th class="text-center">{{ $order -> cnt }}</th>
                 <th class="text-center m-3">
                     @if( $order -> paydate == null && $order -> pconfirmorid == null)
@@ -123,6 +127,10 @@
                                     @csrf
                                     <input type="hidden" value="{{ $order -> orderid }}" name="orderid">
                                     <input type="hidden" value="{{ Auth::user()->id }}" name="userid">
+                                    @if($vkeyword <> null)
+                                        <input type="hidden" value="{{$vkeyword}}" name="vkeyword">
+                                        <input type="hidden" value="{{$searchclumn}}" name="searchclumn">
+                                    @endif
                                     <button class="dropdown-item" type="submit">支払い確認</button>
                                 </form>
                             </div>

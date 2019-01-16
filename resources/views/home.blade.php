@@ -1,9 +1,4 @@
-@if(Auth::user()->rank == 1)
-    @extends('layouts.adminapp')
-@else
-    @extends('layouts.app')
-@endif
-
+@extends('layouts.app')
 
 @section('content')
     <div class="row cart-columns">
