@@ -6,10 +6,15 @@
         <div class="col-12 m-3">
             <h3 class="text-center">Edit Order</h3>
         </div>
-        <div class="m-3">
+        <div class="col-12 text-center m-3">
             <h5>受注に関する情報を作成・編集できます。</h5>
         </div>
 
+        @if($deletemessage)
+            <div class="col-12 text-center alert alert-danger">
+                {{$deletemessage}}
+            </div>
+        @endif
 
         <table class="table table-borderless">
             <tbody>
@@ -32,7 +37,12 @@
                 </tr>
                 <tr>
                     <th class="text-center">Address</th>
-                    <th class="text-center">{{ $Order -> post }}</th>
+                    <th class="text-center">
+                        <p>{{$Order->toname}}</p>
+                        <p>〒{{$Order->post}}</p>
+                        <p>{{$Order->add1}}</p>
+                        <p>{{$Order->add2}}</p>
+                    </th>
                 </tr>
                 <tr>
                     <th class="text-center">PayDate</th>
@@ -41,10 +51,28 @@
                             {{ $Order -> paydate -> format('Y年m月d日') }}
                         @endif
                     </th>
+                    <th class="text-center">
+                        <form action="/admin/Edit_Order/Delete" method="post">
+                            @csrf
+                            <input type="hidden" value="{{$Order->orderid}}" name="orderid">
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                            <input type="hidden" value="paydate" name="clumn">
+                            <button class="btn btn-danger">Reset</button>
+                        </form>
+                    </th>
                 </tr>
                 <tr>
                     <th class="text-center">PayConfirmor</th>
                     <th class="text-center">{{ $Order -> pconfirmorid }}</th>
+                    <th class="text-center">
+                        <form action="/admin/Edit_Order/Delete" method="post">
+                            @csrf
+                            <input type="hidden" value="{{$Order->orderid}}" name="orderid">
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                            <input type="hidden" value="pconfirmorid" name="clumn">
+                            <button class="btn btn-danger">Reset</button>
+                        </form>
+                    </th>
                 </tr>
                 <tr>
                     <th class="text-center">ShipDate</th>
@@ -53,11 +81,20 @@
                             {{ $Order -> shipdate -> format('Y年m月d日') }}
                         @endif
                     </th>
+                    <th class="text-center">
+                        <form action="/admin/Edit_Order/Delete" method="post">
+                            @csrf
+                            <input type="hidden" value="{{$Order->orderid}}" name="orderid">
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                            <input type="hidden" value="shipdate" name="clumn">
+                            <button class="btn btn-danger">Reset</button>
+                        </form>
+                    </th>
                 </tr>
                 <tr>
                     <th class="text-center">Create_Date</th>
                     <th class="text-center">
-                            {{ $Order -> created_at -> format('Y年m月d日') }}
+                        {{ $Order -> created_at -> format('Y年m月d日') }}
                     </th>
                 </tr>
                 <tr>
@@ -68,15 +105,11 @@
                 <tr>
                     <th class="text-center">Update_date</th>
                     <th class="text-center">
-                            {{ $Order -> updated_at -> format('Y年m月d日') }}
+                        {{ $Order -> updated_at -> format('Y年m月d日') }}
                     </th>
                 </tr>
             @endforeach
             </tbody>
         </table>
-
-        <div class="col-12">
-            <input type="submit" value="保存" class="btn btn-block">
-        </div>
     </div>
 @endsection

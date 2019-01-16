@@ -15,7 +15,7 @@ class OrdersTableSeeder extends Seeder
             'userid' => random_int('1','100'),
             'itemid' => random_int('1','28'),
             'cnt' => random_int('1','5'),
-            'addressid' => random_int('1','1000'),
+            'addressid' => random_int('1','424'),
             ]);
         }
         //Order::create([
