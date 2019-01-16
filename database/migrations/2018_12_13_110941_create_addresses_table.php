@@ -16,7 +16,6 @@ class CreateAddressesTable extends Migration
             $table->string('post');                    //郵便番号
             $table->string('add1');                     //都道府県市区町村
             $table->string('add2');                     //番地マンション名
-            $table->text('etc')->nullable();            //メモ
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();
         });

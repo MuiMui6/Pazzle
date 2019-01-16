@@ -117,7 +117,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
         Item::create([
-            'name' => '着物フォレスト１',
+            'name' => 'きものフォレスト１',
             'profile' => '嵐電・嵐山駅の横にあります。',
             'price' => '5000',
             'peasid' => '13',
@@ -126,7 +126,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
         Item::create([
-            'name' => '着物フォレスト２',
+            'name' => 'きものフォレスト２',
             'profile' => '夜になるとライトアップするそうです。',
             'price' => '2000',
             'peasid' => '14',

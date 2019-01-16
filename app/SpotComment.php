@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class SpotComment extends Model
 {
     //
-    protected $table = 'stop_comments';
+    protected $table = 'spot_comments';
 }

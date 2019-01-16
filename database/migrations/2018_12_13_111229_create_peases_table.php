@@ -12,7 +12,6 @@ class CreatePeasesTable extends Migration
         Schema::create('peases', function (Blueprint $table) {
             $table->increments('peasid');               //peasID
             $table->integer('cnt');                     //ピース数
-            $table->text('etc')->nullable();            //メモ
             $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();

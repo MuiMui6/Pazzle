@@ -13,7 +13,6 @@ class CreateSizesTable extends Migration
             $table->increments('sizeid');               //サイズID
             $table->integer('height');                  //縦
             $table->integer('width');                   //横
-            $table->text('etc')->nullable();            //メモ
             $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();

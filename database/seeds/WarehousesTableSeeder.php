@@ -5,17 +5,14 @@ use App\Warehouse;
 
 class WarehousesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //Warehouse::create([
-        //'itemid'=>'',
-        //'cnt'=>'',
-        //'createrid'=>'1'
-        //])
+        for ($i = 0; $i <= 300; $i++) {
+            Warehouse::create([
+                'itemid' => random_int('1', '28'),
+                'cnt' => random_int('1', '20'),
+                'createrid' => '1'
+            ]);
+        }
     }
 }
