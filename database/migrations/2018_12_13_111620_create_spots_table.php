@@ -20,7 +20,6 @@ class CreateSpotsTable extends Migration
             $table->string('url')->nullable();             //URL
             $table->text('address')->nullable();           //住所
             $table->text('tel')->nullable();               //TEL
-            $table->text('etc')->nullable();               //メモ
             $table->integer('createrid');                  //作成者
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();

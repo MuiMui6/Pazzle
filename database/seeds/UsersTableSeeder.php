@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
 
 
         //一般ユーザ
-        for($i = 1; $i < 80; $i++) {
+        for($i = 1; $i < 480; $i++) {
             User::create([
                 'name' => 'user'.$i,
                 'email' => 'mail'.$i.'@mail.com',

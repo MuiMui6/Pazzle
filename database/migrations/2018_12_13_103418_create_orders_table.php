@@ -17,9 +17,7 @@ class CreateOrdersTable extends Migration
             $table->integer('addressid');                  //宛先ID
             $table->date('paydate')->nullable();           //支払日
             $table->integer('pconfirmorid')->nullable();   //支払い確認者
-            $table->date('shipdate')->nullable();          //発送日
-            $table->integer('sconfirmorid')->nullable();   //発送確認者
-            $table->text('etc')->nullable();               //メモ
+            $table->date('shipdate')->nullable();          //到着日
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
         });

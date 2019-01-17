@@ -92,7 +92,7 @@
                 <thead>
                 <tr>
                     <td><h3>Average Evakuation</h3></td>
-                    <td><h3>3.0</h3></td>
+                    <td><h3>{{$evaluation}}</h3></td>
                 </tr>
                 <tr>
                     <td>Evaluation</td>
@@ -134,11 +134,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-left">3.0</td>
-                    <td class="text-left">投稿者</td>
-                    <td class="text-left">コメント文コメント文コメント文</td>
-                </tr>
+                @foreach($itemcomments as $itemcomment)
+                    <tr>
+                        <td class="text-left">{{$itemcomment->evaluation}}</td>
+                        <td class="text-left">{{$itemcomment->name}}</td>
+                        <td class="text-left">{{$itemcomment->comment}}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         @endforeach

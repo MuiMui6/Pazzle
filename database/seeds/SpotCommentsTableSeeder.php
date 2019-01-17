@@ -5,17 +5,15 @@ use App\SpotComment;
 
 class SpotCommentsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //SpotComment::create([
-        //'spotid' => '',
-        //'userid' => '',
-        //'evaluation' => ''
-        //]);
+        for ($i = 0; $i <= 200; $i++) {
+            SpotComment::create([
+                'spotid' => random_int('1', '106'),
+                'userid' => random_int('1', '100'),
+                'evaluation' => random_int('0', '5'),
+                'comment' => 'とてもいいところです！'
+            ]);
+        }
     }
 }

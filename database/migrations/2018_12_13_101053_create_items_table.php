@@ -18,14 +18,13 @@ class CreateItemsTable extends Migration
             $table->string('name');                     //商品名
             $table->text('profile');                    //紹介文
             $table->integer('price');                   //金額
-            $table->integer('tag1')->nullable();                    //タグ１
+            $table->integer('tag1')->nullable();        //タグ１
             $table->integer('tag2')->nullable();        //タグ２
             $table->integer('tag3')->nullable();        //タグ３
-            $table->integer('sizeid')->nullable();                  //サイズ
-            $table->integer('peasid')->nullable();                 //peas数
-            $table->integer('spotid')->nullable();                  //観光情報
+            $table->integer('sizeid');                  //サイズ
+            $table->integer('peasid');                  //peas数
+            $table->integer('spotid')->nullable();      //観光情報
             $table->boolean('view')->default(0);  //可視か不可視か（基本不可視）
-            $table->text('etc')->nullable();            //メモ
             $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();

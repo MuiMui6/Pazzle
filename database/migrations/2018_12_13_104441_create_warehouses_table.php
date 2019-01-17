@@ -13,7 +13,6 @@ class CreateWarehousesTable extends Migration
             $table->increments('warehouseid');          //入庫ID
             $table->integer('itemid');                  //商品ID
             $table->integer('cnt');                     //仕入数
-            $table->text('etc')->nullable();            //メモ
             $table->integer('createrid');               //入庫確認者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();

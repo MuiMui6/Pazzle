@@ -42,7 +42,7 @@
 
                     {{--CartDate--}}
                     <th class="text-center">
-                        {{$item->created_at->format('y年m月d日')}}
+                        {{$item->created_at->format('Y年m月d日')}}
                     </th>
 
                     {{--Paydate--}}
@@ -52,35 +52,39 @@
                                 @csrf
                                 <button class="btn btn-info" type="submit">
                                     <input type="hidden" value="{{$item->orderid}}" name="orderid">
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     支払完了申請
                                 </button>
                             </form>
                         </th>
-                    @elseif($item->paydate <> null || $item ->pconfirmorid == null)
+                    @elseif($item->paydate <> null && $item ->pconfirmorid == null)
                         <th class="text-center">
                             <p>支払確認中です。</p>
                             <p>しばらくお待ちください。</p>
                         </th>
-                    @else
+                    @elseif(($item -> shipdate == null && $item->pconfirmorid <> null) || ($item -> shipdate <> null && $item->pconfirmorid <> null))
                         <th class="text-center">
-                            {{$item->paydate->format('y年m月d日')}}
+                            {{ $item -> paydate->format('Y年m月d日') }}
                         </th>
                     @endif
 
                     {{--Shipdate--}}
-
-                    @if($item ->pconfirmorid == null )
+                    @if($item -> shipdate == null && $item -> pconfirmorid == null)
+                        <th class="text-center"></th>
+                    @elseif($item -> shipdate == null && $item -> pconfirmorid <> null)
                         <th class="text-center">
+                            <form action="/History_Cart/Ship_Date_Confirmation" method="post">
+                                @csrf
+                                <button class="btn btn-info" type="submit">
+                                <input type="hidden" value="{{$item->orderid}}" name="orderid">
+                                <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                                    受取完了申請
+                                </button>
+                            </form>
                         </th>
-                    @elseif($item->pconfirmorid <> null && $item->sconfirmor == null)
+                    @elseif($item -> shipdate <> null)
                         <th class="text-center">
-                            <button class="btn btn-info">
-                                受取完了申請
-                            </button>
-                        </th>
-                    @else
-                        <th class="text-center">
-                            {{$item->shipdate->format('y年m月d日')}}
+                            {{ $item -> shipdate->format('Y年m月d日') }}
                         </th>
                     @endif
                 </tr>

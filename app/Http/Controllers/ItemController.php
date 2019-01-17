@@ -60,7 +60,6 @@ class ItemController extends Controller
         //タグ
         $tag = Tag::select('name')->Get();
 
-
         return view('/home', compact('item', 'peas', 'size', 'tag'));
     }
 
@@ -86,7 +85,15 @@ class ItemController extends Controller
         //タグ
         $tag = Tag::select('name')->get();
 
-        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag','message'));
+        $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
+            ->where('itemid',$request->itemid)
+            ->where('item_comments.view','1')
+            ->get();
+
+        $evaluation = ItemComment::where('itemid',$request->itemid)
+            ->avg('evaluation');
+
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag','message','itemcomments','evaluation'));
 
     }
 

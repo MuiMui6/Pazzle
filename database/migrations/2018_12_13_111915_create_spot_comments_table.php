@@ -10,12 +10,12 @@ class CreateSpotCommentsTable extends Migration
     public function up()
     {
         Schema::create('spot_comments', function (Blueprint $table) {
+            $table->increments('spotcommentid');           //spotcommentid
             $table->integer('spotid');                     //観光地ID
             $table->integer('userid');                     //ユーザID
             $table->integer('evaluation');                 //評価
             $table->text('comment');                       //コメント
             $table->boolean('view')->default(1);     //可視・不可視
-            $table->text('etc')->nullable();               //メモ
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
         });
