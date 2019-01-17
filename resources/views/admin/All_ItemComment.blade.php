@@ -62,10 +62,10 @@
                                     Dropdown button
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" value="created_at" name="dateclumn"
+                                    <button class="dropdown-item" value="item_comments.created_at" name="dateclumn"
                                             type="submit">Created
                                     </button>
-                                    <button class="dropdown-item" value="updated_at" name="dateclumn"
+                                    <button class="dropdown-item" value="item_comments.updated_at" name="dateclumn"
                                             type="submit">Updated
                                     </button>
                                 </div>
@@ -109,6 +109,9 @@
                         <input type="hidden" value="{{$ItemComment->view}}" name="view">
                         <input type="hidden" value="{{$h_clumn}}" name="h_clumn">
                         <input type="hidden" value="{{$h_keyword}}" name="h_keyword">
+                        <input type="hidden" value="{{$h_dateclumn}}" name="h_dateclumn">
+                        <input type="hidden" value="{{$h_startday}}" name="h_startday">
+                        <input type="hidden" value="{{$h_endday}}" name="h_endday">
                         @if($ItemComment->view == 1)
                             <button class="btn btn-primary" type="submit">
                                 True

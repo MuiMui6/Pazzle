@@ -43,6 +43,7 @@ Route::get('/admin/All_ItemComment', 'ItemCommentController@view');
 
 //admin search
 Route::get('/admin/All_ItemComment/Search', 'ItemCommentController@search');
+Route::get('/admin/All_ItemComment/Date', 'ItemCommentController@datesearch');
 
 //admin view edit
 Route::post('/admin/All_ItemComment/ViewEdit', 'ItemCommentController@viewedit');
