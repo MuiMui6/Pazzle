@@ -88,7 +88,7 @@
     </div>
 
     <div class="justify-content-center m-3">
-        {!! $orders->links() !!}
+        {!! $orders->appends(Request::query())->links() !!}
     </div>
 
     <table class="table">
