@@ -92,7 +92,7 @@
                 <thead>
                 <tr>
                     <td><h3>Average Evakuation</h3></td>
-                    <td><h3>3.0</h3></td>
+                    <td><h3>{{$evaluation}}</h3></td>
                 </tr>
                 <tr>
                     <td>Evaluation</td>
@@ -136,7 +136,7 @@
                 <tbody>
                 @foreach($itemcomments as $itemcomment)
                     <tr>
-                        <td class="text-left">{{$evaluation}}</td>
+                        <td class="text-left">{{$itemcomment->evaluation}}</td>
                         <td class="text-left">{{$itemcomment->name}}</td>
                         <td class="text-left">{{$itemcomment->comment}}</td>
                     </tr>

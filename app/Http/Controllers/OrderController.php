@@ -64,7 +64,7 @@ class OrderController extends Controller
                 'orders.created_at',
                 'orders.updaterid',
                 'orders.updated_at')
-            ->where($searchclumn, 'like', '' . $vkeyword . '')
+            ->where($searchclumn, 'like', '%' . $vkeyword . '%')
             ->OrderBy('orders.created_at')
             ->paginate(15);
 
