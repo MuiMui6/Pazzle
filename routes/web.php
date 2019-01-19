@@ -114,9 +114,17 @@ Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirm
 //===============================================================================================================
 //SpotController
 //===============================================================================================================
+Route::get ('/Spotindex', 'SpotController@view');
 
+Route::get ('/Spotindex', 'SpotController@search');
 
+Route::get ('/Detail_Spot', 'SpotController@detail');
 
+Route::get ('/Edit_New_Spot', 'SpotController@newspot');
+
+Route::get ('/Edit_Spot', 'SpotController@editspot');
+
+Route::post('/Save_Spot', 'SpotController@savespot');
 
 //===============================================================================================================
 //TagController
