@@ -12,7 +12,7 @@ class SpotsTableSeeder extends Seeder
         Spot::create([
             'name' => '大阪情報コンピュータ専門学校',
             'profile' => '略称”OIC”。大阪府大阪市天王寺区にあるIT・ゲーム・デザインの３つの学科がある。',
-            'createrid' => random_int('1','480')
+            'createrid' => '1'
         ]);
 
 

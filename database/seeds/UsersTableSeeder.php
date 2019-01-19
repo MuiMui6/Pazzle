@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@mail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('secret'),
+            'anser'=>bcrypt('1234567890'),
             'rank' => '1'
         ]);
 
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'mail'.$i.'@mail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('secret'),
+                'anser'=>bcrypt('1234567890'),
                 'rank' => '0'
             ]);
         }

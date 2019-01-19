@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             SpotCommentsTableSeeder::class,
             TagsTableSeeder::class,
             UsersTableSeeder::class,
-            WarehousesTableSeeder::class
         ]);
     }
 }

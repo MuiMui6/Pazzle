@@ -5,16 +5,11 @@ use App\Tag;
 
 class TagsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         //未定
         Tag::create([
-            'name' => '未定',
+            'name' => '未分類',
             'createrid'=>'1'
         ]);
 
