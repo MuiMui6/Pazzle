@@ -107,10 +107,16 @@
     </nav>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12">
-                <form method="get" action="/SpotIndex">
+            <div class="col-12 m-3">
+                <form method="get" action="/Spotindex">
                     @csrf
-                    <input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">
+                    {{--<input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">--}}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Spot Name / Creater Name / Address etc..." aria-describedby="button-addon2" name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search!</button>
+                        </div>
+                    </div>
                 </form>
             </div>
 

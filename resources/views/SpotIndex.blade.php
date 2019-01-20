@@ -11,7 +11,7 @@
 
     <div class="m-4">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="img/出雲大社１.jpg" alt="Card image cap">
+            <img class="card-img-top" src="img/noimage.png" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p>
@@ -33,9 +33,9 @@
     <div class="row cart-columns">
         @foreach($spots as $spot)
             <div class="card m-2" style="width: 18rem;">
-                <img class="card-img-top" src="img/出雲大社１.jpg" alt="Card image cap">
+                <img class="card-img-top" src="img/noimage.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{$spot->name}}</h5>
+                    <h5 class="card-title">{{$spot->spotname}}</h5>
                     <p>
                         <span class="badge badge-pill badge-secondary">Tags</span>
                         <span class="badge badge-pill badge-secondary">Tags</span>
@@ -55,6 +55,12 @@
 
 
     <div class="col-lg-12 m-4 text-center">
+        <img src="img/s_line.png">
+
+        <div class="m-3 col-lg-12 text-justify">
+            {!! $spots->appends(Request::query())->links() !!}
+        </div>
+
         <img src="img/s_line.png">
     </div>
 
