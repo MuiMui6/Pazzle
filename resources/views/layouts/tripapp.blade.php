@@ -110,7 +110,7 @@
             <div class="col-12">
                 <form method="get" action="/SpotIndex">
                     @csrf
-                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
+                    <input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">
                 </form>
             </div>
 
@@ -124,7 +124,7 @@
                 <div class="row">
 
                     <a href="/">
-                        <image src="img/gopazzle.png"></image>
+                        <img src="img/gopazzle.png">
                     </a>
 
                     <table class="table col m-3">

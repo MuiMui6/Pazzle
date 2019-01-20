@@ -114,7 +114,7 @@
             <div class="col-12">
                 <form method="get" action="/">
                     @csrf
-                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
+                    <input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">
                 </form>
             </div>
 
@@ -127,6 +127,11 @@
 
             <div class="col-lg-2">
                 <div class="row">
+
+                    <a href="/Spotindex">
+                        <img src="img/gotrip.png">
+                    </a>
+
                     {{--Peas--}}
                     <table class="table col m-3">
                         <thead>

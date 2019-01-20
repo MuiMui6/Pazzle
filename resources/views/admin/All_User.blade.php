@@ -1,4 +1,4 @@
-@extends('layouts.adminapp')
+@extends('layouts.notapp')
 
 @section('content')
 
