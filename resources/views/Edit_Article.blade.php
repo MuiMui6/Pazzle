@@ -2,17 +2,18 @@
 
 @section('content')
 
-    <form action="/Update_Article" method="post">
-        @csrf
-        <div class="row">
-            <div class="card col-lg-12 text-center">
-                <div class="card-body">
-                    <h2 class="card-title">Edit Article</h2>
-                    <img src="img/s_line.png">
+    <div class="row">
+        <div class="card col-lg-12 text-center">
+            <div class="card-body">
 
-                    {{--新規作成--}}
-                    @foreach($spots as $spot)
-                        <input type="hidden" value="{{$spot->spotid}}" name="spotid">
+                <h2 class="card-title">Edit Article</h2>
+                <img src="img/s_line.png">
+
+                {{--新規作成--}}
+                @foreach($spots as $spot)
+
+                    <form action="/Update_Article" method="post">
+                        @csrf
                         <table class="table">
                             <tr>
                                 <th class="text-center">
@@ -40,8 +41,8 @@
                                     Article
                                 </th>
                                 <th class="text-center">
-                                    <textarea class="form-control" cols="50" rows="10" name="profile"
-                                              placeholder="{{$spot->profile}}"></textarea>
+                                    <textarea class="form-control" cols="50" rows="10" name="article"
+                                              placeholder="{{$spot->article}}"></textarea>
                                 </th>
                             </tr>
 
@@ -82,40 +83,6 @@
                                     <input type="tel" class="form-control" name="tel" placeholder="{{$spot->tel}}">
                                 </th>
                             </tr>
-
-
-                            <tr>
-                                <th class="text-center">
-                                    Tag
-                                </th>
-                                <th class="text-center">
-                                    <div class="col m-3">
-                                        <select class="custom-select" name="tag1">
-                                            @foreach($tags as $tag)
-                                                <option value="{{$tag->tagid}}">{{$tag->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col m-3">
-                                        <select class="custom-select" name="tag2">
-                                            @foreach($tags as $tag)
-                                                <option value="{{$tag->tagid}}">{{$tag->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col m-3">
-                                        <select class="custom-select" name="tag3">
-                                            @foreach($tags as $tag)
-                                                <option value="{{$tag->tagid}}">{{$tag->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </th>
-                            </tr>
-
 
                             <tr>
                                 <th class="text-center">
@@ -163,12 +130,15 @@
                             </tr>
 
                         </table>
-                    @endforeach
-                    <button type="submit" class="btn btn-primary btn-block m-3">
-                        Save
-                    </button>
-                </div>
+
+                        <button type="submit" class="btn btn-primary btn-block m-3">
+                            <input type="hidden" value="{{$spot->id}}" name="spotid">
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                            Save
+                        </button>
+                        @endforeach
+                    </form>
             </div>
         </div>
-    </form>
+    </div>
 @endsection

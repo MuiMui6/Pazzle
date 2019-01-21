@@ -10,11 +10,11 @@
                 @foreach($spots as $spot)
                     <h2 class="card-title m-2">{{$spot->spotname}}</h2>
 
-                    <table class="table">
+                    <table class="table m-3">
 
                         <tr>
                             <th class="text-center">
-                                Profile
+                                Article
                             </th>
                             <th class="text-center">
                                 {{$spot->profile}}
@@ -54,7 +54,7 @@
                     @if($spot->createrid == Auth::user()->id )
                         <form action="/Edit_Article" method="get">
                             <div class="col-12 m-3">
-                                <button type="submit" class="btn btn-block" value="{{$spot->spotid}}" name="spotid">
+                                <button type="submit" class="btn btn-block" value="{{$spot->id}}" name="spotid">
                                     EDIT
                                 </button>
                             </div>
@@ -70,7 +70,7 @@
 
 
                 {{--コメント--}}
-                <div class="col-12 m-3">
+                <div class="col-12 m-3 mt-4">
                     <h3 class="text-center">Comment</h3>
                 </div>
 

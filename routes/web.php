@@ -80,14 +80,17 @@ Route::post('/admin/Edit_Order', 'OrderController@editsave');
 //支払確認取り消し
 Route::post('/admin/Edit_Order/Delete', 'OrderController@dalete');
 
+
+
 //PayDate
-Route::post('/History_Cart/Pay_Date', 'OrderController@paydate');
+Route::post('/History_Cart/PayDate', 'OrderController@paydate');
 
 //Pay_Confirmor
 Route::post('/admin/All_Order/PayConfirmation', 'OrderController@payconfirmation');
 
 //Ship_Date_Confirmor
 Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirmation');
+
 
 
 //===============================================================================================================
@@ -125,13 +128,6 @@ Route::get ('/Edit_Article', 'SpotController@editspot');
 Route::post('/Save_Article', 'SpotController@save');
 
 Route::post('/Update_Article', 'SpotController@update');
-
-//===============================================================================================================
-//TagController
-//===============================================================================================================
-
-
-
 
 //===============================================================================================================
 //UserController

@@ -94,7 +94,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="text-center">ItemId</th>
+            <th class="text-center">ItemName</th>
             <th class="text-center">UserName</th>
             <th class="text-center">Cnt</th>
             <th class="text-center">Status</th>
@@ -125,7 +125,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <form action="/admin/All_Order/PayConfirmation" method="post">
                                     @csrf
-                                    <input type="hidden" value="{{ $order -> orderid }}" name="orderid">
+                                    <input type="hidden" value="{{ $order -> id }}" name="orderid">
                                     <input type="hidden" value="{{ Auth::user()->id }}" name="userid">
                                     @if($vkeyword <> null)
                                         <input type="hidden" value="{{$vkeyword}}" name="vkeyword">
@@ -147,10 +147,12 @@
                 </th>
                 <th class="text-center">{{ $order -> created_at -> format('y年m月d日') }}</th>
                 <th class="text-center">{{ $order -> updaterid }}</th>
-                <th class="text-center">{{ $order -> updated_at -> format('y年m月d日') }}</th>
+                <th class="text-center">
+                    {{--更新日予定--}}
+                </th>
                 <th class="text-center">
                     <form action="/admin/Edit_Order" method="get">
-                        <button class="btn btn-primary" value="{{$order->orderid}}" name="orderid">
+                        <button class="btn btn-primary" value="{{$order->id}}" name="orderid">
                             Detail
                         </button>
                     </form>

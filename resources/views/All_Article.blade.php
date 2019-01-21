@@ -1,7 +1,7 @@
 @extends('layouts.notapp')
 
 @section('content')
-    <div class="row">
+    <div class="row card card-body">
 
         <div class="col-12 m-3">
             <h3 class="text-center">Your Article</h3>
@@ -15,18 +15,32 @@
                 <th class="text-center">SpotName</th>
                 <th class="text-center">View</th>
                 <th class="text-center">Edit</th>
-                <th class="text-center">Created Date</th>
-                <th class="text-center">Updated Date</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
-            </tr>
+            @foreach($spots as $spot)
+                <tr>
+                    <th class="text-center">{{$spot->name}}</th>
+                    <th class="text-center">
+                        @if($spot->view== '1')
+                            <div class="alert alert-success">
+                                Can View
+                            </div>
+                        @else
+                            <div class="alert alert-denger">
+                                Can't View
+                            </div>
+                        @endif
+                    </th>
+                    <th class="text-center">
+                        <form action="/Edit_Article" method="get">
+                            <button type="submit" class="btn btn-primary" value="{{$spot->id}}" name="spotid">
+                                EDIT
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

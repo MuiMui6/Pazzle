@@ -41,12 +41,6 @@
                     <td>{{$items->cnt}}peas</td>
                 </tr>
 
-                {{--Tag--}}
-                <tr>
-                    <th scope="row">Tag</th>
-                    <td>Tag1,Tag2,Tag3</td>
-                </tr>
-
                 {{--観光地--}}
                 <tr>
                     <th scope="row">Spot</th>
@@ -62,7 +56,7 @@
             @else
                 <form action="/Add_Cart" method="post">
                     @csrf
-                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
+                    <input type="hidden" value="{{$items->id}}" name="itemid">
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0" name="itemcnt">

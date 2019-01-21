@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="justify-content-center m-3">
+        {!! $item->appends(Request::query())->links() !!}
+    </div>
+
     <div class="row cart-columns">
+
         @foreach( $item as $items )
             <div class="card m-2" style="width: 17rem;">
                 <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px">
@@ -39,7 +44,7 @@
                             <td>
                                 <form action="/Detail" method="get">
                                     @csrf
-                                    <input type="hidden" value="{{$items->itemid}}" name="itemid">
+                                    <input type="hidden" value="{{$items->id}}" name="itemid">
                                     <input type="submit" class="btn btn-info" value="Detail">
                                 </form>
                             </td>
@@ -51,4 +56,9 @@
             </div>
         @endforeach
     </div>
+
+    <div class="justify-content-center m-3">
+        {!! $item->appends(Request::query())->links() !!}
+    </div>
+
 @endsection

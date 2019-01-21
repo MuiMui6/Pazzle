@@ -8,7 +8,6 @@ use App\Item;
 use App\ItemComment;
 use App\Peas;
 use App\Size;
-use App\Tag;
 
 class ItemController extends Controller
 {
@@ -22,33 +21,34 @@ class ItemController extends Controller
 
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->Get();
+            ->join('peases', 'items.peasid', '=', 'peases.id')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->orderBy('items.created_at','desc')
+            ->paginate(9);
 
         //もしキーワードがあれば
         if ($keyword <> null) {
             $item = DB::table('items')
-                ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-                ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-                ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->join('peases', 'items.peasid', '=', 'peases.id')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+                ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('items.name', 'like', '%' . $keyword . '%')
                 ->orwhere('items.profile', 'like', '%' . $keyword . '%')
                 ->orwhere('items.price', 'like', '%' . $keyword . '%')
                 ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
-                ->Get();
+                ->paginate(9);
         }
 
         //もしサイズ指定があれば
         if ($key_height <> null && $key_width <> null) {
             $item = DB::table('items')
-                ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-                ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-                ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->join('peases', 'items.peasid', '=', 'peases.id')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+                ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('sizes.height', $key_height)
                 ->orwhere('sizes.width', $key_width)
-                ->Get();
+                ->paginate(9);
         }
 
         //ピース数
@@ -57,23 +57,24 @@ class ItemController extends Controller
         //サイズ
         $size = Size::select('height', 'width')->Get();
 
-        //タグ
-        $tag = Tag::select('name')->Get();
 
-        return view('/home', compact('item', 'peas', 'size', 'tag'));
+        return view('/home', compact('item', 'peas', 'size'));
     }
 
+//======================================================================================================================
 //一般ユーザ・管理者共通
+//======================================================================================================================
+
     public function detail(Request $request)
     {
         $message = null;
 
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->where('items.itemid', $request->itemid)
+            ->join('peases', 'items.peasid', '=', 'peases.id')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.id', $request->itemid)
             ->Get();
 
         //ピース数
@@ -82,8 +83,6 @@ class ItemController extends Controller
         //サイズ
         $size = Size::select('height', 'width')->get();
 
-        //タグ
-        $tag = Tag::select('name')->get();
 
         $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
             ->where('itemid',$request->itemid)
@@ -93,7 +92,7 @@ class ItemController extends Controller
         $evaluation = ItemComment::where('itemid',$request->itemid)
             ->avg('evaluation');
 
-        return view('/Detail_Item', compact('item', 'peas', 'size', 'tag','message','itemcomments','evaluation'));
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'message','itemcomments','evaluation'));
 
     }
 

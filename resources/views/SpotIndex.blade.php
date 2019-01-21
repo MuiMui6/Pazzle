@@ -14,11 +14,6 @@
             <img class="card-img-top" src="img/noimage.png" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p>
-                    <span class="badge badge-pill badge-secondary">Tags</span>
-                    <span class="badge badge-pill badge-secondary">Tags</span>
-                    <span class="badge badge-pill badge-secondary">Tags</span>
-                </p>
                 <button class="btn btn-primary" type="submit">
                     Detail
                 </button>
@@ -34,16 +29,11 @@
         @foreach($spots as $spot)
             <div class="card m-2" style="width: 18rem;">
                 <img class="card-img-top" src="img/noimage.png" alt="Card image cap">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">{{$spot->spotname}}</h5>
-                    <p>
-                        <span class="badge badge-pill badge-secondary">Tags</span>
-                        <span class="badge badge-pill badge-secondary">Tags</span>
-                        <span class="badge badge-pill badge-secondary">Tags</span>
-                    </p>
                     <form action="/Detail_Spot" method="get">
                         @csrf
-                        <input type="hidden" value="{{$spot->spotid}}" name="spotid">
+                        <input type="hidden" value="{{$spot->id}}" name="spotid">
                         <button class="btn btn-primary" type="submit">
                             Detail
                         </button>
