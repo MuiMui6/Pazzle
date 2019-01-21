@@ -112,7 +112,8 @@
                     @csrf
                     {{--<input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">--}}
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Spot Name / Creater Name / Address etc..." aria-describedby="button-addon2" name="keyword">
+                        <input type="text" class="form-control" placeholder="Spot Name / Creater Name / Address etc..."
+                               aria-describedby="button-addon2" name="keyword">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search!</button>
                         </div>
@@ -132,29 +133,6 @@
                     <a href="/">
                         <img src="img/gopazzle.png">
                     </a>
-
-                    <table class="table col m-3">
-                        <thead>
-                        <tr>
-                            <th>
-                                <h4>Tag</h4>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($tags as $tag)
-                            <tr>
-                                <th>
-                                    <form action="/Spotindex" method="get">
-                                        <button type="submit" class="btn btn-link" value="{{$tag->name}}" name="keyword">
-                                    {{$tag->name}}
-                                        </button>
-                                    </form>
-                                </th>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
