@@ -10,7 +10,7 @@ class CreateSizesTable extends Migration
     public function up()
     {
         Schema::create('sizes', function (Blueprint $table) {
-            $table->increments('sizeid');               //サイズID
+            $table->increments('id');               //サイズID
             $table->integer('height');                  //縦
             $table->integer('width');                   //横
             $table->integer('createrid');               //作成者
