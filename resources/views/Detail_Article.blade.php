@@ -49,31 +49,7 @@
                                 <p>{{$spot->add2}}</p>
                             </th>
                         </tr>
-
-                        <tr>
-                            <th class="text-center">
-                                Tag
-                            </th>
-                            <th class="text-center">
-                                <p>
-                                    @foreach($tag1 as $tag1)
-                                        {{ $tag1->name }}
-                                    @endforeach
-
-
-                                    @foreach($tag2 as $tag2)
-                                        {{ $tag2->name }}
-                                    @endforeach
-
-
-                                    @foreach($tag3 as $tag3)
-                                        {{ $tag3->name }}
-                                    @endforeach
-                                </p>
-                            </th>
-                        </tr>
                     </table>
-
 
                     @if($spot->createrid == Auth::user()->id )
                         <form action="/Edit_Article" method="get">
@@ -167,8 +143,6 @@
                     @endforeach
                     </tbody>
                 </table>
-
-
             </div>
         </div>
     </div>

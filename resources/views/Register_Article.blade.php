@@ -77,39 +77,6 @@
                             </th>
                         </tr>
 
-
-                        <tr>
-                            <th class="text-center">
-                                Tag
-                            </th>
-                            <th class="text-center">
-                                <div class="form-group col m-3">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        @foreach($tags as $tag)
-                                            <option value="{{$tag->tagid}}" name="tag1">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col m-3">
-                                    <select class="form-control" id="exampleFormControlSelect2">
-                                        @foreach($tags as $tag)
-                                            <option value="{{$tag->tagid}}" name="tag2">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col m-3">
-                                    <select class="form-control" id="exampleFormControlSelect3">
-                                        @foreach($tags as $tag)
-                                            <option value="{{$tag->tagid}}" name="tag3">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </th>
-                        </tr>
-
-
                         <tr>
                             <th class="text-center">
                                 View
