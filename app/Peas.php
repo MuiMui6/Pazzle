@@ -8,4 +8,10 @@ class Peas extends Model
 {
     //
     protected $table = 'peases';
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
 }

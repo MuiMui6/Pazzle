@@ -8,4 +8,9 @@ class Item extends Model
 {
     //
     protected $table = 'items';
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 }
