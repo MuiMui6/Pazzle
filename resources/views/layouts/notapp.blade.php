@@ -100,7 +100,6 @@
                                 <a href="/admin/All_Size" class="dropdown-item">Size Management</a>
                                 <a href="/admin/All_Spot" class="dropdown-item">Spot Management</a>
                                 <a href="/admin/All_SpotComment" class="dropdown-item">Spot Comment Management</a>
-                                <a href="/admin/All_Tag" class="dropdown-item">Tag Management</a>
                                 <a href="/admin/All_User" class="dropdown-item">User Management</a>
                             </div>
                         </li>
