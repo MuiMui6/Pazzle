@@ -31,7 +31,8 @@
                     <tr>
                         <th class="text-center">宛先</th>
                         <th class="text-center">
-                            <p>〒{{$addresses->post}}</p>
+                            <p>〒{{substr($address->post,0,3)}}
+                                -{{substr($address->post,4,7)}}</p>
                             <p>{{$addresses->add1}}</p>
                             <p>{{$addresses->Add2}}</p>
                         </th>
