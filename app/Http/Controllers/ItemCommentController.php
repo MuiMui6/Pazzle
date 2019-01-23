@@ -91,7 +91,7 @@ class ItemCommentController extends Controller
         $conditions = $request->dateclumn;
         $h_dateclumn = $conditions;
 
-        if ($endday == null || $endday > now()) {
+        if ($endday == null || $endday >= now()) {
             $endday = now();
         }
         if ($startday == null || $startday > now()) {
@@ -166,7 +166,7 @@ class ItemCommentController extends Controller
             $notview = 1;
         }
 
-        ItemComment::where('itemcommentid', $request->itemcommentid)
+        ItemComment::where('id', $request->itemcommentid)
             ->update(['view' => $notview, 'updated_at' => now()]);
 
 
@@ -231,13 +231,13 @@ class ItemCommentController extends Controller
         return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday', 'h_dateclumn'));
     }
 
-//テンプレート
-//======================================================================================
+
+//======================================================================================================================
 //
-//======================================================================================
-//public function (){
-//
-//}
+//======================================================================================================================
+    //public function (){
+    //
+    //}
 
 
 }
