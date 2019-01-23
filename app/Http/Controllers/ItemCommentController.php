@@ -19,9 +19,9 @@ class ItemCommentController extends Controller
         $h_clumn = null;
 
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-            ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+            ->join('items', 'items.id', '=', 'item_comments.itemid')
             ->select(
-                'item_comments.itemcommentid',
+                'item_comments.id',
                 'items.name as itemname',
                 'item_comments.itemid as itemid',
                 'item_comments.userid as userid',
@@ -33,7 +33,7 @@ class ItemCommentController extends Controller
                 'item_comments.created_at',
                 'item_comments.updated_at')
             ->OrderBy('item_comments.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday', 'h_dateclumn'));
 
@@ -54,9 +54,9 @@ class ItemCommentController extends Controller
         $h_clumn = $searchclumn;
 
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-            ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+            ->join('items', 'items.id', '=', 'item_comments.itemid')
             ->select(
-                'item_comments.itemcommentid',
+                'item_comments.id',
                 'items.name as itemname',
                 'item_comments.itemid as itemid',
                 'item_comments.userid as userid',
@@ -69,7 +69,7 @@ class ItemCommentController extends Controller
                 'item_comments.updated_at')
             ->where($searchclumn, 'like', '%' . $vkeyword . '%')
             ->OrderBy('item_comments.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday'));
     }
@@ -91,7 +91,7 @@ class ItemCommentController extends Controller
         $conditions = $request->dateclumn;
         $h_dateclumn = $conditions;
 
-        if ($endday == null || $endday > now()) {
+        if ($endday == null || $endday >= now()) {
             $endday = now();
         }
         if ($startday == null || $startday > now()) {
@@ -100,9 +100,9 @@ class ItemCommentController extends Controller
 
 
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-            ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+            ->join('items', 'items.id', '=', 'item_comments.itemid')
             ->select(
-                'item_comments.itemcommentid',
+                'item_comments.id',
                 'items.name as itemname',
                 'item_comments.itemid as itemid',
                 'item_comments.userid as userid',
@@ -115,7 +115,7 @@ class ItemCommentController extends Controller
                 'item_comments.updated_at')
             ->whereBetWeen($conditions, [$startday, $endday])
             ->OrderBy('item_comments.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday', 'h_dateclumn'));
 
@@ -166,14 +166,14 @@ class ItemCommentController extends Controller
             $notview = 1;
         }
 
-        ItemComment::where('itemcommentid', $request->itemcommentid)
+        ItemComment::where('id', $request->itemcommentid)
             ->update(['view' => $notview, 'updated_at' => now()]);
 
 
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-            ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+            ->join('items', 'items.id', '=', 'item_comments.itemid')
             ->select(
-                'item_comments.itemcommentid',
+                'item_comments.id',
                 'items.name as itemname',
                 'item_comments.itemid as itemid',
                 'item_comments.userid as userid',
@@ -185,14 +185,14 @@ class ItemCommentController extends Controller
                 'item_comments.created_at',
                 'item_comments.updated_at')
             ->OrderBy('item_comments.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         //データ引用
         if ($h_clumn <> null && $h_keyword <> null) {
             $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-                ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+                ->join('items', 'items.id', '=', 'item_comments.itemid')
                 ->select(
-                    'item_comments.itemcommentid',
+                    'item_comments.id',
                     'items.name as itemname',
                     'item_comments.itemid as itemid',
                     'item_comments.userid as userid',
@@ -205,13 +205,13 @@ class ItemCommentController extends Controller
                     'item_comments.updated_at')
                 ->where($h_clumn, 'like', '%' . $h_keyword . '%')
                 ->OrderBy('item_comments.created_at')
-                ->paginate(15);
+                ->paginate(10);
 
         } elseif ($h_startday <> null || $h_endday <> null) {
             $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-                ->join('items', 'items.itemid', '=', 'item_comments.itemid')
+                ->join('items', 'items.id', '=', 'item_comments.itemid')
                 ->select(
-                    'item_comments.itemcommentid',
+                    'item_comments.id',
                     'items.name as itemname',
                     'item_comments.itemid as itemid',
                     'item_comments.userid as userid',
@@ -224,20 +224,20 @@ class ItemCommentController extends Controller
                     'item_comments.updated_at')
                 ->whereBetween($h_dateclumn, [$h_startday . $h_endday])
                 ->OrderBy('item_comments.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
 
         return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday', 'h_dateclumn'));
     }
 
-//テンプレート
-//======================================================================================
+
+//======================================================================================================================
 //
-//======================================================================================
-//public function (){
-//
-//}
+//======================================================================================================================
+    //public function (){
+    //
+    //}
 
 
 }

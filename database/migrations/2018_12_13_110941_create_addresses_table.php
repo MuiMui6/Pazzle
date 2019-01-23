@@ -10,7 +10,7 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('addressid');            //住所ID
+            $table->increments('id');            //住所ID
             $table->integer('userid');                  //ユーザID
             $table->string('toname')->nullable();       //宛先名
             $table->string('post');                    //郵便番号

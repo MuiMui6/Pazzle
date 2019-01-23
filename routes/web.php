@@ -5,6 +5,16 @@ Auth::routes();
 //===============================================================================================================
 //AddreseController
 //===============================================================================================================
+//完成
+Route::get('/admin/All_Address','AddressController@search');
+
+Route::get('/All_Address','AddressController@create');
+
+Route::post('/admin/Address','AddressController@save');
+
+Route::get('/admin/All_Address/Detail','AddressController@detail');
+
+Route::get('/admin/All_Address/Detail','AddressController@update');
 
 
 //===============================================================================================================
@@ -81,7 +91,7 @@ Route::post('/admin/Edit_Order', 'OrderController@editsave');
 Route::post('/admin/Edit_Order/Delete', 'OrderController@dalete');
 
 //PayDate
-Route::post('/History_Cart/Pay_Date', 'OrderController@paydate');
+Route::post('/History_Cart/PayDate', 'OrderController@paydate');
 
 //Pay_Confirmor
 Route::post('/admin/All_Order/PayConfirmation', 'OrderController@payconfirmation');
@@ -90,18 +100,26 @@ Route::post('/admin/All_Order/PayConfirmation', 'OrderController@payconfirmation
 Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirmation');
 
 
+
 //===============================================================================================================
 //PeasController
 //===============================================================================================================
+Route::get ('/admin/All_Peas', 'PeasController@search');
 
+Route::post('/admin/All_Peas/Create', 'PeasController@create');
+
+Route::post('/admin/All_Peas/Update', 'PeasController@update');
 
 
 
 //===============================================================================================================
 //SizeController
 //===============================================================================================================
+Route::get('/admin/All_Size', 'SizeController@search');
 
+Route::post('/admin/All_Size/Create', 'SizeController@create');
 
+Route::post('/admin/All_Size/Update', 'SizeController@update');
 
 
 //===============================================================================================================
@@ -114,27 +132,22 @@ Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirm
 //===============================================================================================================
 //SpotController
 //===============================================================================================================
+Route::get ('/Spotindex', 'SpotController@search');
 
+Route::get ('/Detail_Spot', 'SpotController@detail');
 
+Route::get ('/Edit_New_Article', 'SpotController@newspot');
 
+Route::get ('/Edit_Article', 'SpotController@editspot');
 
-//===============================================================================================================
-//TagController
-//===============================================================================================================
+Route::post('/Save_Article', 'SpotController@save');
 
-
-
+Route::post('/Update_Article', 'SpotController@update');
 
 //===============================================================================================================
 //UserController
 //===============================================================================================================
 
-
-
-
-//===============================================================================================================
-//WarehouseController
-//===============================================================================================================
 
 
 

@@ -1,44 +1,60 @@
-@extends('layouts.adminapp')
+<div class="row">
+    <div class="card col-lg-12">
+        <div class="card-body">
 
-@section('content')
-    <div class="row">
+            <div class="col-12 m-3">
+                <h3 class="text-center">All Peas</h3>
+            </div>
+            <div class="m-3">
+                <h5>ピース数に関する情報を作成・編集できます。</h5>
+            </div>
 
-        <div class="col-12 m-3">
-            <h3 class="text-center">Al SpotComment</h3>
+            <div class="col-lg-12 m-3">
+                <form action="/admin/All_Peas" method="get">
+                    <div class="input-group mr-3">
+                        <input type="text" class="form-control" placeholder=" height / width / Creater Name / Updater Name " aria-describedby="button-addon2" name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-12 m-3">
+
+                <div class="d-flex border-bottom border-dark">
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col-lg-2 text-center"><h3></h3></div>
+                </div>
+
+                @foreach($peases as $peas)
+
+                    <form action="/admin/All_Peas/Update" method="post">
+                        @csrf
+                        <div class=" border-bottom">
+                            <div class="col-lg-2 text-center"></div>
+                            <div class="col-lg-2 text-center"></div>
+                            <div class="col-lg-2 text-center"></div>
+                            <div class="col-lg-2 text-center"></div>
+                            <div class="col-lg-2 text-center"></div>
+                            <div class="col-lg-2 text-center"></div>
+                        </div>
+                    </form>
+
+                @endforeach
+
+            </div>
+
+            <div class="col-lg-12 m-3">
+                {!! $peases->appends(Request::query())->links() !!}
+            </div>
+
         </div>
-        <div class="m-3">
-            <h5>観光地に投稿されたコメントを確認・編集できます。</h5>
-        </div>
-
-        <table class="table table-borderless">
-            <thead>
-            <tr>
-                <th class="text-center">UserId</th>
-                <th class="text-center">SpotId</th>
-                <th class="text-center">Comment</th>
-                <th class="text-center">Evakuation</th>
-                <th class="text-center">Create_date</th>
-                <th class="text-center">Updater</th>
-                <th class="text-center">Update_date</th>
-                <th class="text-center">Etc</th>
-                <th class="text-center">Button</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">#</th>
-                <th class="text-center">Comment</th>
-                <th class="text-center">Rank</th>
-                <th class="text-center">作成者</th>
-                <th class="text-center">0000-00-00</th>
-                <th class="text-center">更新者</th>
-                <th class="text-center">0000-00-00</th>
-                <th class="text-center">memo</th>
-                <th class="text-center">Edit or Add</th>
-            </tr>
-            </tbody>
-        </table>
-
     </div>
+</div>
 @endsection

@@ -21,9 +21,7 @@ class DatabaseSeeder extends Seeder
             SizesTableSeeder::class,
             SpotsTableSeeder::class,
             SpotCommentsTableSeeder::class,
-            TagsTableSeeder::class,
             UsersTableSeeder::class,
-            WarehousesTableSeeder::class
         ]);
     }
 }

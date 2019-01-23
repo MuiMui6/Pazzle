@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Address;
-use App\Item;
+use App\ItemComment;
 use App\User;
 use App\Peas;
-use App\Tag;
 use App\Size;
 use App\Order;
 use phpDocumentor\Reflection\Types\Integer;
@@ -32,32 +31,43 @@ class CartController extends Controller
         return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
     }
 
+
+
+
+
 //追加
     public function add(Request $request)
     {
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases', 'items.sizeid', '=', 'peases.peasid')
-            ->join('sizes', 'items.sizeid', '=', 'sizes.sizeid')
-            ->select('items.itemid', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->where('items.itemid', $request->itemid)
+            ->join('peases', 'items.sizeid', '=', 'peases.id')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.id', $request->itemid)
             ->Get();
 
-
         //ピース数
-        $peas = Peas::select('cnt')->Get();
+        $peas = Peas::select('cnt')->get();
 
         //サイズ
-        $size = Size::select('height', 'width')->Get();
+        $size = Size::select('height', 'width')->get();
 
-        //タグ
-        $tag = Tag::select('name')->Get();
+
+        $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
+            ->where('itemid',$request->itemid)
+            ->where('item_comments.view','1')
+            ->get();
+
+        $evaluation = ItemComment::where('itemid',$request->itemid)
+            ->avg('evaluation');
+
 
         $index = $request->itemid;
         $itemcnt = $request->itemcnt;
         $message = null;
 
-        $items = DB::select("SELECT * FROM items where itemid = ?", [$index]);
+        $items = DB::select("SELECT * FROM items where id = ?", [$index]);
+
 
         if ($itemcnt > 0) {
 
@@ -73,7 +83,7 @@ class CartController extends Controller
 
                 $message = '商品をカートに追加しました。';
 
-                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'tag'));
+                return view("/Detail_Item", compact('message', 'item', 'peas', 'size','itemcomments','evaluation'));
 
             } else {
 
@@ -85,15 +95,19 @@ class CartController extends Controller
 
             $message = '購入個数を指定してください';
 
-            return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'tag'));
+            return view("/Detail_Item", compact('message', 'item', 'peas', 'size'));
         }
     }
+
+
+
+
 
 //カート内の物を削除（１件）
     public function delete(Request $request)
     {
         $index = $request->index;
-        $items = DB::select("SELECT * FROM items where itemid = ?", [$index]);
+        $items = DB::select("SELECT * FROM items where id = ?", [$index]);
         if (count($items) >= 0) {
             $CartItems = request()->session()->get("CART", []);
             $CartItemCnt = request()->session()->get("CARTCNT", []);
@@ -107,6 +121,10 @@ class CartController extends Controller
         }
     }
 
+
+
+
+
 //カート内の物を削除（全件）
     public function alldelete()
     {
@@ -114,6 +132,10 @@ class CartController extends Controller
         $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
     }
+
+
+
+
 
 //宛先決め
     public function Topost(Request $request)
@@ -126,11 +148,15 @@ class CartController extends Controller
 
     }
 
+
+
+
+
 //最終確認
     public function Register(Request $request)
     {
 
-        $address = Address::where('addressid', $request->addressid)->get();
+        $address = Address::where('id', $request->addressid)->get();
         $addid = $request->addressid;
 
         //商品・合計点数・合計金額表示
@@ -149,6 +175,10 @@ class CartController extends Controller
 
     }
 
+
+
+
+
 //購入後
     public function Registerd(Request $request)
     {
@@ -165,7 +195,7 @@ class CartController extends Controller
             //DB処理（Orderに追加）
             DB::table('orders')->insert([
                 'userid' => $request->userid,
-                'itemid' => $item->itemid,
+                'itemid' => $item->id,
                 'cnt' => $itemcnt,
                 'addressid' => $request->addid,
                 'created_at' => now()
@@ -181,12 +211,29 @@ class CartController extends Controller
 
     public function History(Request $request)
     {
-        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+        $items = Order::join('items', 'items.id', '=', 'orders.itemid')
             ->where('userid', $request->userid)
+            ->select('orders.id as id',
+                'items.name as name',
+                'orders.cnt as cnt',
+                'items.price',
+                'orders.paydate',
+                'orders.pconfirmorid',
+                'orders.shipdate',
+                'orders.created_at as created_at',
+                'orders.updaterid as updaterid',
+                'orders.updated_at as updated_at')
             ->get();
-
 
         return view('/History_Cart', compact('items'));
     }
+
+
+//======================================================================================================================
+//
+//======================================================================================================================
+    //public function (){
+    //
+    //}
 
 }

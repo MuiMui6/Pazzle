@@ -26,12 +26,13 @@
                     <tbody>
                     @foreach($address as $addindex => $addresses)
                         <tr>
-                            <th class="text-center"><input type="radio" value="{{$addresses->addressid}}"
+                            <th class="text-center"><input type="radio" value="{{$addresses->id}}"
                                                            name="addressid">
                             </th>
                             <th class="text-center">
                                 <p><h5>{{$addresses->toname}}</h5></p>
-                                <p>〒{{$addresses->post}}</p>
+                                <p>〒{{substr($address->post,0,3)}}
+                                    -{{substr($address->post,4,7)}}</p>
                                 <p>{{$addresses->add1}}　{{$addresses->add2}}</p>
                             </th>
                         </tr>

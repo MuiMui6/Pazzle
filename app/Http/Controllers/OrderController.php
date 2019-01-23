@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Address;
-use App\Item;
-use App\User;
 use App\Order;
 
 class OrderController extends Controller
@@ -18,8 +14,8 @@ class OrderController extends Controller
         $vkeyword = null;
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-            ->join('items', 'items.itemid', '=', 'orders.itemid')
-            ->select('orders.orderid',
+            ->join('items', 'items.id', '=', 'orders.itemid')
+            ->select('orders.id',
                 'orders.itemid as itemid',
                 'items.name as itemname',
                 'orders.userid as userid',
@@ -32,7 +28,7 @@ class OrderController extends Controller
                 'orders.updaterid',
                 'orders.updated_at')
             ->OrderBy('orders.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
     }
@@ -51,8 +47,9 @@ class OrderController extends Controller
         $vkeyword = implode($vkeyword);
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-            ->join('items', 'items.itemid', '=', 'orders.itemid')
-            ->select('orders.orderid',
+            ->join('items', 'items.id', '=', 'orders.itemid')
+            ->where($searchclumn, 'like', '%' . $vkeyword . '%')
+            ->select('orders.id as id',
                 'orders.itemid as itemid',
                 'items.name as itemname',
                 'orders.userid as userid',
@@ -63,10 +60,9 @@ class OrderController extends Controller
                 'orders.shipdate',
                 'orders.created_at',
                 'orders.updaterid',
-                'orders.updated_at')
-            ->where($searchclumn, 'like', '%' . $vkeyword . '%')
+                'orders.updated_at as updated_at')
             ->OrderBy('orders.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
 
@@ -82,7 +78,7 @@ class OrderController extends Controller
     public function datesearch(Request $request)
     {
 
-        //初期値
+        //初期値S
         $startday = $request->startday;
         $endday = $request->endday;
         $conditions = $request->dateclumn;
@@ -106,13 +102,13 @@ class OrderController extends Controller
         }
 
         //全取得
-        $orders = Order::paginate(15);
+        $orders = Order::paginate(10);
 
         //未払い日
         if ($conditions == 'unpaid') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -126,14 +122,14 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereNotBetween('orders.paydate', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
         //支払日
         if ($conditions == 'paid') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -147,14 +143,14 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereBetween('orders.paydate', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
         //未受け取り
         if ($conditions == 'unshipped') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -168,14 +164,14 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereNotBetween('orders.shipdate', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
         //受取日
         if ($conditions == 'shipped') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -189,14 +185,14 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereBetween('orders.shipdate', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
         //アカウント作成日
         if ($conditions == 'created_at') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -210,15 +206,15 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereBetween('orders.created_at', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
 
         }
 
         //アカウント更新日
         if ($conditions == 'updated_at') {
             $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-                ->join('items', 'items.itemid', '=', 'orders.itemid')
-                ->select('orders.orderid',
+                ->join('items', 'items.id', '=', 'orders.itemid')
+                ->select('orders.id',
                     'orders.itemid as itemid',
                     'items.name as itemname',
                     'orders.userid as userid',
@@ -232,7 +228,7 @@ class OrderController extends Controller
                     'orders.updated_at')
                 ->whereBetween('orders.updated_at', [$startday, $endday])
                 ->OrderBy('orders.created_at')
-                ->paginate(15);
+                ->paginate(10);
         }
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
@@ -253,10 +249,10 @@ class OrderController extends Controller
         $orderid = $request->orderid;
 
         $order = Order::join('users', 'users.id', '=', 'orders.userid')
-            ->join('items', 'items.itemid', '=', 'orders.itemid')
-            ->join('addresses', 'addresses.addressid', '=', 'orders.addressid')
-            ->where('orderid', $orderid)
-            ->select('orders.orderid',
+            ->join('items', 'items.id', '=', 'orders.itemid')
+            ->join('addresses', 'addresses.id', '=', 'orders.addressid')
+            ->where('id', $orderid)
+            ->select('orders.id',
                 'users.name as username',
                 'items.name as itemname',
                 'orders.cnt as cnt',
@@ -317,10 +313,10 @@ class OrderController extends Controller
         $deletemessage = $clumn . 'を取り消しました';
 
         $order = Order::join('users', 'users.id', '=', 'orders.userid')
-            ->join('items', 'items.itemid', '=', 'orders.itemid')
-            ->join('addresses', 'addresses.addressid', '=', 'orders.addressid')
+            ->join('items', 'items.id', '=', 'orders.itemid')
+            ->join('addresses', 'addresses.id', '=', 'orders.addressid')
             ->where('orderid', $orderid)
-            ->select('orders.orderid',
+            ->select('orders.id',
                 'users.name as username',
                 'items.name as itemname',
                 'orders.cnt as cnt',
@@ -348,12 +344,24 @@ class OrderController extends Controller
 //===========================================================================================================
     public function paydate(Request $request)
     {
-        Order::where('orderid', $request->orderid)
+        Order::where('id', $request->orderid)
             ->update(['paydate' => now()]);
 
-        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+
+        $items = Order::join('items', 'items.id', '=', 'orders.itemid')
             ->where('userid', $request->userid)
+            ->select('orders.id as id',
+                'items.name as name',
+                'orders.cnt as cnt',
+                'items.price',
+                'orders.paydate',
+                'orders.pconfirmorid',
+                'orders.shipdate',
+                'orders.created_at as created_at',
+                'orders.updaterid as updaterid',
+                'orders.updated_at as updated_at')
             ->get();
+
 
         return view('/History_Cart', compact('items'));
     }
@@ -371,12 +379,12 @@ class OrderController extends Controller
         $vkeyword = $request->vkeyword;
         $searchclumn = $request->searchclumn;
 
-        Order::where('orderid', $request->orderid)
+        Order::where('id', $request->orderid)
             ->update(['pconfirmorid' => $request->userid]);
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
-            ->join('items', 'items.itemid', '=', 'orders.itemid')
-            ->select('orders.orderid',
+            ->join('items', 'items.id', '=', 'orders.itemid')
+            ->select('orders.id as id',
                 'orders.itemid as itemid',
                 'items.name as itemname',
                 'orders.userid as userid',
@@ -390,7 +398,7 @@ class OrderController extends Controller
                 'orders.updated_at')
             ->where($searchclumn, 'like', '' . $vkeyword . '')
             ->OrderBy('orders.created_at')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
     }
@@ -401,18 +409,31 @@ class OrderController extends Controller
 //===========================================================================================================
     public function shipconfirmation(Request $request)
     {
-        Order::where('orderid', $request->orderid)
+        Order::where('id', $request->orderid)
             ->update(['shipdate' => now()]);
 
-        $items = Order::join('items', 'items.itemid', '=', 'orders.itemid')
+        $items = Order::join('items', 'items.id', '=', 'orders.itemid')
             ->where('userid', $request->userid)
+            ->select('orders.id as id',
+                'items.name as name',
+                'orders.cnt as cnt',
+                'items.price',
+                'orders.paydate',
+                'orders.pconfirmorid',
+                'orders.shipdate',
+                'orders.created_at as created_at',
+                'orders.updaterid as updaterid',
+                'orders.updated_at as updated_at')
             ->get();
 
         return view('/History_Cart', compact('items'));
     }
 
     //テンプレート
-    //
+
+//======================================================================================================================
+//
+//======================================================================================================================
     //public function (){
     //
     //}

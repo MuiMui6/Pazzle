@@ -10,7 +10,7 @@ class CreateItemCommentsTable extends Migration
     public function up()
     {
         Schema::create('item_comments', function (Blueprint $table) {
-            $table->increments('itemcommentid');        //ItemCommentsid
+            $table->increments('id');        //ItemCommentsid
             $table->integer('itemid');                  //商品ID
             $table->integer('userid');                  //ユーザID
             $table->integer('evaluation');              //評価

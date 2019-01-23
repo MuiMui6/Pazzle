@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable(); //メール確認日
             $table->string('password');                         //パスワード
             $table->boolean('rank')->default(0);          //rank
+            $table->string('anser');                            //秘密の言葉
             $table->integer('updaterid')->nullable();           //更新者
             $table->rememberToken();
             $table->timestamps();

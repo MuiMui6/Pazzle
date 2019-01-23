@@ -100,7 +100,6 @@
                                 <a href="/admin/All_Size" class="dropdown-item">Size Management</a>
                                 <a href="/admin/All_Spot" class="dropdown-item">Spot Management</a>
                                 <a href="/admin/All_SpotComment" class="dropdown-item">Spot Comment Management</a>
-                                <a href="/admin/All_Tag" class="dropdown-item">Tag Management</a>
                                 <a href="/admin/All_User" class="dropdown-item">User Management</a>
                             </div>
                         </li>
@@ -114,7 +113,7 @@
             <div class="col-12">
                 <form method="get" action="/">
                     @csrf
-                    <input type="text" aria-placeholder="Keyword Search!" class="form-control m-3" name="keyword">
+                    <input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">
                 </form>
             </div>
 
@@ -127,6 +126,11 @@
 
             <div class="col-lg-2">
                 <div class="row">
+
+                    <a href="/Spotindex">
+                        <img src="img/gotrip.png">
+                    </a>
+
                     {{--Peas--}}
                     <table class="table col m-3">
                         <thead>
@@ -170,30 +174,6 @@
                                         <input type="hidden" value="{{$sizes->width}}" name="key_width">
                                         <input type="submit" class="btn btn-link"
                                                value="{{$sizes->height}}×{{$sizes->width}}">
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
-                    {{--tag--}}
-                    <table class="table col m-3">
-                        <thead>
-                        <tr>
-                            <th>
-                                <h4>Tag</h4>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($tag as $tags)
-                            <tr>
-                                <td>
-                                    <form method="get" action="/">
-                                        @csrf
-                                        <input type="submit" class="btn btn-link text-left" value="{{$tags->name}}"
-                                               name="keyword">
                                     </form>
                                 </td>
                             </tr>

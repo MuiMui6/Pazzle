@@ -11,7 +11,9 @@ class Order extends Model
 
     protected $dates = [
         'paydate',
-        'shipdate'
+        'shipdate',
+        'created_at',
+        'updated_at'
     ];
 
 }

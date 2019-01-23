@@ -10,7 +10,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('orderid');                 //受注ID
+            $table->increments('id');                 //受注ID
             $table->integer('userid');                     //ユーザID
             $table->integer('itemid');                     //商品ID
             $table->integer('cnt');                        //商品数

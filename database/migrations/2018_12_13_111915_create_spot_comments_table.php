@@ -10,7 +10,7 @@ class CreateSpotCommentsTable extends Migration
     public function up()
     {
         Schema::create('spot_comments', function (Blueprint $table) {
-            $table->increments('spotcommentid');           //spotcommentid
+            $table->increments('id');                      //spotcommentid
             $table->integer('spotid');                     //観光地ID
             $table->integer('userid');                     //ユーザID
             $table->integer('evaluation');                 //評価

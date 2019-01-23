@@ -23,7 +23,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/Spotindex') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -40,11 +40,6 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="btn btn-link" href="/Confirmation_Cart">
-                            Cart
-                        </a>
-                    </li>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -57,10 +52,11 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            <form action="/History_Cart" method="get">
+                            <form action="/Edit_New_Article" method="get">
                                 @csrf
                                 <button class="btn btn-link" value="{{Auth::user()->id}}" name="userid" type="submit">
-                                    History Cart
+                                    {{--アイコンの色：rgb(166, 226, 137)--}}
+                                    <img src="img/write.png" height="20px" width="20px"> New Article
                                 </button>
                             </form>
                         </li>
@@ -109,9 +105,36 @@
         </div>
     </nav>
     <div class="container">
-            <main>
-                @yield('content')
-            </main>
+        <div class="row justify-content-center">
+            <div class="col-12 m-3">
+                <form method="get" action="/Spotindex">
+                    @csrf
+                    {{--<input type="text" class="form-control m-3" placeholder="Keyword Search Enter!" name="keyword">--}}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Spot Name / Creater Name / Address etc..."
+                               aria-describedby="button-addon2" name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-10">
+                <main>
+                    @yield('content')
+                </main>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="row">
+
+                    <a href="/">
+                        <img src="img/gopazzle.png">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
