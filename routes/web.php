@@ -5,6 +5,16 @@ Auth::routes();
 //===============================================================================================================
 //AddreseController
 //===============================================================================================================
+//完成
+Route::get('/admin/All_Address','AddressController@search');
+
+Route::get('/All_Address','AddressController@create');
+
+Route::post('/admin/Address','AddressController@save');
+
+Route::get('/admin/All_Address/Detail','AddressController@detail');
+
+Route::get('/admin/All_Address/Detail','AddressController@update');
 
 
 //===============================================================================================================
@@ -80,8 +90,6 @@ Route::post('/admin/Edit_Order', 'OrderController@editsave');
 //支払確認取り消し
 Route::post('/admin/Edit_Order/Delete', 'OrderController@dalete');
 
-
-
 //PayDate
 Route::post('/History_Cart/PayDate', 'OrderController@paydate');
 
@@ -96,15 +104,22 @@ Route::post('/History_Cart/Ship_Date_Confirmation', 'OrderController@shipconfirm
 //===============================================================================================================
 //PeasController
 //===============================================================================================================
+Route::get ('/admin/All_Peas', 'PeasController@search');
 
+Route::post('/admin/All_Peas/Create', 'PeasController@create');
+
+Route::post('/admin/All_Peas/Update', 'PeasController@update');
 
 
 
 //===============================================================================================================
 //SizeController
 //===============================================================================================================
+Route::get('/admin/All_Size', 'SizeController@search');
 
+Route::post('/admin/All_Size/Create', 'SizeController@create');
 
+Route::post('/admin/All_Size/Update', 'SizeController@update');
 
 
 //===============================================================================================================
@@ -133,12 +148,6 @@ Route::post('/Update_Article', 'SpotController@update');
 //UserController
 //===============================================================================================================
 
-
-
-
-//===============================================================================================================
-//WarehouseController
-//===============================================================================================================
 
 
 
