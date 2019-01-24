@@ -21,15 +21,16 @@
                 </form>
             </div>
 
+
             <div class="col-lg-12 m-3">
 
                 <div class="d-flex border-bottom border-dark">
-                    <div class="col-lg-2 text-center"><h3></h3></div>
-                    <div class="col-lg-2 text-center"><h3></h3></div>
-                    <div class="col-lg-2 text-center"><h3></h3></div>
-                    <div class="col-lg-2 text-center"><h3></h3></div>
-                    <div class="col-lg-2 text-center"><h3></h3></div>
-                    <div class="col-lg-2 text-center"><h3></h3></div>
+                    <div class="col text-center"><h4></h4></div>
+                    <div class="col text-center"><h4></h4></div>
+                    <div class="col text-center"><h4></h4></div>
+                    <div class="col text-center"><h4></h4></div>
+                    <div class="col text-center"><h4></h4></div>
+                    <div class="col text-center"><h4></h4></div>
                 </div>
 
                 @foreach($peases as $peas)
@@ -37,12 +38,14 @@
                     <form action="/admin/All_Peas/Update" method="post">
                         @csrf
                         <div class=" border-bottom">
-                            <div class="col-lg-2 text-center"></div>
-                            <div class="col-lg-2 text-center"></div>
-                            <div class="col-lg-2 text-center"></div>
-                            <div class="col-lg-2 text-center"></div>
-                            <div class="col-lg-2 text-center"></div>
-                            <div class="col-lg-2 text-center"></div>
+                            <div class="d-flex bd-highlight m-3">
+                                <div class="col text-center"></div>
+                                <div class="col text-center"></div>
+                                <div class="col text-center"></div>
+                                <div class="col text-center"></div>
+                                <div class="col text-center"></div>
+                                <div class="col text-center"></div>
+                            </div>
                         </div>
                     </form>
 

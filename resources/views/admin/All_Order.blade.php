@@ -101,14 +101,14 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th class="text-center">ItemName</th>
-                    <th class="text-center">UserName</th>
-                    <th class="text-center">Cnt</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Create_date</th>
-                    <th class="text-center">Updater</th>
-                    <th class="text-center">Update_date</th>
-                    <th class="text-center">Detail</th>
+                    <th class="text-center"><h4>ItemName</h4></th>
+                    <th class="text-center"><h4>UserName</h4></th>
+                    <th class="text-center"><h4>Cnt</h4></th>
+                    <th class="text-center"><h4>Status</h4></th>
+                    <th class="text-center"><h4>Create_date<</h4>/th>
+                    <th class="text-center"><h4>Updater</h4></th>
+                    <th class="text-center"><h4>Update_date</h4></th>
+                    <th class="text-center"><h4>Detail</h4></th>
                 </tr>
                 </thead>
                 <tbody>
