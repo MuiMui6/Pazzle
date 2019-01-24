@@ -2,141 +2,155 @@
 
 @section('content')
     <div class="row justify-content-center">
+        <div class="card col-lg-12">
+            <div class="card-body">
 
-        @if($message <> null)
-            <div class="alert alert-success m-3 col-12">
-                <p>{{$message}}</p>
-            </div>
-        @endif
-
-        @foreach($item as $items)
-            @if($items->height >= $items->width)
-                <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 600px; width: 400px;">
-            @elseif($items->height < $items->width)
-                <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 400px; width:auto;">
-            @endif
-            <div class="col-12 m-3">
-                <h3 class="text-center">{{$items->name}}</h3>
-            </div>
-            <div class="m-3">
-                <h5>「{{$items->name}}」の商品情報です。</h5>
-            </div>
-            <table class="table table-borderless text-center">
-                <tbody>
-                {{--紹介文--}}
-                <tr>
-                    <th scope="row">Profile</th>
-                    <td>{{$items->profile}}</td>
-                </tr>
-
-                {{--サイズ--}}
-                <tr>
-                    <th scope="row">Size</th>
-                    <td>{{$items->height}}×{{$items->width}}（mm）</td>
-                </tr>
-
-                {{--ピース数--}}
-                <tr>
-                    <th scope="row">PeasCnt</th>
-                    <td>{{$items->cnt}}peas</td>
-                </tr>
-
-                {{--観光地--}}
-                <tr>
-                    <th scope="row">Spot</th>
-                    <td></td>
-                </tr>
-
-                </tbody>
-            </table>
-            @guest
-                <div class="alert alert-danger text-lg-center col-12">
-                    <p>購入していただくには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>して頂く必要があります。</p>
-                </div>
-            @else
-                <form action="/Add_Cart" method="post">
-                    @csrf
-                    <input type="hidden" value="{{$items->id}}" name="itemid">
-                    <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0" name="itemcnt">
-                            Cart Count
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <button class="dropdown-item" value="1" name="itemcnt">1点</button>
-                            <button class="dropdown-item" value="2" name="itemcnt">2点</button>
-                            <button class="dropdown-item" value="3" name="itemcnt">3点</button>
-                        </div>
+                @if($message <> null)
+                    <div class="alert alert-success m-3 col-12">
+                        <p>{{$message}}</p>
                     </div>
-                </form>
-            @endguest
+                @endif
 
-            <div class="col-12 m-3">
-                <h3 class="text-center">Comment</h3>
-            </div>
+                @foreach($item as $items)
+                    <div class="col-lg-12 m-3 text-center">
+                    @if($items->height >= $items->width)
+                        <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 600px; width: 400px;">
+                    @elseif($items->height < $items->width)
+                        <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 400px; width:600px;">
+                    @endif
+                    </div>
+                    <div class="col-12 m-3">
+                        <h3 class="text-center">{{$items->name}}</h3>
+                    </div>
+                    <div class="m-3">
+                        <h5>「{{$items->name}}」の商品情報です。</h5>
+                    </div>
+                    <table class="table table-borderless text-center">
+                        <tbody>
+                        {{--紹介文--}}
+                        <tr>
+                            <th scope="row">Profile</th>
+                            <td>{{$items->profile}}</td>
+                        </tr>
 
-            @guest
-                <div class="alert alert-info text-lg-center col-12">
-                    コメントするには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>していただく必要があります。
-                </div>
-            @endguest
+                        {{--サイズ--}}
+                        <tr>
+                            <th scope="row">Size</th>
+                            <td>{{$items->height}}×{{$items->width}}（mm）</td>
+                        </tr>
 
-            <table class="table table-borderless">
-                <thead>
-                <tr>
-                    <td><h3>Average Evakuation</h3></td>
-                    <td><h3>{{$evaluation}}</h3></td>
-                </tr>
-                <tr>
-                    <td>Evaluation</td>
-                    <td>Name</td>
-                    <td>Comment</td>
-                </tr>
-                <tr>
+                        {{--ピース数--}}
+                        <tr>
+                            <th scope="row">PeasCnt</th>
+                            <td>{{$items->cnt}}peas</td>
+                        </tr>
 
+                        {{--観光地--}}
+                        <tr>
+                            <th scope="row">Spot</th>
+                            <td></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                     @guest
+                        <div class="alert alert-danger text-lg-center col-12">
+                            <p>購入していただくには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>して頂く必要があります。</p>
+                        </div>
                     @else
-                        <form action="/Detail_ItemComment" method="post">
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        評価を選んでください
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <button class="dropdown-item" type="button" value="1" name="evaluation">★
-                                        </button>
-                                        <button class="dropdown-item" type="button" value="2" name="evaluation">★★
-                                        </button>
-                                        <button class="dropdown-item" type="button" value="3" name="evaluation">★★★
-                                        </button>
-                                        <button class="dropdown-item" type="button" value="4" name="evaluation">★★★★
-                                        </button>
-                                        <button class="dropdown-item" type="button" value="5" name="evaluation">★★★★★
-                                        </button>
-                                    </div>
-                                </div>
+                        <form action="/Add_Cart" method="post">
+                            @csrf
+                            <input type="hidden" value="{{$items->id}}" name="itemid">
+                            <div class="dropdown text-center">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0"
+                                   name="itemcnt">
+                                    Cart Count
+                                </a>
 
-                            </td>
-                            <td>
-                                {{Auth::user()->name}}</td>
-                            <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
-                            <td><input type="submit" value="投稿" class="btn btn-info"></td>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <button class="dropdown-item" value="1" name="itemcnt">1点</button>
+                                    <button class="dropdown-item" value="2" name="itemcnt">2点</button>
+                                    <button class="dropdown-item" value="3" name="itemcnt">3点</button>
+                                </div>
+                            </div>
                         </form>
                     @endguest
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($itemcomments as $itemcomment)
-                    <tr>
-                        <td class="text-left">{{$itemcomment->evaluation}}</td>
-                        <td class="text-left">{{$itemcomment->name}}</td>
-                        <td class="text-left">{{$itemcomment->comment}}</td>
-                    </tr>
+
+                    <div class="col-12 m-3">
+                        <h3 class="text-center">Comment</h3>
+                    </div>
+
+                    @guest
+                        <div class="alert alert-info text-lg-center col-12">
+                            コメントするには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>していただく必要があります。
+                        </div>
+                    @endguest
+
+                    <table class="table table-borderless">
+                        <thead>
+                        <tr>
+                            <td><h3>Average Evakuation</h3></td>
+                            <td><h3>{{$evaluation}}</h3></td>
+                        </tr>
+                        <tr>
+                            <td>Evaluation</td>
+                            <td>Name</td>
+                            <td>Comment</td>
+                        </tr>
+                        <tr>
+
+                            @guest
+                            @else
+                                <form action="/Detail_ItemComment" method="post">
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenu2"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                評価を選んでください
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <button class="dropdown-item" type="button" value="1" name="evaluation">
+                                                    ★
+                                                </button>
+                                                <button class="dropdown-item" type="button" value="2" name="evaluation">
+                                                    ★★
+                                                </button>
+                                                <button class="dropdown-item" type="button" value="3" name="evaluation">
+                                                    ★★★
+                                                </button>
+                                                <button class="dropdown-item" type="button" value="4" name="evaluation">
+                                                    ★★★★
+                                                </button>
+                                                <button class="dropdown-item" type="button" value="5" name="evaluation">
+                                                    ★★★★★
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        {{Auth::user()->name}}</td>
+                                    <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
+                                    <td><input type="submit" value="投稿" class="btn btn-info"></td>
+                                </form>
+                            @endguest
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($itemcomments as $itemcomment)
+                            <tr>
+                                <td class="text-left">{{$itemcomment->evaluation}}</td>
+                                <td class="text-left">{{$itemcomment->name}}</td>
+                                <td class="text-left">{{$itemcomment->comment}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 @endforeach
-                </tbody>
-            </table>
-        @endforeach
+            </div>
+        </div>
     </div>
 @endsection
