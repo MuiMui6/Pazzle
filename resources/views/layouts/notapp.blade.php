@@ -65,6 +65,15 @@
                             </form>
                         </li>
 
+                        <li class="nav-item">
+                            <form action="/All_Address" method="get">
+                                @csrf
+                                <button type="submit" value="{{Auth::user()->id}}" name="userid" class="btn btn-link">
+                                    Address
+                                </button>
+                            </form>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -109,9 +118,9 @@
         </div>
     </nav>
     <div class="container">
-            <main>
-                @yield('content')
-            </main>
+        <main>
+            @yield('content')
+        </main>
     </div>
 </div>
 </body>
