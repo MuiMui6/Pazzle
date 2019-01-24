@@ -10,10 +10,6 @@ Route::get('/', 'ItemController@user_search');
 Route::get('/Detail', 'ItemController@detail');
 
 
-
-
-
-
 Auth::routes();
 
 //ログインした人のみ見れる状態にする
@@ -36,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 //完成
     Route::get('/admin/All_Address', 'AddressController@search');
 
-    Route::get ('/admin/All_Address/Detail', 'AddressController@detail');
+    Route::get('/admin/All_Address/Detail', 'AddressController@detail');
 
     Route::post('/admin/Edit_Address/Update', 'AddressController@update');
 
@@ -161,6 +157,15 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
 //UserController
 //===============================================================================================================
+    Route::get('/Edit_User', 'UserController@view');
+
+    Route::post('/Edit_User', 'UserController@userupdate');
+
+    Route::get('/admin/All_User', 'UserController@search');
+
+    Route::get('/admin/Edit_User/Detail', 'UserController@detail');
+
+    Route::post('/admin/Edit_User/Detail', 'UserController@update');
 
 
 });
