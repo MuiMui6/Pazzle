@@ -14,7 +14,7 @@
 
                 <div class="col m-3">
                     <form action="/admin/All_Address/Create" method="get">
-                    <button type="submit" class="btn btn-danger">New Address</button>
+                        <button type="submit" class="btn btn-danger">New Address</button>
                     </form>
                 </div>
 
@@ -35,18 +35,18 @@
                 <div class="col-lg-12 m-3">
 
                     <div class="d-flex border-bottom border-dark">
-                        <div class="col text-center"><h3>　Post</h3></div>
-                        <div class="col text-center"><h3>　Add1</h3></div>
-                        <div class="col text-center"><h3>　Add2</h3></div>
-                        <div class="col text-center"><h3>ToName</h3></div>
-                        <div class="col text-center"><h3>Creater</h3></div>
-                        <div class="col text-center"><h3>UpdateDate</h3></div>
-                        <div class="col text-center"><h3>Button</h3></div>
+                        <div class="col text-center"><h4>　Post</h4></div>
+                        <div class="col text-center"><h4>　Add1</h4></div>
+                        <div class="col text-center"><h4>　Add2</h4></div>
+                        <div class="col text-center"><h4>ToName</h4></div>
+                        <div class="col text-center"><h4>Creater</h4></div>
+                        <div class="col text-center"><h4>UpdateDate</h4></div>
+                        <div class="col text-center"><h4>Button</h4></div>
                     </div>
 
                     @foreach($addresses as $address)
 
-                        <form action="/admin/All_Address/Update" method="post">
+                        <form action="/admin/All_Address/Detail" method="get">
                             @csrf
                             <div class=" border-bottom">
                                 <div class="d-flex bd-highlight m-3">
@@ -58,7 +58,10 @@
                                     <div class="col text-center">{{$address->name}}</div>
                                     <div class="col text-center">{{$address->updated_at->format('Y年m月d日')}}</div>
                                     <div class="col text-center">
-                                        <button type="submit" class="btn btn-primary">EDIT</button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <input type="hidden" value="{{$address->id}}" name="id">
+                                            EDIT
+                                        </button>
                                     </div>
                                 </div>
                             </div>

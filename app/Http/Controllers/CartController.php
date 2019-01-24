@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Address;
 use App\ItemComment;
-use App\User;
+use App\Order;
 use App\Peas;
 use App\Size;
-use App\Order;
-use phpDocumentor\Reflection\Types\Integer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -32,9 +30,6 @@ class CartController extends Controller
     }
 
 
-
-
-
 //追加
     public function add(Request $request)
     {
@@ -53,12 +48,12 @@ class CartController extends Controller
         $size = Size::select('height', 'width')->get();
 
 
-        $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
-            ->where('itemid',$request->itemid)
-            ->where('item_comments.view','1')
+        $itemcomments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
+            ->where('itemid', $request->itemid)
+            ->where('item_comments.view', '1')
             ->get();
 
-        $evaluation = ItemComment::where('itemid',$request->itemid)
+        $evaluation = ItemComment::where('itemid', $request->itemid)
             ->avg('evaluation');
 
 
@@ -83,7 +78,7 @@ class CartController extends Controller
 
                 $message = '商品をカートに追加しました。';
 
-                return view("/Detail_Item", compact('message', 'item', 'peas', 'size','itemcomments','evaluation'));
+                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation'));
 
             } else {
 
@@ -98,9 +93,6 @@ class CartController extends Controller
             return view("/Detail_Item", compact('message', 'item', 'peas', 'size'));
         }
     }
-
-
-
 
 
 //カート内の物を削除（１件）
@@ -122,9 +114,6 @@ class CartController extends Controller
     }
 
 
-
-
-
 //カート内の物を削除（全件）
     public function alldelete()
     {
@@ -132,9 +121,6 @@ class CartController extends Controller
         $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
     }
-
-
-
 
 
 //宛先決め
@@ -145,11 +131,7 @@ class CartController extends Controller
 
         return view('/Register_Topost', compact('address'));
 
-
     }
-
-
-
 
 
 //最終確認
@@ -174,9 +156,6 @@ class CartController extends Controller
         return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid'));
 
     }
-
-
-
 
 
 //購入後
@@ -223,7 +202,8 @@ class CartController extends Controller
                 'orders.created_at as created_at',
                 'orders.updaterid as updaterid',
                 'orders.updated_at as updated_at')
-            ->get();
+            ->orderby('orders.created_at', '1')
+            ->paginate(10);
 
         return view('/History_Cart', compact('items'));
     }

@@ -29,12 +29,12 @@
                 <div class="col-lg-12 m-3">
 
                     <div class="d-flex border-bottom border-dark">
-                        <div class="col-lg-2 text-center"><h3>Peas Cnt</h3></div>
-                        <div class="col-lg-2 text-center"><h3>Creater</h3></div>
-                        <div class="col-lg-2 text-center"><h3>CreateDate</h3></div>
-                        <div class="col-lg-2 text-center"><h3>Updater</h3></div>
-                        <div class="col-lg-2 text-center"><h3>UpdateDate</h3></div>
-                        <div class="col-lg-2 text-center"><h3>Button</h3></div>
+                        <div class="col-lg-2 text-center"><h4>Peas Cnt</h4></div>
+                        <div class="col-lg-2 text-center"><h4>Creater</h4></div>
+                        <div class="col-lg-2 text-center"><h4>CreateDate</h4></div>
+                        <div class="col-lg-2 text-center"><h4>Updater</h4></div>
+                        <div class="col-lg-2 text-center"><h4>UpdateDate</h4></div>
+                        <div class="col-lg-2 text-center"><h4>Button</h4></div>
                     </div>
 
                     <form action="/admin/All_Peas/Create" method="post">
