@@ -126,7 +126,7 @@ class SpotController extends Controller
             'created_at' => now()
         ]);
 
-        $spots = Spot::where('createrid',$request->userid)->paginate(10);
+        $spots = Spot::where('createrid', $request->userid)->paginate(10);
 
         return view('/All_Article', compact('spots'));
     }
@@ -202,44 +202,20 @@ class SpotController extends Controller
 
         //view
         if ($request->view <> $spots->view && $request->view <> null) {
-            if ($request->view == '1') {
-                $spots->view = '0';
-            } else {
-                $spots->view = '1';
-            }
+            $spots->view = $request->view;
             $chg = true;
         }
 
 
         if ($chg == true) {
+            $spots->updated_at = now();
+            $spots->updaterid = $request->userid;
             $spots->save();
         }
 
-        $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
-            ->where('spots.id', $spotid)
-            ->select('spots.id as id',
-                'spots.name as spotname',
-                'spots.article',
-                'spots.url',
-                'spots.tel',
-                'users.name as creatername',
-                'spots.post',
-                'spots.add1',
-                'spots.add2',
-                'spots.createrid',
-                'spots.created_at',
-                'spots.updated_at')
-            ->get();
+        $spots = Spot::where('createrid', $request->userid)->paginate(10);
 
-        $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
-            ->where('spotid', $spotid)
-            ->select('spot_comments.evaluation', 'spot_comments.comment', 'spot_comments.view', 'users.name')
-            ->get();
-
-        $evaluation = SpotComment::where('spotid', $spotid)
-            ->avg('evaluation');
-
-        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid'));
+        return view('/All_Article', compact('spots'));
     }
 
 
