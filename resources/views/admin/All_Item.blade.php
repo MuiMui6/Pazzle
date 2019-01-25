@@ -30,28 +30,44 @@
                 <div class="col-lg-12 m-3">
 
                     <div class="d-flex border-bottom border-dark">
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
+                        <div class="col text-center"><h4>Item Name</h4></div>
+                        <div class="col text-center"><h4>Size</h4></div>
+                        <div class="col text-center"><h4>Peas</h4></div>
+                        <div class="col text-center"><h4>View</h4></div>
+                        <div class="col text-center"><h4>CreateDate</h4></div>
+                        <div class="col text-center"><h4>UpdateDate</h4></div>
+                        <div class="col text-center"><h4>Edit</h4></div>
                     </div>
 
-                    @foreach($peases as $peas)
+                    @foreach($items as $item)
 
-                        <form action="/admin/All_Peas/Update" method="post">
+                        <form action="/admin/Edit_Item" method="get">
                             @csrf
                             <div class=" border-bottom">
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
+                                <div class="d-flex bd-highlight m-3">
+                                    <div class="col text-center">{{$item->itemname}}</div>
+                                    <div class="col text-center">{{$item->height}}×{{$item->width}}</div>
+                                    <div class="col text-center">{{$item->cnt}}</div>
+                                    <div class="col text-center">
+                                        @if($item->view == 0)
+                                            <div class="alert alert-success">
+                                                Can View
+                                            </div>
+                                        @elseif($item->view == 1)
+                                            <div class="alert alert-danger">
+                                                Can't View
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="col text-center">{{$item->created_at->format('Y年m月d日')}}</div>
+                                    <div class="col text-center">{{$item->updated_at->format('Y年m月d日')}}</div>
+                                    <div class="col text-center">
+                                        <input type="hidden" value="{{$item->id}}" name="id">
+                                        <button class="btn btn-primary">
+                                            EDIT
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
 
@@ -60,7 +76,7 @@
                 </div>
 
                 <div class="col-lg-12 m-3">
-                    {!! $peases->appends(Request::query())->links() !!}
+                    {!! $items->appends(Request::query())->links() !!}
                 </div>
 
             </div>

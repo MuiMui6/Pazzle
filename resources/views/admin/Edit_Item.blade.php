@@ -27,62 +27,47 @@
             </tr>
             <tr>
                 <th class="text-center">Profile</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Tag</th>
                 <th class="text-center">
-                    <div class="form-inline">
-                    @for($i = 1;$i<4;$i++)
-                    <div class="dropdown mr-3" for="inlineFormInputGroupUsername2">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tag<?php echo $i;?>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                        @endfor
-                    </div>
+                    <textarea class="form-control" name="profile" rows="10"></textarea>
                 </th>
             </tr>
             <tr>
                 <th class="text-center">Size</th>
                 <th class="text-center">
-                    <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Peas Cnt
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" name="sizeid">
+                            @foreach($sizes as $size)
+                                <option name="sizeid" value="{{$size->id}}">{{$size->height}}　mm　×　{{$size->width}} mm</option>
+                            @endforeach
+                        </select>
                     </div>
                 </th>
             </tr>
             <tr>
                 <th class="text-center">Peas</th>
-                <th class="text-center"></th>
-            </tr>
-            <tr>
-                <th class="text-center">Spot</th>
-                <th class="text-center"></th>
+                <th class="text-center">
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" name="peasid">
+                            @foreach($peases as $peas)
+                                <option name="peasid" value="{{$peas->id}}">{{$peas->cnt}}　Peas</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </th>
             </tr>
             <tr>
                 <th class="text-center">View</th>
                 <th class="text-center">
-                    <input type="radio"><span class="m-3 mr-5">View</span>
-                    <input type="radio"><span class="m-3">Not View</span>
+                    <input type="radio" value="0" name="view" checked><span class="m-3 mr-5">View</span>
+                    <input type="radio" value="1" name="view"><span class="m-3">Not View</span>
                 </th>
             </tr>
+
             <tr>
-                <th class="text-center">Etc</th>
-                <th class="text-center">
-                    <textarea rows="5" cols="50" class="form-control"></textarea>
+                <th></th>
+                <th>
+                    <input type="hidden" name="{{Auth::user()->id}}" value="userid">
+                    <button class="btn btn-primary btn-block">保存</button>
                 </th>
             </tr>
             </tbody>

@@ -105,9 +105,9 @@
                     <th class="text-center"><h4>UserName</h4></th>
                     <th class="text-center"><h4>Cnt</h4></th>
                     <th class="text-center"><h4>Status</h4></th>
-                    <th class="text-center"><h4>Create_date<</h4>/th>
+                    <th class="text-center"><h4>CreateDate</h4></th>
                     <th class="text-center"><h4>Updater</h4></th>
-                    <th class="text-center"><h4>Update_date</h4></th>
+                    <th class="text-center"><h4>UpdateDate</h4></th>
                     <th class="text-center"><h4>Detail</h4></th>
                 </tr>
                 </thead>
@@ -169,6 +169,6 @@
                 @endforeach
                 </tbody>
             </table>
-
         </div>
+    </div>
 @endsection
