@@ -3,41 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\ItemComment;
+use App\Item;
+use App\Peas;
+use App\Size;
 use Illuminate\Http\Request;
 
 class ItemCommentController extends Controller
 {
 
-    //
-    public function view()
+//======================================================================================================================
+//
+//======================================================================================================================
+    public function postitemcomment(Request $request)
     {
 
-        $h_startday = null;
-        $h_endday = null;
-        $h_dateclumn = null;
-        $h_keyword = null;
-        $h_clumn = null;
+        $comment = $request->validate(['comment' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
+        $comment = implode($comment);
 
-        $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
-            ->join('items', 'items.id', '=', 'item_comments.itemid')
-            ->select(
-                'item_comments.id',
-                'items.name as itemname',
-                'item_comments.itemid as itemid',
-                'item_comments.userid as userid',
-                'users.name as username',
-                'item_comments.evaluation',
-                'item_comments.comment',
-                'item_comments.view',
-                'item_comments.updaterid',
-                'item_comments.created_at',
-                'item_comments.updated_at')
-            ->OrderBy('item_comments.created_at')
-            ->paginate(10);
+        ItemComment::insert([
+            'itemid' => $request->itemid,
+            'userid' => $request->userid,
+            'evaluation' => $request->evaluation,
+            'comment' => $comment,
+            'created_at' => now()
+        ]);
 
-        return view('/admin/All_ItemComment', compact('ItemComments', 'h_keyword', 'h_clumn', 'h_startday', 'h_endday', 'h_dateclumn'));
+
+
+        $message = null;
+
+        //テーブル全取得
+        $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
+            ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.id', $request->itemid)
+            ->Get();
+
+        //ピース数
+        $peas = Peas::select('cnt')->get();
+
+        //サイズ
+        $size = Size::select('height', 'width')->get();
+
+
+        $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
+            ->where('itemid',$request->itemid)
+            ->where('item_comments.view','1')
+            ->orderBy('item_comments.created_at','1')
+            ->get();
+
+        $evaluation = ItemComment::where('itemid',$request->itemid)
+            ->avg('evaluation');
+
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'message','itemcomments','evaluation'));
 
     }
+
 
 //======================================================================================
 //

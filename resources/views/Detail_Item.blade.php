@@ -13,11 +13,13 @@
 
                 @foreach($item as $items)
                     <div class="col-lg-12 m-3 text-center">
-                    @if($items->height >= $items->width)
-                        <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 600px; width: 400px;">
-                    @elseif($items->height < $items->width)
-                        <img class="card-img-top" src="img/{{$items->name}}.jpg" style="height: 400px; width:600px;">
-                    @endif
+                        @if($items->height >= $items->width)
+                            <img class="card-img-top" src="img/{{$items->name}}.jpg"
+                                 style="height: 600px; width: 400px;">
+                        @elseif($items->height < $items->width)
+                            <img class="card-img-top" src="img/{{$items->name}}.jpg"
+                                 style="height: 400px; width:600px;">
+                        @endif
                     </div>
                     <div class="col-12 m-3">
                         <h3 class="text-center">{{$items->name}}</h3>
@@ -61,20 +63,17 @@
                         <form action="/Add_Cart" method="post">
                             @csrf
                             <input type="hidden" value="{{$items->id}}" name="itemid">
-                            <div class="dropdown text-center">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                   id="dropdownMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="0"
-                                   name="itemcnt">
-                                    Cart Count
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <button class="dropdown-item" value="1" name="itemcnt">1点</button>
-                                    <button class="dropdown-item" value="2" name="itemcnt">2点</button>
-                                    <button class="dropdown-item" value="3" name="itemcnt">3点</button>
-                                </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Cart Item Cnt</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="itemcnt">
+                                    <option name="itemcnt" value="1">1点</option>
+                                    <option name="itemcnt" value="2">2点</option>
+                                    <option name="itemcnt" value="3">3点</option>
+                                    <option name="itemcnt" value="4">4点</option>
+                                    <option name="itemcnt" value="5">5点</option>
+                                </select>
                             </div>
+                            <button type="submit" class="btn btn-primary btn-block">購入</button>
                         </form>
                     @endguest
 
@@ -88,6 +87,42 @@
                         </div>
                     @endguest
 
+
+                    @guest
+                    @else
+                        <form action="/Detail" method="post">
+                            @csrf
+                            <table class="table">
+                                <tbody>
+                                <th>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Evaluation</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="evaluation">
+                                            <option name="evaluation" value="1">1</option>
+                                            <option name="evaluation" value="2">2</option>
+                                            <option name="evaluation" value="3">3</option>
+                                            <option name="evaluation" value="4">4</option>
+                                            <option name="evaluation" value="5">5</option>
+                                        </select>
+                                    </div>
+                                </th>
+                                <th>
+                                    {{Auth::user()->name}}</th>
+                                <th><textarea cols="50" rows="5" class="form-control" name="comment"></textarea>
+                                </th>
+                                <th>
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                                    @foreach($item as $items)
+                                        <input type="hidden" value="{{$items->id}}" name="itemid">
+                                    @endforeach
+                                    <button type="submit" class="btn btn-primary">投稿</button>
+                                </th>
+                                </tbody>
+                            </table>
+                        </form>
+
+                    @endguest
+
                     <table class="table table-borderless">
                         <thead>
                         <tr>
@@ -98,45 +133,6 @@
                             <td>Evaluation</td>
                             <td>Name</td>
                             <td>Comment</td>
-                        </tr>
-                        <tr>
-
-                            @guest
-                            @else
-                                <form action="/Detail_ItemComment" method="post">
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenu2"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                評価を選んでください
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <button class="dropdown-item" type="button" value="1" name="evaluation">
-                                                    ★
-                                                </button>
-                                                <button class="dropdown-item" type="button" value="2" name="evaluation">
-                                                    ★★
-                                                </button>
-                                                <button class="dropdown-item" type="button" value="3" name="evaluation">
-                                                    ★★★
-                                                </button>
-                                                <button class="dropdown-item" type="button" value="4" name="evaluation">
-                                                    ★★★★
-                                                </button>
-                                                <button class="dropdown-item" type="button" value="5" name="evaluation">
-                                                    ★★★★★
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </td>
-                                    <td>
-                                        {{Auth::user()->name}}</td>
-                                    <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
-                                    <td><input type="submit" value="投稿" class="btn btn-info"></td>
-                                </form>
-                            @endguest
                         </tr>
                         </thead>
                         <tbody>

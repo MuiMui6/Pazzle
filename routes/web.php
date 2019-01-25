@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
 //ItemCommentController
 //===============================================================================================================
+//User Post
+    Route::post('/Detail','ItemCommentController@postitemcomment');
+
+
 //admin view
     Route::get('/admin/All_ItemComment', 'ItemCommentController@view');
 

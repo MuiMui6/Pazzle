@@ -87,6 +87,7 @@ class ItemController extends Controller
         $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
             ->where('itemid',$request->itemid)
             ->where('item_comments.view','1')
+            ->orderBy('item_comments.created_at','1')
             ->get();
 
         $evaluation = ItemComment::where('itemid',$request->itemid)
