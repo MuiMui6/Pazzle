@@ -8,6 +8,7 @@ use App\Peas;
 use App\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -109,6 +110,7 @@ class ItemController extends Controller
             ->join('peases', 'peases.id', '=', 'items.peasid')
             ->join('sizes', 'sizes.id', '=', 'items.sizeid')
             ->where('items.name', 'like', '%' . $vkeyword . '%')
+            ->where('users.name', 'like', '%' . $vkeyword . '%')
             ->select([
                 'items.id as id',
                 'items.name as itemname',
@@ -131,9 +133,14 @@ class ItemController extends Controller
 //======================================================================================================================
 //商品新規追加
 //======================================================================================================================
-    public function additem(Request $request)
+    public function additem()
     {
 
+        $sizes = Size::get();
+
+        $peases = Peas::get();
+
+        return view('/admin/Register_Item', compact('sizes', 'peases'));
     }
 
 
@@ -143,6 +150,43 @@ class ItemController extends Controller
 //======================================================================================================================
     public function save(Request $request)
     {
+
+
+        //DB処理
+        Item::insert([
+            'name' => $request->name,
+            'profile' => $request->profile,
+            'sizeid' => $request->sizeid,
+            'peasid' => $request->peasid,
+            'price' => $request->price,
+            'view' => $request->view,
+            'createrid' => $request->userid,
+            'created_at' => now(),
+            'updaterid' => $request->userid,
+            'updated_at' => now()
+        ]);
+
+
+        //一覧へ戻る処理
+        $items = Item::join('users', 'users.id', '=', 'items.createrid')
+            ->join('peases', 'peases.id', '=', 'items.peasid')
+            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+            ->select([
+                'items.id as id',
+                'items.name as itemname',
+                'items.price as price',
+                'sizes.height as height',
+                'sizes.width as width',
+                'peases.cnt as cnt',
+                'items.view as view',
+                'users.name as username',
+                'items.created_at as created_at',
+                'items.updated_at as updated_at'
+            ])
+            ->OrderBy('items.created_at', '1')
+            ->paginate(10);
+
+        return view('/admin/All_Item', compact('items'));
 
     }
 
@@ -159,10 +203,12 @@ class ItemController extends Controller
             ->select([
                 'items.id as id',
                 'items.name as itemname',
+                'items.profile as profile',
                 'items.price as price',
                 'sizes.height as height',
                 'sizes.width as width',
                 'peases.cnt as cnt',
+                'items.image as image',
                 'items.view as view',
                 'users.name as username',
                 'items.created_at as created_at',
@@ -174,7 +220,7 @@ class ItemController extends Controller
 
         $peases = Peas::get();
 
-        return view('/admin/Edit_Item', compact('items','sizes','peases'));
+        return view('/admin/Edit_Item', compact('items', 'sizes', 'peases'));
 
     }
 
@@ -184,6 +230,96 @@ class ItemController extends Controller
 //======================================================================================================================
     public function update(Request $request)
     {
+        $items = Item::findOrFail($request->id);
+        $chg = false;
+
+        if ($request->hasFile('img')) {
+            $request->validate(['img' => 'image|mimes:jpg']);
+            //画像登録
+            $imgname = now()->format('Ymd') . '.jpg';
+            Storage::makeDirectory('public/items/' . $request->id);
+            $request->file('img')->storeAs(
+                'public/items/' . $request->id, $imgname);
+            $items->image = $imgname;
+            $chg = true;
+
+        }
+
+
+        if ($request->name <> null && $request->name <> $items->name) {
+            $vname = $request->validate(['name' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vname = implode($vname);
+            $items->name = $vname;
+            $chg = true;
+        }
+
+
+        if ($request->profile <> null && $request->profile <> $items->profile) {
+            $vprofile = $request->validate(['profile' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
+            $vprofile = implode($vprofile);
+            $items->profile = $vprofile;
+            $chg = true;
+
+        }
+
+
+        if ($request->price <> null && $request->price <> $items->price) {
+            $vprice = $request->validate(['price' => 'regex:/^[0-9]+$/']);
+            $vprice = implode($vprice);
+            $items->price = $vprice;
+            $chg = true;
+
+        }
+
+
+        if ($request->sizeid <> "null" && $request->sizeid <> $items->sizeid) {
+            $items->sizeid = $request->sizeid;
+            $chg = true;
+
+        }
+
+
+        if ($request->peasid <> "null" && $request->peasid <> $items->peasid) {
+            $items->peasid = $request->peasid;
+            $chg = true;
+        }
+
+
+        if ($request->view <> $items->view) {
+            $items->view = $request->view;
+            $chg = true;
+        }
+        if ($chg == true) {
+            $items->updated_at = now();
+            $items->updaterid = $request->userid;
+            $items->save();
+        }
+
+
+        $items = Item::join('users', 'users.id', '=', 'items.createrid')
+            ->join('peases', 'peases.id', '=', 'items.peasid')
+            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+            ->where('items.id', $request->id)
+            ->select([
+                'items.id as id',
+                'items.name as itemname',
+                'items.profile as profile',
+                'items.price as price',
+                'sizes.height as height',
+                'sizes.width as width',
+                'peases.cnt as cnt',
+                'items.image as image',
+                'items.view as view',
+                'users.name as username',
+                'items.created_at as created_at',
+                'items.updated_at as updated_at'
+            ])
+            ->get();
+
+        $sizes = Size::get();
+
+        $peases = Peas::get();
+        return view('/admin/Edit_Item', compact('items', 'sizes', 'peases'));
 
     }
 

@@ -71,7 +71,6 @@ Route::group(['middleware' => 'auth'], function () {
 //全ユーザ商品コメント投稿
     Route::post('/Detail', 'ItemCommentController@postitemcomment');
 
-
 //管理者一覧検索
     Route::get('/admin/All_ItemComment', 'ItemCommentController@view');
 
@@ -89,10 +88,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/All_Item', 'ItemController@search');
 
 //商品追加
-    Route::post('/admin/New_Item', 'ItemController@additem');
+    Route::get('/admin/Register_Item', 'ItemController@additem');
 
 //商品新規追加
-    Route::post('/admin/New_Item', 'ItemController@saveitem');
+    Route::post('/admin/Register_Item', 'ItemController@save');
 
 //商品編集
     Route::get('/admin/Edit_Item', 'ItemController@edit');

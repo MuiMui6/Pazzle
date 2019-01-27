@@ -9,8 +9,16 @@
                 <div class="col-12 m-3">
                     <h3 class="text-center">All Peas</h3>
                 </div>
-                <div class="m-3">
+                <div class="col-lg-12 m-3">
                     <h5>ピース数に関する情報を作成・編集できます。</h5>
+                </div>
+
+                <div class="col-lg-12 m-3">
+                    <form action="/admin/Register_Item" method="get">
+                        <button class="btn btn-danger">
+                           New Register Item
+                        </button>
+                    </form>
                 </div>
 
                 <div class="col-lg-12 m-3">
