@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ItemComment;
 use App\Item;
+use App\ItemComment;
 use App\Peas;
 use App\Size;
 use Illuminate\Http\Request;
@@ -29,7 +29,6 @@ class ItemCommentController extends Controller
         ]);
 
 
-
         $message = null;
 
         //テーブル全取得
@@ -46,17 +45,51 @@ class ItemCommentController extends Controller
         $size = Size::select('height', 'width')->get();
 
 
-        $itemcomments = ItemComment::join('users','users.id','=','item_comments.userid')
-            ->where('itemid',$request->itemid)
-            ->where('item_comments.view','1')
-            ->orderBy('item_comments.created_at','1')
+        $itemcomments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
+            ->where('itemid', $request->itemid)
+            ->where('item_comments.view', '1')
+            ->orderBy('item_comments.created_at', '1')
             ->get();
 
-        $evaluation = ItemComment::where('itemid',$request->itemid)
+        $evaluation = ItemComment::where('itemid', $request->itemid)
             ->avg('evaluation');
 
-        return view('/Detail_Item', compact('item', 'peas', 'size', 'message','itemcomments','evaluation'));
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation'));
 
+    }
+
+
+
+//======================================================================================================================
+//
+//======================================================================================================================
+    public function view()
+    {
+        $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
+            ->join('items', 'items.id', '=', 'item_comments.itemid')
+            ->select(
+                'item_comments.id',
+                'items.name as itemname',
+                'item_comments.itemid as itemid',
+                'item_comments.userid as userid',
+                'users.name as username',
+                'item_comments.evaluation',
+                'item_comments.comment',
+                'item_comments.view',
+                'item_comments.updaterid',
+                'item_comments.created_at',
+                'item_comments.updated_at')
+            ->OrderBy('item_comments.created_at', '1')
+            ->paginate(10);
+
+        $h_clumn = null;
+        $h_startday = null;
+        $h_endday = null;
+        $h_dateclumn = null;
+        $h_keyword = null;
+
+        return view('/admin/All_ItemComment',
+            compact('ItemComments', 'h_dateclumn', 'h_endday', 'h_startday', 'h_clumn', 'h_keyword'));
     }
 
 

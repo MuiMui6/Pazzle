@@ -12,14 +12,23 @@
                     <h5>商品に関する情報を編集できます。</h5>
                 </div>
 
-                <form action="/admin/Register_Item" method="post">
+                <form action="/admin/Register_Item" method="post" enctype="multipart/form-data">
                     @csrf
                     <table class="table table-borderless">
                         <tbody>
                         <tr>
+                            <th class="text-center">Image</th>
+                            <th class="text-left">
+                                <p>
+                                    <input type="file" name="img" enctype="multipart/form-data">
+                                </p>
+                                <p>画像ファイル( jpg / png / bmp / gif / svg )のみしか登録できません。</p>
+                            </th>
+                        </tr>
+                        <tr>
                             <th class="text-center">Name</th>
                             <th class="text-center">
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" enctype="multipart/form-data">
                             </th>
                         </tr>
                         <tr>

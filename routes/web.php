@@ -152,6 +152,12 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
 //SpotCommentController
 //===============================================================================================================
+    Route::post('/Detail_SpotComment', 'SpotCommentController@PostSpotComment');
+
+    Route::get('/admin/All_SpotComment', 'SpotCommentController@search');
+
+    Route::post();
+
 
 
 //===============================================================================================================

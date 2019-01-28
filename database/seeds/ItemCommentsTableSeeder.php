@@ -9,7 +9,7 @@ class ItemCommentsTableSeeder extends Seeder
     public function run()
     {
         //
-        for ($j = 1; $j <= 1000; $j++) {
+        for ($j = 1; $j <= 100; $j++) {
             ItemComment::create([
                 'itemid' => random_int('1', '28'),
                 'userid' => random_int('1', '100'),

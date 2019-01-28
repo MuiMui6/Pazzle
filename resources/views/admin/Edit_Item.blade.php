@@ -30,9 +30,9 @@
                                 <th class="text-center">Image</th>
                                 <th class="text-left">
                                     <p>
-                                        <input type="file" name="img">
+                                        <input type="file" name="img" enctype="multipart/form-data">
                                     </p>
-                                    <p>画像ファイルは「.jpg」のみしか登録できません。</p>
+                                    <p>画像ファイル( jpg / png / bmp / gif / svg )のみしか登録できません。</p>
                                 </th>
                             </tr>
                             <tr>

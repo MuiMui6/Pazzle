@@ -150,10 +150,8 @@ class ItemController extends Controller
 //======================================================================================================================
     public function save(Request $request)
     {
-
-
         //DB処理
-        Item::insert([
+        $id = Item::insertGetId([
             'name' => $request->name,
             'profile' => $request->profile,
             'sizeid' => $request->sizeid,
@@ -165,6 +163,20 @@ class ItemController extends Controller
             'updaterid' => $request->userid,
             'updated_at' => now()
         ]);
+
+
+
+        if ($request->hasFile('img')) {
+            $items = Item::FindOrFail($id);
+            $request->validate(['img' => 'image']);
+            //画像登録
+            $imgname = now()->format('Ymd') . '.jpg';
+            Storage::makeDirectory('public/items/' . $id);
+            $request->file('img')->storeAs(
+                'public/items/' . $id, $imgname);
+            $items->image = $imgname;
+            $items->save();
+        }
 
 
         //一覧へ戻る処理
@@ -234,7 +246,7 @@ class ItemController extends Controller
         $chg = false;
 
         if ($request->hasFile('img')) {
-            $request->validate(['img' => 'image|mimes:jpg']);
+            $request->validate(['img' => 'image']);
             //画像登録
             $imgname = now()->format('Ymd') . '.jpg';
             Storage::makeDirectory('public/items/' . $request->id);
@@ -242,7 +254,6 @@ class ItemController extends Controller
                 'public/items/' . $request->id, $imgname);
             $items->image = $imgname;
             $chg = true;
-
         }
 
 

@@ -1,63 +1,83 @@
-<div class="row">
-    <div class="card col-lg-12">
-        <div class="card-body">
+@extends('layouts.notapp')
 
-            <div class="col-12 m-3">
-                <h3 class="text-center">All Peas</h3>
-            </div>
-            <div class="m-3">
-                <h5>ピース数に関する情報を作成・編集できます。</h5>
-            </div>
+@section('content')
+    <div class="row">
+        <div class="card col-lg-12">
+            <div class="card-body">
 
-            <div class="col-lg-12 m-3">
-                <form action="/admin/All_Peas" method="get">
-                    <div class="input-group mr-3">
-                        <input type="text" class="form-control" placeholder=" height / width / Creater Name / Updater Name " aria-describedby="button-addon2" name="keyword">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="col-lg-12 m-3">
-
-                <div class="d-flex border-bottom border-dark">
-                    <div class="col text-center"><h4></h4></div>
-                    <div class="col text-center"><h4></h4></div>
-                    <div class="col text-center"><h4></h4></div>
-                    <div class="col text-center"><h4></h4></div>
-                    <div class="col text-center"><h4></h4></div>
-                    <div class="col text-center"><h4></h4></div>
+                <div class="col-12 m-3">
+                    <h3 class="text-center">All SpotComment</h3>
+                </div>
+                <div class="m-3">
+                    <h5>コメントに関する情報編集できます。</h5>
                 </div>
 
-                @foreach($peases as $peas)
-
-                    <form action="/admin/All_Peas/Update" method="post">
-                        @csrf
-                        <div class=" border-bottom">
-                            <div class="d-flex bd-highlight m-3">
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
+                <div class="col-lg-12 m-3">
+                    <form action="/admin/All_SpotComment" method="get">
+                        <div class="input-group mr-3">
+                            <input type="text" class="form-control"
+                                   placeholder=" height / width / Creater Name / Updater Name "
+                                   aria-describedby="button-addon2" name="keyword">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
+                                </button>
                             </div>
                         </div>
                     </form>
+                </div>
 
-                @endforeach
+
+                <div class="col-lg-12 m-3">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center">UserId</th>
+                            <th class="text-center">ItemId</th>
+                            <th class="text-center">Comment</th>
+                            <th class="text-center">Evaluation</th>
+                            <th class="text-center">View</th>
+                            <th class="text-center">Create_Date</th>
+                            <th class="text-center">Updated_Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($spotcomments as $spotcomment)
+                            <tr>
+                                <th class="text-center">{{$spotcomment->name}}</th>
+                                <th class="text-center">{{$spotcomment->spotname}}</th>
+                                <th class="text-center">{{$spotcomment->comment}}</th>
+                                <th class="text-center">{{$spotcomment->evaluation}}</th>
+                                <th class="text-center">
+                                    <form action="/admin/All_ItemComment/ViewEdit" method="post">
+                                        @csrf
+                                        <input type="hidden" value="{{$spotcomment->id}}" name="itemcommentid">
+                                        <input type="hidden" value="{{$spotcomment->view}}" name="view">
+                                        @if($spotcomment->view == 1)
+                                            <button class="btn btn-primary" type="submit">
+                                                True
+                                            </button>
+                                        @elseif($spotcomment->view == 0)
+                                            <button class="btn btn-danger" type="submit">
+                                                False
+                                            </button>
+                                        @endif
+                                    </form>
+                                </th>
+                                <th class="text-center">{{$spotcomment->created_at->format('Y年m月d日')}}</th>
+                                <th class="text-center">{{$spotcomment->updated_at->format('Y年m月d日')}}</th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="col-lg-12 m-3">
+                    {!! $spotcomments->appends(Request::query())->links() !!}
+                </div>
 
             </div>
-
-            <div class="col-lg-12 m-3">
-                {!! $peases->appends(Request::query())->links() !!}
-            </div>
-
         </div>
     </div>
-</div>
 @endsection
