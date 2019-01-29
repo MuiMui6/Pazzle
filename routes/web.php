@@ -156,7 +156,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin/All_SpotComment', 'SpotCommentController@search');
 
-    Route::post();
+    Route::post('/admin/All_SpotComment/ViewEdit','SpotCommentController@viewedit');
 
 
 

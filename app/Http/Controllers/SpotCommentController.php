@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\ItemComment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\SpotComment;
 use App\Spot;
+use App\SpotComment;
+use Illuminate\Http\Request;
+
 class SpotCommentController extends Controller
 {
 
 //===============================================================================
 //観光地コメント
 //===============================================================================
-    public function PostSpotComment(Request $request){
+    public function PostSpotComment(Request $request)
+    {
         $comment = $request->validate(['comment' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠！？]+$/']);
         $comment = implode($comment);
 
@@ -62,14 +62,15 @@ class SpotCommentController extends Controller
 //===============================================================================
 //管理者側一覧
 //===============================================================================
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
 
-        $spotcomments = SpotComment::join('users','users.id','=','spot_comments.userid')
-            ->join('spots','spots.id','=','spot_comments.spotid')
-            ->where('spot_comments.id','like','%'.$vkeyword.'%')
+        $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
+            ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
+            ->where('spot_comments.id', 'like', '%' . $vkeyword . '%')
             ->select('spot_comments.id as id',
                 'spot_comments.comment as comment',
                 'spot_comments.evaluation as evaluation',
@@ -78,17 +79,41 @@ class SpotCommentController extends Controller
                 'spot_comments.updated_at as updated_at',
                 'users.name as name',
                 'spots.name as spotname'
-                )
+            )
             ->paginate(10);
 
-        return view('/admin/All_SpotComment',compact('spotcomments'));
+        return view('/admin/All_SpotComment', compact('spotcomments'));
     }
 
 
 //===============================================================================
 //管理者側Viewの変更
 //===============================================================================
-    public function viewedit(Request $request){
+    public function viewedit(Request $request)
+    {
+
+        if ($request->view == 0) {
+            SpotComment::where('id', $request->id)
+                ->update(['view' => '1','updated_at'=>now(),'updaterid'=>$request->userid]);
+        }else{
+            SpotComment::where('id', $request->id)
+                ->update(['view' => '0','updated_at'=>now(),'updaterid'=>$request->userid]);
+        }
+
+        $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
+            ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
+            ->select('spot_comments.id as id',
+                'spot_comments.comment as comment',
+                'spot_comments.evaluation as evaluation',
+                'spot_comments.view as view',
+                'spot_comments.created_at as created_at',
+                'spot_comments.updated_at as updated_at',
+                'users.name as name',
+                'spots.name as spotname'
+            )
+            ->paginate(10);
+
+        return view('/admin/All_SpotComment', compact('spotcomments'));
 
     }
 

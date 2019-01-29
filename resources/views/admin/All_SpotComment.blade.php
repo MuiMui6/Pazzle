@@ -32,8 +32,8 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="text-center">UserId</th>
-                            <th class="text-center">ItemId</th>
+                            <th class="text-center">UserName</th>
+                            <th class="text-center">SpotName</th>
                             <th class="text-center">Comment</th>
                             <th class="text-center">Evaluation</th>
                             <th class="text-center">View</th>
@@ -49,9 +49,10 @@
                                 <th class="text-center">{{$spotcomment->comment}}</th>
                                 <th class="text-center">{{$spotcomment->evaluation}}</th>
                                 <th class="text-center">
-                                    <form action="/admin/All_ItemComment/ViewEdit" method="post">
+                                    <form action="/admin/All_SpotComment/ViewEdit" method="post">
                                         @csrf
-                                        <input type="hidden" value="{{$spotcomment->id}}" name="itemcommentid">
+                                        <input type="hidden" value="{{$spotcomment->id}}" name="id">
+                                        <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                         <input type="hidden" value="{{$spotcomment->view}}" name="view">
                                         @if($spotcomment->view == 1)
                                             <button class="btn btn-primary" type="submit">

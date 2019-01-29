@@ -58,6 +58,7 @@ class SpotController extends Controller
 
         $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
             ->where('spotid', $spotid)
+            ->where('view','1')
             ->select('spot_comments.evaluation', 'spot_comments.comment', 'spot_comments.view', 'users.name')
             ->get();
 
