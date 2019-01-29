@@ -6,10 +6,10 @@
         <div class="card col-lg-12 text-center">
             <div class="card-body">
 
-                <form action="/Save_Article" method="post">
+                <form action="/Save_Article" method="post" enctype="multipart/form-data">
                     @csrf
 
-                    <h2 class="card-title">Edit Article</h2>
+                    <h2 class="card-title">Register Article</h2>
                     <img src="img/s_line.png">
 
                     <table class="table">
@@ -18,7 +18,7 @@
                                 Photo
                             </th>
                             <th class="text-center">
-                                <input type="file" name="image">
+                                <input type="file" name="img" enctype="multipart/form-data">
                             </th>
                         </tr>
 

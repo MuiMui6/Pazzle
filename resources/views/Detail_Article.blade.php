@@ -4,10 +4,14 @@
     <div class="row">
         <div class="card col-lg-12 text-center">
             <div class="card-body">
-                <img src="img/noimage.png" height="500px">
-
 
                 @foreach($spots as $spot)
+                    @if($spot->image == null)
+                        <img src="img/noimage.png" height="500px">
+                    @else
+                        <img src="storage/spots/{{$spot->id}}/{{$spot->image}}" height="500px">
+                    @endif
+
                     <h2 class="card-title m-2">{{$spot->spotname}}</h2>
 
                     <table class="table m-3">
@@ -17,7 +21,7 @@
                                 Article
                             </th>
                             <th class="text-center">
-                                {{$spot->profile}}
+                                {{$spot->article}}
                             </th>
                         </tr>
 

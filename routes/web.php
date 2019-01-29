@@ -175,6 +175,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/Update_Article', 'SpotController@update');
 
+    Route::get('/All_Article','SpotController@userarticle');
+
 //===============================================================================================================
 //UserController
 //===============================================================================================================

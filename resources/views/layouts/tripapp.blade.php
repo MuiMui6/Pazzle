@@ -63,10 +63,10 @@
 
 
                         <li class="nav-item">
-                            <form action="/All_Address" method="get">
+                            <form action="/All_Article" method="get">
                                 @csrf
                                 <button type="submit" value="{{Auth::user()->id}}" name="userid" class="btn btn-link">
-                                    Address
+                                    My Article
                                 </button>
                             </form>
                         </li>
