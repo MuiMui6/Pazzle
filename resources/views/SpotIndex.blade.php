@@ -28,7 +28,12 @@
     <div class="row cart-columns">
         @foreach($spots as $spot)
             <div class="card m-2" style="width: 18rem;">
-                <img class="card-img-top" src="img/noimage.png" alt="Card image cap">
+                @if($spot->image == null)
+                    <img src="img/noimage.png" alt="Card image cap" class="card-img-top">
+                @else
+                    <img src="storage/spots/{{$spot->id}}/{{$spot->image}}" alt="Card image cap" class="card-img-top">
+                @endif
+
                 <div class="card-body text-center">
                     <h5 class="card-title">{{$spot->spotname}}</h5>
                     <form action="/Detail_Spot" method="get">

@@ -12,7 +12,7 @@
                 {{--新規作成--}}
                 @foreach($spots as $spot)
 
-                    <form action="/Update_Article" method="post">
+                    <form action="/Update_Article" method="post" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
                             <tr>
@@ -20,7 +20,7 @@
                                     Photo
                                 </th>
                                 <th class="text-center">
-                                    <input type="file" name="image">
+                                    <input type="file" name="img" enctype="multipart/form-data">
                                 </th>
                             </tr>
 

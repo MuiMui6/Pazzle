@@ -7,10 +7,18 @@
             <div class="card-body">
 
                 <div class="col-12 m-3">
-                    <h3 class="text-center">All Peas</h3>
+                    <h3 class="text-center">All Item</h3>
                 </div>
-                <div class="m-3">
-                    <h5>ピース数に関する情報を作成・編集できます。</h5>
+                <div class="col-lg-12 m-3">
+                    <h5>商品に関する情報を作成・編集できます。</h5>
+                </div>
+
+                <div class="col-lg-12 m-3">
+                    <form action="/admin/Register_Item" method="get">
+                        <button class="btn btn-danger">
+                            New Register Item
+                        </button>
+                    </form>
                 </div>
 
                 <div class="col-lg-12 m-3">
@@ -28,39 +36,63 @@
                 </div>
 
                 <div class="col-lg-12 m-3">
+                    <form action="/admin/Edit_Item" method="get">
+                        @csrf
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="text-center"><h4>Item Name</h4></th>
+                                <th class="text-center"><h4>Size</h4></th>
+                                <th class="text-center"><h4>Peas</h4></th>
+                                <th class="text-center"><h4>Price</h4></th>
+                                <th class="text-center"><h4>View</h4></th>
+                                <th class="text-center"><h4>CreateDate</h4></th>
+                                <th class="text-center"><h4>UpdateDate</h4></th>
+                                <th class="text-center"><h4>Edit</h4></th>
+                            </tr>
+                            </thead>
 
-                    <div class="d-flex border-bottom border-dark">
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                        <div class="col text-center"><h3></h3></div>
-                    </div>
+                            <tbody>
+                            @foreach($items as $item)
+                                <tr>
+                                    <th class="text-center">{{$item->itemname}}</th>
+                                    <th class="text-center">{{$item->height}}×{{$item->width}}</th>
+                                    <th class="text-center">{{$item->cnt}}</th>
+                                    <th class="text-center">{{$item->price}}</th>
+                                    <th class="text-center">
+                                        @if($item->view == 0)
+                                            <div class="alert alert-success">
+                                                Can View
+                                            </div>
+                                        @elseif($item->view == 1)
+                                            <div class="alert alert-danger">
+                                                Can't View
+                                            </div>
+                                        @endif
+                                    </th>
+                                    <th class="text-center">
+                                        {{$item->created_at->format('Y年m月d日')}}
+                                    </th>
+                                    <th class="text-center">
+                                        {{$item->updated_at->format('Y年m月d日')}}
+                                    </th>
+                                    <th class="text-center">
+                                        <input type="hidden" value="{{$item->id}}" name="id">
+                                        <button class="btn btn-primary">
+                                            EDIT
+                                        </button>
+                                    </th>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </form>
 
-                    @foreach($peases as $peas)
-
-                        <form action="/admin/All_Peas/Update" method="post">
-                            @csrf
-                            <div class=" border-bottom">
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                                <div class="col text-center"></div>
-                            </div>
-                        </form>
-
-                    @endforeach
 
                 </div>
 
                 <div class="col-lg-12 m-3">
-                    {!! $peases->appends(Request::query())->links() !!}
+                    {!! $items->appends(Request::query())->links() !!}
                 </div>
 
             </div>

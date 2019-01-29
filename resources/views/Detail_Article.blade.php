@@ -4,10 +4,14 @@
     <div class="row">
         <div class="card col-lg-12 text-center">
             <div class="card-body">
-                <img src="img/noimage.png" height="500px">
-
 
                 @foreach($spots as $spot)
+                    @if($spot->image == null)
+                        <img src="img/noimage.png" height="500px">
+                    @else
+                        <img src="storage/spots/{{$spot->id}}/{{$spot->image}}" height="500px">
+                    @endif
+
                     <h2 class="card-title m-2">{{$spot->spotname}}</h2>
 
                     <table class="table m-3">
@@ -17,7 +21,7 @@
                                 Article
                             </th>
                             <th class="text-center">
-                                {{$spot->profile}}
+                                {{$spot->article}}
                             </th>
                         </tr>
 
@@ -62,8 +66,8 @@
                     @endif
 
                     <p class="small">
-                        created_at:{{$spot->created_at->format('Y/m/d')}}
-                        　/　updated_ad:{{$spot->updated_at->format('Y/m/d')}}
+                        createDate:{{$spot->created_at->format('Y/m/d')}}
+                        　/　updateDate:{{$spot->updated_at->format('Y/m/d')}}
                         　/　by　{{$spot->creatername}}
                     </p>
                 @endforeach
@@ -91,46 +95,54 @@
                         <td>Name</td>
                         <td>Comment</td>
                     </tr>
+                    </thead>
+                </table>
+
+
+                @guest
+                @else
+                    <form action="/Detail_SpotComment" method="post">
+                        @csrf
+                        <table class="table">
+                            <th>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Evaluation</label>
+                                    <select class="form-control" id="exampleFormControlSelect1"
+                                            name="evaluation">
+                                        <option name="evaluation" value="1">1</option>
+                                        <option name="evaluation" value="2">2</option>
+                                        <option name="evaluation" value="3">3</option>
+                                        <option name="evaluation" value="4">4</option>
+                                        <option name="evaluation" value="5">5</option>
+                                    </select>
+                                </div>
+                            </th>
+                            <th>
+                                {{Auth::user()->name}}</th>
+                            <th><textarea cols="50" rows="5" class="form-control" name="comment"></textarea>
+                            </th>
+                            <th>
+                                <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                                @foreach($spots as $spot)
+                                    <input type="hidden" value="{{$spot->id}}" name="spotid">
+                                @endforeach
+                                <button type="submit" class="btn btn-primary">投稿</button>
+                            </th>
+                        </table>
+                    </form>
+
+                @endguest
+
+                <table class="table table-borderless">
+                    <thead>
                     <tr>
-
-                        @guest
-                        @else
-                            <form action="/Detail_SpotComment" method="post">
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenu2"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            評価を選んでください
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <button class="dropdown-item" type="button" value="1"
-                                                    name="evaluation">★
-                                            </button>
-                                            <button class="dropdown-item" type="button" value="2"
-                                                    name="evaluation">★★
-                                            </button>
-                                            <button class="dropdown-item" type="button" value="3"
-                                                    name="evaluation">★★★
-                                            </button>
-                                            <button class="dropdown-item" type="button" value="4"
-                                                    name="evaluation">★★★★
-                                            </button>
-                                            <button class="dropdown-item" type="button" value="5"
-                                                    name="evaluation">
-                                                ★★★★★
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>
-                                    {{Auth::user()->name}}</td>
-                                <td><textarea cols="50" rows="5" class="form-control"></textarea></td>
-                                <td><input type="submit" value="投稿" class="btn btn-info"></td>
-                            </form>
-                        @endguest
+                        <td><h3>Average Evakuation</h3></td>
+                        <td><h3>{{$evaluation}}</h3></td>
+                    </tr>
+                    <tr>
+                        <td>Evaluation</td>
+                        <td>Name</td>
+                        <td>Comment</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -142,6 +154,9 @@
                         </tr>
                     @endforeach
                     </tbody>
+                </table>
+                </tr>
+                </thead>
                 </table>
             </div>
         </div>

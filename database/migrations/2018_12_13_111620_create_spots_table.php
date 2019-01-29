@@ -23,6 +23,7 @@ class CreateSpotsTable extends Migration
             $table->boolean('view')->default('1');   //可視
             $table->string('url')->nullable();             //URL
             $table->text('tel')->nullable();               //TEL
+            $table->string('image')->nullable();           //画像名
             $table->integer('createrid');                  //作成者
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();

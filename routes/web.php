@@ -66,23 +66,38 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 //===============================================================================================================
-//ItemCommentController
+//ItemCommentController　完了
 //===============================================================================================================
-//admin view
+//全ユーザ商品コメント投稿
+    Route::post('/Detail', 'ItemCommentController@postitemcomment');
+
+//管理者一覧検索
     Route::get('/admin/All_ItemComment', 'ItemCommentController@view');
 
-//admin search
+//管理者検索
     Route::get('/admin/All_ItemComment/Search', 'ItemCommentController@search');
-    Route::get('/admin/All_ItemComment/Date', 'ItemCommentController@datesearch');
 
-//admin view edit
+//管理者商品コメント可視不可視
     Route::post('/admin/All_ItemComment/ViewEdit', 'ItemCommentController@viewedit');
 
 
 //===============================================================================================================
 //ItemController
 //===============================================================================================================
+//商品一覧検索
+    Route::get('/admin/All_Item', 'ItemController@search');
 
+//商品追加
+    Route::get('/admin/Register_Item', 'ItemController@additem');
+
+//商品新規追加
+    Route::post('/admin/Register_Item', 'ItemController@save');
+
+//商品編集
+    Route::get('/admin/Edit_Item', 'ItemController@edit');
+
+//商品編集保存
+    Route::post('/admin/Edit_Item', 'ItemController@update');
 
 //===============================================================================================================
 //OrderController
@@ -137,6 +152,12 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
 //SpotCommentController
 //===============================================================================================================
+    Route::post('/Detail_SpotComment', 'SpotCommentController@PostSpotComment');
+
+    Route::get('/admin/All_SpotComment', 'SpotCommentController@search');
+
+    Route::post('/admin/All_SpotComment/ViewEdit','SpotCommentController@viewedit');
+
 
 
 //===============================================================================================================
@@ -153,6 +174,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/Save_Article', 'SpotController@save');
 
     Route::post('/Update_Article', 'SpotController@update');
+
+    Route::get('/All_Article','SpotController@userarticle');
 
 //===============================================================================================================
 //UserController
