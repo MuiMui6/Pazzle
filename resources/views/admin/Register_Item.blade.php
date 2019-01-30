@@ -72,7 +72,9 @@
                         <tr>
                             <th class="text-center">View</th>
                             <th class="text-center">
-                                <input type="radio" value="1" name="view" checked><span class="m-3">Can't View</span>
+                                <input type="radio" value="0" name="view"><span class="m-3 mr-5">Can View</span>
+                                <input type="radio" value="1" name="view" checked><span
+                                        class="m-3">Can't View</span>
                             </th>
                         </tr>
 
