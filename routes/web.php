@@ -10,7 +10,9 @@ Route::get('/', 'ItemController@user_search');
 Route::get('/Detail', 'ItemController@detail');
 
 
-Auth::routes();
+//Auth::routes();
+
+Auth::routes(['verify'=>true]);
 
 //ログインした人のみ見れる状態にする
 
@@ -19,7 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
 //AddreseController
 //===============================================================================================================
 //ユーザ
-    Route::get('/All_Address', 'AddressController@view');
+    Route::get('/All_Address', 'AddressController@view')->middleware('verified');
 
     Route::get('/Edit_Address', 'AddressController@userdetail');
 
@@ -53,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/AllDelete_Cart', 'CartController@alldelete');
 
 //宛先決定
-    Route::post('/Topost_Cart', 'CartController@Topost');
+    Route::post('/Topost_Cart', 'CartController@Topost')->middleware('verified');
 
 //最終確認
     Route::post('/Register_Cart', 'CartController@register');
