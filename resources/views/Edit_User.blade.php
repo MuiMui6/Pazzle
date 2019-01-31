@@ -37,10 +37,19 @@
                             <tr>
                                 <th scope="row">Password</th>
                                 <td>
-                                    <input type="text" class="mb-3 form-control" name="pass1">
-                                    <input type="text" class="mt-3 form-control" name="pass2">
+                                    <input type="password" class="mb-3 form-control" name="pass1">
+                                    <input type="password" class="mt-3 form-control" name="pass2">
                                 </td>
                             </tr>
+
+                            {{--Secretkey--}}
+                            <tr>
+                                <th scope="row">Secret Key</th>
+                                <td>
+                                    <input type="password" class="form-control" placeholder="Secret Key" name="secretkey">
+                                </td>
+                            </tr>
+
 
                             {{--保存--}}
                             <tr>
@@ -48,7 +57,7 @@
                                 <td>
                                     <button type="submit" value="{{Auth::user()->id}}" name="userid"
                                             class="btn btn-primary">
-                                        保存
+                                        Save
                                     </button>
                                 </td>
                             </tr>

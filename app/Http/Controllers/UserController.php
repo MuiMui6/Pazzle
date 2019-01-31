@@ -33,23 +33,30 @@ class UserController extends Controller
         $chg = false;
 
         if ($request->name <> null) {
-            $vname = $request->validate(['name' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vname = $request->validate(['name' => ['regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/','min:1','max:30']]);
             $vname = implode($vname);
             $user->name = $vname;
             $chg = true;
         }
 
         if ($request->email <> null) {
-            $vemail = $request->validate(['email' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vemail = $request->validate(['email' => ['regex:/^[a-zA-Zａ-ｚA-Z@.-]]+$/','max:30']]);
             $vemail = implode($vemail);
             $user->email = $vemail;
             $chg = true;
         }
 
         if ($request->pass1 <> null && $request->pass2 <> null && $request->pass1 == $request->pass2) {
-            $vpass = $request->validate(['pass1' => 'regex:/^[a-zA-Z0-9]+$/', 'pass2' => 'regex:/^[a-zA-Z0-9]+$/']);
+            $vpass = $request->validate(['pass1' => ['regex:/^[a-zA-Z0-9]+$/','min:6'], 'pass2' => ['regex:/^[a-zA-Z0-9]+$/','min:6']]);
             $vpass = implode($vpass);
             $user->password = bcrypt($vpass);
+            $chg = true;
+        }
+
+        if ($request->secretkey <> null) {
+            $vanser = $request->validate(['secretkey' => ['regex:/^[0-9a-zA-Z]+$/','min:8']]);
+            $vanser = implode($vanser);
+            $user->anser = $vanser;
             $chg = true;
         }
 

@@ -129,6 +129,19 @@
                                 </th>
                             </tr>
 
+
+                            <tr>
+                                <th class="text-center">
+                                    Updater Name
+                                </th>
+                                <th class="text-center">
+                                    @foreach($updater as $updaters)
+                                        {{$updaters->updatername}}
+                                    @endforeach
+                                </th>
+                            </tr>
+
+
                         </table>
 
                         <button type="submit" class="btn btn-primary btn-block m-3">
