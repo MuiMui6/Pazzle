@@ -60,6 +60,12 @@ class SpotController extends Controller
                 'spots.updated_at as updated_at')
             ->get();
 
+
+        $updater = Spot::join('users','users.id','=','spots.updaterid')
+            ->where('spots.id',$spotid)
+            ->select('users.name as updatername')
+            ->get();
+
         $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
             ->where('spotid', $spotid)
             ->where('view', '1')
@@ -70,7 +76,7 @@ class SpotController extends Controller
             ->where('view','1')
             ->avg('evaluation');
 
-        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid'));
+        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid','updater'));
     }
 
 //===============================================================================
@@ -103,7 +109,12 @@ class SpotController extends Controller
                 'spots.view as view')
             ->get();
 
-        return view('/Edit_Article', compact('spots'));
+        $updater = Spot::join('users','users.id','=','spots.updaterid')
+            ->where('spots.id',$request->spotid)
+            ->select('users.name as updatername')
+            ->get();
+
+        return view('/Edit_Article', compact('spots','updater'));
     }
 
 

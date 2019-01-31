@@ -8,16 +8,20 @@
                 <div class="col-12 m-3">
                     <h3 class="text-center">Register Topost</h3>
                 </div>
-                <div class="m-3">
+                <div class="m-3 text-center">
                     <h5>商品の発送先を決定します。</h5>
                 </div>
 
 
                 <div class="col-12">
-                    <form action="/New_Address">
+                    <form action="/Register_Address">
                         @csrf
-                        <input type="submit" class="btn btn-block" value="住所を追加する">
+                        <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                        <button type="submit" class="btn btn-danger btn-block">
+                            New Address
+                        </button>
                     </form>
+
                 </div>
 
 
@@ -42,7 +46,7 @@
                         </table>
 
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                        <input type="submit" class="btn btn-block" value="購入確認">
+                        <input type="submit" class="btn btn-block" value="Confirmation Cart">
 
                     </form>
                 </div>

@@ -43,23 +43,23 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'secretkey' => ['required','string','min:6']
+            'name' => ['required', 'string', 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:1', 'max:30'],
+            'email' => ['required', 'string', 'email', 'unique:users', 'regex:/^[a-zA-Z0-9@.-]]+$/', 'max:30'],
+            'password' => ['required', 'string', 'min:6', 'confirmed', 'regex:/^[a-zA-Z0-9]+$/'],
+            'secretkey' => ['required', 'string', 'min:8', 'regex:/^[a-zA-Z0-9]+$/']
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'anser'=> $data['secretkey']
+            'anser' => $data['secretkey']
         ]);
     }
 }

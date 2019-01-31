@@ -66,7 +66,7 @@
                             <label for="secretkey" class="col-md-4 col-form-label text-md-right">{{ __('Secret_Key') }}</label>
 
                             <div class="col-md-6">
-                                <input id="secretkey" type="text" class="form-control{{ $errors->has('secretkey') ? ' is-invalid' : '' }}" name="secretkey" value="{{ old('secretkey') }}" required autofocus>
+                                <input id="secretkey" type="password" class="form-control{{ $errors->has('secretkey') ? ' is-invalid' : '' }}" name="secretkey" value="{{ old('secretkey') }}" required autofocus>
 
                                 @if ($errors->has('secretkey'))
                                     <span class="invalid-feedback" role="alert">

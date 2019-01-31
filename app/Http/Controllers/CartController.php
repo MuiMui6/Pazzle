@@ -38,7 +38,7 @@ class CartController extends Controller
         $item = DB::table('items')
             ->join('peases', 'items.sizeid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
             ->where('items.id', $request->itemid)
             ->Get();
 

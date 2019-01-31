@@ -8,10 +8,10 @@
                 <form action="/Registerd_Cart" method="post">
                     @csrf
                     <div class="col-12 m-3">
-                        <h3 class="text-center">Register Cart</h3>
+                        <h3 class="text-center">Last Confirmation Cart</h3>
                     </div>
-                    <div class="m-3">
-                        <h5>商品の購入確認です。</h5>
+                    <div class="m-3 text-center">
+                        <h5>商品の最終購入確認です。</h5>
                     </div>
 
                     <table class="table table-borderless">
@@ -72,7 +72,7 @@
                         </div>
                         <input type="hidden" value="{{$addid}}" name="addid">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                        <input type="submit" class="mb-3 btn btn-block" value="購入">
+                        <input type="submit" class="mb-3 btn btn-danger btn-block" value="Order!">
                     </div>
                 </form>
             </div>
