@@ -68,6 +68,17 @@ class UserController extends Controller
 
 
 
+//===============================================================================
+//
+//===============================================================================
+    public function adminview()
+    {
+
+        $users = User::orderBy('created_at', '1')
+            ->paginate(10);
+
+        return view('/admin/All_User', compact('users'));
+    }
 
 //===============================================================================
 //
@@ -75,7 +86,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
 
-        $users = User::where('name', 'like', '%' . $request->keyword . '%')
+        $users = User::where($request->clumn, 'like', '%' . $request->keyword . '%')
             ->orderBy('created_at', '1')
             ->paginate(10);
 
@@ -116,7 +127,7 @@ class UserController extends Controller
         }
 
         if ($request->email <> null) {
-            $vemail = $request->validate(['email' => 'mail|regex:/^[a-zA-Z0-9@.-]+$/']);
+            $vemail = $request->validate(['email' => 'mail','regex:/^[a-zA-Z0-9@.-]+$/']);
             $vemail = implode($vemail);
             $user->email = $vemail;
             $chg = true;

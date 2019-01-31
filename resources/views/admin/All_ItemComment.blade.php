@@ -10,6 +10,7 @@
                 </div>
                 <div class="col-12 text-center m-3">
                     <h5>商品に投稿されたコメントをを確認・可視/不可視変更できます。</h5>
+                    <h5>また、記事に表示される平均評価は「Can View」のみの平均です。</h5>
                 </div>
 
                 <div class="col-lg-12 m-3">

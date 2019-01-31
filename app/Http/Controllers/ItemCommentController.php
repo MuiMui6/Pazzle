@@ -52,7 +52,9 @@ class ItemCommentController extends Controller
             ->get();
 
         $evaluation = ItemComment::where('itemid', $request->itemid)
+            ->where('view','1')
             ->avg('evaluation');
+
 
         return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation'));
 

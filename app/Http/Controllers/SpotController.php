@@ -21,13 +21,14 @@ class SpotController extends Controller
         $vkeyword = implode($vkeyword);
 
         $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
-            ->select('spots.id as id', 'spots.name as spotname', 'spots.article', 'spots.image as image')
+            ->select('spots.id as id', 'spots.name as spotname', 'spots.image', 'spots.article', 'spots.image as image')
             ->where('spots.name', 'like', '%' . $vkeyword . '%')
             ->orwhere('spots.article', 'like', '%' . $vkeyword . '%')
             ->orwhere('users.name', 'like', '%' . $vkeyword . '%')
             ->orwhere('spots.post', 'like', '%' . $vkeyword . '%')
             ->orwhere('spots.add1', 'like', '%' . $vkeyword . '%')
             ->orwhere('spots.add2', 'like', '%' . $vkeyword . '%')
+            ->where('spots.view', '1')
             ->orderBy('spots.created_at', '1')
             ->paginate(9);
 
@@ -66,6 +67,7 @@ class SpotController extends Controller
             ->get();
 
         $evaluation = SpotComment::where('spotid', $spotid)
+            ->where('view','1')
             ->avg('evaluation');
 
         return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid'));
@@ -95,6 +97,7 @@ class SpotController extends Controller
                 'spots.post as post',
                 'spots.add1 as add1',
                 'spots.add2 as add2',
+                'spots.image as image',
                 'spots.url as url',
                 'spots.tel as tel',
                 'spots.view as view')
@@ -319,7 +322,7 @@ class SpotController extends Controller
                         'users.name as creater',
                         'spots.created_at as created_at',
                         'spots.updated_at as updated_at'
-                        )
+                    )
                     ->where('users.name', 'like', '%' . $vkeyword . '%')
                     ->orderBy('spots.created_at', '1')
                     ->paginate(10);
@@ -340,7 +343,7 @@ class SpotController extends Controller
                         'spots.created_at as created_at',
                         'spots.updated_at as updated_at'
                     )
-                    ->where('spots'.$request->clumn, 'like', '%' . $vkeyword . '%')
+                    ->where('spots' . $request->clumn, 'like', '%' . $vkeyword . '%')
                     ->orderBy('spots.created_at', '1')
                     ->paginate(10);
 

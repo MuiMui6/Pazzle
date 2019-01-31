@@ -6,10 +6,13 @@
     </div>
 
     <div class="row cart-columns">
-
         @foreach( $item as $items )
             <div class="card m-2" style="width: 17rem;">
-                <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px">
+                @if($items->image == null)
+                    <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px">
+                @else
+                    <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}" width="150px">
+                @endif
                 <div class="card-body">
                     <p class="card-text">
                     <table class="table table-borderless">
@@ -55,10 +58,6 @@
                 </div>
             </div>
         @endforeach
-    </div>
-
-    <div class="justify-content-center m-3">
-        {!! $item->appends(Request::query())->links() !!}
     </div>
 
 @endsection

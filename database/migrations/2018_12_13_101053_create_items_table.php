@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->integer('sizeid');                  //サイズ
             $table->integer('peasid');                  //peas数
             $table->string('image')->nullable();        //Image画像
-            $table->boolean('view')->default(0);  //可視か不可視か（基本不可視）
+            $table->boolean('view')->default(1);  //可視か不可視か（基本不可視）
             $table->integer('createrid');               //作成者
             $table->integer('updaterid')->nullable();   //更新者
             $table->timestamps();

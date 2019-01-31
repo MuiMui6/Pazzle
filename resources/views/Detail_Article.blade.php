@@ -9,7 +9,7 @@
                     @if($spot->image == null)
                         <img src="img/noimage.png" height="500px">
                     @else
-                        <img src="storage/spots/{{$spot->id}}/{{$spot->image}}" height="500px">
+                        <img src="/storage/spots/{{$spot->id}}/{{$spot->image}}" height="500px">
                     @endif
 
                     <h2 class="card-title m-2">{{$spot->spotname}}</h2>

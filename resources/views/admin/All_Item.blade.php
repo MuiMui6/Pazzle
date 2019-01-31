@@ -71,11 +71,11 @@
                                 <th class="text-center">{{$item->cnt}}</th>
                                 <th class="text-center">{{$item->price}}</th>
                                 <th class="text-center">
-                                    @if($item->view == 0)
+                                    @if($item->view == 1)
                                         <div class="alert alert-success">
                                             Can View
                                         </div>
-                                    @elseif($item->view == 1)
+                                    @elseif($item->view == 0)
                                         <div class="alert alert-danger">
                                             Can't View
                                         </div>

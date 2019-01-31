@@ -158,7 +158,9 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
     Route::post('/Detail_SpotComment', 'SpotCommentController@PostSpotComment')->middleware('verified');
 
-    Route::get('/admin/All_SpotComment', 'SpotCommentController@search')->middleware('verified');
+    Route::get('/admin/All_SpotComment', 'SpotCommentController@adminview')->middleware('verified');
+
+    Route::get('/admin/All_SpotComment/Search', 'SpotCommentController@search')->middleware('verified');
 
     Route::post('/admin/All_SpotComment/ViewEdit','SpotCommentController@viewedit')->middleware('verified');
 
@@ -192,7 +194,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/Edit_User', 'UserController@userupdate')->middleware('verified');
 
-    Route::get('/admin/All_User', 'UserController@search')->middleware('verified');
+    Route::get('/admin/All_User', 'UserController@adminview')->middleware('verified');
+
+    Route::get('/admin/All_User/Search', 'UserController@search')->middleware('verified');
 
     Route::get('/admin/Edit_User/Detail', 'UserController@detail')->middleware('verified');
 
