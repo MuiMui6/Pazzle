@@ -10,56 +10,50 @@
                     <h3 class="text-center">All User</h3>
                 </div>
                 <div class="m-3">
-                    <h5>ユーザに関する情報を編集できます。</h5>
+                    <h5>ユーザに関する情報を確認・編集できます。</h5>
                 </div>
 
                 <div class="col-lg-12 m-3">
-                    <form action="/admin/All_User" method="get">
-                        <div class="input-group mr-3">
-                            <input type="text" class="form-control"
-                                   placeholder=" height / width / Creater Name / Updater Name "
-                                   aria-describedby="button-addon2" name="keyword">
+                    <form action="/admin/All_User/Search" method="get">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
                                 </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" value="id" name="clumn">User Id</button>
+                                    <button class="dropdown-item" value="name" name="clumn">User Name</button>
+                                    <button class="dropdown-item" value="email" name="clumn">Email</button>
+                                    <button class="dropdown-item" value="rank" name="clumn">Rank</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <div class="col-lg-12 m-3">
 
-                    <table class="table">
+                <div class="col-lg-12 m-3">
+                    {!! $users->appends(Request::query())->links() !!}
+                </div>
+
+                <div class="col-lg-12 m-3">
+                    <table class="table table-striped">
                         <thead>
-                        <th class="text-center">
-                            Name
-                        </th>
-                        <th class="text-center">
-                            Email
-                        </th>
-                        <th class="text-center">
-                            Rank
-                        </th>
-                        <th class="text-center">
-                            CreateDate
-                        </th>
-                        <th class="text-center">
-                            UpdateDate
-                        </th>
-                        <th class="text-center">
-                            EDIT
-                        </th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Rank</th>
+                        <th class="text-center">CreateDate</th>
+                        <th class="text-center">UpdateDate</th>
+                        <th class="text-center">EDIT</th>
                         </thead>
 
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <th class="text-center">
-                                    {{$user->name}}
-                                </th>
-                                <th class="text-center">
-                                    {{$user->email}}
-                                </th>
+                                <th class="text-center">{{$user->name}}</th>
+                                <th class="text-center">{{$user->email}}</th>
                                 <th class="text-center">
                                     @switch($user->rank)
                                         @case('1')
@@ -72,14 +66,9 @@
                                         一般ユーザ
                                     @endswitch
                                 </th>
+                                <th class="text-center">{{$user->created_at->format('Y年m月d日')}}</th>
+                                <th class="text-center">{{$user->updated_at->format('Y年m月d日')}}</th>
                                 <th class="text-center">
-                                    {{$user->created_at->format('Y年m月d日')}}
-                                </th>
-                                <th class="text-center">
-                                    {{$user->updated_at->format('Y年m月d日')}}
-                                </th>
-                                <th class="text-center">
-
                                     <form action="/admin/Edit_User/Detail" method="get">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$user->id}}">
@@ -93,14 +82,7 @@
                         @endforeach
                         </tbody>
                     </table>
-
-
                 </div>
-
-                <div class="col-lg-12 m-3">
-                    {!! $users->appends(Request::query())->links() !!}
-                </div>
-
             </div>
         </div>
     </div>

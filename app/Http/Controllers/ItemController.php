@@ -23,19 +23,22 @@ class ItemController extends Controller
         //テーブル全取得
         $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->orderBy('items.created_at', 'desc')
+            ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.view','=','1')
+            ->orderBy('items.created_at', '1')
             ->paginate(9);
 
         //もしキーワードがあれば
         if ($keyword <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('items.name', 'like', '%' . $keyword . '%')
                 ->orwhere('items.profile', 'like', '%' . $keyword . '%')
                 ->orwhere('items.price', 'like', '%' . $keyword . '%')
                 ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
+                ->where('items.view','=','1')
+                ->orderBy('items.created_at', '1')
                 ->paginate(9);
         }
 
@@ -43,9 +46,11 @@ class ItemController extends Controller
         if ($key_height <> null && $key_width <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-                ->orwhere('sizes.height', $key_height)
-                ->orwhere('sizes.width', $key_width)
+                ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->where('sizes.height', $key_height)
+                ->where('sizes.width', $key_width)
+                ->where('items.view','=','1')
+                ->orderBy('items.created_at', '1')
                 ->paginate(9);
         }
 
@@ -71,7 +76,7 @@ class ItemController extends Controller
         $item = DB::table('items')
             ->join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
             ->where('items.id', $request->itemid)
             ->Get();
 
@@ -89,12 +94,40 @@ class ItemController extends Controller
             ->get();
 
         $evaluation = ItemComment::where('itemid', $request->itemid)
+            ->where('view','1')
             ->avg('evaluation');
 
         return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation'));
 
     }
 
+
+//======================================================================================================================
+//管理者商品一覧
+//======================================================================================================================
+    public function adminview()
+    {
+
+        $items = Item::join('users', 'users.id', '=', 'items.createrid')
+            ->join('peases', 'peases.id', '=', 'items.peasid')
+            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+            ->select([
+                'items.id as id',
+                'items.name as itemname',
+                'items.price as price',
+                'sizes.height as height',
+                'sizes.width as width',
+                'peases.cnt as cnt',
+                'items.view as view',
+                'items.image',
+                'items.created_at as created_at',
+                'items.updated_at as updated_at'
+            ])
+            ->OrderBy('items.created_at', '1')
+            ->paginate(10);
+
+        return view('/admin/All_Item', compact('items'));
+    }
 
 
 //======================================================================================================================
@@ -109,8 +142,6 @@ class ItemController extends Controller
         $items = Item::join('users', 'users.id', '=', 'items.createrid')
             ->join('peases', 'peases.id', '=', 'items.peasid')
             ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->where('items.name', 'like', '%' . $vkeyword . '%')
-            ->where('users.name', 'like', '%' . $vkeyword . '%')
             ->select([
                 'items.id as id',
                 'items.name as itemname',
@@ -119,10 +150,11 @@ class ItemController extends Controller
                 'sizes.width as width',
                 'peases.cnt as cnt',
                 'items.view as view',
-                'users.name as username',
+                'items.image',
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
+            ->where($request->clumn, 'like', '%' . $vkeyword . '%')
             ->OrderBy('items.created_at', '1')
             ->paginate(10);
 
@@ -179,26 +211,7 @@ class ItemController extends Controller
         }
 
 
-        //一覧へ戻る処理
-        $items = Item::join('users', 'users.id', '=', 'items.createrid')
-            ->join('peases', 'peases.id', '=', 'items.peasid')
-            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->select([
-                'items.id as id',
-                'items.name as itemname',
-                'items.price as price',
-                'sizes.height as height',
-                'sizes.width as width',
-                'peases.cnt as cnt',
-                'items.view as view',
-                'users.name as username',
-                'items.created_at as created_at',
-                'items.updated_at as updated_at'
-            ])
-            ->OrderBy('items.created_at', '1')
-            ->paginate(10);
-
-        return view('/admin/All_Item', compact('items'));
+        return redirect('/admin/All_Item');
 
     }
 

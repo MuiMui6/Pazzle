@@ -101,6 +101,8 @@
                             </div>
                         </li>
 
+
+                    @if(Auth::user()->rank == 1)
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -119,6 +121,7 @@
                                 <a href="/admin/All_User" class="dropdown-item">User Management</a>
                             </div>
                         </li>
+                        @endif
                     @endguest
                 </ul>
             </div>

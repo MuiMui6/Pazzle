@@ -9,31 +9,42 @@
                     <h3 class="text-center">All SpotComment</h3>
                 </div>
                 <div class="m-3">
-                    <h5>コメントに関する情報編集できます。</h5>
+                    <h5>観光地記事に投稿されたコメントに関する情報編集できます。</h5>
+                    <h5>また、記事に表示される平均評価は「Can View」のみの平均です。</h5>
                 </div>
 
                 <div class="col-lg-12 m-3">
-                    <form action="/admin/All_SpotComment" method="get">
-                        <div class="input-group mr-3">
-                            <input type="text" class="form-control"
-                                   placeholder=" height / width / Creater Name / Updater Name "
-                                   aria-describedby="button-addon2" name="keyword">
+                    <form action="/admin/All_SpotComment/Search" method="get">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
                                 </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" value="id" name="clumn">Comment Id</button>
+                                    <button class="dropdown-item" value="username" name="clumn">User Name</button>
+                                    <button class="dropdown-item" value="spotname" name="clumn">Spot Name</button>
+                                    <button class="dropdown-item" value="comment" name="clumn">Comment</button>
+                                    <button class="dropdown-item" value="evaluation" name="clumn">Evaluation</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
 
+                <div class="col-lg-12 m-3">
+                    {!! $spotcomments->appends(Request::query())->links() !!}
+                </div>
 
                 <div class="col-lg-12 m-3">
 
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="text-center">UserName</th>
-                            <th class="text-center">SpotName</th>
+                            <th class="text-center">User Name</th>
+                            <th class="text-center">Spot Name</th>
                             <th class="text-center">Comment</th>
                             <th class="text-center">Evaluation</th>
                             <th class="text-center">View</th>
@@ -71,13 +82,7 @@
                         @endforeach
                         </tbody>
                     </table>
-
                 </div>
-
-                <div class="col-lg-12 m-3">
-                    {!! $spotcomments->appends(Request::query())->links() !!}
-                </div>
-
             </div>
         </div>
     </div>

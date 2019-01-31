@@ -13,12 +13,22 @@
 
                 @foreach($item as $items)
                     <div class="col-lg-12 m-3 text-center">
-                        @if($items->height >= $items->width)
-                            <img class="card-img-top" src="img/{{$items->name}}.jpg"
-                                 style="height: 600px; width: 400px;">
-                        @elseif($items->height < $items->width)
-                            <img class="card-img-top" src="img/{{$items->name}}.jpg"
-                                 style="height: 400px; width:600px;">
+                        @if($items->image == null)
+                            @if($items->height >= $items->width)
+                                <img class="card-img-top" src="img/{{$items->name}}.jpg"
+                                     style="height: 600px; width: 400px;">
+                            @elseif($items->height < $items->width)
+                                <img class="card-img-top" src="img/{{$items->name}}.jpg"
+                                     style="height: 400px; width:600px;">
+                            @endif
+                        @else
+                            @if($items->height >= $items->width)
+                                <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}"
+                                     style="height: 600px; width: 400px;">
+                            @elseif($items->height < $items->width)
+                                <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}"
+                                     style="height: 400px; width:600px;">
+                            @endif
                         @endif
                     </div>
                     <div class="col-12 m-3">
@@ -46,13 +56,6 @@
                             <th scope="row">PeasCnt</th>
                             <td>{{$items->cnt}}peas</td>
                         </tr>
-
-                        {{--観光地--}}
-                        <tr>
-                            <th scope="row">Spot</th>
-                            <td></td>
-                        </tr>
-
                         </tbody>
                     </table>
                     @guest

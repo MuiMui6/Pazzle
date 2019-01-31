@@ -15,6 +15,7 @@ class CreateSpotCommentsTable extends Migration
             $table->integer('userid');                     //ユーザID
             $table->integer('evaluation');                 //評価
             $table->text('comment');                       //コメント
+            $table->string('image')->nullable();           //image
             $table->boolean('view')->default(1);     //可視・不可視
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\ItemComment;
 use App\Order;
 use App\Peas;
 use App\Size;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -126,11 +127,19 @@ class CartController extends Controller
 //宛先決め
     public function Topost(Request $request)
     {
-        //アドレス指定
-        $address = Address::where('userid', $request->userid)->get();
+        $secretkey = $request->secretkey;
+        $anser = User::where('id', $request->userid)->value('anser');
 
-        return view('/Register_Topost', compact('address'));
+        if ($anser == $secretkey && $request->itemcnt > 0) {
 
+            //アドレス指定
+            $address = Address::where('userid', $request->userid)->get();
+
+            return view('/Register_Topost', compact('address'));
+
+        } else {
+            return redirect('/Confirmation_Cart');
+        }
     }
 
 

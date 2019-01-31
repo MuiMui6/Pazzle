@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 
 class PeasController extends Controller
 {
-
 //======================================================================================================================
 //Search
 //======================================================================================================================
-    public function search(Request $request)
+    public function adminview(Request $request)
     {
 
         $peases = Peas::join('users', 'users.id', '=', 'peases.createrid')
@@ -25,8 +24,17 @@ class PeasController extends Controller
             ->orderBy('peases.created_at', '1')
             ->paginate(9);
 
-        $updatername = Peas::join('users', 'users.id', '=', 'peases.updaterid')
-            ->select('users.name')->get();
+
+        return view('/admin/All_Peas', compact('peases'));
+
+    }
+
+
+//======================================================================================================================
+//Search
+//======================================================================================================================
+    public function search(Request $request)
+    {
 
         if ($request->keyword <> null) {
 
@@ -34,8 +42,6 @@ class PeasController extends Controller
             $vkeyword = implode($vkeyword);
 
             $peases = Peas::join('users', 'users.id', '=', 'peases.createrid')
-                ->where('peases.cnt', 'like', '%' . $vkeyword . '%')
-                ->orwhere('users.name', 'like' . '%' . $vkeyword . '%')
                 ->select([
                     'peases.id as id',
                     'peases.cnt as cnt',
@@ -43,17 +49,12 @@ class PeasController extends Controller
                     'peases.updated_at as updated_at',
                     'users.name as creatername'
                 ])
+                ->where($request->clumn, 'like', '%' . $vkeyword . '%')
                 ->orderBy('peases.created_at', '1')
                 ->paginate(9);
-
-
-            $updatername = Peas::join('users', 'users.id', '=', 'peases.updaterid')
-                ->select('users.name')->get();
+            return view('/admin/All_Peas', compact('peases'));
         }
-
-
-        return view('/admin/All_Peas', compact('peases', 'updatername'));
-
+        return redirect('/admin/All_Peas');
     }
 
 
@@ -84,35 +85,6 @@ class PeasController extends Controller
 
         return redirect('/admin/All_Peas');
     }
-
-
-//======================================================================================================================
-//Update
-//======================================================================================================================
-    public function update(Request $request)
-    {
-
-        $vpeas = $request->validate(['peas' => 'regex:/^[0-9]+$/']);
-        $vpeas = implode($vpeas);
-
-
-        $c_peas = Peas::where('peases.cnt', $vpeas)
-            ->count('id');
-
-        if ($c_peas == '0') {
-
-            Peas::where('id', $request->id)
-                ->update([
-                    'cnt' => $vpeas,
-                    'updaterid' => $request->userid,
-                    'updated_at' => now()
-                ]);
-        }
-
-        return redirect('/admin/All_Peas');
-
-    }
-
 
 
 //======================================================================================================================
