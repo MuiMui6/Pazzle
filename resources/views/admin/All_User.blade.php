@@ -14,14 +14,24 @@
                 </div>
 
                 <div class="col-lg-12 m-3">
-                    <form action="/admin/All_User" method="get">
-                        <div class="input-group mr-3">
-                            <input type="text" class="form-control"
-                                   placeholder=" height / width / Creater Name / Updater Name "
-                                   aria-describedby="button-addon2" name="keyword">
+                    <form action="/admin/All_User/Search" method="get">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
-                                </button>
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="submit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" value="id" name="clumn">Id</button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                    <button class="dropdown-item" value="" name="clumn"></button>
+                                </div>
                             </div>
                         </div>
                     </form>

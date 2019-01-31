@@ -267,6 +267,98 @@ class SpotController extends Controller
         return view('/All_Article', compact('spots'));
     }
 
+
+//===============================================================================
+//
+//===============================================================================
+    public function adminview()
+    {
+        $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+            ->select('spots.id as id',
+                'spots.name as name',
+                'spots.article as article',
+                'spots.post as post',
+                'spots.add1 as add1',
+                'spots.add2 as add2',
+                'spots.view as view',
+                'spots.url as url',
+                'spots.tel as tel',
+                'users.name as creater',
+                'spots.created_at as created_at',
+                'spots.updated_at as updated_at'
+            )
+            ->orderBy('spots.created_at', '1')
+            ->paginate(10);
+
+        return view('/admin/All_Spot', compact('spots'));
+    }
+
+
+//===============================================================================
+//
+//===============================================================================
+    public function adminsearch(Request $request)
+    {
+        if ($request->keyword) {
+
+            $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Zａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠]+$/']);
+            $vkeyword = implode($vkeyword);
+
+            if ($request->clumn == 'creater') {
+
+                $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                    ->select('spots.id as id',
+                        'spots.name as name',
+                        'spots.article as article',
+                        'spots.post as post',
+                        'spots.add1 as add1',
+                        'spots.add2 as add2',
+                        'spots.view as view',
+                        'spots.url as url',
+                        'spots.tel as tel',
+                        'users.name as creater',
+                        'spots.created_at as created_at',
+                        'spots.updated_at as updated_at'
+                        )
+                    ->where('users.name', 'like', '%' . $vkeyword . '%')
+                    ->orderBy('spots.created_at', '1')
+                    ->paginate(10);
+
+            } else {
+
+                $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                    ->select('spots.id as id',
+                        'spots.name as name',
+                        'spots.article as article',
+                        'spots.post as post',
+                        'spots.add1 as add1',
+                        'spots.add2 as add2',
+                        'spots.view as view',
+                        'spots.url as url',
+                        'spots.tel as tel',
+                        'users.name as creater',
+                        'spots.created_at as created_at',
+                        'spots.updated_at as updated_at'
+                    )
+                    ->where('spots'.$request->clumn, 'like', '%' . $vkeyword . '%')
+                    ->orderBy('spots.created_at', '1')
+                    ->paginate(10);
+
+            }
+
+            return view('/admin/All_Spot', compact('spots'));
+        }
+
+        return redirect('/admin/All_Spot');
+
+    }
+
+
+
+
+
+
+
 //===============================================================================
 //
 //===============================================================================

@@ -13,83 +13,72 @@
                 </div>
 
                 <div class="col-lg-12 m-4">
-                    <form action="/admin/All_Peas" method="get">
-                        <div class="input-group mr-3">
-                            <input type="text" class="form-control"
-                                   placeholder=" PeasCnt / Creater Name "
-                                   aria-describedby="button-addon2" name="keyword">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search!
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-lg-12 m-3">
-
-                    <div class="d-flex border-bottom border-dark">
-                        <div class="col-lg-2 text-center"><h4>Peas Cnt</h4></div>
-                        <div class="col-lg-2 text-center"><h4>Creater</h4></div>
-                        <div class="col-lg-2 text-center"><h4>CreateDate</h4></div>
-                        <div class="col-lg-2 text-center"><h4>Updater</h4></div>
-                        <div class="col-lg-2 text-center"><h4>UpdateDate</h4></div>
-                        <div class="col-lg-2 text-center"><h4>Button</h4></div>
-                    </div>
-
-                    <form action="/admin/All_Peas/Create" method="post">
+                    <form action="/admin/All_Peas/Search" method="get">
                         @csrf
-                        <div class=" border-bottom">
-                            <div class="d-flex bd-highlight m-3">
-                                <div class="col-lg-2 text-center"><input type="text" name="peas" class="form-control">
-                                </div>
-                                <div class="col-lg-2 text-center">{{Auth::user()->name}}</div>
-                                <div class="col-lg-2 text-center"></div>
-                                <div class="col-lg-2 text-center"></div>
-                                <div class="col-lg-2 text-center"></div>
-                                <div class="col-lg-2 text-center">
-                                    <th class="text-center">
-                                        <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                                        <button type="submit" class="btn btn-primary">Create!</button>
-                                    </th>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Keyword" name="keyword">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" value="id" name="clumn">Peas Id</button>
+                                    <button class="dropdown-item" value="cnt" name="clumn">Peas Cnt</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-
-
-                    @foreach($peases as $peas)
-
-                        <form action="/admin/All_Peas/Update" method="post">
-                            @csrf
-                            <div class=" border-bottom">
-                                <div class="d-flex bd-highlight m-3">
-                                    <div class="col-lg-2 text-center"><input type="text" placeholder="{{$peas->cnt}}"
-                                                                             name="peas"
-                                                                             class="form-control"></div>
-                                    <div class="col-lg-2 text-center">{{$peas->creatername}}</div>
-                                    <div class="col-lg-2 text-center">{{$peas->created_at->format('Y年m月d日')}}</div>
-                                    <div class="col-lg-2 text-center">
-                                        @foreach($updatername as $updater)
-                                            {{$updater->name}}
-                                        @endforeach
-                                    </div>
-                                    <div class="col-lg-2 text-center">{{$peas->updated_at->format('Y年m月d日')}}</div>
-                                    <div class="col-lg-2 text-center">
-                                        <th class="col-lg-2 text-center">
-                                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                                            <input type="hidden" value="{{$peas->id}}" name="id">
-                                            <button type="submit" class="btn btn-primary">Update!</button>
-                                        </th>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    @endforeach
                 </div>
 
                 <div class="col-lg-12 m-3">
                     {!! $peases->appends(Request::query())->links() !!}
+                </div>
+
+                <div class="col-lg-12 m-3">
+                    <p>
+                    <h3>New Peas</h3></p>
+                    <form action="/admin/All_Peas/Create" method="post">
+                        @csrf
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th class="text-center">
+                                    <input type="text" name="peas" class="form-control" placeholder="Peas Cnt">
+                                </th>
+                                <th class="text-center">{{Auth::user()->name}}</th>
+                                <th class="text-center">{{now()->format('Y年m月d日')}}</th>
+                                <th class="text-center">{{now()->format('Y年m月d日')}}</th>
+                                <th class="text-center">
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                                    <button type="submit" class="btn btn-primary">Create!</button>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <p>
+                    <h3>Peas List</h3></p>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center"><h4>Peas Cnt</h4></th>
+                            <th class="text-center"><h4>Creater</h4></th>
+                            <th class="text-center"><h4>Created Date</h4></th>
+                            <th class="text-center"><h4>Updated Date</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($peases as $peas)
+                            <tr>
+                                <th class="text-center">{{$peas->cnt}}</th>
+                                <th class="text-center">{{$peas->creatername}}</th>
+                                <th class="text-center">{{$peas->created_at->format('Y年m月d日')}}</th>
+                                <th class="text-center">{{$peas->updated_at->format('Y年m月d日')}}</th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
             </div>

@@ -96,6 +96,32 @@ class ItemController extends Controller
     }
 
 
+//======================================================================================================================
+//管理者商品一覧
+//======================================================================================================================
+    public function adminview()
+    {
+
+        $items = Item::join('users', 'users.id', '=', 'items.createrid')
+            ->join('peases', 'peases.id', '=', 'items.peasid')
+            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+            ->select([
+                'items.id as id',
+                'items.name as itemname',
+                'items.price as price',
+                'sizes.height as height',
+                'sizes.width as width',
+                'peases.cnt as cnt',
+                'items.view as view',
+                'items.created_at as created_at',
+                'items.updated_at as updated_at'
+            ])
+            ->OrderBy('items.created_at', '1')
+            ->paginate(10);
+
+        return view('/admin/All_Item', compact('items'));
+    }
+
 
 //======================================================================================================================
 //管理者商品一覧
@@ -109,8 +135,6 @@ class ItemController extends Controller
         $items = Item::join('users', 'users.id', '=', 'items.createrid')
             ->join('peases', 'peases.id', '=', 'items.peasid')
             ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->where('items.name', 'like', '%' . $vkeyword . '%')
-            ->where('users.name', 'like', '%' . $vkeyword . '%')
             ->select([
                 'items.id as id',
                 'items.name as itemname',
@@ -119,10 +143,10 @@ class ItemController extends Controller
                 'sizes.width as width',
                 'peases.cnt as cnt',
                 'items.view as view',
-                'users.name as username',
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
+            ->where($request->clumn, 'like', '%' . $vkeyword . '%')
             ->OrderBy('items.created_at', '1')
             ->paginate(10);
 
@@ -179,26 +203,7 @@ class ItemController extends Controller
         }
 
 
-        //一覧へ戻る処理
-        $items = Item::join('users', 'users.id', '=', 'items.createrid')
-            ->join('peases', 'peases.id', '=', 'items.peasid')
-            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->select([
-                'items.id as id',
-                'items.name as itemname',
-                'items.price as price',
-                'sizes.height as height',
-                'sizes.width as width',
-                'peases.cnt as cnt',
-                'items.view as view',
-                'users.name as username',
-                'items.created_at as created_at',
-                'items.updated_at as updated_at'
-            ])
-            ->OrderBy('items.created_at', '1')
-            ->paginate(10);
-
-        return view('/admin/All_Item', compact('items'));
+        return redirect('/admin/All_Item');
 
     }
 
