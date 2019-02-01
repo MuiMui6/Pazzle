@@ -9,6 +9,7 @@ use App\Peas;
 use App\Size;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -18,7 +19,8 @@ class CartController extends Controller
     {
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
-
+        $count = request()->session()->get("COUNTER", 0);
+        request()->session()->put("COUNTER", $count);
         $itemcnt = 0;
         $price = 0;
 
@@ -27,7 +29,7 @@ class CartController extends Controller
             $price = $price + ($items->price * $CartItemCnt[$index]);
         }
 
-        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
+        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt', 'count'));
     }
 
 
@@ -118,6 +120,7 @@ class CartController extends Controller
 //カート内の物を削除（全件）
     public function alldelete()
     {
+        $count = request()->session()->get("COUNTER", 0);
         $CartItems = request()->session()->forget("CART");
         $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
@@ -127,6 +130,7 @@ class CartController extends Controller
 //宛先決め
     public function Topost(Request $request)
     {
+
         $secretkey = $request->secretkey;
         $anser = User::where('id', $request->userid)->value('anser');
 
@@ -138,7 +142,19 @@ class CartController extends Controller
             return view('/Register_Topost', compact('address'));
 
         } else {
-            return redirect('/Confirmation_Cart');
+
+            $count = request()->session()->get("COUNTER", 0);
+            $count = $count + 1;
+            request()->session()->put("COUNTER", $count);
+
+            if ($count > 2) {
+                $count = request()->session()->get("COUNTER", 0);
+                Auth::logout();
+                return redirect('/');
+            } else {
+                $count = request()->session()->get("COUNTER", 0);
+                return redirect('/Confirmation_Cart');
+            }
         }
     }
 
