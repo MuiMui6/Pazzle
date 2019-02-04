@@ -34,6 +34,9 @@ class ItemController extends Controller
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
                 ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('items.name', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag1', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag2', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag3', 'like', '%' . $keyword . '%')
                 ->orwhere('items.profile', 'like', '%' . $keyword . '%')
                 ->orwhere('items.price', 'like', '%' . $keyword . '%')
                 ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
@@ -150,24 +153,77 @@ class ItemController extends Controller
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
 
-        $items = Item::join('users', 'users.id', '=', 'items.createrid')
-            ->join('peases', 'peases.id', '=', 'items.peasid')
-            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->select([
-                'items.id as id',
-                'items.name as itemname',
-                'items.price as price',
-                'sizes.height as height',
-                'sizes.width as width',
-                'peases.cnt as cnt',
-                'items.view as view',
-                'items.image',
-                'items.created_at as created_at',
-                'items.updated_at as updated_at'
-            ])
-            ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-            ->OrderBy('items.created_at', '1')
-            ->paginate(10);
+        if ($request->clumn == 'tag') {
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.view as view',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->orwhere('items.tag1', 'like', '%' . $vkeyword . '%')
+                ->orwhere('items.tag2', 'like', '%' . $vkeyword . '%')
+                ->orwhere('items.tag3', 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+
+        } elseif($request->clumn == 'itemname'){
+
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.view as view',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->orwhere('items.name', 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+        }else {
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.view as view',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->where($request->clumn, 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+        }
 
         return view('/admin/All_Item', compact('items'));
     }
