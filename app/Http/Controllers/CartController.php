@@ -19,8 +19,6 @@ class CartController extends Controller
     {
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
-        $count = request()->session()->get("COUNTER", 0);
-        request()->session()->put("COUNTER", $count);
         $itemcnt = 0;
         $price = 0;
 
@@ -29,7 +27,7 @@ class CartController extends Controller
             $price = $price + ($items->price * $CartItemCnt[$index]);
         }
 
-        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt', 'count'));
+        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
     }
 
 
@@ -120,7 +118,6 @@ class CartController extends Controller
 //カート内の物を削除（全件）
     public function alldelete()
     {
-        $count = request()->session()->get("COUNTER", 0);
         $CartItems = request()->session()->forget("CART");
         $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
@@ -143,16 +140,15 @@ class CartController extends Controller
 
         } else {
 
-            $count = request()->session()->get("COUNTER", 0);
-            $count = $count + 1;
-            request()->session()->put("COUNTER", $count);
+
+            $count = $request->count;
 
             if ($count > 2) {
-                $count = request()->session()->get("COUNTER", 0);
+                $CartItems = request()->session()->forget("CART");
+                $CartItems = request()->session()->forget("CARTCNT");
                 Auth::logout();
                 return redirect('/');
             } else {
-                $count = request()->session()->get("COUNTER", 0);
                 return redirect('/Confirmation_Cart');
             }
         }
