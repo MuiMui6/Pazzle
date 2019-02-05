@@ -21,7 +21,7 @@ class PeasController extends Controller
                 'peases.updated_at as updated_at',
                 'users.name as creatername'
             ])
-            ->orderBy('peases.created_at', '1')
+            ->orderBy('peases.id', '1')
             ->paginate(9);
 
 
@@ -50,7 +50,7 @@ class PeasController extends Controller
                     'users.name as creatername'
                 ])
                 ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-                ->orderBy('peases.created_at', '1')
+                ->orderBy('peases.id', '1')
                 ->paginate(9);
             return view('/admin/All_Peas', compact('peases'));
         }
@@ -83,7 +83,19 @@ class PeasController extends Controller
             ]);
         }
 
-        return redirect('/admin/All_Peas');
+        $peases = Peas::join('users', 'users.id', '=', 'peases.createrid')
+            ->select([
+                'peases.id as id',
+                'peases.cnt as cnt',
+                'peases.created_at as created_at',
+                'peases.updated_at as updated_at',
+                'users.name as creatername'
+            ])
+            ->orderBy('peases.id', '1')
+            ->paginate(9);
+
+
+        return view('/admin/All_Peas', compact('peases'));
     }
 
 
