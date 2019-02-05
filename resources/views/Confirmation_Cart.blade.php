@@ -60,9 +60,8 @@
                         @csrf
                         <input type="text" class="form-control mb-3" name="secretkey" placeholder="Secret Key">
                         <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
-                        <input type="hidden" value="{{$count}}" name="count">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                        <input type="submit" class="btn btn-block btn-default" value="購入手続きへ">
+                        <input type="submit" class="btn btn-block btn-default" value="To Purchase Procedure">
                     </form>
                 </div>
             </div>
