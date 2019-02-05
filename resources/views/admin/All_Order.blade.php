@@ -7,9 +7,11 @@
 
                 <div class="col-12 m-3">
                     <h3 class="text-center">All Order</h3>
+                    <p class="text-center">受注一覧</p>
                 </div>
                 <div class="m-3">
-                    <h5>受注情報を確認・編集できます。</h5>
+                    <h5>I can manage the information about the sightseeing order.</h5>
+                    <p>受注に関する情報を管理することが出来ます。</p>
                 </div>
 
 
@@ -22,15 +24,15 @@
                             <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn　/　検索項目
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" value="id" name="clumn">Order Id</button>
-                                    <button class="dropdown-item" value="itemid" name="clumn">Item Id</button>
-                                    <button class="dropdown-item" value="itemname" name="clumn">Item Name</button>
-                                    <button class="dropdown-item" value="userid" name="clumn">User Id</button>
-                                    <button class="dropdown-item" value="username" name="clumn">User Name</button>
-                                    <button class="dropdown-item" value="cnt" name="clumn">Cnt</button>
+                                    <button class="dropdown-item" value="id" name="clumn">Order Id　/　受注ID</button>
+                                    <button class="dropdown-item" value="itemid" name="clumn">Item Id　/　商品ID</button>
+                                    <button class="dropdown-item" value="itemname" name="clumn">Item Name　/　商品名</button>
+                                    <button class="dropdown-item" value="userid" name="clumn">User Id　/　ユーザID</button>
+                                    <button class="dropdown-item" value="username" name="clumn">User Name　/　ユーザ名</button>
+                                    <button class="dropdown-item" value="cnt" name="clumn">Cnt　/　個数</button>
                                 </div>
                             </div>
                         </div>
@@ -46,18 +48,44 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="text-center"><h4>ItemName</h4></th>
-                            <th class="text-center"><h4>UserName</h4></th>
-                            <th class="text-center"><h4>Cnt</h4></th>
-                            <th class="text-center"><h4>Status</h4></th>
-                            <th class="text-center"><h4>CreateDate</h4></th>
-                            <th class="text-center"><h4>UpdateDate</h4></th>
-                            <th class="text-center"><h4>Detail</h4></th>
+                            <th class="text-center">
+                                <h5>Order ID</h5>
+                                <p>受注ID</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Item Name</h5>
+                                <p>商品名</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>User Name</h5>
+                                <p>ユーザ名</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Cnt</h5>
+                                <p>個数</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Status</h5>
+                                <p>状態</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Created Date</h5>
+                                <p>作成日</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Updated Date</h5>
+                                <p>更新日</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Detail</h5>
+                                <p>詳細</p>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
+                                <th class="text-center">{{ $order -> id }}</th>
                                 <th class="text-center">{{ $order -> itemname }}</th>
                                 <th class="text-center">{{ $order -> username }}</th>
                                 <th class="text-center">{{ $order -> cnt }}</th>
@@ -79,12 +107,7 @@
                                                     @csrf
                                                     <input type="hidden" value="{{ $order -> id }}" name="orderid">
                                                     <input type="hidden" value="{{ Auth::user()->id }}" name="userid">
-                                                    @if($vkeyword <> null)
-                                                        <input type="hidden" value="{{$vkeyword}}" name="vkeyword">
-                                                        <input type="hidden" value="{{$searchclumn}}"
-                                                               name="searchclumn">
-                                                    @endif
-                                                    <button class="dropdown-item" type="submit">支払い確認</button>
+                                                    <button class="dropdown-item" type="submit">支払確認</button>
                                                 </form>
                                             </div>
                                         </div>
