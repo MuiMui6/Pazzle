@@ -11,8 +11,8 @@
                     <p class="text-center">ユーザ一覧</p>
                 </div>
                 <div class="col-lg-12 m-3">
-                    <h5>I come by confirmation, editing in the information about the user.</h5>
-                    <p>ユーザに関する情報を確認・編集できます。</p>
+                    <h5>I can manage the information about the user.</h5>
+                    <p>ユーザに関する情報を管理することができます。</p>
                 </div>
 
                 <div class="col-lg-12 m-3">
@@ -22,13 +22,15 @@
                             <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">検索項目
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+                                    Clumn　/　検索項目
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" value="id" name="clumn">ユーザID</button>
-                                    <button class="dropdown-item" value="name" name="clumn">ユーザ名</button>
-                                    <button class="dropdown-item" value="email" name="clumn">Eメールアドレス</button>
-                                    <button class="dropdown-item" value="rank" name="clumn">ランク</button>
+                                    <button class="dropdown-item" value="id" name="clumn"> User ID　/　ユーザID</button>
+                                    <button class="dropdown-item" value="name" name="clumn">User Name　/　ユーザ名</button>
+                                    <button class="dropdown-item" value="email" name="clumn"> E-Mail 　/　Eメールアドレス
+                                    </button>
+                                    <button class="dropdown-item" value="rank" name="clumn"> Rank　 /　ランク</button>
                                 </div>
                             </div>
                         </div>

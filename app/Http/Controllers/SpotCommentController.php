@@ -75,6 +75,7 @@ class SpotCommentController extends Controller
                 'users.name as name',
                 'spots.name as spotname'
             )
+            ->orderBy('spot_comments.created_at','1')
             ->paginate(10);
 
         return view('/admin/All_SpotComment', compact('spotcomments'));
@@ -103,6 +104,7 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
+                ->orderBy('spot_comments.created_at','1')
                 ->paginate(10);
 
         } elseif ($request->clumn == 'spotname') {
@@ -119,13 +121,14 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
+                ->orderBy('spot_comments.created_at','1')
                 ->paginate(10);
 
         } else {
 
             $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
                 ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
-                ->where($request->clumn, 'like', '%' . $vkeyword . '%')
+                ->where('spot_comments.'.$request->clumn, 'like', '%' . $vkeyword . '%')
                 ->select('spot_comments.id as id',
                     'spot_comments.comment as comment',
                     'spot_comments.evaluation as evaluation',
@@ -135,6 +138,7 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
+                ->orderBy('spot_comments.created_at','1')
                 ->paginate(10);
         }
 
