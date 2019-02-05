@@ -49,8 +49,8 @@
                         <thead>
                         <tr>
                             <th class="text-center">
-                                <h5>User ID</h5>
-                                <p>ユーザID</p>
+                                <h5>Comment ID</h5>
+                                <p>コメントID</p>
                             </th>
                             <th class="text-center">
                                 <h5>User Name</h5>
