@@ -5,6 +5,10 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="m-3">
+                    <a href="/admin/All_User">All Userへ戻る</a>
+                </div>
+
                 <div class="col-12 m-3">
                     <h3 class="text-center">Edit User</h3>
                     <p class="text-center">ユーザ編集</p>
