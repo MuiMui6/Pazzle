@@ -24,6 +24,9 @@ class CreateSpotsTable extends Migration
             $table->string('url')->nullable();             //URL
             $table->text('tel')->nullable();               //TEL
             $table->string('image')->nullable();           //画像名
+            $table->string('tag1')->nullable();         //タグ1
+            $table->string('tag2')->nullable();         //タグ2
+            $table->string('tag3')->nullable();         //タグ3
             $table->integer('createrid');                  //作成者
             $table->integer('updaterid')->nullable();      //更新者
             $table->timestamps();
