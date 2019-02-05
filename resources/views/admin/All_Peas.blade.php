@@ -7,9 +7,11 @@
 
                 <div class="col-12 m-3">
                     <h3 class="text-center">All Peas</h3>
+                    <p class="text-center">ピース一覧</p>
                 </div>
                 <div class="m-3">
-                    <h5>ピース数に関する情報を作成・編集できます。</h5>
+                    <h5>I can manage the information about the peas.</h5>
+                    <p>ピースに関する情報を管理できます。</p>
                 </div>
 
                 <div class="col-lg-12 m-4">
@@ -19,11 +21,12 @@
                             <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+                                    Clumn　/　検索項目
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" value="id" name="clumn">Peas Id</button>
-                                    <button class="dropdown-item" value="cnt" name="clumn">Peas Cnt</button>
+                                    <button class="dropdown-item" value="id" name="clumn">Peas Id　/　ピースID</button>
+                                    <button class="dropdown-item" value="cnt" name="clumn">Peas Cnt　/　ピース数</button>
                                 </div>
                             </div>
                         </div>
@@ -35,6 +38,43 @@
                 </div>
 
                 <div class="col-lg-12 m-3">
+
+                    <p>
+                    <h3>Peas List</h3></p>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                <h5>Peas ID</h5>
+                                <p>ピースID</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Cnt</h5>
+                                <p>ピース数</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Creater Name</h5>
+                                <p>製作者名</p>
+                            </th>
+                            <th class="text-center">
+                                <h5>Creater Date</h5>
+                                <p>制作日</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($peases as $peas)
+                            <tr>
+                                <th class="text-center">{{$peas->id}}</th>
+                                <th class="text-center">{{$peas->cnt}}</th>
+                                <th class="text-center">{{$peas->creatername}}</th>
+                                <th class="text-center">{{$peas->created_at->format('Y年m月d日')}}</th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+
                     <p>
                     <h3>New Peas</h3></p>
                     <form action="/admin/All_Peas/Create" method="post">
@@ -47,7 +87,6 @@
                                 </th>
                                 <th class="text-center">{{Auth::user()->name}}</th>
                                 <th class="text-center">{{now()->format('Y年m月d日')}}</th>
-                                <th class="text-center">{{now()->format('Y年m月d日')}}</th>
                                 <th class="text-center">
                                     <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     <button type="submit" class="btn btn-primary">Create!</button>
@@ -56,31 +95,7 @@
                             </tbody>
                         </table>
                     </form>
-
-                    <p>
-                    <h3>Peas List</h3></p>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th class="text-center"><h4>Peas Cnt</h4></th>
-                            <th class="text-center"><h4>Creater</h4></th>
-                            <th class="text-center"><h4>Created Date</h4></th>
-                            <th class="text-center"><h4>Updated Date</h4></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($peases as $peas)
-                            <tr>
-                                <th class="text-center">{{$peas->cnt}}</th>
-                                <th class="text-center">{{$peas->creatername}}</th>
-                                <th class="text-center">{{$peas->created_at->format('Y年m月d日')}}</th>
-                                <th class="text-center">{{$peas->updated_at->format('Y年m月d日')}}</th>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
                 </div>
-
             </div>
         </div>
     </div>

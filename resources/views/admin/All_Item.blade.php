@@ -37,6 +37,7 @@
                                     <button class="dropdown-item" value="height" name="clumn">Height</button>
                                     <button class="dropdown-item" value="width" name="clumn">Width</button>
                                     <button class="dropdown-item" value="cnt" name="clumn">Peas Cnt</button>
+                                    <button class="dropdown-item" value="tag" name="clumn">Spot Tag</button>
                                 </div>
                             </div>
                         </div>

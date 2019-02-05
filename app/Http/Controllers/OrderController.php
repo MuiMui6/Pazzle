@@ -107,7 +107,7 @@ class OrderController extends Controller
                         'orders.updaterid',
                         'orders.created_at as created_at',
                         'orders.updated_at as updated_at')
-                    ->where('orders.'.$request->clumn,'like','%'.$vkeyword.'%')
+                    ->where('orders.' . $request->clumn, 'like', '%' . $vkeyword . '%')
                     ->OrderBy('orders.created_at', '1')
                     ->paginate(10);
 
@@ -136,14 +136,14 @@ class OrderController extends Controller
         $order = Order::join('users', 'users.id', '=', 'orders.userid')
             ->join('items', 'items.id', '=', 'orders.itemid')
             ->join('addresses', 'addresses.id', '=', 'orders.addressid')
-            ->where('id', $orderid)
+            ->where('orders.id', $orderid)
             ->select('orders.id',
                 'users.name as username',
                 'items.name as itemname',
                 'orders.cnt as cnt',
                 'addresses.toname as toname',
                 'addresses.post as post',
-                'addresses.add2 as add1',
+                'addresses.add1 as add1',
                 'addresses.add2 as add2',
                 'orders.paydate as paydate',
                 'orders.pconfirmorid as pconfirmorid',
@@ -245,7 +245,8 @@ class OrderController extends Controller
                 'orders.created_at as created_at',
                 'orders.updaterid as updaterid',
                 'orders.updated_at as updated_at')
-            ->get();
+            ->orderby('orders.created_at', '1')
+            ->paginate(10);
 
 
         return view('/History_Cart', compact('items'));
@@ -261,11 +262,12 @@ class OrderController extends Controller
     public function payconfirmation(Request $request)
     {
 
-        $vkeyword = $request->vkeyword;
-        $searchclumn = $request->searchclumn;
+        $order = Order::where('id', $request->orderid)->value('userid');
 
-        Order::where('id', $request->orderid)
-            ->update(['pconfirmorid' => $request->userid]);
+        if ($order <> $request->userid) {
+            Order::where('id', $request->orderid)
+                ->update(['pconfirmorid' => $request->userid, 'updated_at' => now()]);
+        }
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
             ->join('items', 'items.id', '=', 'orders.itemid')
@@ -281,8 +283,7 @@ class OrderController extends Controller
                 'orders.created_at',
                 'orders.updaterid',
                 'orders.updated_at')
-            ->where($searchclumn, 'like', '' . $vkeyword . '')
-            ->OrderBy('orders.created_at')
+            ->OrderBy('orders.id', '1')
             ->paginate(10);
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
@@ -309,7 +310,8 @@ class OrderController extends Controller
                 'orders.created_at as created_at',
                 'orders.updaterid as updaterid',
                 'orders.updated_at as updated_at')
-            ->get();
+            ->orderby('orders.id', '1')
+            ->paginate(10);
 
         return view('/History_Cart', compact('items'));
     }

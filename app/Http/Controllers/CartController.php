@@ -19,8 +19,6 @@ class CartController extends Controller
     {
         $CartItems = request()->session()->get("CART", []);
         $CartItemCnt = request()->session()->get("CARTCNT", []);
-        $count = request()->session()->get("COUNTER", 0);
-        request()->session()->put("COUNTER", $count);
         $itemcnt = 0;
         $price = 0;
 
@@ -29,7 +27,7 @@ class CartController extends Controller
             $price = $price + ($items->price * $CartItemCnt[$index]);
         }
 
-        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt', 'count'));
+        return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
     }
 
 
@@ -38,9 +36,20 @@ class CartController extends Controller
     {
         //テーブル全取得
         $item = DB::table('items')
-            ->join('peases', 'items.sizeid', '=', 'peases.id')
+            ->join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->select(
+                'items.id',
+                'items.name',
+                'items.profile',
+                'items.image',
+                'items.price',
+                'peases.cnt',
+                'items.tag1 as tag1',
+                'items.tag2 as tag2',
+                'items.tag3 as tag3',
+                'sizes.height',
+                'sizes.width')
             ->where('items.id', $request->itemid)
             ->Get();
 
@@ -120,7 +129,6 @@ class CartController extends Controller
 //カート内の物を削除（全件）
     public function alldelete()
     {
-        $count = request()->session()->get("COUNTER", 0);
         $CartItems = request()->session()->forget("CART");
         $CartItems = request()->session()->forget("CARTCNT");
         return redirect('/Confirmation_Cart');
@@ -143,16 +151,15 @@ class CartController extends Controller
 
         } else {
 
-            $count = request()->session()->get("COUNTER", 0);
-            $count = $count + 1;
-            request()->session()->put("COUNTER", $count);
+
+            $count = $request->count;
 
             if ($count > 2) {
-                $count = request()->session()->get("COUNTER", 0);
+                $CartItems = request()->session()->forget("CART");
+                $CartItems = request()->session()->forget("CARTCNT");
                 Auth::logout();
                 return redirect('/');
             } else {
-                $count = request()->session()->get("COUNTER", 0);
                 return redirect('/Confirmation_Cart');
             }
         }

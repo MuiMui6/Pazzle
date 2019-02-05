@@ -81,7 +81,7 @@ class UserController extends Controller
     public function adminview()
     {
 
-        $users = User::orderBy('created_at', '1')
+        $users = User::orderBy('users.id', '1')
             ->paginate(10);
 
         return view('/admin/All_User', compact('users'));
@@ -94,7 +94,7 @@ class UserController extends Controller
     {
 
         $users = User::where($request->clumn, 'like', '%' . $request->keyword . '%')
-            ->orderBy('created_at', '1')
+            ->orderBy('users.id', '1')
             ->paginate(10);
 
         return view('/admin/All_User', compact('users'));

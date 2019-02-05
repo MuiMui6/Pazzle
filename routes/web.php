@@ -9,6 +9,12 @@ Route::get('/', 'ItemController@user_search');
 //商品詳細
 Route::get('/Detail', 'ItemController@detail');
 
+Route::get('/Spotindex', 'SpotController@search');
+
+Route::get('/Detail_Spot', 'SpotController@detail');
+
+
+
 
 //Auth::routes();
 
@@ -169,9 +175,6 @@ Route::group(['middleware' => 'auth'], function () {
 //===============================================================================================================
 //SpotController
 //===============================================================================================================
-    Route::get('/Spotindex', 'SpotController@search')->middleware('verified');
-
-    Route::get('/Detail_Spot', 'SpotController@detail')->middleware('verified');
 
     Route::get('/Edit_New_Article', 'SpotController@newspot')->middleware('verified');
 

@@ -56,6 +56,26 @@
                             <th scope="row">PeasCnt</th>
                             <td>{{$items->cnt}}peas</td>
                         </tr>
+
+                        {{--タグ--}}
+                        <tr>
+                            <th scope="row">
+                                <p>Spot Tag</p>
+                                <p>※クリックすると観光ページに移行します</p>
+                            </th>
+                            <td class="form-inline">
+                                <form action="/Spotindex" method="get">
+                                    @csrf
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$items->tag1}}">{{$items->tag1}}</button>
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$items->tag2}}">{{$items->tag2}}</button>
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$items->tag3}}">{{$items->tag3}}</button>
+                                </form>
+                            </td>
+                        </tr>
+
                         </tbody>
                     </table>
                     @guest

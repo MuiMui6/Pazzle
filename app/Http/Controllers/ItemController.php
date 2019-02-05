@@ -23,8 +23,8 @@ class ItemController extends Controller
         //テーブル全取得
         $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->where('items.view','=','1')
+            ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->where('items.view', '=', '1')
             ->orderBy('items.created_at', '1')
             ->paginate(9);
 
@@ -32,12 +32,15 @@ class ItemController extends Controller
         if ($keyword <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('items.name', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag1', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag2', 'like', '%' . $keyword . '%')
+                ->orwhere('items.tag3', 'like', '%' . $keyword . '%')
                 ->orwhere('items.profile', 'like', '%' . $keyword . '%')
                 ->orwhere('items.price', 'like', '%' . $keyword . '%')
                 ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
-                ->where('items.view','=','1')
+                ->where('items.view', '=', '1')
                 ->orderBy('items.created_at', '1')
                 ->paginate(9);
         }
@@ -46,10 +49,10 @@ class ItemController extends Controller
         if ($key_height <> null && $key_width <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->where('sizes.height', $key_height)
                 ->where('sizes.width', $key_width)
-                ->where('items.view','=','1')
+                ->where('items.view', '=', '1')
                 ->orderBy('items.created_at', '1')
                 ->paginate(9);
         }
@@ -76,7 +79,18 @@ class ItemController extends Controller
         $item = DB::table('items')
             ->join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile','items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->select(
+                'items.id',
+                'items.name',
+                'items.profile',
+                'items.image',
+                'items.price',
+                'peases.cnt',
+                'items.tag1 as tag1',
+                'items.tag2 as tag2',
+                'items.tag3 as tag3',
+                'sizes.height',
+                'sizes.width')
             ->where('items.id', $request->itemid)
             ->Get();
 
@@ -94,7 +108,7 @@ class ItemController extends Controller
             ->get();
 
         $evaluation = ItemComment::where('itemid', $request->itemid)
-            ->where('view','1')
+            ->where('view', '1')
             ->avg('evaluation');
 
         return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation'));
@@ -139,24 +153,77 @@ class ItemController extends Controller
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
 
-        $items = Item::join('users', 'users.id', '=', 'items.createrid')
-            ->join('peases', 'peases.id', '=', 'items.peasid')
-            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->select([
-                'items.id as id',
-                'items.name as itemname',
-                'items.price as price',
-                'sizes.height as height',
-                'sizes.width as width',
-                'peases.cnt as cnt',
-                'items.view as view',
-                'items.image',
-                'items.created_at as created_at',
-                'items.updated_at as updated_at'
-            ])
-            ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-            ->OrderBy('items.created_at', '1')
-            ->paginate(10);
+        if ($request->clumn == 'tag') {
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.view as view',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->orwhere('items.tag1', 'like', '%' . $vkeyword . '%')
+                ->orwhere('items.tag2', 'like', '%' . $vkeyword . '%')
+                ->orwhere('items.tag3', 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+
+        } elseif($request->clumn == 'itemname'){
+
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.view as view',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->orwhere('items.name', 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+        }else {
+            $items = Item::join('users', 'users.id', '=', 'items.createrid')
+                ->join('peases', 'peases.id', '=', 'items.peasid')
+                ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+                ->select([
+                    'items.id as id',
+                    'items.name as itemname',
+                    'items.price as price',
+                    'sizes.height as height',
+                    'sizes.width as width',
+                    'peases.cnt as cnt',
+                    'items.view as view',
+                    'items.tag1 as tag1',
+                    'items.tag2 as tag2',
+                    'items.tag3 as tag3',
+                    'items.image',
+                    'items.created_at as created_at',
+                    'items.updated_at as updated_at'
+                ])
+                ->where($request->clumn, 'like', '%' . $vkeyword . '%')
+                ->OrderBy('items.created_at', '1')
+                ->paginate(10);
+        }
 
         return view('/admin/All_Item', compact('items'));
     }
@@ -189,13 +256,15 @@ class ItemController extends Controller
             'sizeid' => $request->sizeid,
             'peasid' => $request->peasid,
             'price' => $request->price,
+            'tag1' => $request->tag1,
+            'tag2' => $request->tag2,
+            'tag3' => $request->tag3,
             'view' => $request->view,
             'createrid' => $request->userid,
             'created_at' => now(),
             'updaterid' => $request->userid,
             'updated_at' => now()
         ]);
-
 
 
         if ($request->hasFile('img')) {
@@ -234,6 +303,9 @@ class ItemController extends Controller
                 'sizes.width as width',
                 'peases.cnt as cnt',
                 'items.image as image',
+                'items.tag1 as tag1',
+                'items.tag2 as tag2',
+                'items.tag3 as tag3',
                 'items.view as view',
                 'users.name as username',
                 'items.created_at as created_at',
@@ -268,7 +340,6 @@ class ItemController extends Controller
             $items->image = $imgname;
             $chg = true;
         }
-
 
         if ($request->name <> null && $request->name <> $items->name) {
             $vname = $request->validate(['name' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
@@ -309,6 +380,29 @@ class ItemController extends Controller
         }
 
 
+        if ($request->tag1 <> null && $request->tag1 <> $items->tag1) {
+            $vtag = $request->validate(['tag1' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = implode($vtag);
+            $items->tag1 = $vtag;
+            $chg = true;
+        }
+
+
+        if ($request->tag2 <> null && $request->tag2 <> $items->tag2) {
+            $vtag = $request->validate(['tag2' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = implode($vtag);
+            $items->tag2 = $vtag;
+            $chg = true;
+        }
+
+        if ($request->tag3 <> null && $request->tag3 <> $items->tag3) {
+            $vtag = $request->validate(['tag3' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = implode($vtag);
+            $items->tag3 = $vtag;
+            $chg = true;
+        }
+
+
         if ($request->view <> $items->view) {
             $items->view = $request->view;
             $chg = true;
@@ -333,6 +427,9 @@ class ItemController extends Controller
                 'sizes.width as width',
                 'peases.cnt as cnt',
                 'items.image as image',
+                'items.tag1 as tag1',
+                'items.tag2 as tag2',
+                'items.tag3 as tag3',
                 'items.view as view',
                 'users.name as username',
                 'items.created_at as created_at',

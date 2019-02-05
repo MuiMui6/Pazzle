@@ -86,17 +86,33 @@
                                     </div>
                                 </th>
                             </tr>
+
+                            <tr>
+                                <th class="text-center">Spot Tag</th>
+                                <th class="text-center">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control m-3" name="tag1"
+                                               placeholder="{{$item->tag1}}">
+                                        <input type="text" class="form-control m-3" name="tag2"
+                                               placeholder="{{$item->tag2}}">
+                                        <input type="text" class="form-control m-3" name="tag3"
+                                               placeholder="{{$item->tag3}}">
+                                    </div>
+                                </th>
+                            </tr>
+
                             <tr>
                                 <th class="text-center">View</th>
                                 <th class="text-center">
                                     @switch($item->view)
                                         @case('0')
-                                        <input type="radio" value="0" name="view" checked><span class="m-3 mr-5">Can View</span>
-                                        <input type="radio" value="1" name="view"><span class="m-3">Can't View</span>
+                                        <input type="radio" value="1" name="view"><span class="m-3 mr-5">Can View</span>
+                                        <input type="radio" value="0" name="view" checked><span
+                                                class="m-3">Can't View</span>
                                         @break
                                         @case('1')
-                                        <input type="radio" value="0" name="view"><span class="m-3 mr-5">Can View</span>
-                                        <input type="radio" value="1" name="view" checked><span
+                                        <input type="radio" value="1" name="view" checked><span class="m-3 mr-5">Can View</span>
+                                        <input type="radio" value="0" name="view"><span
                                                 class="m-3">Can't View</span>
                                         @break
                                     @endswitch

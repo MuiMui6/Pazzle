@@ -6,11 +6,13 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
-                <div class="col-12 m-3">
+                <div class="col-lg-12 m-3">
                     <h3 class="text-center">All User</h3>
+                    <p class="text-center">ユーザ一覧</p>
                 </div>
-                <div class="m-3">
-                    <h5>ユーザに関する情報を確認・編集できます。</h5>
+                <div class="col-lg-12 m-3">
+                    <h5>I can manage the information about the user.</h5>
+                    <p>ユーザに関する情報を管理することができます。</p>
                 </div>
 
                 <div class="col-lg-12 m-3">
@@ -20,13 +22,15 @@
                             <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+                                    Clumn　/　検索項目
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button class="dropdown-item" value="id" name="clumn">User Id</button>
-                                    <button class="dropdown-item" value="name" name="clumn">User Name</button>
-                                    <button class="dropdown-item" value="email" name="clumn">Email</button>
-                                    <button class="dropdown-item" value="rank" name="clumn">Rank</button>
+                                    <button class="dropdown-item" value="id" name="clumn"> User ID　/　ユーザID</button>
+                                    <button class="dropdown-item" value="name" name="clumn">User Name　/　ユーザ名</button>
+                                    <button class="dropdown-item" value="email" name="clumn"> E-Mail 　/　Eメールアドレス
+                                    </button>
+                                    <button class="dropdown-item" value="rank" name="clumn"> Rank　 /　ランク</button>
                                 </div>
                             </div>
                         </div>
@@ -41,17 +45,40 @@
                 <div class="col-lg-12 m-3">
                     <table class="table table-striped">
                         <thead>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Rank</th>
-                        <th class="text-center">CreateDate</th>
-                        <th class="text-center">UpdateDate</th>
-                        <th class="text-center">EDIT</th>
+                        <th class="text-center">
+                            <h5>User ID</h5>
+                            <p>ユーザID</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>User Name</h5>
+                            <p>ユーザ名</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>E-Mail</h5>
+                            <p>Eメール</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>Rank</h5>
+                            <p>ランク</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>Created Date</h5>
+                            <p>作成日</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>Updated Date</h5>
+                            <p>更新日</p>
+                        </th>
+                        <th class="text-center">
+                            <h5>Edit</h5>
+                            <p>編集</p>
+                        </th>
                         </thead>
 
                         <tbody>
                         @foreach($users as $user)
                             <tr>
+                                <th class="text-center">{{$user->id}}</th>
                                 <th class="text-center">{{$user->name}}</th>
                                 <th class="text-center">{{$user->email}}</th>
                                 <th class="text-center">
@@ -74,7 +101,7 @@
                                         <input type="hidden" name="id" value="{{$user->id}}">
                                         <input type="hidden" name="userid" value="{{Auth::user()->id}}">
                                         <button class="btn btn-primary">
-                                            EDIT
+                                            編集
                                         </button>
                                     </form>
                                 </th>
