@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Size;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class SizeController extends Controller
 {
 
@@ -93,7 +93,19 @@ class SizeController extends Controller
             ]);
         }
 
-        return redirect('/admin/All_Size');
+        $sizes = Size::join('users', 'users.id', '=', 'sizes.createrid')
+            ->select([
+                'sizes.id as id',
+                'sizes.height as height',
+                'sizes.width as width',
+                'sizes.created_at as created_at',
+                'sizes.updated_at as updated_at',
+                'users.name as creatername'
+            ])
+            ->orderBy('sizes.created_at', '1')
+            ->paginate(9);
+
+        return view('/admin/All_Size', compact('sizes'));
     }
 
 
