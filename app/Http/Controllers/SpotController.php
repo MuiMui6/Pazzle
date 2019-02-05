@@ -32,7 +32,7 @@ class SpotController extends Controller
             ->orwhere('spots.tag2', 'like', '%' . $vkeyword . '%')
             ->orwhere('spots.tag3', 'like', '%' . $vkeyword . '%')
             ->where('spots.view', '1')
-            ->orderBy('spots.created_at', '1')
+            ->orderBy('spots.id', '1')
             ->paginate(9);
 
         return view('/SpotIndex', compact('spots'));
@@ -293,7 +293,7 @@ class SpotController extends Controller
         }
 
         $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('created_at', '1')
+            ->orderBy('spots.id', '1')
             ->paginate(10);
 
         return view('/All_Article', compact('spots'));
@@ -307,7 +307,7 @@ class SpotController extends Controller
     {
 
         $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('created_at', '1')
+            ->orderBy('spots.id', '1')
             ->paginate(10);
 
 
@@ -334,7 +334,7 @@ class SpotController extends Controller
                 'spots.created_at as created_at',
                 'spots.updated_at as updated_at'
             )
-            ->orderBy('spots.created_at', '1')
+            ->orderBy('spots.id', '1')
             ->paginate(10);
 
         return view('/admin/All_Spot', compact('spots'));
@@ -368,7 +368,7 @@ class SpotController extends Controller
                         'spots.updated_at as updated_at'
                     )
                     ->where('users.name', 'like', '%' . $vkeyword . '%')
-                    ->orderBy('spots.created_at', '1')
+                    ->orderBy('spots.id', '1')
                     ->paginate(10);
 
             } else {
@@ -388,7 +388,7 @@ class SpotController extends Controller
                         'spots.updated_at as updated_at'
                     )
                     ->where('spots' . $request->clumn, 'like', '%' . $vkeyword . '%')
-                    ->orderBy('spots.created_at', '1')
+                    ->orderBy('spots.id', '1')
                     ->paginate(10);
 
             }
