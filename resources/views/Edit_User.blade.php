@@ -12,6 +12,18 @@
                     <h5>ユーザ様の情報の確認・編集が出来ます。</h5>
                 </div>
 
+                <div class="col-12 m-3 text-center">
+                    <h3>Edit User</h3>
+                    <p>ユーザ編集</p>
+                </div>
+                <div class="col-12 m-3">
+                    <h5>{{Auth::user()->name}}</h5>
+                    <p>{{Auth::user()->name}}様の情報を編集できます。</p>
+                </div>
+
+                <img src="img/s_line.png">
+
+
                 <form action="/Edit_User" method="post">
                     @csrf
                     <table class="table table-borderless">

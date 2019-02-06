@@ -5,6 +5,16 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="col-12 m-3 text-center">
+                    <h3>All Address</h3>
+                    <p>住所一覧</p>
+                </div>
+                <div class="col-12 m-3">
+                    <h5></h5>
+                    <p>住所を登録・編集できます。</p>
+                </div>
+
+                <img src="img/s_line.png">
 
                 <div class="col-12 m-3">
                     <h3 class="text-center">All Address</h3>

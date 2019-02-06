@@ -5,12 +5,16 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="col-12 m-3 text-center">
+                    <h3>History Cart</h3>
+                    <p>購入履歴</p>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">History Cart</h3>
+                    <h5></h5>
+                    <p>購入履歴の確認・購入した商品に関する取引が行えます。</p>
                 </div>
-                <div class="m-3">
-                    <h5>購入履歴の確認ができます。</h5>
-                </div>
+
+                <img src="img/s_line.png">
 
                 <table class="table table-striped">
                     <thead>
