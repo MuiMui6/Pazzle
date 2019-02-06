@@ -8,14 +8,13 @@
                 <div class="m-3">
                     <a href="/admin/All_User">All Userへ戻る</a>
                 </div>
-
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Edit User</h3>
-                    <p class="text-center">ユーザ編集</p>
+                    <h3 class="text-center">Detail / Edit User</h3>
+                    <p class="text-center">ユーザ詳細/編集</p>
                 </div>
                 <div class="m-3">
-                    <h5>I can edit the information about the user.</h5>
-                    <p>ユーザに関する情報を編集できます</p>
+                    <h5>I confirm it in detail and can edit the information about applicable user data.</h5>
+                    <p>該当ユーザデータに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
 
                 <form action="/admin/Edit_User/Detail" method="post">

@@ -28,7 +28,7 @@ class OrderController extends Controller
                 'orders.updaterid',
                 'orders.created_at as created_at',
                 'orders.updated_at')
-            ->OrderBy('orders.created_at', '1')
+            ->OrderBy('orders.id', '1')
             ->paginate(10);
 
         return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
@@ -67,7 +67,7 @@ class OrderController extends Controller
                         'orders.created_at as created_at',
                         'orders.updated_at as updated_at')
                     ->where('items.name', 'like', '%' . $vkeyword . '%')
-                    ->OrderBy('orders.created_at', '1')
+                    ->OrderBy('orders.id', '1')
                     ->paginate(10);
 
             } else if ($request->clumn == 'username') {
@@ -88,7 +88,7 @@ class OrderController extends Controller
                         'orders.created_at as created_at',
                         'orders.updated_at as updated_at')
                     ->where('users.name', 'like', '%' . $vkeyword . '%')
-                    ->OrderBy('orders.created_at', '1')
+                    ->OrderBy('orders.id', '1')
                     ->paginate(10);
             } else {
 
@@ -108,7 +108,7 @@ class OrderController extends Controller
                         'orders.created_at as created_at',
                         'orders.updated_at as updated_at')
                     ->where('orders.' . $request->clumn, 'like', '%' . $vkeyword . '%')
-                    ->OrderBy('orders.created_at', '1')
+                    ->OrderBy('orders.id', '1')
                     ->paginate(10);
 
             }
@@ -245,7 +245,7 @@ class OrderController extends Controller
                 'orders.created_at as created_at',
                 'orders.updaterid as updaterid',
                 'orders.updated_at as updated_at')
-            ->orderby('orders.created_at', '1')
+            ->OrderBy('orders.id', '1')
             ->paginate(10);
 
 

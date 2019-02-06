@@ -24,14 +24,16 @@
                             <input type="text" class="form-control" placeholder="Keyword" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="submit"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Clumn　/　検索項目
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+                                    Clumn　/　検索項目
                                 </button>
                                 <div class="dropdown-menu">
                                     <button class="dropdown-item" value="id" name="clumn">Order Id　/　受注ID</button>
                                     <button class="dropdown-item" value="itemid" name="clumn">Item Id　/　商品ID</button>
                                     <button class="dropdown-item" value="itemname" name="clumn">Item Name　/　商品名</button>
                                     <button class="dropdown-item" value="userid" name="clumn">User Id　/　ユーザID</button>
-                                    <button class="dropdown-item" value="username" name="clumn">User Name　/　ユーザ名</button>
+                                    <button class="dropdown-item" value="username" name="clumn">User Name　/　ユーザ名
+                                    </button>
                                     <button class="dropdown-item" value="cnt" name="clumn">Cnt　/　個数</button>
                                 </div>
                             </div>
@@ -44,7 +46,7 @@
                     {!! $orders->appends(Request::query())->links() !!}
                 </div>
 
-                <div class="col-lg-12 m-3">
+                <div class="col-12 m-3">
                     <table class="table table-striped">
                         <thead>
                         <tr>

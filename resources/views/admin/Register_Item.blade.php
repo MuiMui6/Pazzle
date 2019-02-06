@@ -5,11 +5,16 @@
     <div class="row">
         <div class="card col-lg-12">
             <div class="card-body">
+                <div class="m-3">
+                    <a href="/admin/All_Item">All Itemへ戻る</a>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Edit Item</h3>
+                    <h3 class="text-center">Register Item</h3>
+                    <p class="text-center">商品登録</p>
                 </div>
                 <div class="m-3">
-                    <h5>商品に関する情報を編集できます。</h5>
+                    <h5>I can register the information about non-registration product.</h5>
+                    <p>未登録商品に関する情報を登録することが出来ます。</p>
                 </div>
 
                 <form action="/admin/Register_Item" method="post" enctype="multipart/form-data">

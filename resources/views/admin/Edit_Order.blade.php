@@ -5,6 +5,9 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="m-3">
+                    <a href="/admin/All_Order">All Orderへ戻る</a>
+                </div>
                 <div class="col-12 m-3">
                     <h3 class="text-center">Detail / Edit Order</h3>
                     <p class="text-center">受注詳細/編集</p>

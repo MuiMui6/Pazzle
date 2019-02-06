@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Spot;
 use App\SpotComment;
+use app\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -169,12 +170,35 @@ class SpotController extends Controller
             $spots->save();
         }
 
-        $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('created_at', '1')
-            ->paginate(10);
+        $user = User::where('id',$request->userid)->value('rank');
+        if($user == '0') {
 
+            $spots = Spot::where('createrid', $request->userid)
+                ->orderBy('created_at', '1')
+                ->paginate(10);
 
-        return view('/All_Article', compact('spots'));
+            return view('/All_Article', compact('spots'));
+        }else{
+            $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                ->select('spots.id as id',
+                    'spots.name as name',
+                    'spots.article as article',
+                    'spots.post as post',
+                    'spots.add1 as add1',
+                    'spots.add2 as add2',
+                    'spots.view as view',
+                    'spots.url as url',
+                    'spots.tel as tel',
+                    'users.name as creater',
+                    'spots.created_at as created_at',
+                    'spots.updated_at as updated_at'
+                )
+                ->orderBy('spots.id', '1')
+                ->paginate(10);
+
+            return view('/admin/All_Spot', compact('spots'));
+
+        }
     }
 
 
@@ -292,11 +316,35 @@ class SpotController extends Controller
             $spots->save();
         }
 
-        $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('spots.id', '1')
-            ->paginate(10);
+        $user = User::where('id',$request->userid)->value('rank');
+        if($user == '0') {
 
-        return view('/All_Article', compact('spots'));
+            $spots = Spot::where('createrid', $request->userid)
+                ->orderBy('created_at', '1')
+                ->paginate(10);
+
+            return view('/All_Article', compact('spots'));
+        }else{
+            $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                ->select('spots.id as id',
+                    'spots.name as name',
+                    'spots.article as article',
+                    'spots.post as post',
+                    'spots.add1 as add1',
+                    'spots.add2 as add2',
+                    'spots.view as view',
+                    'spots.url as url',
+                    'spots.tel as tel',
+                    'users.name as creater',
+                    'spots.created_at as created_at',
+                    'spots.updated_at as updated_at'
+                )
+                ->orderBy('spots.id', '1')
+                ->paginate(10);
+
+            return view('/admin/All_Spot', compact('spots'));
+
+        }
     }
 
 
@@ -387,7 +435,7 @@ class SpotController extends Controller
                         'spots.created_at as created_at',
                         'spots.updated_at as updated_at'
                     )
-                    ->where('spots' . $request->clumn, 'like', '%' . $vkeyword . '%')
+                    ->where('spots.' . $request->clumn, 'like', '%' . $vkeyword . '%')
                     ->orderBy('spots.id', '1')
                     ->paginate(10);
 

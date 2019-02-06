@@ -151,8 +151,9 @@ class CartController extends Controller
 
         } else {
 
-
-            $count = $request->count;
+            $count = request()->session()->get("COUNTER",0);
+            $count = $count + 1;
+            request()->session()->put("COUNTER",$count);
 
             if ($count > 2) {
                 $CartItems = request()->session()->forget("CART");
