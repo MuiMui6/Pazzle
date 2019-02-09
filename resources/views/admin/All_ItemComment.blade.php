@@ -13,7 +13,11 @@
                     <h5>I can manage the information about the sightseeing Item Comment.</h5>
                     <p>商品コメントに関する情報を管理することが出来ます。</p>
                 </div>
-
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <div class="col-lg-12 m-3">
                     <form action="/admin/All_ItemComment/Search" method="get">
                         @csrf
@@ -89,6 +93,7 @@
                             <th class="text-center">
                                 <form action="/admin/All_ItemComment/ViewEdit" method="post">
                                     @csrf
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     <input type="hidden" value="{{$ItemComment->id}}" name="itemcommentid">
                                     <input type="hidden" value="{{$ItemComment->view}}" name="view">
                                     @if($ItemComment->view == 1)
