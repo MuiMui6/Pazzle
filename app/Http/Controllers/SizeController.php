@@ -13,6 +13,7 @@ class SizeController extends Controller
 //======================================================================================================================
     public function adminview()
     {
+        $message = null;
 
         $sizes = Size::join('users', 'users.id', '=', 'sizes.createrid')
             ->select([
@@ -23,10 +24,10 @@ class SizeController extends Controller
                 'sizes.updated_at as updated_at',
                 'users.name as creatername'
             ])
-            ->orderBy('sizes.created_at', '1')
+            ->orderBy('sizes.id', '1')
             ->paginate(9);
 
-        return view('/admin/All_Size', compact('sizes'));
+        return view('/admin/All_Size', compact('sizes','message'));
 
     }
 
@@ -37,6 +38,7 @@ class SizeController extends Controller
     {
         if ($request->keyword <> null) {
 
+            $message = null;
             $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
             $vkeyword = implode($vkeyword);
 
@@ -50,10 +52,10 @@ class SizeController extends Controller
                     'users.name as creatername'
                 ])
                 ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-                ->orderBy('sizes.created_at', '1')
+                ->orderBy('sizes.id', '1')
                 ->paginate(9);
 
-            return view('/admin/All_Size', compact('sizes'));
+            return view('/admin/All_Size', compact('sizes','message'));
         }
 
 
@@ -91,6 +93,10 @@ class SizeController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+            $message = '作成しました';
+        }else{
+            $message = '既に作成されております';
         }
 
         $sizes = Size::join('users', 'users.id', '=', 'sizes.createrid')
@@ -102,10 +108,10 @@ class SizeController extends Controller
                 'sizes.updated_at as updated_at',
                 'users.name as creatername'
             ])
-            ->orderBy('sizes.created_at', '1')
+            ->orderBy('sizes.id', '1')
             ->paginate(9);
 
-        return view('/admin/All_Size', compact('sizes'));
+        return view('/admin/All_Size', compact('sizes','message'));
     }
 
 

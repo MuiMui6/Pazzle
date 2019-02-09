@@ -14,7 +14,11 @@
                     <h5>I can manage the information about the size.</h5>
                     <p>サイズに関する情報を管理できます。</p>
                 </div>
-
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <div class="col-lg-12 m-3">
                     <form action="/admin/All_Size/Search" method="get">
                         @csrf

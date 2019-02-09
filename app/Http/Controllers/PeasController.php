@@ -10,9 +10,9 @@ class PeasController extends Controller
 //======================================================================================================================
 //Search
 //======================================================================================================================
-    public function adminview(Request $request)
+    public function adminview()
     {
-
+        $message = null;
         $peases = Peas::join('users', 'users.id', '=', 'peases.createrid')
             ->select([
                 'peases.id as id',
@@ -25,7 +25,7 @@ class PeasController extends Controller
             ->paginate(9);
 
 
-        return view('/admin/All_Peas', compact('peases'));
+        return view('/admin/All_Peas', compact('peases','message'));
 
     }
 
@@ -35,6 +35,8 @@ class PeasController extends Controller
 //======================================================================================================================
     public function search(Request $request)
     {
+
+        $message = null;
 
         if ($request->keyword <> null) {
 
@@ -52,7 +54,7 @@ class PeasController extends Controller
                 ->where($request->clumn, 'like', '%' . $vkeyword . '%')
                 ->orderBy('peases.id', '1')
                 ->paginate(9);
-            return view('/admin/All_Peas', compact('peases'));
+            return view('/admin/All_Peas', compact('peases','message'));
         }
         return redirect('/admin/All_Peas');
     }
@@ -81,6 +83,10 @@ class PeasController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+            $message = '作成しました';
+        }else{
+            $message = '既に作成されております';
         }
 
         $peases = Peas::join('users', 'users.id', '=', 'peases.createrid')
@@ -95,7 +101,7 @@ class PeasController extends Controller
             ->paginate(9);
 
 
-        return view('/admin/All_Peas', compact('peases'));
+        return view('/admin/All_Peas', compact('peases','message'));
     }
 
 
