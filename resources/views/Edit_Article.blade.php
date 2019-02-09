@@ -56,7 +56,7 @@
                                     Article
                                 </th>
                                 <th class="text-center">
-                                    <textarea class="form-control" cols="50" rows="10" name="article"
+                                    <textarea class="form-control" name="article" cols="50" rows="10"
                                               placeholder="{{$spot->article}}"></textarea>
                                 </th>
                             </tr>

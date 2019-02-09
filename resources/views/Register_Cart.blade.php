@@ -7,13 +7,6 @@
             <div class="card-body">
                 <form action="/Registerd_Cart" method="post">
                     @csrf
-                    <div class="col-12 m-3">
-                        <h3 class="text-center">Last Confirmation Cart</h3>
-                    </div>
-                    <div class="m-3 text-center">
-                        <h5>商品の最終購入確認です。</h5>
-                    </div>
-
                     <div class="col-12 m-3 text-center">
                         <h3>Last Confirmation Cart</h3>
                         <p>カート最終確認</p>
