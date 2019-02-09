@@ -14,6 +14,13 @@
                     <p>{{Auth::user()->name}}さまが書かれた記事一覧です。</p>
                 </div>
 
+
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
+
                 <img src="img/s_line.png">
 
                 <form action="/Edit_Article" method="get">
