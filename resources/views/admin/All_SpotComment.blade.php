@@ -13,7 +13,11 @@
                     <h5>I can manage the comment contributed to a sightseeing spot article.</h5>
                     <p>観光地記事に投稿されたコメントを管理することが出来ます。</p>
                 </div>
-
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <div class="col-lg-12 m-3">
                     <form action="/admin/All_SpotComment/Search" method="get">
                         @csrf

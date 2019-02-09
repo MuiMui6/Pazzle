@@ -48,10 +48,11 @@ class SpotCommentController extends Controller
         $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
             ->where('spotid', $spotid)
             ->select('spot_comments.evaluation', 'spot_comments.comment', 'spot_comments.view', 'users.name')
+            ->OrderBy('spot_comments.id', '1')
             ->get();
 
         $evaluation = SpotComment::where('spotid', $spotid)
-            ->where('view','1')
+            ->where('view', '1')
             ->avg('evaluation');
 
         return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid'));
@@ -63,7 +64,7 @@ class SpotCommentController extends Controller
 //===============================================================================
     public function adminview()
     {
-
+        $message = null;
         $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
             ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
             ->select('spot_comments.id as id',
@@ -75,10 +76,10 @@ class SpotCommentController extends Controller
                 'users.name as name',
                 'spots.name as spotname'
             )
-            ->orderBy('spot_comments.id','1')
+            ->orderBy('spot_comments.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_SpotComment', compact('spotcomments'));
+        return view('/admin/All_SpotComment', compact('spotcomments', 'message'));
     }
 
 
@@ -87,7 +88,7 @@ class SpotCommentController extends Controller
 //===============================================================================
     public function search(Request $request)
     {
-
+        $message = null;
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
 
@@ -104,7 +105,7 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
-                ->orderBy('spot_comments.id','1')
+                ->orderBy('spot_comments.id', '1')
                 ->paginate(10);
 
         } elseif ($request->clumn == 'spotname') {
@@ -121,14 +122,14 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
-                ->orderBy('spot_comments.id','1')
+                ->orderBy('spot_comments.id', '1')
                 ->paginate(10);
 
         } else {
 
             $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
                 ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
-                ->where('spot_comments.'.$request->clumn, 'like', '%' . $vkeyword . '%')
+                ->where('spot_comments.' . $request->clumn, 'like', '%' . $vkeyword . '%')
                 ->select('spot_comments.id as id',
                     'spot_comments.comment as comment',
                     'spot_comments.evaluation as evaluation',
@@ -138,11 +139,11 @@ class SpotCommentController extends Controller
                     'users.name as name',
                     'spots.name as spotname'
                 )
-                ->orderBy('spot_comments.id','1')
+                ->orderBy('spot_comments.id', '1')
                 ->paginate(10);
         }
 
-        return view('/admin/All_SpotComment', compact('spotcomments'));
+        return view('/admin/All_SpotComment', compact('spotcomments','message'));
     }
 
 
@@ -160,6 +161,8 @@ class SpotCommentController extends Controller
                 ->update(['view' => '0', 'updated_at' => now(), 'updaterid' => $request->userid]);
         }
 
+        $message = '更新しました';
+
         $spotcomments = SpotComment::join('users', 'users.id', '=', 'spot_comments.userid')
             ->join('spots', 'spots.id', '=', 'spot_comments.spotid')
             ->select('spot_comments.id as id',
@@ -171,10 +174,10 @@ class SpotCommentController extends Controller
                 'users.name as name',
                 'spots.name as spotname'
             )
-            ->orderBy('spot_comments.id','1')
+            ->orderBy('spot_comments.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_SpotComment', compact('spotcomments'));
+        return view('/admin/All_SpotComment', compact('spotcomments','message'));
 
     }
 
