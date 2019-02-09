@@ -22,7 +22,11 @@
                         </button>
                     </form>
                 </div>
-
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <div class="col-lg-12 m-3">
                     <form action="/admin/All_Item/Search" method="get">
                         @csrf
