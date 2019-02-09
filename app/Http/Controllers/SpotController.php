@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Spot;
 use App\SpotComment;
+use app\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -123,6 +124,7 @@ class SpotController extends Controller
             ->select('users.name as updatername')
             ->get();
 
+
         return view('/Edit_Article', compact('spots', 'updater'));
     }
 
@@ -135,8 +137,8 @@ class SpotController extends Controller
 
         //spotname
         $request->validate([
-            'name' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/','min:2','max:30','required','string'],
-            'article' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠＊！？・ー。、（）‐]+$/','min:10','max:500','required','string']
+            'name' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30', 'required', 'string'],
+            'article' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠＊！？・ー。、（）‐]+$/', 'min:10', 'max:500', 'required', 'string']
         ]);
 
         //登録
@@ -169,12 +171,38 @@ class SpotController extends Controller
             $spots->save();
         }
 
-        $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('created_at', '1')
-            ->paginate(10);
+        $message = '追加しました';
 
+        $user = User::where('id', $request->userid)->value('rank');
 
-        return view('/All_Article', compact('spots'));
+        if ($user == '0') {
+
+            $spots = Spot::where('createrid', $request->userid)
+                ->orderBy('created_at', '1')
+                ->paginate(10);
+
+            return view('/All_Article', compact('spots','message'));
+        } else {
+            $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                ->select('spots.id as id',
+                    'spots.name as name',
+                    'spots.article as article',
+                    'spots.post as post',
+                    'spots.add1 as add1',
+                    'spots.add2 as add2',
+                    'spots.view as view',
+                    'spots.url as url',
+                    'spots.tel as tel',
+                    'users.name as creater',
+                    'spots.created_at as created_at',
+                    'spots.updated_at as updated_at'
+                )
+                ->orderBy('spots.id', '1')
+                ->paginate(10);
+
+            return view('/admin/All_Spot', compact('spots','message'));
+
+        }
     }
 
 
@@ -186,6 +214,7 @@ class SpotController extends Controller
         $spotid = $request->spotid;
         $spots = Spot::findOrFail($spotid);
         $chg = false;
+        $message = null;
 
         //image
         if ($request->hasFile('img')) {
@@ -201,7 +230,7 @@ class SpotController extends Controller
         }
         //spotname
         if ($request->name <> $spots->name && $request->name <> null) {
-            $vname = $request->validate(['name' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/','min:2','max:30','required','string']]);
+            $vname = $request->validate(['name' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30', 'required', 'string']]);
             $vname = implode($vname);
             $spots->name = $vname;
             $chg = true;
@@ -209,15 +238,15 @@ class SpotController extends Controller
 
         //Article
         if ($request->article <> $spots->article && $request->article <> null) {
-            $varticle = $request->validate(['article' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠！？・ー。、（）]+$/|min:10|max:500|required','string']);
+            $varticle = $request->validate(['article' => ['regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠！？・ー。、（）]+$/', 'min:10', 'max:500', 'required', 'string']]);
             $varticle = implode($varticle);
-            $spots->name = $varticle;
+            $spots->article = $varticle;
             $chg = true;
         }
 
         //address_post
         if ($request->post <> $spots->post && $request->post <> null) {
-            $vpost = $request->validate(['post' => ['regex:/^[0-9]+$/','digits:7',]]);
+            $vpost = $request->validate(['post' => ['regex:/^[0-9]+$/', 'digits:7',]]);
             $vpost = implode($vpost);
             $spots->post = $vpost;
             $chg = true;
@@ -225,7 +254,7 @@ class SpotController extends Controller
 
         //address_add1
         if ($request->add1 <> $spots->add1 && $request->add1 <> null) {
-            $vadd1 = $request->validate(['add1' => ['regex:/^[０-９ぁ-んァ-ヶー一-龠]+$/','min:3','max:50']]);
+            $vadd1 = $request->validate(['add1' => ['regex:/^[０-９ぁ-んァ-ヶー一-龠]+$/', 'min:3', 'max:50']]);
             $vadd1 = implode($vadd1);
             $spots->add1 = $vadd1;
             $chg = true;
@@ -233,7 +262,7 @@ class SpotController extends Controller
 
         //address_add2
         if ($request->add2 <> $spots->add2 && $request->add2 <> null) {
-            $vadd2 = $request->validate(['add2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠-]+$/','min:3','max:50']]);
+            $vadd2 = $request->validate(['add2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠-]+$/', 'min:3', 'max:50']]);
             $vadd2 = implode($vadd2);
             $spots->add2 = $vadd2;
             $chg = true;
@@ -241,7 +270,7 @@ class SpotController extends Controller
 
         //url
         if ($request->url <> $spots->url && $request->url <> null) {
-            $vurl = $request->validate(['url' => ['regex:/^[a-zA-Z0-9:/.]+$/','min:5','max:50','url']]);
+            $vurl = $request->validate(['url' => ['regex:/^[a-zA-Z0-9:/.]+$/', 'min:5', 'max:50', 'url']]);
             $vurl = implode($vurl);
             $spots->name = $vurl;
             $chg = true;
@@ -250,7 +279,7 @@ class SpotController extends Controller
 
         //tel
         if ($request->tel <> $spots->tel && $request->tel <> null) {
-            $vtel = $request->validate(['tel' => ['regex:/^[0-9]+$/','min:10','max:13','digits_between:10,13']]);
+            $vtel = $request->validate(['tel' => ['regex:/^[0-9]+$/', 'min:10', 'max:13', 'digits_between:10,13']]);
             $vtel = implode($vtel);
             $spots->tel = $vtel;
             $chg = true;
@@ -258,7 +287,7 @@ class SpotController extends Controller
 
 
         if ($request->tag1 <> null && $request->tag1 <> $spots->tag1) {
-            $vtag = $request->validate(['tag1' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/','min:2','max:30']]);
+            $vtag = $request->validate(['tag1' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
             $vtag = implode($vtag);
             $spots->tag1 = $vtag;
             $chg = true;
@@ -266,14 +295,14 @@ class SpotController extends Controller
 
 
         if ($request->tag2 <> null && $request->tag2 <> $spots->tag2) {
-            $vtag = $request->validate(['tag2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/','min:2','max:30']]);
+            $vtag = $request->validate(['tag2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
             $vtag = implode($vtag);
             $spots->tag2 = $vtag;
             $chg = true;
         }
 
         if ($request->tag3 <> null && $request->tag3 <> $spots->tag3) {
-            $vtag = $request->validate(['tag3' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/','min:2','max:30']]);
+            $vtag = $request->validate(['tag3' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
             $vtag = implode($vtag);
             $spots->tag3 = $vtag;
             $chg = true;
@@ -290,13 +319,38 @@ class SpotController extends Controller
             $spots->updated_at = now();
             $spots->updaterid = $request->userid;
             $spots->save();
+            $message = '更新しました';
         }
 
-        $spots = Spot::where('createrid', $request->userid)
-            ->orderBy('spots.id', '1')
-            ->paginate(10);
+        $user = User::where('id', $request->userid)->value('rank');
+        if ($user == '0') {
 
-        return view('/All_Article', compact('spots'));
+            $spots = Spot::where('createrid', $request->userid)
+                ->orderBy('created_at', '1')
+                ->paginate(10);
+
+            return view('/All_Article', compact('spots'));
+        } else {
+            $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                ->select('spots.id as id',
+                    'spots.name as name',
+                    'spots.article as article',
+                    'spots.post as post',
+                    'spots.add1 as add1',
+                    'spots.add2 as add2',
+                    'spots.view as view',
+                    'spots.url as url',
+                    'spots.tel as tel',
+                    'users.name as creater',
+                    'spots.created_at as created_at',
+                    'spots.updated_at as updated_at'
+                )
+                ->orderBy('spots.id', '1')
+                ->paginate(10);
+
+            return view('/admin/All_Spot', compact('spots', 'message'));
+
+        }
     }
 
 
@@ -310,8 +364,9 @@ class SpotController extends Controller
             ->orderBy('spots.id', '1')
             ->paginate(10);
 
+        $message = null;
 
-        return view('/All_Article', compact('spots'));
+        return view('/All_Article', compact('spots', 'message'));
     }
 
 
@@ -337,7 +392,9 @@ class SpotController extends Controller
             ->orderBy('spots.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Spot', compact('spots'));
+        $message = null;
+
+        return view('/admin/All_Spot', compact('spots', 'message'));
     }
 
 
@@ -346,6 +403,9 @@ class SpotController extends Controller
 //===============================================================================
     public function adminsearch(Request $request)
     {
+
+        $message = null;
+
         if ($request->keyword) {
 
             $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Zａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠]+$/']);
@@ -387,13 +447,13 @@ class SpotController extends Controller
                         'spots.created_at as created_at',
                         'spots.updated_at as updated_at'
                     )
-                    ->where('spots' . $request->clumn, 'like', '%' . $vkeyword . '%')
+                    ->where('spots.' . $request->clumn, 'like', '%' . $vkeyword . '%')
                     ->orderBy('spots.id', '1')
                     ->paginate(10);
 
             }
 
-            return view('/admin/All_Spot', compact('spots'));
+            return view('/admin/All_Spot', compact('spots', 'message'));
         }
 
         return redirect('/admin/All_Spot');

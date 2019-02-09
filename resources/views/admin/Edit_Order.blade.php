@@ -5,11 +5,16 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
-                <div class="col-12 m-3">
-                    <h3 class="text-center">Edit Order</h3>
+                <div class="m-3">
+                    <a href="/admin/All_Order">All Orderへ戻る</a>
                 </div>
-                <div class="col-12 text-center m-3">
-                    <h5>受注に関する情報を作成・編集できます。</h5>
+                <div class="col-12 m-3">
+                    <h3 class="text-center">Detail / Edit Order</h3>
+                    <p class="text-center">受注詳細/編集</p>
+                </div>
+                <div class="m-3">
+                    <h5>I confirm it in detail and can edit the information about applicable order data.</h5>
+                    <p>該当受注データに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
 
                 @if($deletemessage)

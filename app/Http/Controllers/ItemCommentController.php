@@ -17,7 +17,7 @@ class ItemCommentController extends Controller
     public function postitemcomment(Request $request)
     {
 
-        $comment = $request->validate(['comment' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
+        $comment = $request->validate(['comment' => 'regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠！？・ー。、（）]+$/']);
         $comment = implode($comment);
 
         ItemComment::insert([
@@ -35,7 +35,7 @@ class ItemCommentController extends Controller
         $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
             ->select('items.id', 'items.name', 'items.profile', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
-            ->where('items.id', $request->itemid)
+            ->OrderBy('items.id', '1')
             ->Get();
 
         //ピース数
@@ -52,7 +52,7 @@ class ItemCommentController extends Controller
             ->get();
 
         $evaluation = ItemComment::where('itemid', $request->itemid)
-            ->where('view','1')
+            ->where('view', '1')
             ->avg('evaluation');
 
 
@@ -67,6 +67,7 @@ class ItemCommentController extends Controller
 //======================================================================================================================
     public function view()
     {
+        $message = null;
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
             ->join('items', 'items.id', '=', 'item_comments.itemid')
             ->select(
@@ -81,11 +82,11 @@ class ItemCommentController extends Controller
                 'item_comments.updaterid',
                 'item_comments.created_at',
                 'item_comments.updated_at')
-            ->OrderBy('item_comments.created_at', '1')
+            ->OrderBy('item_comments.id', '1')
             ->paginate(10);
 
         return view('/admin/All_ItemComment',
-            compact('ItemComments'));
+            compact('ItemComments', 'message'));
     }
 
 
@@ -94,6 +95,7 @@ class ItemCommentController extends Controller
 //======================================================================================
     public function search(Request $request)
     {
+        $message = null;
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
 
@@ -111,10 +113,10 @@ class ItemCommentController extends Controller
                 'item_comments.created_at as created_at',
                 'item_comments.updated_at as updated_at')
             ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-            ->OrderBy('item_comments.created_at','1')
+            ->OrderBy('item_comments.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_ItemComment', compact('ItemComments'));
+        return view('/admin/All_ItemComment', compact('ItemComments', 'message'));
     }
 
 
@@ -132,7 +134,9 @@ class ItemCommentController extends Controller
         }
 
         ItemComment::where('id', $request->itemcommentid)
-            ->update(['view' => $notview, 'updated_at' => now()]);
+            ->update(['view' => $notview, 'updaterid' => $request->userid, 'updated_at' => now()]);
+
+        $message = '更新しました';
 
         $ItemComments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
             ->join('items', 'items.id', '=', 'item_comments.itemid')
@@ -148,10 +152,10 @@ class ItemCommentController extends Controller
                 'item_comments.updaterid',
                 'item_comments.created_at',
                 'item_comments.updated_at')
-            ->OrderBy('item_comments.created_at')
+            ->OrderBy('item_comments.id','1')
             ->paginate(10);
 
-        return view('/admin/All_ItemComment', compact('ItemComments'));
+        return view('/admin/All_ItemComment', compact('ItemComments', 'message'));
     }
 
 

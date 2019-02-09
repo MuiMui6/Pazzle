@@ -5,12 +5,18 @@
     <div class="row">
         <div class="card col-lg-12">
             <div class="card-body">
+
+                <div class="col-12 m-3 text-center">
+                    <h3>Register Address</h3>
+                    <p>住所一覧</p>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Register Address</h3>
+                    <h5></h5>
+                    <p>住所の確認が出来ます。</p>
                 </div>
-                <div class="m-3">
-                    <h5>住所の登録が出来ます。</h5>
-                </div>
+
+                <img src="img/s_line.png">
+
                 <form action="/Register_Address" method="post">
                     @csrf
                     <table class="table table-borderless">

@@ -6,11 +6,15 @@
             <div class="card-body">
 
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Confirmaion Cart</h3>
+                    <h3 class="text-center">Confirmation Cart</h3>
+                    <p class="text-center">カート内確認</p>
                 </div>
-                <div class="m-3">
-                    <h5>カートに入っている商品を確認できます。</h5>
+                <div class="col m-3">
+                    <h5></h5>
+                    <p>カートに入っている商品を確認できます。</p>
                 </div>
+
+                <img src="img/s_line.png">
 
                 <table class="table table-borderless">
                     <thead>

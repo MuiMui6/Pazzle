@@ -5,12 +5,18 @@
     <div class="row">
         <div class="card col-lg-12">
             <div class="card-body">
+                <div class="m-3">
+                    <a href="/admin/All_Item">All Itemへ戻る</a>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Edit Item</h3>
+                    <h3 class="text-center">Detail / Edit Item</h3>
+                    <p class="text-center">商品詳細/編集</p>
                 </div>
-                <div class="col-lg-12 m-3">
-                    <h5>商品に関する情報を編集できます。</h5>
+                <div class="m-3">
+                    <h5>I confirm it in detail and can edit the information about applicable item data.</h5>
+                    <p>該当商品データに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
+
                 <form action="/admin/Edit_Item" method="post" enctype="multipart/form-data">
                     @csrf
                     @foreach($items as $item)

@@ -140,7 +140,9 @@ class ItemController extends Controller
             ->OrderBy('items.created_at', '1')
             ->paginate(10);
 
-        return view('/admin/All_Item', compact('items'));
+        $message = null;
+
+        return view('/admin/All_Item', compact('items','message'));
     }
 
 
@@ -152,6 +154,8 @@ class ItemController extends Controller
 
         $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
         $vkeyword = implode($vkeyword);
+
+        $message = null;
 
         if ($request->clumn == 'tag') {
             $items = Item::join('users', 'users.id', '=', 'items.createrid')
@@ -225,7 +229,7 @@ class ItemController extends Controller
                 ->paginate(10);
         }
 
-        return view('/admin/All_Item', compact('items'));
+        return view('/admin/All_Item', compact('items','message'));
     }
 
 
@@ -249,6 +253,9 @@ class ItemController extends Controller
 //======================================================================================================================
     public function save(Request $request)
     {
+
+        $message = '追加しました';
+
         //DB処理
         $id = Item::insertGetId([
             'name' => $request->name,
@@ -279,8 +286,25 @@ class ItemController extends Controller
             $items->save();
         }
 
+        $items = Item::join('users', 'users.id', '=', 'items.createrid')
+            ->join('peases', 'peases.id', '=', 'items.peasid')
+            ->join('sizes', 'sizes.id', '=', 'items.sizeid')
+            ->select([
+                'items.id as id',
+                'items.name as itemname',
+                'items.price as price',
+                'sizes.height as height',
+                'sizes.width as width',
+                'peases.cnt as cnt',
+                'items.view as view',
+                'items.image',
+                'items.created_at as created_at',
+                'items.updated_at as updated_at'
+            ])
+            ->OrderBy('items.created_at', '1')
+            ->paginate(10);
 
-        return redirect('/admin/All_Item');
+        return view('/admin/All_Item', compact('items','message'));
 
     }
 
@@ -329,6 +353,7 @@ class ItemController extends Controller
     {
         $items = Item::findOrFail($request->id);
         $chg = false;
+        $message = null;
 
         if ($request->hasFile('img')) {
             $request->validate(['img' => 'image']);
@@ -411,36 +436,29 @@ class ItemController extends Controller
             $items->updated_at = now();
             $items->updaterid = $request->userid;
             $items->save();
+            $message = '更新しました';
         }
 
 
         $items = Item::join('users', 'users.id', '=', 'items.createrid')
             ->join('peases', 'peases.id', '=', 'items.peasid')
             ->join('sizes', 'sizes.id', '=', 'items.sizeid')
-            ->where('items.id', $request->id)
             ->select([
                 'items.id as id',
                 'items.name as itemname',
-                'items.profile as profile',
                 'items.price as price',
                 'sizes.height as height',
                 'sizes.width as width',
                 'peases.cnt as cnt',
-                'items.image as image',
-                'items.tag1 as tag1',
-                'items.tag2 as tag2',
-                'items.tag3 as tag3',
                 'items.view as view',
-                'users.name as username',
+                'items.image',
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
-            ->get();
+            ->OrderBy('items.created_at', '1')
+            ->paginate(10);
 
-        $sizes = Size::get();
-
-        $peases = Peas::get();
-        return view('/admin/Edit_Item', compact('items', 'sizes', 'peases'));
+        return view('/admin/All_Item', compact('items','message'));
 
     }
 

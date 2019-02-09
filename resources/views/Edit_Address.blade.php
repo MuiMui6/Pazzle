@@ -5,12 +5,18 @@
     <div class="row">
         <div class="card col-lg-12">
             <div class="card-body">
+
+                <div class="col-12 m-3 text-center">
+                    <h3>Edit　Address</h3>
+                    <p>住所編集</p>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Edit Address</h3>
+                    <h5></h5>
+                    <p>該当住所データを編集できます。</p>
                 </div>
-                <div class="m-3">
-                    <h5>住所の編集が出来ます。</h5>
-                </div>
+
+                <img src="img/s_line.png">
+
                 <form action="/Edit_Address" method="post">
                     @csrf
                     @foreach($addresses as $address)

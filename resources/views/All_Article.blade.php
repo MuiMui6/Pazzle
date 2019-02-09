@@ -5,12 +5,23 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="col-12 m-3 text-center">
+                    <h3>All Spot Article</h3>
+                    <p>観光地記事一覧</p>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Your Article</h3>
+                    <h5>{{Auth::user()->name}}</h5>
+                    <p>{{Auth::user()->name}}さまが書かれた記事一覧です。</p>
                 </div>
-                <div class="m-3">
-                    <h5>{{Auth::user()->name}}さまが書かれた記事の一覧です。</h5>
-                </div>
+
+
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
+
+                <img src="img/s_line.png">
 
                 <form action="/Edit_Article" method="get">
                     @csrf

@@ -6,12 +6,24 @@
         <div class="card col-lg-12 text-center">
             <div class="card-body">
 
-                <h2 class="card-title">Edit Article</h2>
+                <div class="col-12 m-3 text-center">
+                    <h3>Edit Spot Article</h3>
+                    <p>観光地記事編集</p>
+                </div>
+                <div class="col-12 m-3">
+                    <h5></h5>
+                    <p>観光地記事の編集ができます。</p>
+                </div>
+
                 <img src="img/s_line.png">
 
                 {{--新規作成--}}
                 @foreach($spots as $spot)
-
+                    @if($spot->image == null)
+                        <img src="../img/noimage.png" height="500px">
+                    @else
+                        <img src="/storage/spots/{{$spot->id}}/{{$spot->image}}" height="500px">
+                    @endif
                     <form action="/Update_Article" method="post" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
@@ -20,7 +32,10 @@
                                     Photo
                                 </th>
                                 <th class="text-center">
-                                    <input type="file" name="img" enctype="multipart/form-data">
+                                    <p>
+                                        <input type="file" name="img" enctype="multipart/form-data">
+                                    </p>
+                                    <p>画像ファイル( jpg / png / bmp / gif / svg )のみしか登録できません。</p>
                                 </th>
                             </tr>
 
@@ -41,7 +56,7 @@
                                     Article
                                 </th>
                                 <th class="text-center">
-                                    <textarea class="form-control" cols="50" rows="10" name="article"
+                                    <textarea class="form-control" name="article" cols="50" rows="10"
                                               placeholder="{{$spot->article}}"></textarea>
                                 </th>
                             </tr>
@@ -81,6 +96,22 @@
                                 </th>
                                 <th class="text-center">
                                     <input type="tel" class="form-control" name="tel" placeholder="{{$spot->tel}}">
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th class="text-center">
+                                    Item Tag
+                                </th>
+                                <th class="text-center">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control m-3" name="tag1"
+                                               placeholder="{{$spot->tag1}}">
+                                        <input type="text" class="form-control m-3" name="tag2"
+                                               placeholder="{{$spot->tag2}}">
+                                        <input type="text" class="form-control m-3" name="tag3"
+                                               placeholder="{{$spot->tag3}}">
+                                    </div>
                                 </th>
                             </tr>
 

@@ -5,13 +5,17 @@
     <div class="row">
         <div class="card col-lg-12">
             <div class="card-body">
-                <div class="col-12 m-3">
-                    <h3 class="text-center">Register Topost</h3>
+
+                <div class="col-12 m-3 text-center">
+                    <h3>Register Topost</h3>
+                    <p>宛先登録</p>
                 </div>
-                <div class="m-3 text-center">
-                    <h5>商品の発送先を決定します。</h5>
+                <div class="col-12 m-3">
+                    <h5></h5>
+                    <p>商品の発送先を決定します。</p>
                 </div>
 
+                <img src="img/s_line.png">
 
                 <div class="col-12">
                     <form action="/Register_Address">

@@ -87,7 +87,7 @@
                             @csrf
                             <input type="hidden" value="{{$items->id}}" name="itemid">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Cart Item Cnt</label>
+                                <label for="exampleFormControlSelect1">Cart Item Cnt　/　購入個数</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="itemcnt">
                                     <option name="itemcnt" value="1">1点</option>
                                     <option name="itemcnt" value="2">2点</option>
@@ -96,7 +96,7 @@
                                     <option name="itemcnt" value="5">5点</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">購入</button>
+                            <button type="submit" class="btn btn-primary btn-block">Purchase　/　購入</button>
                         </form>
                     @endguest
 
@@ -138,7 +138,7 @@
                                     @foreach($item as $items)
                                         <input type="hidden" value="{{$items->id}}" name="itemid">
                                     @endforeach
-                                    <button type="submit" class="btn btn-primary">投稿</button>
+                                    <button type="submit" class="btn btn-primary">Post</button>
                                 </th>
                                 </tbody>
                             </table>
@@ -149,7 +149,7 @@
                     <table class="table table-borderless">
                         <thead>
                         <tr>
-                            <td><h3>Average Evakuation</h3></td>
+                            <td><h3>Average Evaluation</h3></td>
                             <td><h3>{{$evaluation}}</h3></td>
                         </tr>
                         <tr>

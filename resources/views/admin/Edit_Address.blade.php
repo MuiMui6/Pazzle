@@ -5,12 +5,22 @@
         <div class="card col-lg-12">
             <div class="card-body">
 
+                <div class="m-3">
+                    <a href="/admin/All_Address">All Addressへ戻る</a>
+                </div>
                 <div class="col-12 m-3">
-                    <h3 class="text-center">Edit Address</h3>
+                    <h3 class="text-center">Detail / Edit Address</h3>
+                    <p class="text-center">住所詳細/編集</p>
                 </div>
                 <div class="m-3">
-                    <h5>住所に関する情報を編集できます。</h5>
+                    <h5>I confirm it in detail and can edit the information about applicable address data.</h5>
+                    <p>該当住所データに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <form action="/admin/Edit_Address/Update" method="post">
                     @csrf
                     @foreach($addresses as $address)
