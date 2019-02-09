@@ -17,6 +17,11 @@
                     <p>該当ユーザデータに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
 
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <form action="/admin/Edit_User/Detail" method="post">
                     @csrf
                     <table class="table table-borderless">

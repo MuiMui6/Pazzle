@@ -21,6 +21,12 @@
                     <p>{{Auth::user()->name}}様の情報を編集できます。</p>
                 </div>
 
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
+                
                 <img src="img/s_line.png">
 
 
