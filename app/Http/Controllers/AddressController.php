@@ -16,7 +16,9 @@ class AddressController extends Controller
             ->orderBy('addresses.id', '1')
             ->paginate(10);
 
-        return view('/All_Address', compact('addresses'));
+        $message = null;
+
+        return view('/All_Address', compact('addresses', 'message'));
     }
 
 
@@ -60,14 +62,16 @@ class AddressController extends Controller
             ->orderBy('addresses.id', '1')
             ->paginate(10);
 
-        return view('/All_Address', compact('addresses'));
+        $message = '追加しました';
+
+        return view('/All_Address', compact('addresses', 'message'));
     }
 
 
 //======================================================================================================================
 //
 //======================================================================================================================
-    public function create(Request $request)
+    public function create()
     {
         return view('/Register_Address');
     }
@@ -81,7 +85,7 @@ class AddressController extends Controller
     {
         $address = Address::findOrFail($request->id);
         $chg = false;
-
+        $message = null;
 
         if ($request->toname <> null) {
             $vtoname = $request->validate(['toname' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
@@ -115,18 +119,19 @@ class AddressController extends Controller
             $address->updaterid = $request->userid;
             $address->updated_at = now();
             $address->save();
+            $message = '更新しました';
         }
 
         $addresses = Address::where('userid', $request->userid)
             ->orderBy('id', '1')
             ->paginate(10);
-        $user = User::where('id',$request->userid)->value('rank');
+        $user = User::where('id', $request->userid)->value('rank');
 
         if ($user == '1') {
-            return view('/admin/All_Address', compact('addresses'));
+            return view('/admin/All_Address', compact('addresses','message'));
         }
 
-        return view('/All_Address', compact('addresses'));
+        return view('/All_Address', compact('addresses','message'));
 
     }
 
@@ -152,7 +157,9 @@ class AddressController extends Controller
             ->orderBy('addresses.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Address', compact('addresses'));
+        $message = null;
+
+        return view('/admin/All_Address', compact('addresses','message'));
     }
 
 
@@ -161,6 +168,7 @@ class AddressController extends Controller
 //======================================================================================================================
     public function search(Request $request)
     {
+        $message = null;
         $addresses = Address::join('users', 'users.id', '=', 'addresses.userid')
             ->select([
                 'addresses.id',
@@ -221,7 +229,7 @@ class AddressController extends Controller
             }
         }
 
-        return view('/admin/All_Address', compact('addresses'));
+        return view('/admin/All_Address', compact('addresses','message'));
     }
 
 
@@ -233,6 +241,8 @@ class AddressController extends Controller
 //======================================================================================================================
     public function detail(Request $request)
     {
+        $message = null;
+
         $addresses = Address::join('users', 'users.id', '=', 'addresses.userid')
             ->where('addresses.id', $request->id)
             ->select([
@@ -251,7 +261,7 @@ class AddressController extends Controller
         $updatername = Address::join('users', 'users.id', '=', 'addresses.updaterid')
             ->distinct('users.name')->get();
 
-        return view('/admin/Edit_Address', compact('addresses', 'updatername'));
+        return view('/admin/Edit_Address', compact('addresses', 'updatername','message'));
     }
 
 
@@ -265,6 +275,7 @@ class AddressController extends Controller
     {
         $address = Address::findOrFail($request->id);
         $chg = false;
+        $message = null;
 
         if ($request->toname <> null) {
             $vtoname = $request->validate(['toname' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
@@ -301,6 +312,7 @@ class AddressController extends Controller
             $address->updaterid = $request->userid;
             $address->updated_at = now();
             $address->save();
+            $message = '更新しました';
         }
 
 
@@ -323,7 +335,7 @@ class AddressController extends Controller
         $updatername = Address::join('users', 'users.id', '=', 'addresses.updaterid')
             ->distinct('users.name')->get();
 
-        return view('/admin/Edit_Address', compact('addresses', 'updatername'));
+        return view('/admin/Edit_Address', compact('addresses', 'updatername','message'));
 
     }
 

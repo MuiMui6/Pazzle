@@ -22,6 +22,11 @@
                 <div class="col-lg-12 m-3">
                     <h5>住所に関する情報を作成・編集できます。</h5>
                 </div>
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
 
                 <div class="col-lg-12 m-3">
                     <form action="/Register_Address" method="get">

@@ -14,6 +14,12 @@
                     <p>住所に関する情報を管理することが出来ます。</p>
                 </div>
 
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
+
                 <div class="col-lg-12 m-3 mb-4">
                     <form action="/admin/All_Address/Search" method="get">
                         @csrf

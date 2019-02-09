@@ -16,6 +16,11 @@
                     <h5>I confirm it in detail and can edit the information about applicable address data.</h5>
                     <p>該当住所データに関する情報を詳細確認・編集することが出来ます。</p>
                 </div>
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 <form action="/admin/Edit_Address/Update" method="post">
                     @csrf
                     @foreach($addresses as $address)
