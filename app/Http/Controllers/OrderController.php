@@ -10,8 +10,7 @@ class OrderController extends Controller
     //view
     public function view()
     {
-        $searchclumn = null;
-        $vkeyword = null;
+        $message = null;
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
             ->join('items', 'items.id', '=', 'orders.itemid')
@@ -31,7 +30,7 @@ class OrderController extends Controller
             ->OrderBy('orders.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
+        return view('/admin/All_Order', compact('orders', 'message'));
     }
 
 
@@ -44,6 +43,7 @@ class OrderController extends Controller
     public function search(Request $request)
     {
 
+        $message = null;
         if ($request->keyword) {
             $vkeyword = $request->validate(['keyword' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
             $vkeyword = implode($vkeyword);
@@ -113,7 +113,7 @@ class OrderController extends Controller
 
             }
 
-            return view('/admin/All_Order', compact('orders'));
+            return view('/admin/All_Order', compact('orders','message'));
 
         }
 
@@ -262,12 +262,15 @@ class OrderController extends Controller
     public function payconfirmation(Request $request)
     {
 
+        $message = null;
         $order = Order::where('id', $request->orderid)->value('userid');
 
         if ($order <> $request->userid) {
             Order::where('id', $request->orderid)
                 ->update(['pconfirmorid' => $request->userid, 'updated_at' => now()]);
         }
+
+        $message = $request->orderid.'の支払確認完了しました。受取申請が届くまでお待ちください';
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
             ->join('items', 'items.id', '=', 'orders.itemid')
@@ -286,7 +289,7 @@ class OrderController extends Controller
             ->OrderBy('orders.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Order', compact('orders', 'vkeyword', 'searchclumn'));
+        return view('/admin/All_Order', compact('orders', 'message'));
     }
 
 

@@ -14,7 +14,11 @@
                     <p>受注に関する情報を管理することが出来ます。</p>
                 </div>
 
-
+                @if($message <> null)
+                    <div class="alert alert-info m-3">
+                        {{$message}}
+                    </div>
+                @endif
                 {{--検索--}}
                 <div class="col-lg-12 m-3">
 
