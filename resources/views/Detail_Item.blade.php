@@ -83,21 +83,27 @@
                             <p>購入していただくには<a href="/register">新規登録</a>または<a href="/login">ログイン</a>して頂く必要があります。</p>
                         </div>
                     @else
-                        <form action="/Add_Cart" method="post">
-                            @csrf
-                            <input type="hidden" value="{{$items->id}}" name="itemid">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Cart Item Cnt　/　購入個数</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="itemcnt">
-                                    <option name="itemcnt" value="1">1点</option>
-                                    <option name="itemcnt" value="2">2点</option>
-                                    <option name="itemcnt" value="3">3点</option>
-                                    <option name="itemcnt" value="4">4点</option>
-                                    <option name="itemcnt" value="5">5点</option>
-                                </select>
+                        @if(Auth::user()->rank <> 2)
+                            <form action="/Add_Cart" method="post">
+                                @csrf
+                                <input type="hidden" value="{{$items->id}}" name="itemid">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Cart Item Cnt　/　購入個数</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="itemcnt">
+                                        <option name="itemcnt" value="1">1点</option>
+                                        <option name="itemcnt" value="2">2点</option>
+                                        <option name="itemcnt" value="3">3点</option>
+                                        <option name="itemcnt" value="4">4点</option>
+                                        <option name="itemcnt" value="5">5点</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Purchase　/　購入</button>
+                            </form>
+                        @else
+                            <div class="alert alert-danger text-lg-center col-12">
+                                <p>現在アカウント停止中のため、購入できません。</p>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Purchase　/　購入</button>
-                        </form>
+                        @endif
                     @endguest
 
                     <div class="col-12 m-3">

@@ -40,7 +40,7 @@ class UserController extends Controller
         }
 
         if ($request->email <> null) {
-            $vemail = $request->validate(['email' => ['regex:/^[a-zA-Zａ-ｚA-Z@.-]]+$/', 'max:30']]);
+            $vemail = $request->validate(['email' => ['regex:/^[a-zA-Zａ-ｚA-Z@.-]+$/', 'max:30']]);
             $vemail = implode($vemail);
             $user->email = $vemail;
             $chg = true;
