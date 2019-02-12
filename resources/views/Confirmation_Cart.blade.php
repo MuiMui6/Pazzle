@@ -13,8 +13,9 @@
                     <h5></h5>
                     <p>カートに入っている商品を確認できます。</p>
                 </div>
-
-                <img src="img/s_line.png">
+                <div class="text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <table class="table table-borderless">
                     <thead>
