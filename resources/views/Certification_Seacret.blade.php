@@ -13,7 +13,7 @@
                 <form action="/Topost_Cart" method="post">
                     @csrf
                     <div class="col-lg-12 text-center m-3">
-                        <p>ご登録時に登録した“Seacret Key”をご記入ください。</p>
+                        <p>ご登録時に登録した“Secret Key”をご記入ください。</p>
                         <p class="text-danger">※3回間違えるとログアウトします。※</p>
 
                         <input type="password" name="secretkey" class="form-control">

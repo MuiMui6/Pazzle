@@ -36,7 +36,7 @@
                             </tr>
 
                             <tr>
-                                <th class="text-center">宛先</th>
+                                <th class="text-center">Address</th>
                                 <th class="text-center">
                                     <p>〒{{substr($addresses->post,0,3)}}
                                         -{{substr($addresses->post,4,7)}}</p>
@@ -81,6 +81,7 @@
                             下のボタンをクリックすると購入が確定します。
                         </div>
                         <input type="hidden" value="{{$addid}}" name="addid">
+                        <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <input type="submit" class="mb-3 btn btn-danger btn-block" value="Order!">
                     </div>
