@@ -13,8 +13,9 @@
                     <h5></h5>
                     <p>カートに入っている商品を確認できます。</p>
                 </div>
-
-                <img src="img/s_line.png">
+                <div class="text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <table class="table table-borderless">
                     <thead>
@@ -40,7 +41,14 @@
                     @foreach($CartItems as $index =>$item)
 
                         <tr>
-                            <th class="text-center"><img src="img/{{$item->name}}.jpg" height="150px"></th>
+                            <th class="text-center">
+                                @if($item->image == null)
+                                    <img class="card-img-top" src="img/{{$item->name}}.jpg" style="width: 200px;height: 150px;">
+                                @else
+                                    <img class="card-img-top"
+                                         src="storage/items/{{$item->id}}/{{$item->image}}" style="width: 200px;height: 150px;">
+                                @endif
+                            </th>
                             <th class="text-center">{{$item->name}}</th>
                             <th class="text-center">{{$CartItemCnt[$index]}}</th>
                             <th class="text-center">{{$item->price}}円</th>

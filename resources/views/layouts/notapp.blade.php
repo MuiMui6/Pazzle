@@ -40,6 +40,16 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <form action="/Register_Order" method="get">
+                            @csrf
+                            <button class="btn btn-link" type="submit">
+                                Origin Item Order
+                            </button>
+                        </form>
+                    </li>
+
                     <li class="nav-item">
                         <a class="btn btn-link" href="/Confirmation_Cart">
                             Cart

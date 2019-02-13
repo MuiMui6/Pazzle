@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Item;
 use App\ItemComment;
 use App\Order;
 use App\Peas;
@@ -11,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
 {
@@ -151,9 +153,9 @@ class CartController extends Controller
 
         } else {
 
-            $count = request()->session()->get("COUNTER",0);
+            $count = request()->session()->get("COUNTER", 0);
             $count = $count + 1;
-            request()->session()->put("COUNTER",$count);
+            request()->session()->put("COUNTER", $count);
 
             if ($count > 2) {
                 $CartItems = request()->session()->forget("CART");
@@ -245,8 +247,89 @@ class CartController extends Controller
 //======================================================================================================================
 //
 //======================================================================================================================
-    //public function (){
-    //
-    //}
+    public function oio_view()
+    {
+
+        $sizes = Size::get();
+
+        $peases = Peas::get();
+
+        return view('/Register_Order', compact('sizes', 'peases'));
+    }
+
+//======================================================================================================================
+//
+//======================================================================================================================
+    public function oio_add(Request $request)
+    {
+        $price = Peas::where('id', $request->peasid)->value('cnt');
+
+        $id = Item::insertGetId([
+            'name' => $request->userid . now()->format('Ymd'),
+            'sizeid' => $request->sizeid,
+            'peasid' => $request->peasid,
+            'price' => $price * 1.75,
+            'view' => 0,
+            'createrid' => $request->userid,
+            'created_at' => now(),
+            'updaterid' => $request->userid,
+            'updated_at' => now()
+        ]);
+
+
+        $items = Item::FindOrFail($id);
+        $request->validate(['img' => 'image']);
+        //画像登録
+        $imgname = now()->format('Ymd') . '.jpg';
+        Storage::makeDirectory('public/items/' . $id);
+        $request->file('img')->storeAs(
+            'public/items/' . $id, $imgname);
+        $items->image = $imgname;
+        $items->save();
+
+        $index = $request->itemid;
+        $itemcnt = $request->itemcnt;
+
+        $items = DB::select("SELECT * FROM items where id = ".$id, [$index]);
+
+
+        if (count($items)) {
+            $CartItems = request()->session()->get("CART", []);
+            $CartItems[] = $items[0];
+
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
+            $CartItemCnt[] = $itemcnt[0];
+
+            request()->session()->put("CART", $CartItems);
+            request()->session()->put("CARTCNT", $CartItemCnt);
+
+            $CartItems = request()->session()->get("CART", []);
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
+            $itemcnt = 0;
+            $price = 0;
+
+            foreach ($CartItems as $index => $items) {
+                $itemcnt = $itemcnt + $CartItemCnt[$index];
+                $price = $price + ($items->price * $CartItemCnt[$index]);
+            }
+
+            return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
+
+
+        } else {
+
+            return abort(404);
+
+        }
+
+
+    }
+
+//======================================================================================================================
+//
+//======================================================================================================================
+//public function (){
+//
+//}
 
 }

@@ -268,9 +268,12 @@ class OrderController extends Controller
         if ($order <> $request->userid) {
             Order::where('id', $request->orderid)
                 ->update(['pconfirmorid' => $request->userid, 'updated_at' => now()]);
+
+            $message = $request->orderid.'の支払確認完了しました。受取申請が届くまでお待ちください';
+        }else{
+            $message =  $request->orderid.'の支払確認完了しませんでした。';
         }
 
-        $message = $request->orderid.'の支払確認完了しました。受取申請が届くまでお待ちください';
 
         $orders = Order::join('users', 'users.id', '=', 'orders.userid')
             ->join('items', 'items.id', '=', 'orders.itemid')
@@ -318,9 +321,7 @@ class OrderController extends Controller
 
         return view('/History_Cart', compact('items'));
     }
-
-    //テンプレート
-
+//テンプレート
 //======================================================================================================================
 //
 //======================================================================================================================

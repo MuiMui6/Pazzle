@@ -14,9 +14,9 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');               //商品ID
-            $table->string('name');                     //商品名
-            $table->text('profile');                    //紹介文
+            $table->increments('id');                   //商品ID
+            $table->string('name')->nullable();         //商品名
+            $table->text('profile')->nullable();        //紹介文
             $table->integer('price');                   //金額
             $table->integer('sizeid');                  //サイズ
             $table->integer('peasid');                  //peas数

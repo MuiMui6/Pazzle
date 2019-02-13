@@ -73,7 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
 //購入履歴
     Route::get('/History_Cart', 'CartController@history')->middleware('verified');
 
+//オリジナル商品注文
+    Route::get('/Register_Order','CartController@oio_view')->middleware('verified');
 
+//オリジナル商品注文追加
+    Route::post('Register_Order/Add','CartController@oio_add')->middleware('verified');
 //===============================================================================================================
 //ItemCommentController　完了
 //===============================================================================================================
