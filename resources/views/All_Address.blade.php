@@ -32,6 +32,7 @@
                     <form action="/Register_Address" method="get">
                         @csrf
                         <button type="submit" class="btn btn-danger">
+                            <input type="hidden" value="false" name="authsec">
                             New Address
                         </button>
                     </form>

@@ -18,8 +18,9 @@
                 <img src="img/s_line.png">
 
                 <div class="col-12">
-                    <form action="/Register_Address">
+                    <form action="/Register_Address" method="get">
                         @csrf
+                        <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <button type="submit" class="btn btn-danger btn-block">
                             New Address
@@ -48,7 +49,7 @@
                             @endforeach
                             </tbody>
                         </table>
-
+                        <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <input type="submit" class="btn btn-block" value="Confirmation Cart">
 

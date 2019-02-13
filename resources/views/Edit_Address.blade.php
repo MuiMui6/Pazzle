@@ -61,6 +61,7 @@
                                 <th scope="row"></th>
                                 <td>
                                     <input type="hidden" value="{{$address->id}}" name="id">
+                                    <input type="hidden" value="{{$authsec}}" name="authsec">
                                     <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     <button type="submit" class="btn btn-info">保存</button>
                                 </td>

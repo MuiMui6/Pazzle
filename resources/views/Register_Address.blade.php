@@ -57,6 +57,7 @@
                             <th scope="row"></th>
                             <th>
                                 <input type="hidden" value="{{Auth::user()->id}}" name="userid">
+                                <input type="hidden" value="{{$authsec}}" name="authsec">
                                 <input type="submit" class="btn btn-info" value="保存">
                             </th>
                         </tr>

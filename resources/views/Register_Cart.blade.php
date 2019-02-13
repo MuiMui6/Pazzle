@@ -61,7 +61,13 @@
                         <tbody>
                         @foreach($CartItems as $index => $items)
                             <tr>
-                                <th class="text-center"><img src="img/{{$items->name}}.jpg" height="150px"></th>
+                                <th class="text-center">
+                                    @if($items->image == null)
+                                        <img src="img/{{$items->name}}.jpg" height="150px">
+                                    @else
+                                        <img src="storage/items/{{$items->id}}/{{$items->image}}" height="150px">
+                                    @endif
+                                </th>
                                 <th class="text-center">{{$items->name}}</th>
                                 <th class="text-center">{{$CartItemCnt[$index]}}</th>
                                 <th class="text-center">{{$items->price}}円</th>
