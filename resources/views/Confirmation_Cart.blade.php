@@ -10,7 +10,7 @@
                     <p class="text-center">カート内確認</p>
                 </div>
                 <div class="col m-3">
-                    <h5></h5>
+                    <h5>You can check the items in the cart.</h5>
                     <p>カートに入っている商品を確認できます。</p>
                 </div>
                 <div class="text-center">

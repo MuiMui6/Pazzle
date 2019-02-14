@@ -5,19 +5,12 @@
         <div class="card col-lg-12 text-center">
             <div class="card-body">
 
-                <div class="col-12 m-3">
-                    <h3 class="text-center">Edit User</h3>
-                </div>
-                <div class="m-3">
-                    <h5>ユーザ様の情報の確認・編集が出来ます。</h5>
-                </div>
-
                 <div class="col-12 m-3 text-center">
                     <h3>Edit User</h3>
                     <p>ユーザ編集</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5>{{Auth::user()->name}}</h5>
+                    <h5>You can edit information.</h5>
                     <p>{{Auth::user()->name}}様の情報を編集できます。</p>
                 </div>
 
@@ -66,7 +59,8 @@
                             <tr>
                                 <th scope="row">Secret Key</th>
                                 <td>
-                                    <input type="password" class="form-control" placeholder="Secret Key" name="secretkey">
+                                    <input type="password" class="form-control" placeholder="Secret Key"
+                                           name="secretkey">
                                 </td>
                             </tr>
 

@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-block btn-primary mt-3">
                             <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                             <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
-                            Certification　/　-　認証　-
+                            Certification　/　認証　
                         </button>
                     </div>
                 </form>

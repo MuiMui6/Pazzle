@@ -10,8 +10,8 @@
                     <p>観光地記事一覧</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5>{{Auth::user()->name}}</h5>
-                    <p>{{Auth::user()->name}}さまが書かれた記事一覧です。</p>
+                    <h5>This is a list of articles written by you.</h5>
+                    <p>{{Auth::user()->name}}様が書かれた記事一覧です。</p>
                 </div>
 
 

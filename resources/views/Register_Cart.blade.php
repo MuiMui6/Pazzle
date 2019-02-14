@@ -12,7 +12,7 @@
                         <p>カート最終確認</p>
                     </div>
                     <div class="col-12 m-3">
-                        <h5></h5>
+                        <h5>You can confirm the final confirmation as accepting the order as follows.</h5>
                         <p>以下の通りに受注を受け付けて良いか、最終確認ができます。</p>
                     </div>
 
@@ -43,7 +43,7 @@
                                     <p>〒{{substr($addresses->post,0,3)}}
                                         -{{substr($addresses->post,4,7)}}</p>
                                     <p>{{$addresses->add1}}</p>
-                                    <p>{{$addresses->Add2}}</p>
+                                    <p>{{$addresses->add2}}</p>
                                 </th>
                             </tr>
                         @endforeach

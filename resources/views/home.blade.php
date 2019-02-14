@@ -41,7 +41,9 @@
                     <form action="/Detail" method="get">
                         @csrf
                         <input type="hidden" value="{{$items->id}}" name="itemid">
-                        <input type="submit" class="btn btn-info btn-block" value="Detail">
+                        <button type="submit" class="btn btn-info btn-block">
+                        Detail / 詳細
+                        </button>
                     </form>
 
                 </div>

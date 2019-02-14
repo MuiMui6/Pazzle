@@ -11,7 +11,7 @@
                     <p>観光地記事編集</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
+                    <h5>You can edit sightseeing spots articles.</h5>
                     <p>観光地記事の編集ができます。</p>
                 </div>
 
