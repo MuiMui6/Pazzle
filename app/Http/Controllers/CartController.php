@@ -161,14 +161,15 @@ class CartController extends Controller
             }
 
             if ($itemcnt > 0) {
-
                 //アドレス指定
                 $address = Address::where('userid', $request->userid)->get();
                 $authsec = true;
 
                 return view('/Register_Topost', compact('address', 'authsec'));
-
-            } elseif ($request->secretkey <> $anser || $itemcnt <= 0) {
+            }else{
+                return abort(404);
+            }
+        } elseif ($request->secretkey <> $anser) {
 
                 $count = request()->session()->get("COUNTER", 0);
                 $count = $count + 1;
@@ -180,11 +181,12 @@ class CartController extends Controller
                     Auth::logout();
                     return redirect('/');
                 } else {
-                    return redirect('/Confirmation_Cart');
+                    $itemcnt = $request->itemcnt;
+                    return view('/Certification_Seacret', compact('itemcnt'));
                 }
             }
-        }
-        return redirect('/Confirmation_Cart');
+        $itemcnt = $request->itemcnt;
+        return view('/Certification_Seacret', compact('itemcnt'));
     }
 
 

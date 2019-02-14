@@ -11,7 +11,7 @@
                     <p>宛先登録</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
+                    <h5>We will decide the shipping address of the item.</h5>
                     <p>商品の発送先を決定します。</p>
                 </div>
 
@@ -25,7 +25,7 @@
                         <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <button type="submit" class="btn btn-danger btn-block">
-                            New Address
+                            New Address　/　住所追加
                         </button>
                     </form>
 
@@ -53,7 +53,9 @@
                         </table>
                         <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                        <input type="submit" class="btn btn-block" value="Confirmation Cart">
+                        <button type="submit" class="btn btn-block">
+                            Confirmation Cart /　最終確認
+                        </button>
 
                     </form>
                 </div>

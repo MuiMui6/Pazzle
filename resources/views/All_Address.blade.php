@@ -10,20 +10,14 @@
                     <p>住所一覧</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
-                    <p>住所を登録・編集できます。</p>
+                    <h5>You can register and confirm your address.</h5>
+                    <p>住所を登録・確認ができます。</p>
                 </div>
 
                 <div class="col-12 m-3 text-center">
                 <img src="img/s_line.png">
                 </div>
 
-                <div class="col-12 m-3">
-                    <h3 class="text-center">All Address</h3>
-                </div>
-                <div class="col-lg-12 m-3">
-                    <h5>住所に関する情報を作成・編集できます。</h5>
-                </div>
                 @if($message <> null)
                     <div class="alert alert-info m-3">
                         {{$message}}
@@ -71,6 +65,7 @@
                                     <div class="col text-center">
                                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                         <input type="hidden" value="{{$address->id}}" name="id">
+                                        <input type="hidden" value="{{$authsec}}" name="authsec">
                                         <button type="submit" class="btn btn-primary">
                                             EDIT
                                         </button>

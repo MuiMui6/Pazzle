@@ -11,8 +11,8 @@
                     <p>住所一覧</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
-                    <p>住所の確認が出来ます。</p>
+                    <h5>You can register your address.</h5>
+                    <p>住所の登録が出来ます。</p>
                 </div>
 
 
@@ -61,7 +61,9 @@
                             <th>
                                 <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                 <input type="hidden" value="{{$authsec}}" name="authsec">
-                                <input type="submit" class="btn btn-info" value="保存">
+                                <button type="submit" class="btn btn-info">
+                                Save　/　保存
+                                </button>
                             </th>
                         </tr>
                         </tbody>

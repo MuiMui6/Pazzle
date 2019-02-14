@@ -11,7 +11,7 @@
                     <p>住所編集</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
+                    <h5>You can edit the corresponding address data.</h5>
                     <p>該当住所データを編集できます。</p>
                 </div>
 
@@ -66,7 +66,7 @@
                                     <input type="hidden" value="{{$address->id}}" name="id">
                                     <input type="hidden" value="{{$authsec}}" name="authsec">
                                     <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                                    <button type="submit" class="btn btn-info">保存</button>
+                                    <button type="submit" class="btn btn-info">Save　/　保存</button>
                                 </td>
                             </tr>
 

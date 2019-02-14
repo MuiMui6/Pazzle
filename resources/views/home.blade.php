@@ -9,52 +9,43 @@
         @foreach( $item as $items )
             <div class="card m-2" style="width: 17rem;">
                 @if($items->image == null)
-                    <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px">
+                    <img class="card-img-top" src="img/{{$items -> name}}.jpg" width="150px" height="200px">
                 @else
-                    <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}" width="150px">
+                    <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}" width="150px"
+                         height="200px">
                 @endif
-                <div class="card-body">
-                    <p class="card-text">
+                <div class="card-body card-text">
                     <table class="table table-borderless">
                         <tbody>
                         {{--商品名--}}
                         <tr>
                             <th scope="row">Name</th>
-                            <td>{{$items -> name}}</td>
-                        </tr>
-
-                        {{--紹介文--}}
-                        <tr>
-                            <th scope="row">Profile</th>
-                            <td>{{$items -> profile}}</td>
+                            <th>{{$items -> name}}</th>
                         </tr>
 
                         {{--サイズ--}}
                         <tr>
                             <th scope="row">Size</th>
-                            <td>{{$items->height}}×{{$items->width}}（mm）</td>
+                            <th>{{$items->height}}×{{$items->width}}（mm）</th>
                         </tr>
 
                         {{--ピース数--}}
                         <tr>
                             <th scope="row">PeasCnt</th>
-                            <td>{{$items->cnt}}peas</td>
-                        </tr>
-
-                        {{--詳細--}}
-                        <tr>
-                            <th scope="row"></th>
-                            <td>
-                                <form action="/Detail" method="get">
-                                    @csrf
-                                    <input type="hidden" value="{{$items->id}}" name="itemid">
-                                    <input type="submit" class="btn btn-info" value="Detail">
-                                </form>
-                            </td>
+                            <th>{{$items->cnt}}peas</th>
                         </tr>
                         </tbody>
                     </table>
-                    </p>
+
+                    {{--詳細--}}
+                    <form action="/Detail" method="get">
+                        @csrf
+                        <input type="hidden" value="{{$items->id}}" name="itemid">
+                        <button type="submit" class="btn btn-info btn-block">
+                        Detail / 詳細
+                        </button>
+                    </form>
+
                 </div>
             </div>
         @endforeach

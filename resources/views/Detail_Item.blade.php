@@ -61,7 +61,7 @@
                         <tr>
                             <th scope="row">
                                 <p>Spot Tag</p>
-                                <p>※クリックすると観光ページに移行します</p>
+                                <p>※クリックすると観光サイトに移行します</p>
                             </th>
                             <td class="form-inline">
                                 <form action="/Spotindex" method="get">

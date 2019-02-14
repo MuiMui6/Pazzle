@@ -19,42 +19,52 @@ class ItemController extends Controller
         $keyword = $request->keyword;
         $key_height = $request->key_height;
         $key_width = $request->key_width;
+        $key_peas = $request->key_peas;
 
         //テーブル全取得
         $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
             ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-            ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+            ->select('items.id', 'items.name', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
             ->where('items.view', '=', '1')
-            ->orderBy('items.created_at', '1')
-            ->paginate(9);
+            ->orderBy('items.id', '1')
+            ->paginate(15);
 
         //もしキーワードがあれば
         if ($keyword <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->select('items.id', 'items.name', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->orwhere('items.name', 'like', '%' . $keyword . '%')
                 ->orwhere('items.tag1', 'like', '%' . $keyword . '%')
                 ->orwhere('items.tag2', 'like', '%' . $keyword . '%')
                 ->orwhere('items.tag3', 'like', '%' . $keyword . '%')
                 ->orwhere('items.profile', 'like', '%' . $keyword . '%')
                 ->orwhere('items.price', 'like', '%' . $keyword . '%')
-                ->orwhere('peases.cnt', 'like', '%' . $keyword . '%')
                 ->where('items.view', '=', '1')
-                ->orderBy('items.created_at', '1')
-                ->paginate(9);
+                ->orderBy('items.id', '1')
+                ->paginate(15);
         }
 
         //もしサイズ指定があれば
         if ($key_height <> null && $key_width <> null) {
             $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
                 ->join('sizes', 'items.sizeid', '=', 'sizes.id')
-                ->select('items.id', 'items.name', 'items.profile', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->select('items.id', 'items.name', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
                 ->where('sizes.height', $key_height)
                 ->where('sizes.width', $key_width)
                 ->where('items.view', '=', '1')
-                ->orderBy('items.created_at', '1')
-                ->paginate(9);
+                ->orderBy('items.id', '1')
+                ->paginate(15);
+        }
+
+        if ($key_peas <> null) {
+            $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+                ->select('items.id', 'items.name', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->where('peases.cnt', $key_peas)
+                ->where('items.view', '=', '1')
+                ->orderBy('items.id', '1')
+                ->paginate(15);
         }
 
         //ピース数
@@ -142,7 +152,7 @@ class ItemController extends Controller
 
         $message = null;
 
-        return view('/admin/All_Item', compact('items','message'));
+        return view('/admin/All_Item', compact('items', 'message'));
     }
 
 
@@ -182,7 +192,7 @@ class ItemController extends Controller
                 ->OrderBy('items.id', '1')
                 ->paginate(10);
 
-        } elseif($request->clumn == 'itemname'){
+        } elseif ($request->clumn == 'itemname') {
 
             $items = Item::join('users', 'users.id', '=', 'items.createrid')
                 ->join('peases', 'peases.id', '=', 'items.peasid')
@@ -205,7 +215,7 @@ class ItemController extends Controller
                 ->orwhere('items.name', 'like', '%' . $vkeyword . '%')
                 ->OrderBy('items.id', '1')
                 ->paginate(10);
-        }else {
+        } else {
             $items = Item::join('users', 'users.id', '=', 'items.createrid')
                 ->join('peases', 'peases.id', '=', 'items.peasid')
                 ->join('sizes', 'sizes.id', '=', 'items.sizeid')
@@ -229,7 +239,7 @@ class ItemController extends Controller
                 ->paginate(10);
         }
 
-        return view('/admin/All_Item', compact('items','message'));
+        return view('/admin/All_Item', compact('items', 'message'));
     }
 
 
@@ -253,8 +263,14 @@ class ItemController extends Controller
 //======================================================================================================================
     public function save(Request $request)
     {
-
-        $message = '追加しました';
+        $request->validate([
+            'name'=>'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'profile'=>'max:255|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠！？・（）―～]+$/',
+            'price'=>'max:10|regex:/^[0-9]+$/',
+            'tag1'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'tag2'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'tag3'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/'
+        ]);
 
         //DB処理
         $id = Item::insertGetId([
@@ -273,6 +289,7 @@ class ItemController extends Controller
             'updated_at' => now()
         ]);
 
+        $message = '追加しました';
 
         if ($request->hasFile('img')) {
             $items = Item::FindOrFail($id);
@@ -304,7 +321,7 @@ class ItemController extends Controller
             ->OrderBy('items.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Item', compact('items','message'));
+        return view('/admin/All_Item', compact('items', 'message'));
 
     }
 
@@ -367,7 +384,7 @@ class ItemController extends Controller
         }
 
         if ($request->name <> null && $request->name <> $items->name) {
-            $vname = $request->validate(['name' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vname = $request->validate(['name' => 'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vname = implode($vname);
             $items->name = $vname;
             $chg = true;
@@ -375,7 +392,7 @@ class ItemController extends Controller
 
 
         if ($request->profile <> null && $request->profile <> $items->profile) {
-            $vprofile = $request->validate(['profile' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
+            $vprofile = $request->validate(['profile' => 'max:255|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
             $vprofile = implode($vprofile);
             $items->profile = $vprofile;
             $chg = true;
@@ -384,7 +401,7 @@ class ItemController extends Controller
 
 
         if ($request->price <> null && $request->price <> $items->price) {
-            $vprice = $request->validate(['price' => 'regex:/^[0-9]+$/']);
+            $vprice = $request->validate(['price' => 'max:10|regex:/^[0-9]+$/']);
             $vprice = implode($vprice);
             $items->price = $vprice;
             $chg = true;
@@ -406,7 +423,7 @@ class ItemController extends Controller
 
 
         if ($request->tag1 <> null && $request->tag1 <> $items->tag1) {
-            $vtag = $request->validate(['tag1' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = $request->validate(['tag1' => 'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $items->tag1 = $vtag;
             $chg = true;
@@ -414,14 +431,14 @@ class ItemController extends Controller
 
 
         if ($request->tag2 <> null && $request->tag2 <> $items->tag2) {
-            $vtag = $request->validate(['tag2' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = $request->validate(['tag2' => 'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $items->tag2 = $vtag;
             $chg = true;
         }
 
         if ($request->tag3 <> null && $request->tag3 <> $items->tag3) {
-            $vtag = $request->validate(['tag3' => 'regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtag = $request->validate(['tag3' => 'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $items->tag3 = $vtag;
             $chg = true;
@@ -458,7 +475,7 @@ class ItemController extends Controller
             ->OrderBy('items.id', '1')
             ->paginate(10);
 
-        return view('/admin/All_Item', compact('items','message'));
+        return view('/admin/All_Item', compact('items', 'message'));
 
     }
 

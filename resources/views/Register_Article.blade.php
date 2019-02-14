@@ -14,7 +14,7 @@
                         <p>観光地記事登録</p>
                     </div>
                     <div class="col-12 m-3">
-                        <h5></h5>
+                        <h5>You can create sightseeing articles.</h5>
                         <p>観光地記事を作成できます。</p>
                     </div>
 

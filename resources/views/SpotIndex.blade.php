@@ -24,8 +24,8 @@
                     <form action="/Detail_Spot" method="get">
                         @csrf
                         <input type="hidden" value="{{$spot->id}}" name="spotid">
-                        <button class="btn btn-primary" type="submit">
-                            Detail
+                        <button class="btn btn-primary btn-block" type="submit">
+                            Detail / 詳細
                         </button>
                     </form>
                 </div>
