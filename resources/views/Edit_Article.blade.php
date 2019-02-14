@@ -15,9 +15,7 @@
                     <p>観光地記事の編集ができます。</p>
                 </div>
 
-                <div class="col-12 m-3 text-center">
-                    <img src="img/s_line.png">
-                </div>
+                <img src="img/s_line.png">
 
                 {{--新規作成--}}
                 @foreach($spots as $spot)

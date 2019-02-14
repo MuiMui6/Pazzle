@@ -58,43 +58,22 @@ class AddressController extends Controller
             'updated_at' => now()
         ]);
 
-        if ($request->authsec <> 1) {
-            $addresses = Address::where('userid', $request->userid)
-                ->orderBy('addresses.id', '1')
-                ->paginate(10);
+        $addresses = Address::where('userid', $request->userid)
+            ->orderBy('addresses.id', '1')
+            ->paginate(10);
 
-            $message = '追加しました';
+        $message = '追加しました';
 
-            return view('/All_Address', compact('addresses', 'message'));
-        } elseif($request->authsec == 1) {
-            $CartItems = request()->session()->get("CART", []);
-            $CartItemCnt = request()->session()->get("CARTCNT", []);
-            $itemcnt = 0;
-
-            foreach ($CartItems as $index => $items) {
-                $itemcnt = $itemcnt + $CartItemCnt[$index];
-            }
-
-            if ($itemcnt > 0) {
-
-                //アドレス指定
-                $address = Address::where('userid', $request->userid)->get();
-                $authsec = true;
-
-                return view('/Register_Topost', compact('address', 'authsec'));
-            }
-        }
+        return view('/All_Address', compact('addresses', 'message'));
     }
 
 
 //======================================================================================================================
 //
 //======================================================================================================================
-    public function create(Request $request)
+    public function create()
     {
-        $authsec = $request->authsec;
-
-        return view('/Register_Address',compact('authsec'));
+        return view('/Register_Address');
     }
 
 

@@ -15,10 +15,7 @@
                     <p>住所の確認が出来ます。</p>
                 </div>
 
-
-                <div class="col-12 m-3 text-center">
-                    <img src="img/s_line.png">
-                </div>
+                <img src="img/s_line.png">
 
                 <form action="/Register_Address" method="post">
                     @csrf
@@ -60,7 +57,6 @@
                             <th scope="row"></th>
                             <th>
                                 <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                                <input type="hidden" value="{{$authsec}}" name="authsec">
                                 <input type="submit" class="btn btn-info" value="保存">
                             </th>
                         </tr>

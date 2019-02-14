@@ -14,9 +14,7 @@
                     <p>購入履歴の確認・購入した商品に関する取引が行えます。</p>
                 </div>
 
-                <div class="col-12 m-3 text-center">
-                    <img src="img/s_line.png">
-                </div>
+                <img src="img/s_line.png">
 
                 <table class="table table-striped">
                     <thead>

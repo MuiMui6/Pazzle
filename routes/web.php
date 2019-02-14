@@ -61,9 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
 //全削除
     Route::post('/AllDelete_Cart', 'CartController@alldelete')->middleware('verified');
 
-//確認キー
-    Route::get('/Cnf_Secret','CartController@cnf_secret')->middleware('verified');
-
 //宛先決定
     Route::post('/Topost_Cart', 'CartController@Topost')->middleware('verified');
 
