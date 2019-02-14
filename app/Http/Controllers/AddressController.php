@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\User;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -41,11 +42,11 @@ class AddressController extends Controller
     public function save(Request $request)
     {
 
-        $vadd = $request->validate([
-            'toname' => 'regex:/^[a-zA-Z0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
-            'post' => 'regex:/^[0-9]+$/',
-            'add1' => 'regex:/^[ぁ-んァ-ヶー一-龠]+$/',
-            'add2' => 'regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠]+$/'
+        $request->validate([
+            'toname' => 'required|max:30|regex:/^[a-zA-Z0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'post' => 'required|min:7|max:7|regex:/^[0-9]+$/',
+            'add1' => 'required|max:50|regex:/^[ぁ-んァ-ヶー一-龠]+$/',
+            'add2' => 'required|max:50|regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠]+$/'
         ]);
 
         Address::insert([
@@ -109,28 +110,28 @@ class AddressController extends Controller
         $message = null;
 
         if ($request->toname <> null) {
-            $vtoname = $request->validate(['toname' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtoname = $request->validate(['toname' => 'required|max:30|regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtoname = implode($vtoname);
             $address->toname = $vtoname;
             $chg = true;
         }
 
         if ($request->post) {
-            $vpost = $request->validate(['post' => 'regex:/^[0-9]+$/']);
+            $vpost = $request->validate(['post' => 'required|min:7|max:7|regex:/^[0-9]+$/']);
             $vpost = implode($vpost);
             $address->post = $vpost;
             $chg = true;
         }
 
         if ($request->add1) {
-            $vadd1 = $request->validate(['add1' => 'regex:/^[0-9０-９a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vadd1 = $request->validate(['add1' => 'required|max:50|regex:/^[0-9０-９a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vadd1 = implode($vadd1);
             $address->add1 = $vadd1;
             $chg = true;
         }
 
         if ($request->add2) {
-            $vadd2 = $request->validate(['add2' => 'regex:/^[0-9０-９a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vadd2 = $request->validate(['add2' => 'required|max:50|regex:/^[0-9０-９a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vadd2 = implode($vadd2);
             $address->add2 = $vadd2;
             $chg = true;
@@ -299,7 +300,7 @@ class AddressController extends Controller
         $message = null;
 
         if ($request->toname <> null) {
-            $vtoname = $request->validate(['toname' => 'regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
+            $vtoname = $request->validate(['toname' => 'required|max:30|regex:/^[a-zA-Zａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtoname = implode($vtoname);
             $address->toname = $vtoname;
             $chg = true;
@@ -307,7 +308,7 @@ class AddressController extends Controller
 
 
         if ($request->post <> null) {
-            $vpost = $request->validate(['post' => 'regex:/^[0-9]+$/']);
+            $vpost = $request->validate(['post' => 'required|min:7|max:7|regex:/^[0-9]+$/']);
             $vpost = implode($vpost);
             $address->post = $vpost;
             $chg = true;
@@ -315,7 +316,7 @@ class AddressController extends Controller
 
 
         if ($request->add1 <> null) {
-            $vadd1 = $request->validate(['add1' => 'regex:/^[ぁ-んァ-ヶー一-龠]+$/']);
+            $vadd1 = $request->validate(['add1' => 'required|max:50|regex:/^[ぁ-んァ-ヶー一-龠]+$/']);
             $vadd1 = implode($vadd1);
             $address->add1 = $vadd1;
             $chg = true;
@@ -323,7 +324,7 @@ class AddressController extends Controller
 
 
         if ($request->add2 <> null) {
-            $vadd2 = $request->validate(['add2' => 'regex:/^[a-zA-Z0-9ぁ-んァ-ヶー一-龠]+$/']);
+            $vadd2 = $request->validate(['add2' => 'required|max:50|regex:/^[a-zA-Z0-9ぁ-んァ-ヶー一-龠]+$/']);
             $vadd2 = implode($vadd2);
             $address->add2 = $vadd2;
             $chg = true;

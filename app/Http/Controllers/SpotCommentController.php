@@ -14,7 +14,7 @@ class SpotCommentController extends Controller
 //===============================================================================
     public function PostSpotComment(Request $request)
     {
-        $comment = $request->validate(['comment' => 'regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠！？]+$/']);
+        $comment = $request->validate(['comment' => 'required|max:255|regex:/^[0-9a-zA-Z０-９ぁ-んァ-ヶー一-龠！？]+$/']);
         $comment = implode($comment);
 
         SpotComment::insert([

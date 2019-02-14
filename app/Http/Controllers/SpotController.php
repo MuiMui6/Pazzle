@@ -230,7 +230,7 @@ class SpotController extends Controller
         }
         //spotname
         if ($request->name <> $spots->name && $request->name <> null) {
-            $vname = $request->validate(['name' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30', 'required', 'string']]);
+            $vname = $request->validate(['name' => 'required|min:2|max:30|string|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/']);
             $vname = implode($vname);
             $spots->name = $vname;
             $chg = true;
@@ -238,7 +238,7 @@ class SpotController extends Controller
 
         //Article
         if ($request->article <> $spots->article && $request->article <> null) {
-            $varticle = $request->validate(['article' => ['regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠！？・ー。、（）]+$/', 'min:10', 'max:500', 'required', 'string']]);
+            $varticle = $request->validate(['article' => 'required|min:10|max:500|string|regex:/^[a-zA-Z0-9ａ-ｚＡ-Ｚ０-９ぁ-んァ-ヶー一-龠！？・ー。、（）]+$/']);
             $varticle = implode($varticle);
             $spots->article = $varticle;
             $chg = true;
@@ -246,7 +246,7 @@ class SpotController extends Controller
 
         //address_post
         if ($request->post <> $spots->post && $request->post <> null) {
-            $vpost = $request->validate(['post' => ['regex:/^[0-9]+$/', 'digits:7',]]);
+            $vpost = $request->validate(['post' => 'nullable|max:7|regex:/^[0-9]+$/']);
             $vpost = implode($vpost);
             $spots->post = $vpost;
             $chg = true;
@@ -254,7 +254,7 @@ class SpotController extends Controller
 
         //address_add1
         if ($request->add1 <> $spots->add1 && $request->add1 <> null) {
-            $vadd1 = $request->validate(['add1' => ['regex:/^[０-９ぁ-んァ-ヶー一-龠]+$/', 'min:3', 'max:50']]);
+            $vadd1 = $request->validate(['add1' => 'nullable|max:50|regex:/^[０-９ぁ-んァ-ヶー一-龠]+$/']);
             $vadd1 = implode($vadd1);
             $spots->add1 = $vadd1;
             $chg = true;
@@ -262,7 +262,7 @@ class SpotController extends Controller
 
         //address_add2
         if ($request->add2 <> $spots->add2 && $request->add2 <> null) {
-            $vadd2 = $request->validate(['add2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠-]+$/', 'min:3', 'max:50']]);
+            $vadd2 = $request->validate(['add2' => 'nullable|max:50|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠-]+$/']);
             $vadd2 = implode($vadd2);
             $spots->add2 = $vadd2;
             $chg = true;
@@ -270,7 +270,7 @@ class SpotController extends Controller
 
         //url
         if ($request->url <> $spots->url && $request->url <> null) {
-            $vurl = $request->validate(['url' => ['regex:/^[a-zA-Z0-9:/.]+$/', 'min:5', 'max:50', 'url']]);
+            $vurl = $request->validate(['url' => 'nullable|min:5|max:50|url|regex:/^[a-zA-Z0-9:/.]+$/']);
             $vurl = implode($vurl);
             $spots->name = $vurl;
             $chg = true;
@@ -279,7 +279,7 @@ class SpotController extends Controller
 
         //tel
         if ($request->tel <> $spots->tel && $request->tel <> null) {
-            $vtel = $request->validate(['tel' => ['regex:/^[0-9]+$/', 'min:10', 'max:13', 'digits_between:10,13']]);
+            $vtel = $request->validate(['tel' => 'nullable|min:10|max:13|regex:/^[0-9]+$/']);
             $vtel = implode($vtel);
             $spots->tel = $vtel;
             $chg = true;
@@ -287,7 +287,7 @@ class SpotController extends Controller
 
 
         if ($request->tag1 <> null && $request->tag1 <> $spots->tag1) {
-            $vtag = $request->validate(['tag1' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
+            $vtag = $request->validate(['tag1' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $spots->tag1 = $vtag;
             $chg = true;
@@ -295,14 +295,14 @@ class SpotController extends Controller
 
 
         if ($request->tag2 <> null && $request->tag2 <> $spots->tag2) {
-            $vtag = $request->validate(['tag2' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
+            $vtag = $request->validate(['tag2' => '\'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $spots->tag2 = $vtag;
             $chg = true;
         }
 
         if ($request->tag3 <> null && $request->tag3 <> $spots->tag3) {
-            $vtag = $request->validate(['tag3' => ['regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/', 'min:2', 'max:30']]);
+            $vtag = $request->validate(['tag3' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']]);
             $vtag = implode($vtag);
             $spots->tag3 = $vtag;
             $chg = true;
