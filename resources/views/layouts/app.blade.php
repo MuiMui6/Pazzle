@@ -180,7 +180,7 @@
                                     <form method="get" action="/">
                                         @csrf
                                         <input type="submit" class="btn btn-link" value="{{$peases->cnt}}"
-                                               name="keyword">
+                                               name="key_peas">
                                     </form>
                                 </td>
                             </tr>
