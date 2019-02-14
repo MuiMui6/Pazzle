@@ -18,8 +18,8 @@
 
                         <input type="password" name="secretkey" class="form-control">
 
-                        <button type="submit" value="{{Auth::user()->id}}" name="userid"
-                                class="btn btn-block btn-primary mt-3">
+                        <button type="submit" class="btn btn-block btn-primary mt-3">
+                            <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                             <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
                             Certification　/　-　認証　-
                         </button>
