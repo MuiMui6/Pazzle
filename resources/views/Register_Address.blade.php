@@ -15,7 +15,10 @@
                     <p>住所の確認が出来ます。</p>
                 </div>
 
-                <img src="img/s_line.png">
+
+                <div class="col-12 m-3 text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <form action="/Register_Address" method="post">
                     @csrf

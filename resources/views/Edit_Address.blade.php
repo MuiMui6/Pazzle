@@ -15,7 +15,10 @@
                     <p>該当住所データを編集できます。</p>
                 </div>
 
-                <img src="img/s_line.png">
+
+                <div class="col-12 m-3 text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <form action="/Edit_Address" method="post">
                     @csrf

@@ -15,7 +15,9 @@
                     <p>商品の発送先を決定します。</p>
                 </div>
 
-                <img src="img/s_line.png">
+                <div class="col-12 m-3 text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <div class="col-12">
                     <form action="/Register_Address" method="get">

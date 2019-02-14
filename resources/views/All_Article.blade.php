@@ -21,7 +21,9 @@
                     </div>
                 @endif
 
-                <img src="img/s_line.png">
+                <div class="col-12 m-3 text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <form action="/Edit_Article" method="get">
                     @csrf
