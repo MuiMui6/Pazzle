@@ -18,7 +18,9 @@
                         <p>観光地記事を作成できます。</p>
                     </div>
 
-                    <img src="img/s_line.png">
+                    <div class="col-12 m-3 text-center">
+                        <img src="img/s_line.png">
+                    </div>
 
                     <table class="table">
                         <tr>

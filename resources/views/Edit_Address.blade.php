@@ -15,7 +15,10 @@
                     <p>該当住所データを編集できます。</p>
                 </div>
 
-                <img src="img/s_line.png">
+
+                <div class="col-12 m-3 text-center">
+                    <img src="img/s_line.png">
+                </div>
 
                 <form action="/Edit_Address" method="post">
                     @csrf
@@ -61,6 +64,7 @@
                                 <th scope="row"></th>
                                 <td>
                                     <input type="hidden" value="{{$address->id}}" name="id">
+                                    <input type="hidden" value="{{$authsec}}" name="authsec">
                                     <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     <button type="submit" class="btn btn-info">保存</button>
                                 </td>

@@ -65,6 +65,7 @@ class CartController extends Controller
         $itemcomments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
             ->where('itemid', $request->itemid)
             ->where('item_comments.view', '1')
+            ->orderBy('item_comments.id', '1')
             ->get();
 
         $evaluation = ItemComment::where('itemid', $request->itemid)
@@ -137,58 +138,79 @@ class CartController extends Controller
     }
 
 
+//確認
+    public function cnf_secret(Request $request)
+    {
+        $itemcnt = $request->itemcnt;
+        return view('/Certification_Seacret', compact('itemcnt'));
+    }
+
 //宛先決め
     public function Topost(Request $request)
     {
-
-        $secretkey = $request->secretkey;
         $anser = User::where('id', $request->userid)->value('anser');
 
-        if ($anser == $secretkey && $request->itemcnt > 0) {
+        if ($request->secretkey == $anser) {
 
-            //アドレス指定
-            $address = Address::where('userid', $request->userid)->get();
+            $CartItems = request()->session()->get("CART", []);
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
+            $itemcnt = 0;
 
-            return view('/Register_Topost', compact('address'));
+            foreach ($CartItems as $index => $items) {
+                $itemcnt = $itemcnt + $CartItemCnt[$index];
+            }
 
-        } else {
+            if ($itemcnt > 0) {
 
-            $count = request()->session()->get("COUNTER", 0);
-            $count = $count + 1;
-            request()->session()->put("COUNTER", $count);
+                //アドレス指定
+                $address = Address::where('userid', $request->userid)->get();
+                $authsec = true;
 
-            if ($count > 2) {
-                $CartItems = request()->session()->forget("CART");
-                $CartItems = request()->session()->forget("CARTCNT");
-                Auth::logout();
-                return redirect('/');
-            } else {
-                return redirect('/Confirmation_Cart');
+                return view('/Register_Topost', compact('address', 'authsec'));
+
+            } elseif ($request->secretkey <> $anser || $itemcnt <= 0) {
+
+                $count = request()->session()->get("COUNTER", 0);
+                $count = $count + 1;
+                request()->session()->put("COUNTER", $count);
+
+                if ($count > 2) {
+                    $CartItems = request()->session()->forget("CART");
+                    $CartItems = request()->session()->forget("CARTCNT");
+                    Auth::logout();
+                    return redirect('/');
+                } else {
+                    return redirect('/Confirmation_Cart');
+                }
             }
         }
+        return redirect('/Confirmation_Cart');
     }
 
 
 //最終確認
     public function Register(Request $request)
     {
+        if ($request->authsec == 1) {
+            $authsec = $request->authsec;
+            $address = Address::where('id', $request->addressid)->get();
+            $addid = $request->addressid;
 
-        $address = Address::where('id', $request->addressid)->get();
-        $addid = $request->addressid;
+            //商品・合計点数・合計金額表示
+            $CartItems = request()->session()->get("CART", []);
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
 
-        //商品・合計点数・合計金額表示
-        $CartItems = request()->session()->get("CART", []);
-        $CartItemCnt = request()->session()->get("CARTCNT", []);
+            $itemcnt = 0;
+            $price = 0;
 
-        $itemcnt = 0;
-        $price = 0;
+            foreach ($CartItems as $index => $items) {
+                $itemcnt = $itemcnt + $CartItemCnt[$index];
+                $price = $price + ($items->price * $CartItemCnt[$index]);
+            }
 
-        foreach ($CartItems as $index => $items) {
-            $itemcnt = $itemcnt + $CartItemCnt[$index];
-            $price = $price + ($items->price * $CartItemCnt[$index]);
+            return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid','authsec'));
         }
-
-        return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid'));
+        return redirect('/Cnf_Secret');
 
     }
 
@@ -197,30 +219,32 @@ class CartController extends Controller
     public function Registerd(Request $request)
     {
 
-        $CartItems = request()->session()->get("CART", []);
-        $CartItemCnt = request()->session()->get("CARTCNT", []);
+        if ($request->authsec == 1) {
+            $CartItems = request()->session()->get("CART", []);
+            $CartItemCnt = request()->session()->get("CARTCNT", []);
 
-        $itemcnt = 0;
+            foreach ($CartItems as $index => $item) {
 
-        foreach ($CartItems as $index => $item) {
+                $itemcnt = $CartItemCnt[$index];
 
-            $itemcnt = $CartItemCnt[$index];
-
-            //DB処理（Orderに追加）
-            DB::table('orders')->insert([
-                'userid' => $request->userid,
-                'itemid' => $item->id,
-                'cnt' => $itemcnt,
-                'addressid' => $request->addid,
-                'created_at' => now()
-            ]);
+                //DB処理（Orderに追加）
+                DB::table('orders')->insert([
+                    'userid' => $request->userid,
+                    'itemid' => $item->id,
+                    'cnt' => $itemcnt,
+                    'addressid' => $request->addid,
+                    'created_at' => now()
+                ]);
 
 
+            }
+            $CartItems = request()->session()->forget("CART");
+            $CartItems = request()->session()->forget("CARTCNT");
+
+            return view('/Registerd_Cart');
+        } else {
+            return redirect('/Cnf_Secret');
         }
-        $CartItems = request()->session()->forget("CART");
-        $CartItems = request()->session()->forget("CARTCNT");
-
-        return view('/Registerd_Cart');
     }
 
     public function History(Request $request)
@@ -237,17 +261,18 @@ class CartController extends Controller
                 'orders.created_at as created_at',
                 'orders.updaterid as updaterid',
                 'orders.updated_at as updated_at')
-            ->orderby('orders.created_at', '1')
+            ->orderby('orders.id', '1')
             ->paginate(10);
 
         return view('/History_Cart', compact('items'));
-    }
 
+    }
 
 //======================================================================================================================
 //
 //======================================================================================================================
-    public function oio_view()
+    public
+    function oio_view()
     {
 
         $sizes = Size::get();
@@ -260,7 +285,8 @@ class CartController extends Controller
 //======================================================================================================================
 //
 //======================================================================================================================
-    public function oio_add(Request $request)
+    public
+    function oio_add(Request $request)
     {
         $price = Peas::where('id', $request->peasid)->value('cnt');
 
@@ -290,7 +316,7 @@ class CartController extends Controller
         $index = $request->itemid;
         $itemcnt = $request->itemcnt;
 
-        $items = DB::select("SELECT * FROM items where id = ".$id, [$index]);
+        $items = DB::select("SELECT * FROM items where id = " . $id, [$index]);
 
 
         if (count($items)) {
@@ -305,15 +331,9 @@ class CartController extends Controller
 
             $CartItems = request()->session()->get("CART", []);
             $CartItemCnt = request()->session()->get("CARTCNT", []);
-            $itemcnt = 0;
-            $price = 0;
 
-            foreach ($CartItems as $index => $items) {
-                $itemcnt = $itemcnt + $CartItemCnt[$index];
-                $price = $price + ($items->price * $CartItemCnt[$index]);
-            }
 
-            return view('/Confirmation_Cart', compact('CartItems', 'price', 'itemcnt', 'CartItemCnt'));
+            return redirect('/Confirmation_Cart');
 
 
         } else {

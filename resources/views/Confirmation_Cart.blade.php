@@ -68,11 +68,9 @@
 
 
                 <div class="col-lg-12 m-3">
-                    <form action="/Topost_Cart" method="post">
+                    <form action="/Cnf_Secret" method="get">
                         @csrf
-                        <input type="text" class="form-control mb-3" name="secretkey" placeholder="Secret Key">
                         <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
-                        <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <input type="submit" class="btn btn-block btn-default" value="To Purchase Procedure">
                     </form>
                 </div>

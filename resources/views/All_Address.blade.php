@@ -14,7 +14,9 @@
                     <p>住所を登録・編集できます。</p>
                 </div>
 
+                <div class="col-12 m-3 text-center">
                 <img src="img/s_line.png">
+                </div>
 
                 <div class="col-12 m-3">
                     <h3 class="text-center">All Address</h3>
@@ -32,6 +34,7 @@
                     <form action="/Register_Address" method="get">
                         @csrf
                         <button type="submit" class="btn btn-danger">
+                            <input type="hidden" value="false" name="authsec">
                             New Address
                         </button>
                     </form>

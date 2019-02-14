@@ -16,7 +16,9 @@
                         <p>以下の通りに受注を受け付けて良いか、最終確認ができます。</p>
                     </div>
 
-                    <img src="img/s_line.png">
+                    <div class="col-12 m-3 text-center">
+                        <img src="img/s_line.png">
+                    </div>
 
                     <table class="table table-borderless">
                         <tbody>
@@ -36,7 +38,7 @@
                             </tr>
 
                             <tr>
-                                <th class="text-center">宛先</th>
+                                <th class="text-center">Address</th>
                                 <th class="text-center">
                                     <p>〒{{substr($addresses->post,0,3)}}
                                         -{{substr($addresses->post,4,7)}}</p>
@@ -61,7 +63,13 @@
                         <tbody>
                         @foreach($CartItems as $index => $items)
                             <tr>
-                                <th class="text-center"><img src="img/{{$items->name}}.jpg" height="150px"></th>
+                                <th class="text-center">
+                                    @if($items->image == null)
+                                        <img src="img/{{$items->name}}.jpg" height="150px">
+                                    @else
+                                        <img src="storage/items/{{$items->id}}/{{$items->image}}" height="150px">
+                                    @endif
+                                </th>
                                 <th class="text-center">{{$items->name}}</th>
                                 <th class="text-center">{{$CartItemCnt[$index]}}</th>
                                 <th class="text-center">{{$items->price}}円</th>
@@ -75,6 +83,7 @@
                             下のボタンをクリックすると購入が確定します。
                         </div>
                         <input type="hidden" value="{{$addid}}" name="addid">
+                        <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                         <input type="submit" class="mb-3 btn btn-danger btn-block" value="Order!">
                     </div>

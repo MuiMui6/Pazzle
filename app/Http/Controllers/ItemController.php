@@ -137,7 +137,7 @@ class ItemController extends Controller
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
-            ->OrderBy('items.created_at', '1')
+            ->OrderBy('items.id', '1')
             ->paginate(10);
 
         $message = null;
@@ -179,7 +179,7 @@ class ItemController extends Controller
                 ->orwhere('items.tag1', 'like', '%' . $vkeyword . '%')
                 ->orwhere('items.tag2', 'like', '%' . $vkeyword . '%')
                 ->orwhere('items.tag3', 'like', '%' . $vkeyword . '%')
-                ->OrderBy('items.created_at', '1')
+                ->OrderBy('items.id', '1')
                 ->paginate(10);
 
         } elseif($request->clumn == 'itemname'){
@@ -203,7 +203,7 @@ class ItemController extends Controller
                     'items.updated_at as updated_at'
                 ])
                 ->orwhere('items.name', 'like', '%' . $vkeyword . '%')
-                ->OrderBy('items.created_at', '1')
+                ->OrderBy('items.id', '1')
                 ->paginate(10);
         }else {
             $items = Item::join('users', 'users.id', '=', 'items.createrid')
@@ -225,7 +225,7 @@ class ItemController extends Controller
                     'items.updated_at as updated_at'
                 ])
                 ->where($request->clumn, 'like', '%' . $vkeyword . '%')
-                ->OrderBy('items.created_at', '1')
+                ->OrderBy('items.id', '1')
                 ->paginate(10);
         }
 
@@ -301,7 +301,7 @@ class ItemController extends Controller
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
-            ->OrderBy('items.created_at', '1')
+            ->OrderBy('items.id', '1')
             ->paginate(10);
 
         return view('/admin/All_Item', compact('items','message'));
@@ -455,7 +455,7 @@ class ItemController extends Controller
                 'items.created_at as created_at',
                 'items.updated_at as updated_at'
             ])
-            ->OrderBy('items.created_at', '1')
+            ->OrderBy('items.id', '1')
             ->paginate(10);
 
         return view('/admin/All_Item', compact('items','message'));
