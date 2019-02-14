@@ -53,17 +53,39 @@
                                 <p>{{$spot->add2}}</p>
                             </th>
                         </tr>
-                    </table>
 
-                    @if($spot->createrid == Auth::user()->id )
-                        <form action="/Edit_Article" method="get">
-                            <div class="col-12 m-3">
-                                <button type="submit" class="btn btn-block" value="{{$spot->id}}" name="spotid">
-                                    EDIT
-                                </button>
-                            </div>
-                        </form>
-                    @endif
+
+                        <tr>
+                        <tr>
+                            <th scope="row">
+                                <p>Item Tag</p>
+                                <p>※クリックするとパズルECサイトに移行します</p>
+                            </th>
+                            <td class="form-inline">
+                                <form action="/" method="get">
+                                    @csrf
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$spot->tag1}}">{{$spot->tag1}}</button>
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$spot->tag2}}">{{$spot->tag2}}</button>
+                                    <button class="btn btn-link" name="keyword"
+                                            value="{{$spot->tag3}}">{{$spot->tag3}}</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    @guest
+                    @elseguest
+                        @if($spot->createrid == Auth::user()->id )
+                            <form action="/Edit_Article" method="get">
+                                <div class="col-12 m-3">
+                                    <button type="submit" class="btn btn-block" value="{{$spot->id}}" name="spotid">
+                                        EDIT
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
+                    @endguest
 
                     <p class="small">
                         createDate:{{$spot->created_at->format('Y/m/d')}}
