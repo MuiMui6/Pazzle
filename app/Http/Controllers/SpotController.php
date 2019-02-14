@@ -302,7 +302,7 @@ class SpotController extends Controller
         }
 
         if ($request->tag3 <> null && $request->tag3 <> $spots->tag3) {
-            $vtag = $request->validate(['tag3' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']]);
+            $vtag = $request->validate(['tag3' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$/']);
             $vtag = implode($vtag);
             $spots->tag3 = $vtag;
             $chg = true;

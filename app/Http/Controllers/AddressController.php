@@ -18,8 +18,9 @@ class AddressController extends Controller
             ->paginate(10);
 
         $message = null;
+        $authsec = 0;
 
-        return view('/All_Address', compact('addresses', 'message'));
+        return view('/All_Address', compact('addresses', 'message', 'authsec'));
     }
 
 
@@ -31,8 +32,8 @@ class AddressController extends Controller
     public function userdetail(Request $request)
     {
         $addresses = Address::where('id', $request->id)->get();
-
-        return view('/Edit_Address', compact('addresses'));
+        $authsec = 0;
+        return view('/Edit_Address', compact('addresses', 'authsec'));
     }
 
 
@@ -67,7 +68,7 @@ class AddressController extends Controller
             $message = '追加しました';
 
             return view('/All_Address', compact('addresses', 'message'));
-        } elseif($request->authsec == 1) {
+        } elseif ($request->authsec == 1) {
             $CartItems = request()->session()->get("CART", []);
             $CartItemCnt = request()->session()->get("CARTCNT", []);
             $itemcnt = 0;
@@ -95,7 +96,7 @@ class AddressController extends Controller
     {
         $authsec = $request->authsec;
 
-        return view('/Register_Address',compact('authsec'));
+        return view('/Register_Address', compact('authsec'));
     }
 
 
@@ -150,10 +151,10 @@ class AddressController extends Controller
         $user = User::where('id', $request->userid)->value('rank');
 
         if ($user == '1') {
-            return view('/admin/All_Address', compact('addresses','message'));
+            return view('/admin/All_Address', compact('addresses', 'message'));
         }
 
-        return view('/All_Address', compact('addresses','message'));
+        return view('/All_Address', compact('addresses', 'message'));
 
     }
 
@@ -181,7 +182,7 @@ class AddressController extends Controller
 
         $message = null;
 
-        return view('/admin/All_Address', compact('addresses','message'));
+        return view('/admin/All_Address', compact('addresses', 'message'));
     }
 
 
@@ -251,7 +252,7 @@ class AddressController extends Controller
             }
         }
 
-        return view('/admin/All_Address', compact('addresses','message'));
+        return view('/admin/All_Address', compact('addresses', 'message'));
     }
 
 
@@ -283,7 +284,7 @@ class AddressController extends Controller
         $updatername = Address::join('users', 'users.id', '=', 'addresses.updaterid')
             ->distinct('users.name')->get();
 
-        return view('/admin/Edit_Address', compact('addresses', 'updatername','message'));
+        return view('/admin/Edit_Address', compact('addresses', 'updatername', 'message'));
     }
 
 
@@ -357,7 +358,7 @@ class AddressController extends Controller
         $updatername = Address::join('users', 'users.id', '=', 'addresses.updaterid')
             ->distinct('users.name')->get();
 
-        return view('/admin/Edit_Address', compact('addresses', 'updatername','message'));
+        return view('/admin/Edit_Address', compact('addresses', 'updatername', 'message'));
 
     }
 
