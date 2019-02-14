@@ -81,14 +81,7 @@ class PeasesTableSeeder extends Seeder
             'createrid'=>'1',
             'updaterid'=>'1'
         ]);
-
-        //
-        Peas::create([
-            'cnt' => '1000',
-            'createrid'=>'1',
-            'updaterid'=>'1'
-        ]);
-
+        
         //
         Peas::create([
             'cnt' => '2000',
