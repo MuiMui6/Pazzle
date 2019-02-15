@@ -51,7 +51,17 @@ class TagsTableSeeder extends Seeder
 
         //旅行
         Tag::create([
-            'name' => '神社・お寺',
+            'name' => '神社',
+            'genre' => '2',
+            'createrid'=>'1'
+        ]);
+        Tag::create([
+            'name' => '寺',
+            'genre' => '2',
+            'createrid'=>'1'
+        ]);
+        Tag::create([
+            'name' => '大社',
             'genre' => '2',
             'createrid'=>'1'
         ]);

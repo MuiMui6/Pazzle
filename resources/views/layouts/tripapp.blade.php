@@ -173,7 +173,7 @@
                         @foreach ($tag as $tags)
                             <tr>
                                 <td>
-                                    <form method="get" action="/">
+                                    <form method="get" action="/Spotindex">
                                         @csrf
                                         <input type="hidden" value="{{$tags->name}}" name="key_tag">
                                         <input type="submit" class="btn btn-link" value="{{$tags->name}}">

@@ -9,6 +9,7 @@ use App\Order;
 use App\Peas;
 use App\Size;
 use App\User;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +62,8 @@ class CartController extends Controller
         //サイズ
         $size = Size::select('height', 'width')->get();
 
+        //タグ
+        $tag = Tag::select('name')->where('genre', '1')->orwhere('genre', '3')->get();
 
         $itemcomments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
             ->where('itemid', $request->itemid)
@@ -93,7 +96,7 @@ class CartController extends Controller
 
                 $message = '商品をカートに追加しました。';
 
-                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation'));
+                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation','tag'));
 
             } else {
 
@@ -105,7 +108,7 @@ class CartController extends Controller
 
             $message = '購入個数を指定してください';
 
-            return view("/Detail_Item", compact('message', 'item', 'peas', 'size'));
+            return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation','tag'));
         }
     }
 
@@ -148,7 +151,7 @@ class CartController extends Controller
 //宛先決め
     public function Topost(Request $request)
     {
-        $anser = User::where('id', $request->userid)->value('anser');
+        $anser = User::select('anser')->where('id', $request->userid)->get();
 
         if ($request->secretkey == $anser) {
 
