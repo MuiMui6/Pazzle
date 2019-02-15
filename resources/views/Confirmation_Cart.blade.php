@@ -71,7 +71,9 @@
                     <form action="/Cnf_Secret" method="get">
                         @csrf
                         <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
-                        <input type="submit" class="btn btn-block btn-default" value="To Purchase Procedure">
+                        <button type="submit" class="btn btn-block btn-default">
+                            To Purchase Procedure　/　購入手続きへ進む
+                        </button>
                     </form>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                     <p>購入履歴</p>
                 </div>
                 <div class="col-12 m-3">
-                    <h5></h5>
+                    <h5>Confirmation of purchase history · Transactions related to purchased items can be done.</h5>
                     <p>購入履歴の確認・購入した商品に関する取引が行えます。</p>
                 </div>
 

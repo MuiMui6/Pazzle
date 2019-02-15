@@ -164,6 +164,30 @@
                         <img src="img/gotrip.png">
                     </a>
 
+                    {{--tag--}}
+                    <table class="table col m-3">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h4>Tag</h4>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($tag as $tags)
+                            <tr>
+                                <td>
+                                    <form method="get" action="/">
+                                        @csrf
+                                        <input type="hidden" value="{{$tags->name}}" name="key_tag">
+                                        <input type="submit" class="btn btn-link" value="{{$tags->name}}">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
                     {{--Peas--}}
                     <table class="table col m-3">
                         <thead>

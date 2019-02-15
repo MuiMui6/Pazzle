@@ -16,18 +16,18 @@
                         @if($items->image == null)
                             @if($items->height >= $items->width)
                                 <img class="card-img-top" src="img/{{$items->name}}.jpg"
-                                     style="height: 600px; width: 400px;">
+                                     style="height: 600px; width: 450px;">
                             @elseif($items->height < $items->width)
                                 <img class="card-img-top" src="img/{{$items->name}}.jpg"
-                                     style="height: 400px; width:600px;">
+                                     style="height: 450px; width:600px;">
                             @endif
                         @else
                             @if($items->height >= $items->width)
                                 <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}"
-                                     style="height: 600px; width: 400px;">
+                                     style="height: 600px; width: 450px;">
                             @elseif($items->height < $items->width)
                                 <img class="card-img-top" src="/storage/items/{{$items->id}}/{{$items->image}}"
-                                     style="height: 400px; width:600px;">
+                                     style="height: 400px; width:650px;">
                             @endif
                         @endif
                     </div>
@@ -37,29 +37,29 @@
                     <div class="m-3">
                         <h5>「{{$items->name}}」の商品情報です。</h5>
                     </div>
-                    <table class="table table-borderless text-center">
+                    <table class="table text-left mr-5">
                         <tbody>
                         {{--紹介文--}}
                         <tr>
-                            <th scope="row">Profile</th>
+                            <th scope="row" class="text-center">Profile</th>
                             <td>{{$items->profile}}</td>
                         </tr>
 
                         {{--サイズ--}}
                         <tr>
-                            <th scope="row">Size</th>
+                            <th scope="row" class="text-center">Size</th>
                             <td>{{$items->height}}×{{$items->width}}（mm）</td>
                         </tr>
 
                         {{--ピース数--}}
                         <tr>
-                            <th scope="row">PeasCnt</th>
+                            <th scope="row" class="text-center">PeasCnt</th>
                             <td>{{$items->cnt}}peas</td>
                         </tr>
 
                         {{--タグ--}}
                         <tr>
-                            <th scope="row">
+                            <th scope="row" class="text-center">
                                 <p>Spot Tag</p>
                                 <p>※クリックすると観光サイトに移行します</p>
                             </th>
@@ -88,7 +88,7 @@
                                 @csrf
                                 <input type="hidden" value="{{$items->id}}" name="itemid">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Cart Item Cnt　/　購入個数</label>
+                                    <h5><label for="exampleFormControlSelect1">Cart Item Cnt　/　購入個数</label></h5>
                                     <select class="form-control" id="exampleFormControlSelect1" name="itemcnt">
                                         <option name="itemcnt" value="1">1点</option>
                                         <option name="itemcnt" value="2">2点</option>
@@ -97,7 +97,7 @@
                                         <option name="itemcnt" value="5">5点</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Purchase　/　購入</button>
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Purchase　/　購入</button>
                             </form>
                         @else
                             <div class="alert alert-danger text-lg-center col-12">
@@ -106,9 +106,19 @@
                         @endif
                     @endguest
 
-                    <div class="col-12 m-3">
-                        <h3 class="text-center">Comment</h3>
+
+                    <div class="col-lg-12 text-center" style="margin-top: 150px">
+                        <img src="img/s_line.png">
                     </div>
+
+                    <div class="col-12 m-3 mt-4">
+                        <h3 class="text-center">Comment　/　コメント</h3>
+                    </div>
+                        <div class="text-center">
+                            <h5>Average Evakuation</h5>
+                            <p>平均評価</p>
+                            <h3>{{$evaluation}}</h3>
+                        </div>
 
                     @guest
                         <div class="alert alert-info text-lg-center col-12">
@@ -119,13 +129,31 @@
 
                     @guest
                     @else
+
                         <form action="/Detail" method="post">
                             @csrf
-                            <table class="table">
+                            <table class="table text-center">
+                                <thead>
+                                <tr>
+                                    <td>
+                                        <h5><p>Name</p></h5>
+                                        <h5><p>名前</p></h5>
+                                    </td>
+                                    <td>
+                                        <h5><p>Evaluation</p></h5>
+                                        <h5><p>評価</p></h5>
+                                    </td>
+                                    <td>
+                                        <h5><p>Comment</p></h5>
+                                        <h5><p>コメント文</p></h5>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                </thead>
                                 <tbody>
+                                <th>{{Auth::user()->name}}</th>
                                 <th>
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Evaluation</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="evaluation">
                                             <option name="evaluation" value="1">1</option>
                                             <option name="evaluation" value="2">2</option>
@@ -135,16 +163,13 @@
                                         </select>
                                     </div>
                                 </th>
-                                <th>
-                                    {{Auth::user()->name}}</th>
-                                <th><textarea cols="50" rows="5" class="form-control" name="comment"></textarea>
-                                </th>
+                                <th><textarea cols="40" rows="5" class="form-control" name="comment"></textarea></th>
                                 <th>
                                     <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                     @foreach($item as $items)
                                         <input type="hidden" value="{{$items->id}}" name="itemid">
                                     @endforeach
-                                    <button type="submit" class="btn btn-primary">Post</button>
+                                    <button type="submit" class="btn btn-primary">Post　/ 投稿</button>
                                 </th>
                                 </tbody>
                             </table>
@@ -152,24 +177,20 @@
 
                     @endguest
 
-                    <table class="table table-borderless">
+                    <table class="table">
                         <thead>
-                        <tr>
-                            <td><h3>Average Evaluation</h3></td>
-                            <td><h3>{{$evaluation}}</h3></td>
-                        </tr>
-                        <tr>
-                            <td>Evaluation</td>
-                            <td>Name</td>
-                            <td>Comment</td>
+                        <tr class="text-center">
+                            <td><h5>Name / 名前</h5></td>
+                            <td><h5>Evaluation / 評価</h5></td>
+                            <td><h5>Comment / コメント文</h5></td>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($itemcomments as $itemcomment)
-                            <tr>
-                                <td class="text-left">{{$itemcomment->evaluation}}</td>
-                                <td class="text-left">{{$itemcomment->name}}</td>
-                                <td class="text-left">{{$itemcomment->comment}}</td>
+                            <tr class="text-center">
+                                <td>{{$itemcomment->name}}</td>
+                                <td>{{$itemcomment->evaluation}}</td>
+                                <td>{{$itemcomment->comment}}</td>
                             </tr>
                         @endforeach
                         </tbody>
