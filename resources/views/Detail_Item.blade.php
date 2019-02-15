@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
     <div class="row justify-content-center">
@@ -37,24 +37,24 @@
                     <div class="m-3">
                         <h5>「{{$items->name}}」の商品情報です。</h5>
                     </div>
-                    <table class="table table-borderless text-center">
+                    <table class="table text-center m-4">
                         <tbody>
                         {{--紹介文--}}
                         <tr>
                             <th scope="row">Profile</th>
-                            <td>{{$items->profile}}</td>
+                            <td class="text-left">{{$items->profile}}</td>
                         </tr>
 
                         {{--サイズ--}}
                         <tr>
                             <th scope="row">Size</th>
-                            <td>{{$items->height}}×{{$items->width}}（mm）</td>
+                            <td class="text-left">{{$items->height}}×{{$items->width}}（mm）</td>
                         </tr>
 
                         {{--ピース数--}}
                         <tr>
                             <th scope="row">PeasCnt</th>
-                            <td>{{$items->cnt}}peas</td>
+                            <td class="text-left">{{$items->cnt}}peas</td>
                         </tr>
 
                         {{--タグ--}}
