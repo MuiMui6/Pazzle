@@ -12,8 +12,10 @@
                 </div>
                 <form action="/Topost_Cart" method="post">
                     @csrf
-                    <div class="col-lg-12 text-center m-3">
+                    <div class="col-lg-12 m-3">
+                        <p>Please enter the "Secret Key" you registered when registering.</p>
                         <p>ご登録時に登録した“Secret Key”をご記入ください。</p>
+                        <p class="text-danger">※I log out when I mistake three times.※</p>
                         <p class="text-danger">※3回間違えるとログアウトします。※</p>
 
                         <input type="password" name="secretkey" class="form-control">

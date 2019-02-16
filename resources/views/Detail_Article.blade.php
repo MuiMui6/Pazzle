@@ -96,9 +96,19 @@
 
 
                 {{--コメント--}}
-                <div class="col-12 m-3 mt-4">
-                    <h3 class="text-center">Comment</h3>
+                <div class="col-lg-12 text-center" style="margin-top: 150px">
+                    <img src="img/s_line.png">
                 </div>
+
+                <div class="col-12 m-3 mt-4">
+                    <h3 class="text-center">Comment　/　コメント</h3>
+                </div>
+
+                    <div class="text-center">
+                        <h5>Average Evakuation</h5>
+                        <p>平均評価</p>
+                        <h3>{{$evaluation}}</h3>
+                    </div>
 
                 @guest
                     <div class="alert alert-info text-lg-center col-12">
@@ -106,29 +116,32 @@
                     </div>
                 @endguest
 
-                <table class="table table-borderless">
-                    <thead>
-                    <tr>
-                        <td><h3>Average Evakuation</h3></td>
-                        <td><h3>{{$evaluation}}</h3></td>
-                    </tr>
-                    <tr>
-                        <td>Evaluation</td>
-                        <td>Name</td>
-                        <td>Comment</td>
-                    </tr>
-                    </thead>
-                </table>
-
-
-                @guest
-                @else
-                    <form action="/Detail_SpotComment" method="post">
-                        @csrf
-                        <table class="table">
+                <form action="/Detail_SpotComment" method="post">
+                    @csrf
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>
+                                <h5><p>Name</p></h5>
+                                <h5><p>名前</p></h5>
+                            </td>
+                            <td>
+                                <h5><p>Evaluation</p></h5>
+                                <h5><p>評価</p></h5>
+                            </td>
+                            <td>
+                                <h5><p>Comment</p></h5>
+                                <h5><p>コメント文</p></h5>
+                            </td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        @guest
+                        @else
+                            <th>
+                                {{Auth::user()->name}}</th>
                             <th>
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Evaluation</label>
                                     <select class="form-control" id="exampleFormControlSelect1"
                                             name="evaluation">
                                         <option name="evaluation" value="1">1</option>
@@ -139,46 +152,37 @@
                                     </select>
                                 </div>
                             </th>
-                            <th>
-                                {{Auth::user()->name}}</th>
-                            <th><textarea cols="50" rows="5" class="form-control" name="comment"></textarea>
+                            <th><textarea cols="30" rows="5" class="form-control" name="comment"></textarea>
                             </th>
                             <th>
                                 <input type="hidden" value="{{Auth::user()->id}}" name="userid">
                                 @foreach($spots as $spot)
                                     <input type="hidden" value="{{$spot->id}}" name="spotid">
                                 @endforeach
-                                <button type="submit" class="btn btn-primary">投稿</button>
+                                <button type="submit" class="btn btn-primary">Post / 投稿</button>
                             </th>
-                        </table>
-                    </form>
+                    </table>
+                </form>
 
                 @endguest
 
-                <table class="table table-borderless">
+                <table class="table">
                     <thead>
-                    <tr>
-                        <td><h3>Average Evakuation</h3></td>
-                        <td><h3>{{$evaluation}}</h3></td>
-                    </tr>
-                    <tr>
-                        <td>Evaluation</td>
-                        <td>Name</td>
-                        <td>Comment</td>
+                    <tr class="text-center">
+                        <td><h5>Name / 名前</h5></td>
+                        <td><h5>Evaluation / 評価</h5></td>
+                        <td><h5>Comment / コメント文</h5></td>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($spotcomments as $spotcomment)
-                        <tr>
-                            <td class="text-left">{{$spotcomment->evaluation}}</td>
-                            <td class="text-left">{{$spotcomment->name}}</td>
-                            <td class="text-left">{{$spotcomment->comment}}</td>
+                        <tr class="text-center">
+                            <td>{{$spotcomment->name}}</td>
+                            <td>{{$spotcomment->evaluation}}</td>
+                            <td>{{$spotcomment->comment}}</td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
-                </tr>
-                </thead>
                 </table>
             </div>
         </div>

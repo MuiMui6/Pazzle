@@ -6,6 +6,7 @@ use App\Item;
 use App\ItemComment;
 use App\Peas;
 use App\Size;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,7 @@ class ItemController extends Controller
         $key_height = $request->key_height;
         $key_width = $request->key_width;
         $key_peas = $request->key_peas;
+        $key_tag = $request->key_tag;
 
         //テーブル全取得
         $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
@@ -67,14 +69,31 @@ class ItemController extends Controller
                 ->paginate(15);
         }
 
+        if ($key_tag <> null) {
+            $item = Item::join('peases', 'items.peasid', '=', 'peases.id')
+                ->join('sizes', 'items.sizeid', '=', 'sizes.id')
+                ->select('items.id', 'items.name', 'items.image', 'items.price', 'peases.cnt', 'sizes.height', 'sizes.width')
+                ->orwhere('items.name', 'like', '%' . $key_tag . '%')
+                ->orwhere('items.tag1', 'like', '%' . $key_tag . '%')
+                ->orwhere('items.tag2', 'like', '%' . $key_tag . '%')
+                ->orwhere('items.tag3', 'like', '%' . $key_tag . '%')
+                ->orwhere('items.profile', 'like', '%' . $key_tag . '%')
+                ->orwhere('items.price', 'like', '%' . $key_tag . '%')
+                ->where('items.view', '=', '1')
+                ->orderBy('items.id', '1')
+                ->paginate(15);
+        }
+
         //ピース数
         $peas = Peas::select('cnt')->Get();
 
         //サイズ
         $size = Size::select('height', 'width')->Get();
 
+        //タグ
+        $tag = Tag::select('name')->where('genre', '1')->orwhere('genre', '3')->get();
 
-        return view('/home', compact('item', 'peas', 'size'));
+        return view('/home', compact('item', 'peas', 'size', 'tag'));
     }
 
 //======================================================================================================================
@@ -110,6 +129,9 @@ class ItemController extends Controller
         //サイズ
         $size = Size::select('height', 'width')->get();
 
+        //タグ
+        $tag = Tag::select('name')->where('genre', '1')->orwhere('genre', '3')->get();
+
 
         $itemcomments = ItemComment::join('users', 'users.id', '=', 'item_comments.userid')
             ->where('itemid', $request->itemid)
@@ -121,7 +143,7 @@ class ItemController extends Controller
             ->where('view', '1')
             ->avg('evaluation');
 
-        return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation'));
+        return view('/Detail_Item', compact('item', 'peas', 'size', 'message', 'itemcomments', 'evaluation','tag'));
 
     }
 
@@ -264,12 +286,12 @@ class ItemController extends Controller
     public function save(Request $request)
     {
         $request->validate([
-            'name'=>'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
-            'profile'=>'max:255|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠！？・（）―～]+$/',
-            'price'=>'max:10|regex:/^[0-9]+$/',
-            'tag1'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
-            'tag2'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
-            'tag3'=>'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/'
+            'name' => 'max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'profile' => 'max:255|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠！？・（）―～]+$/',
+            'price' => 'max:10|regex:/^[0-9]+$/',
+            'tag1' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'tag2' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/',
+            'tag3' => 'nullable|max:30|regex:/^[a-zA-Z0-9ａ-ｚA-Z０-９ぁ-んァ-ヶー一-龠]+$/'
         ]);
 
         //DB処理

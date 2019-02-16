@@ -255,5 +255,35 @@ class ItemsTableSeeder extends Seeder
             'sizeid' => '4',
             'createrid' => '1'
         ]);
+
+
+        Item::create([
+            'name' => '木枠　明るい',
+            'profile' => 'パズルを入れるフレームです。明るい色の木製です。',
+            'price' => '2000',
+            'createrid' => '1'
+        ]);
+
+        Item::create([
+            'name' => '木枠',
+            'profile' => 'パズルを入れるフレームです。木製です。',
+            'price' => '2000',
+            'createrid' => '1'
+        ]);
+
+        Item::create([
+            'name' => '木枠　暗い',
+            'profile' => 'パズルを入れるフレームです。暗い色の木製です。',
+            'price' => '2000',
+            'createrid' => '1'
+        ]);
+
+        Item::create([
+            'name' => 'ノリ',
+            'profile' => 'パズルを接着するノリです。ヘラ付きです。',
+            'price' => '500',
+            'createrid' => '1'
+        ]);
+
     }
 }

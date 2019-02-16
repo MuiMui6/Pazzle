@@ -55,7 +55,11 @@ class SpotCommentController extends Controller
             ->where('view', '1')
             ->avg('evaluation');
 
-        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid'));
+
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid','tag'));
 
 
     }

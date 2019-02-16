@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             SpotsTableSeeder::class,
             SpotCommentsTableSeeder::class,
             UsersTableSeeder::class,
+            TagsTableSeeder::class
         ]);
     }
 }

@@ -85,7 +85,7 @@
                         <input type="hidden" value="{{$addid}}" name="addid">
                         <input type="hidden" value="{{$authsec}}" name="authsec">
                         <input type="hidden" value="{{Auth::user()->id}}" name="userid">
-                        <input type="submit" class="mb-3 btn btn-danger btn-block" value="Order!">
+                        <input type="submit" class="mb-3 btn btn-danger btn-block" value="Order! /　発注">
                     </div>
                 </form>
             </div>

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Spot;
 use App\SpotComment;
-use app\User;
+use App\User;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,7 +37,30 @@ class SpotController extends Controller
             ->orderBy('spots.id', '1')
             ->paginate(9);
 
-        return view('/SpotIndex', compact('spots'));
+
+        if($request->key_tag <> null){
+            $key_tag = $request->key_tag;
+
+            $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
+                ->select('spots.id as id', 'spots.name as spotname', 'spots.image', 'spots.article', 'spots.image as image')
+                ->where('spots.name', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.article', 'like', '%' . $key_tag . '%')
+                ->orwhere('users.name', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.post', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.add1', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.add2', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.tag1', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.tag2', 'like', '%' . $key_tag . '%')
+                ->orwhere('spots.tag3', 'like', '%' . $key_tag . '%')
+                ->where('spots.view', '1')
+                ->orderBy('spots.id', '1')
+                ->paginate(9);
+        }
+
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+        return view('/SpotIndex', compact('spots','tag'));
 
     }
 
@@ -83,7 +107,11 @@ class SpotController extends Controller
             ->where('view', '1')
             ->avg('evaluation');
 
-        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid', 'updater'));
+
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+        return view('/Detail_Article', compact('spots', 'spotcomments', 'evaluation', 'createrid', 'updater','tag'));
     }
 
 //===============================================================================
@@ -91,7 +119,11 @@ class SpotController extends Controller
 //===============================================================================
     public function newspot()
     {
-        return view('/Register_Article');
+
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+        return view('/Register_Article',compact('tag'));
     }
 
 
@@ -124,8 +156,10 @@ class SpotController extends Controller
             ->select('users.name as updatername')
             ->get();
 
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
 
-        return view('/Edit_Article', compact('spots', 'updater'));
+        return view('/Edit_Article', compact('spots', 'updater','tag'));
     }
 
 
@@ -181,7 +215,10 @@ class SpotController extends Controller
                 ->orderBy('created_at', '1')
                 ->paginate(10);
 
-            return view('/All_Article', compact('spots','message'));
+            //タグ
+            $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+            return view('/All_Article', compact('spots','message','tag'));
         } else {
             $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
                 ->select('spots.id as id',
@@ -329,7 +366,10 @@ class SpotController extends Controller
                 ->orderBy('created_at', '1')
                 ->paginate(10);
 
-            return view('/All_Article', compact('spots'));
+
+            $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
+            return view('/All_Article', compact('spots','tag'));
         } else {
             $spots = Spot::join('users', 'users.id', '=', 'spots.createrid')
                 ->select('spots.id as id',
@@ -364,9 +404,13 @@ class SpotController extends Controller
             ->orderBy('spots.id', '1')
             ->paginate(10);
 
+
+        //タグ
+        $tag = Tag::select('name')->where('genre', '2')->orwhere('genre', '3')->get();
+
         $message = null;
 
-        return view('/All_Article', compact('spots', 'message'));
+        return view('/All_Article', compact('spots', 'message','tag'));
     }
 
 
