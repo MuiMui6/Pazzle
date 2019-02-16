@@ -1,4 +1,4 @@
-@extends('layouts.notapp')
+﻿@extends('layouts.notapp')
 
 @section('content')
     <div class="row">
@@ -72,8 +72,7 @@
                         @csrf
                         <input type="hidden" value="{{$itemcnt}}" name="itemcnt">
                         <button type="submit" class="btn btn-block btn-default">
-                            To Purchase Procedure　/　購入手続きへ進む
-                        </button>
+                            To Purchase Procedure　/　購入手続きへ
                     </form>
                 </div>
             </div>
