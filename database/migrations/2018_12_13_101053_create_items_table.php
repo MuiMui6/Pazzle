@@ -18,8 +18,8 @@ class CreateItemsTable extends Migration
             $table->string('name')->nullable();         //商品名
             $table->text('profile')->nullable();        //紹介文
             $table->integer('price');                   //金額
-            $table->integer('sizeid');                  //サイズ
-            $table->integer('peasid');                  //peas数
+            $table->integer('sizeid')->nullable();      //サイズ
+            $table->integer('peasid')->nullable();      //peas数
             $table->string('tag1')->nullable();         //タグ1
             $table->string('tag2')->nullable();         //タグ2
             $table->string('tag3')->nullable();         //タグ3

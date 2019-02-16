@@ -8,8 +8,8 @@ use App\ItemComment;
 use App\Order;
 use App\Peas;
 use App\Size;
-use App\User;
 use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -96,7 +96,7 @@ class CartController extends Controller
 
                 $message = '商品をカートに追加しました。';
 
-                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation','tag'));
+                return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation', 'tag'));
 
             } else {
 
@@ -108,7 +108,7 @@ class CartController extends Controller
 
             $message = '購入個数を指定してください';
 
-            return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation','tag'));
+            return view("/Detail_Item", compact('message', 'item', 'peas', 'size', 'itemcomments', 'evaluation', 'tag'));
         }
     }
 
@@ -151,7 +151,7 @@ class CartController extends Controller
 //宛先決め
     public function Topost(Request $request)
     {
-        $anser = User::select('anser')->where('id', $request->userid)->get();
+        $anser = User::where('id', $request->userid)->value('anser');
 
         if ($request->secretkey == $anser) {
 
@@ -169,25 +169,25 @@ class CartController extends Controller
                 $authsec = true;
 
                 return view('/Register_Topost', compact('address', 'authsec'));
-            }else{
+            } else {
                 return abort(404);
             }
         } elseif ($request->secretkey <> $anser) {
 
-                $count = request()->session()->get("COUNTER", 0);
-                $count = $count + 1;
-                request()->session()->put("COUNTER", $count);
+            $count = request()->session()->get("COUNTER", 0);
+            $count = $count + 1;
+            request()->session()->put("COUNTER", $count);
 
-                if ($count > 2) {
-                    $CartItems = request()->session()->forget("CART");
-                    $CartItems = request()->session()->forget("CARTCNT");
-                    Auth::logout();
-                    return redirect('/');
-                } else {
-                    $itemcnt = $request->itemcnt;
-                    return view('/Certification_Seacret', compact('itemcnt'));
-                }
+            if ($count > 2) {
+                $CartItems = request()->session()->forget("CART");
+                $CartItems = request()->session()->forget("CARTCNT");
+                Auth::logout();
+                return redirect('/');
+            } else {
+                $itemcnt = $request->itemcnt;
+                return view('/Certification_Seacret', compact('itemcnt'));
             }
+        }
         $itemcnt = $request->itemcnt;
         return view('/Certification_Seacret', compact('itemcnt'));
     }
@@ -213,7 +213,7 @@ class CartController extends Controller
                 $price = $price + ($items->price * $CartItemCnt[$index]);
             }
 
-            return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid','authsec'));
+            return view('/Register_Cart', compact('address', 'CartItems', 'price', 'itemcnt', 'CartItemCnt', 'addid', 'authsec'));
         }
         return redirect('/Cnf_Secret');
 
